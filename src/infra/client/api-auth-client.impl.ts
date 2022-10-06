@@ -218,48 +218,6 @@ export default function ApiAuthClientImpl(): IAuthClient {
   };
 
   /**
-   * logout
-   * @param userId 
-   * @param adminToken 
-   * @returns 
-   */
-  async function logoutService(userId: string): Promise<number> {
-
-    let adminToken: string;
-    try {
-      adminToken = await GlobalConfig.authTokensClient.getAdminTokenService();
-    } catch (error: any) {
-      throw error;
-    }
-
-    //User endpoint
-    const URL = `${GlobalConfig.APIEndpoints.auth}/logout`;
-
-    const body = {
-      id: userId,
-      adminToken: adminToken
-    };
-
-    const promise: AxiosPromise<any> = axios({
-      method: 'post',
-      url: URL,
-      headers: { 'Authorization': `Bearer ${adminToken}` },
-      data: qs.stringify(body)
-    });
-
-    // using .then, create a new promise which extracts the data
-    const status: Promise<number> = promise.then((response) =>
-      response.status
-    ).catch((error) => {
-      // response.status !== 200
-      const authError: ApiError = handleAxiosError(error);
-      throw authError;
-    });
-
-    return status;
-  };
-
-  /**
    * Send Start Email with verification code to password recovery process.
    * @param name 
    * @param email 
@@ -359,7 +317,6 @@ export default function ApiAuthClientImpl(): IAuthClient {
     sendStartEmailConfirm,
     confirmAccount,
     loginService,
-    logoutService,
     sendEmailToRecoveryPass,
     updatePassword
   };

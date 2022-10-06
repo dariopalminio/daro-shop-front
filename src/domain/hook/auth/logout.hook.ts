@@ -30,26 +30,9 @@ export default function useLogout(
     const logout = useCallback((loggedUser: SessionType | undefined) => {
         setState({ isProcessing: true, hasError: false, msg: "logout.info.loading", isSuccess: false });
 
-        console.log('logout...');
         removeSessionValue();
 
-        const userId = loggedUser?.userId ? loggedUser?.userId : null;
-        let msgKey = "";
-
-        if (userId !== null) {
-
-            const responseLogout = authClient.logoutService(userId);
-
-            responseLogout.then(status => {
-                setState({ isProcessing: false, hasError: false, msg: "logout.success", isSuccess: true });
-            }).catch(err => {
-                msgKey = err.message;
-                setState({ isProcessing: false, hasError: true, msg: msgKey, isSuccess: false });
-            });
-
-        } else {
-            setState({ isProcessing: false, hasError: true, msg: "logout.error.not.logged", isSuccess: false });
-        };
+        setState({ isProcessing: false, hasError: false, msg: "logout.success", isSuccess: true });
 
     }, [setState, removeSessionValue, authClient]);
 

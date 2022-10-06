@@ -23,8 +23,6 @@ export interface IAuthClient {
   ) => Promise<any>;
 
   loginService (username: string, pass: string): Promise<Tokens>;
-
-  logoutService: (userId: string) => Promise<number>;
   
   sendEmailToRecoveryPass: (
     email: string,

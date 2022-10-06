@@ -46,13 +46,6 @@ export default function ApiAuthClientStub(): IAuthClient {
         });
     };
 
-
-    function logoutService(userId: string): Promise<number> {
-        return new Promise<number>((resolve, reject) => {
-            resolve(200);
-        });
-    };
-
     function sendStartEmailConfirm(
         name: string,
         email: string,
@@ -175,7 +168,6 @@ export default function ApiAuthClientStub(): IAuthClient {
         sendStartEmailConfirm,
         confirmAccount,
         loginService,
-        logoutService,
         sendEmailToRecoveryPass,
         updatePassword
     };
