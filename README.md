@@ -2,7 +2,7 @@ Daro web app
 
 ## Stack
 
-- Stack: MERN with React + Typescript
+- Stack: MERN (Node.js v.16.17.1 & npm v8.19.2) with React + Typescript
 - Programming Language: Javascript, Typescript
 - Frontend Frameworks & libraries: React
 - i18: react-i18next, i18next
