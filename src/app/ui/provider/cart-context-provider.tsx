@@ -2,10 +2,12 @@ import { FC, useEffect, useState } from "react";
 import CartContext from "domain/context/cart.context";
 import { useCart } from "domain/hook/cart/cart.hook";
 
+interface Props {children?: React.ReactNode}
+
 /**
  * Session Context Provider
  */
-const CartContextProvider: FC = ({ children }) => {
+const CartContextProvider: FC<Props> = ({ children }) => {
     const {
         cartItems,
         cartSubTotal,

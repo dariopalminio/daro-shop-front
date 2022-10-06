@@ -35,7 +35,7 @@ type RequesRefreshToken = {
  * a (presumably new) object. In JavaScript, any function can return an object.
  * @returns 
  */
-export default function AuthKeycloakTokensClientImpl(): IAuthTokensClient {
+export default function AuthTokensClientImpl(): IAuthTokensClient {
 
   /**
    * Get Admin Token
