@@ -1,3 +1,42 @@
+Daro web app
+
+## Stack
+
+- Stack: MERN with React + Typescript
+- Programming Language: Javascript, Typescript
+- Frontend Frameworks & libraries: React
+- i18: react-i18next, i18next
+- Testing: Jest, React Testing Library
+- Build, pack & automation tool: npm
+- Segurity, authentication & authorization: OAuth 2.0
+- Backend Frameworks & libraries: NodeJS, NestJS
+- Validation data: avj, typebox
+- Documentation: Swagger
+- HTTP Client: Axios
+
+
+## Referencias:
+- Code commits standard: https://www.conventionalcommits.org/en/v1.0.0/
+- HTTP Client, Axios :https://axios-http.com/docs/intro
+- Internationalization, react-i18next: https://github.com/andretorres00123/react-i18n-tutorial
+- Internationalization, i18next: https://www.i18next.com/overview/getting-started
+- Internationalization, i18next, video: https://www.youtube.com/watch?v=Nc2xWHONPjQ
+- OAuth 2.0: https://oauth.net/2/
+- Envía emails desde Node.js con Nodemailer (Gmail) tutorial español: https://www.youtube.com/watch?v=KjheexBLY4A
+- Node shop api with stripe payment:  https://github.com/safak/youtube/tree/node-shop-api
+- Responsive testing tool: https://responsivedesignchecker.com/
+- Ajv and JWT: https://github.com/Desarrollo-Util/express-example
+- API Guide: https://github.com/byrondover/api-guidelines/blob/master/Guidelines.md#errors
+- Axios and refresh token: https://javascript.plainenglish.io/handle-refresh-token-with-axios-1e0f45e9afa
+
+Other References:
+- Keycloak: https://medium.com/devops-dudes/secure-front-end-react-js-and-back-end-node-js-express-rest-api-with-keycloak-daf159f0a94e
+- Keycloak, Admin REST API: https://www.keycloak.org/docs-api/10.0/rest-api/index.html
+- Keycloak, with postman: https://documenter.getpostman.com/view/7294517/SzmfZHnd#intro
+- Keycloak, Create user: https://www.appsdeveloperblog.com/keycloak-rest-api-create-a-new-user/
+- Keycloak, Video: https://www.youtube.com/watch?v=368WDlsF_Ow&ab_channel=ColmenaTEC
+- Keycloak, Video: https://www.youtube.com/watch?v=PY5xUgI_BDQ&list=PLRFOqDrY-6nuCMk2gORw-jSKtcnJX7Yam&index=2&ab_channel=ColmenaTEC
+- Keycloak, Video: https://www.youtube.com/watch?v=yz4lwsfUpVs&list=PLRFOqDrY-6nuCMk2gORw-jSKtcnJX7Yam&index=3&ab_channel=ColmenaTEC
 
 # Getting Started with Create React App
 
@@ -18,12 +57,6 @@ npm install axios\
 # Install testing library
 npm install @testing-library/react-hooks\
 npm install react-test-renderer -D
-
-# Install system design for React components from https://material-ui.com/
-npm install @material-ui/core\
-npm install @material-ui/icons\
-npm install @material-ui/lab\
-npm install @material-ui/styles
 
 # npm i universal-cookie --save-dev
 
