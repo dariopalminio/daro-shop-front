@@ -1,4 +1,3 @@
-import  { FunctionComponent } from "react";
 import useLogin from "domain/hook/auth/login.hook";
 import Alert from "app/ui/common/alert/alert";
 import { useTranslation } from 'react-i18next';

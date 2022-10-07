@@ -69,7 +69,7 @@ const MenuListFloat: React.FC<Props> = ({ isOpen, permission, menuList, onClick 
         {isOpen && (
             <StylesMenuListFloat>
                 <div className="menu_float">
-                    {menuList.map((item, index) => {
+                    {menuList.map((item) => {
                         if (isShowed(item))
                             return (
                                 <div className="menu_float_items">

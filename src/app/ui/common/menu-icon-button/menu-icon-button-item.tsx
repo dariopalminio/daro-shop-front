@@ -1,5 +1,5 @@
 
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { MenuItemType } from "../menu-list/menu-item.type";
 import styled from "styled-components";
 import IconButton from "../icon-button/icon-button";
@@ -33,17 +33,8 @@ const MenuIconButtonItem: React.FC<Props> = ({ permission, item, onClick, style 
         else setIsOpen(!isOpen);
     };
 
-    const isShowed = (item: MenuItemType) => {
-
-        return permission ? item.access.includes(permission) : false;
-    }
-
     const getSubmenuData = (): MenuItemType[] => {
         return item.submenu ? item.submenu : [];
-    };
-
-    const handleClick = () => {
-        history.push("/cart");
     };
 
     return (<MenuIconButtonItemContainer

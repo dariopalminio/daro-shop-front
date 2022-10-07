@@ -115,7 +115,7 @@ const ImgCarousel: React.FC<Props> = ({ uniqueId, images, width, height }) => {
             <ImgCarouselMenu>
                 {images.map((image, index) => {
                     const referenceName = `imgcarousel-slide-${uniqueId}-${index}`;
-                    const cyecleColor =  (selected == index) ? "#31C4F3" : "grey";
+                    const cyecleColor =  (selected === index) ? "#31C4F3" : "grey";
                     return (
                         <LabelCyrcle htmlFor={referenceName} style={{background: cyecleColor}}/>
                     );
@@ -127,7 +127,7 @@ const ImgCarousel: React.FC<Props> = ({ uniqueId, images, width, height }) => {
 
             {images.map((image, index) => {
                 const referenceName = `imgcarousel-slide-${uniqueId}-${index}`;
-                const isSelected = (selected == index);
+                const isSelected = (selected === index);
                 const imgZIndex = isSelected ? zIndexUp : zIndexDown;
                 const visible = isSelected ? "visible" : "hidden";
                 return (<>

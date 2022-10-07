@@ -18,7 +18,7 @@ export default function useProducts(authClientInjected: IAuthTokensClient | null
 
     const [state, setState] = useState<IHookState>(InitialState);
     const [product, setProduct] = useState<ProductType|null>(null);
-    const { session, removeSessionValue } = useContext(SessionContext) as ISessionContext;
+    const { removeSessionValue } = useContext(SessionContext) as ISessionContext;
     const productClient: IProductClient = productClientInjected ? productClientInjected : StateConfig.productClient;
 
     const getDetail = async (id: string) => {

@@ -2,8 +2,8 @@ import React, { useContext } from "react";
 import styled from "styled-components";
 import IconButton from "../../../common/icon-button/icon-button";
 import { ILayoutContext, LayoutContext } from "../../../provider/layout-context-provider";
-import { RiArrowLeftSLine, RiCloseFill } from "react-icons/ri"; //ChevronLeftIcon
-import { RiArrowRightSLine } from "react-icons/ri"; //ChevronRightIcon
+import { RiCloseFill } from "react-icons/ri"; //ChevronLeftIcon
+
 
 //Styled-components
 const LayoutContainer = styled.div`

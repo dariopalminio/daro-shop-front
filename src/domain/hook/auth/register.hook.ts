@@ -1,4 +1,4 @@
-import { useCallback, useContext, useState } from 'react';
+import { useContext, useState } from 'react';
 import SessionContext, { ISessionContext } from 'domain/context/session.context';
 import { SessionType } from 'domain/model/auth/session.type';
 import * as StateConfig from 'infra/global.config';
@@ -7,7 +7,7 @@ import { IAuthClient } from 'domain/service/auth-client.interface';
 import { IHookState, InitialState } from 'domain/hook/hook.type';
 import { convertJwtToSessionType } from './convert-jwt';
 import { IProfileClient } from 'domain/service/profile-client.interface';
-import { Profile } from 'domain/model/user/profile.type';
+
 
 /**
  * use Register

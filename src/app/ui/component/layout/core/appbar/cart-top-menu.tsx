@@ -1,4 +1,4 @@
-import { FunctionComponent, useContext } from "react";
+import { useContext } from "react";
 import { useTranslation } from 'react-i18next';
 import { useHistory } from "react-router-dom";
 import { RiShoppingCart2Fill } from "react-icons/ri";

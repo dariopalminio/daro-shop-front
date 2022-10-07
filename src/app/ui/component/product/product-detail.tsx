@@ -23,9 +23,7 @@ interface Props {
 const ProductDetail: React.FC<Props> = ({ product }) => {
 
   const { t } = useTranslation();
-  const [qty, setQty] = useState(1);
   const { cartItems,
-    cartSubTotal,
     setCartItems,
     setCartSubTotal,
     addToCart,
@@ -36,7 +34,7 @@ const ProductDetail: React.FC<Props> = ({ product }) => {
 
   const addToCartHandler = () => {
     console.log("addToCartHandler-->cartItems", cartItems);
-    if (product && qty > 0) addToCart(product, qty);
+    if (product && quantity > 0) addToCart(product, quantity);
     else console.log("No tiene producto que agregar!");
   };
 

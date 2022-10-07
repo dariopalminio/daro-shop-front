@@ -40,7 +40,7 @@ const SingleAttrTable: React.FC<Props> = ({ rowDictionary, style }) => {
     return (
         <TableWrapper>
             {rowDictionary.map((item, index) => {
-                if ((index % 2) == 0)
+                if ((index % 2) === 0)
                     return (
                         <Row> <LabelRow>{item.label}</LabelRow><ValueRow>{item.value}</ValueRow></Row>
                     );

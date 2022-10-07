@@ -1,4 +1,3 @@
-import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import { CenteringContainer } from "app/ui/common/elements/centering-container";
 import { CategoryType } from "domain/model/category/category.type";
@@ -29,7 +28,6 @@ interface Props {
  * Stateless components, extensible Style and controlled component
  */
 const Categories: React.FC<Props> = ({categorySelected, categories, onClick }) => {
-    const { t } = useTranslation();
 
       
     const getLinkColor = (el: CategoryType) => {

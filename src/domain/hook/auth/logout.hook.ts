@@ -2,7 +2,6 @@ import { useCallback, useContext, useState } from 'react';
 import SessionContext, { ISessionContext } from 'domain/context/session.context';
 import { SessionType } from 'domain/model/auth/session.type';
 import * as StateConfig from 'infra/global.config';
-import { IAuthTokensClient } from 'domain/service/auth-tokens-client.interface';
 import { IAuthClient } from 'domain/service/auth-client.interface';
 import { IHookState, InitialState } from '../hook.type';
 
@@ -18,23 +17,20 @@ import { IHookState, InitialState } from '../hook.type';
  *      login function
  *      logout function
  */
-export default function useLogout(
-    userClientInjected: IAuthClient | null = null) {
+export default function useLogout() {
     const { removeSessionValue } = useContext(SessionContext) as ISessionContext;
     const [state, setState] = useState<IHookState>(InitialState);
-    const authClient: IAuthClient = userClientInjected ? userClientInjected : StateConfig.userAuthClient;
+    
 
     /**
      * logout function
      */
-    const logout = useCallback((loggedUser: SessionType | undefined) => {
+    const logout = (loggedUser: SessionType | undefined) => {
         setState({ isProcessing: true, hasError: false, msg: "logout.info.loading", isSuccess: false });
-
         removeSessionValue();
-
         setState({ isProcessing: false, hasError: false, msg: "logout.success", isSuccess: true });
 
-    }, [setState, removeSessionValue, authClient]);
+    };
 
     return {
         isSuccess: state.isSuccess,

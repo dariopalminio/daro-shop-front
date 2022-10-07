@@ -1,5 +1,5 @@
 import * as GlobalConfig from 'infra/global.config';
-import axios, { AxiosPromise } from 'axios';
+import axios from 'axios';
 import { handleAxiosError, ApiError } from 'infra/client/api.error';
 import qs from 'querystring';
 import { IAuthTokensClient } from 'domain/service/auth-tokens-client.interface';

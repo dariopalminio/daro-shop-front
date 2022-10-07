@@ -27,7 +27,7 @@ interface Props {
  */
 const PassRecoveryStartForm: React.FC<Props> = ({ email, title, message, validationErrorMessages, onChange, onSubmit, style }) => {
 
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const [validationFlag, setValidationFlag] = useState(validationFlagInit);
   const expressions = {
     email: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,

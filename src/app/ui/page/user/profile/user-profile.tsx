@@ -42,7 +42,7 @@ const initialEmptyProfile: Profile = {
 const UserProfile: FunctionComponent = () => {
     const { t, i18n } = useTranslation();
     const { session } = useContext(SessionContext) as ISessionContext;
-    const [profile, setProfile] = useState(initialEmptyProfile);
+    const [profile, setProfile] = useState(initialEmptyProfile); //puede colocarse en el hook
     const [initialized, setInitialized] = useState(false);
     const { isProcessing, hasError, msg, isSuccess, getProfile, updateProfile } = useProfile();
 

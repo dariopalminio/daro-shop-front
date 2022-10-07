@@ -22,7 +22,7 @@ export default function useCatalog(authClientInjected: IAuthTokensClient | null 
     const [products, setProducts] = useState<Array<ProductType>>([]);
     const [page, setPage] = useState(1);
     const [maxPage, setMaxPage] = useState(0);
-    const { session, removeSessionValue } = useContext(SessionContext) as ISessionContext;
+    const { removeSessionValue } = useContext(SessionContext) as ISessionContext;
     const productClient: IProductClient = productClientInjected ? productClientInjected : StateConfig.productClient;
 
     const [categories, setCategories] = useState<Array<CategoryType>>([]);
