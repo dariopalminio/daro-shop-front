@@ -5,7 +5,7 @@ import * as StateConfig from 'infra/global.config';
 import { ProductType } from 'domain/model/product/product.type';
 import { IAuthTokensClient } from 'domain/service/auth-tokens-client.interface';
 import { IProductClient } from 'domain/service/product-client.interface';
-import { IHookState, InitialState } from '../hook.type';
+import { IHookState, InitialState } from './hook.type';
 
 /**
  * use Product

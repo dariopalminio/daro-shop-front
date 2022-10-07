@@ -1,7 +1,7 @@
 
 import { FunctionComponent } from "react";
 import { ContactType } from "domain/model/notification/contact.type";
-import useNotification from "domain/hook/contact/notification.hook";
+import useContact from "domain/hook/contact.hook";
 import Alert from "app/ui/common/alert/alert";
 import { useTranslation } from 'react-i18next';
 import CircularProgress from "app/ui/common/progress/circular-progress";
@@ -14,7 +14,7 @@ import ContactForm from "app/ui/component/contact/contact-form";
  */
 const ContactPage: FunctionComponent = () => {
   const { isProcessing, hasError, msg, isSuccess, sendContactEmail } =
-    useNotification(); // Custom Hooks
+  useContact(); // Custom Hooks
   const { t } = useTranslation();
 
   /**

@@ -8,7 +8,7 @@ import { Profile } from "domain/model/user/profile.type";
 import { Address } from "domain/model/user/address.type";
 import CircularProgress from "app/ui/common/progress/circular-progress";
 import Alert from "app/ui/common/alert/alert";
-import useProfile from "domain/hook/profile/profile.hook";
+import useProfile from "domain/hook/profile.hook";
 import ProfileForm from "app/ui/component/user/profile/profile-form";
 
 

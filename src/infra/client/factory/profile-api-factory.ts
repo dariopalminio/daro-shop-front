@@ -1,7 +1,7 @@
 
 import { IProfileClient } from '../../../domain/service/profile-client.interface';
 import ProfileApiClientImpl from '../profile-api-client.impl';
-import ProfileClientStub from '../stub/profile-api-client.stub';
+import ProfileClientStub from '../fake/profile-api-client.stub';
 
 /**
  * Factory of INotificationService implementation for dependency injection

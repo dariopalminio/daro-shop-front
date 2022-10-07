@@ -2,48 +2,42 @@ import { SessionType } from "domain/model/auth/session.type";
 import { Tokens } from "domain/model/auth/tokens.type";
 var jws = require('jws');
 
-    /**
-     * Decode JWT and return data from payload in SessionType value.
-     * @param jwt Jason Web Token
-     * @returns SessionType object
-     */
-     export const convertJwtToSessionType = (tokens: Tokens) => {
-        const jwtDecoded = jws.decode(tokens.access_token);
-        //console.log("refresh_toke:",tokens.refresh_token);
-        const errorJwtDecodedFail = "Decoded JWT fail! JWT decoded is null.";
-        if (!jwtDecoded) throw Error(errorJwtDecodedFail);
-        //console.log("jwtDecoded:",jwtDecoded);
-        const payload = jwtDecoded.payload;
-        console.log("payload:", payload);
+/**
+ * Decode JWT and return data from payload in SessionType value.
+ * @param jwt Jason Web Token
+ * @returns SessionType object
+ */
+export const convertJwtToSessionType = (tokens: Tokens) => {
+    let jwtDecoded;
+    try {
+        jwtDecoded = jws.decode(tokens.access_token);
+        if (!jwtDecoded || !jwtDecoded.payload) throw Error("Error decoding the JWT: Does not exist payload!");
+    } catch (error: any) {
+        console.log('JWT decoding:', error.message);
+        throw error;
+    }
 
-        //StateConfig.clientId
-        //const roles = payload.resource_access.rest-client-test.roles //  ['uma_protection', 'admin', 'user']
+    const payload = jwtDecoded.payload;
 
-        let theRoles = [];
-        try {
-            theRoles = payload.roles;
-            console.log("ROLES:", theRoles);
-        } catch (err) {
-            console.log('Roles not found in JWT!');
-        }
-        //console.log("payload:",payload);
-        // Authorizedaccess_token: (string | null),
-        const userSessionData: SessionType = {
-            createdTimestamp: '', //TODO
-            access_token: tokens.access_token,
-            refresh_token: tokens.refresh_token,
-            expires_in: tokens.expires_in,
-            refresh_expires_in: tokens.refresh_expires_in,
-            date: tokens.date,
-            isLogged: payload.email_verified, //If email ferified is logged
-            email: payload.email,
-            email_verified: payload.email_verified,
-            given_name: payload.username,
-            preferred_username: payload.username,
-            userId: payload.sub,
-            roles: theRoles,
-            firstName: payload.firstName,
-            lastName: payload.lastName
-        };
-        return userSessionData;
+    let theRoles: Array<string> = []; //By default it is anonymous with no roles
+    if (payload.roles && Array.isArray(payload.roles)) theRoles = payload.roles;
+
+    const userSessionData: SessionType = {
+        createdTimestamp: '', //TODO
+        access_token: tokens.access_token ? tokens.access_token : null,
+        refresh_token: tokens.refresh_token ? tokens.refresh_token : null,
+        expires_in: tokens.expires_in ? tokens.expires_in : 0,
+        refresh_expires_in: tokens.refresh_expires_in ? tokens.refresh_expires_in : 0,
+        date: tokens.date ? tokens.date : null,
+        isLogged: payload.email_verified ? payload.email_verified : false, //If email ferified is logged
+        email: payload.email ? payload.email : '',
+        email_verified: payload.email_verified ? payload.email_verified : false,
+        given_name: payload.username ? payload.username : '',
+        preferred_username: payload.username ? payload.username : '',
+        userId: payload.sub ? payload.sub : '',
+        roles: theRoles,
+        firstName: payload.firstName ? payload.firstName : '',
+        lastName: payload.lastName ? payload.lastName : ''
     };
+    return userSessionData;
+};

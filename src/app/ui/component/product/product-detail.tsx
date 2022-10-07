@@ -33,7 +33,6 @@ const ProductDetail: React.FC<Props> = ({ product }) => {
   const [quantity, setQuantity] = useState(1);
 
   const addToCartHandler = () => {
-    console.log("addToCartHandler-->cartItems", cartItems);
     if (product && quantity > 0) addToCart(product, quantity);
     else console.log("No tiene producto que agregar!");
   };

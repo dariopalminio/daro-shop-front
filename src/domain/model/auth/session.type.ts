@@ -12,7 +12,7 @@ export interface SessionType {
     // refresh_expires_in is SSO Session Idle: Sets the expiry time for refresh tokens.
     refresh_expires_in: number; 
     // Date is the date the access_token was obtained.
-    date: Date;
+    date: Date | null;
     isLogged: boolean;
     email: string;
     email_verified: boolean;

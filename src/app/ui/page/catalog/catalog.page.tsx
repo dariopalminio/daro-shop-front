@@ -1,7 +1,7 @@
 
 import { FunctionComponent, useEffect } from "react";
 import { useTranslation } from 'react-i18next';
-import useCatalog from "domain/hook/products/catalog.hook";
+import useCatalog from "domain/hook/catalog.hook";
 import Alert from "app/ui/common/alert/alert";
 import { CenteringContainer } from "app/ui/common/elements/centering-container";
 import CircularProgress from "app/ui/common/progress/circular-progress";

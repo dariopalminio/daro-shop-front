@@ -1,6 +1,6 @@
 
 import  NotificationApiServiceImpl from '../notification-api-client.impl';
-import  NotificationClientStub from '../stub/notification-api-client.stub';
+import  NotificationClientStub from '../fake/notification-api-client.stub';
 import { INotificationClient } from '../../../domain/service/notification-client.interface';
 
 /**

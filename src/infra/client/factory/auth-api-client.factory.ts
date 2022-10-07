@@ -1,6 +1,6 @@
 
 
-import  AuthTokensClientOktub from '../stub/auth-token-client-ok.stub';
+import  AuthTokensClientOktub from '../fake/auth-token-client-ok.stub';
 import { IAuthTokensClient } from '../../../domain/service/auth-tokens-client.interface';
 import AuthTokensClientImpl from '../auth-tokens-client.impl';
 

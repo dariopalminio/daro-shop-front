@@ -1,6 +1,6 @@
 import { FC, useEffect } from "react";
 import CartContext from "domain/context/cart.context";
-import { useCart } from "domain/hook/cart/cart.hook";
+import { useCart } from "domain/hook/cart.hook";
 
 interface Props {children?: React.ReactNode}
 
@@ -18,11 +18,6 @@ const CartContextProvider: FC<Props> = ({ children }) => {
         getCartCount,
         changeItemQuantity
     } = useCart();
-
-
-    useEffect(() => {
-        console.log('useEffect of CartContextProvider...');
-    }, []);
 
     return (
         <CartContext.Provider

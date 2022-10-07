@@ -54,7 +54,6 @@ export default function useCatalog(authClientInjected: IAuthTokensClient | null 
         setState({ isProcessing: true, hasError: false, msg: '', isSuccess: false });
 
         try {
-            console.log("categories:", categories);
             let categoryName: string = '';
             if (categories && categories.length>0) 
                 categoryName = categories[categorySelectedIndex].name? categories[categorySelectedIndex].name : '';

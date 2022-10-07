@@ -115,6 +115,14 @@ export default function ProductClientFake(): IProductClient {
         ]
     };
 
+    const listOfAll: [] = (products_01.list.concat(products_02.list)).concat(products_03.list);
+    const products_all: any = {
+        page: 1,
+        limit: listOfAll.length,
+        count: listOfAll.length,
+        list: listOfAll
+    };
+
     productsFake.set("Category 1", products_01);
     productsFake.set("Category 2", products_02);
     productsFake.set("Category 3", products_03);
@@ -176,7 +184,7 @@ export default function ProductClientFake(): IProductClient {
     function getCatalog(category: string, page: number, limit: number, orderBy: string): Promise<any> {
         
         return new Promise<any>((resolve, reject) => {
-            let data: any = products_01;
+            let data: any = products_all;
             if (category && (category.trim() !== ''))
                 data = productsFake.get(category) as any;
             resolve(data);

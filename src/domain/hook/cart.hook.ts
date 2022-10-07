@@ -71,13 +71,23 @@ export const useCart = () => {
         return totalVal;
     };
 
+    /**
+     * Update the selected quantity and calculate the amount
+     * @param id  Item Id
+     * @param qty Quantity selected
+     */
     const changeItemQuantity = (id: string, qty: number) => {
         const indexToUpdate = cartItems.findIndex((cartItem) => cartItem.itemId === id);
         const searchObject = cartItems[indexToUpdate];
+
+        const num: number = Number(qty * searchObject.grossPrice) // The Number() only visualizes the type and is not needed
+        const roundedString: string = num.toFixed(2); // toFixed() returns a string rounded
+        const newAmount: number = Number(roundedString); 
+
         const itemChanged = {
             ...searchObject,
             qty: qty,
-            amount: qty * searchObject.grossPrice
+            amount: newAmount
         }
         let newCartItems = [...cartItems];
         newCartItems[indexToUpdate] = itemChanged;
@@ -85,6 +95,9 @@ export const useCart = () => {
         saveCart(newCartItems);
     };
 
+    /**
+     * Save cart in storage
+     */
     const saveCart = (items: Array<CartItemType>) => {
         const sessionStorageItem: string = JSON.stringify(items);
         window.sessionStorage.setItem(CART_ITEM_NAME, sessionStorageItem);

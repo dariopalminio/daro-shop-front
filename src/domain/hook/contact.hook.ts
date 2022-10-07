@@ -3,7 +3,7 @@ import { ContactType } from 'domain/model/notification/contact.type';
 import { INotificationClient } from 'domain/service/notification-client.interface';
 import * as StateConfig from 'infra/global.config';
 import { IAuthTokensClient } from 'domain/service/auth-tokens-client.interface';
-import { IHookState, InitialState } from '../hook.type';
+import { IHookState, InitialState } from './hook.type';
 
 
 /**
@@ -12,7 +12,7 @@ import { IHookState, InitialState } from '../hook.type';
  * 
  * @returns 
  */
-export default function useNotification(
+export default function useContact(
     authClientInjected: IAuthTokensClient | null = null,
     notifClientInjected: INotificationClient | null = null) {
     const [state, setState] = useState<IHookState>(InitialState);

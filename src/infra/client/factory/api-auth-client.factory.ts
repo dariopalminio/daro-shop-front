@@ -1,7 +1,7 @@
 import  ApiAuthClientImpl from '../api-auth-client.impl';
 //import  AuthApiClienOkStub from '../stub/auth-api-client-ok.stub';
 import { IAuthClient } from '../../../domain/service/auth-client.interface';
-import ApiAuthClientStub from '../stub/api-auth-client.stub';
+import ApiAuthClientStub from '../fake/api-auth-client.stub';
 
 /**
  * Factory of IAuthService implementation for dependency injection

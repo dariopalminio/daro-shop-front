@@ -5,7 +5,7 @@ import {
   Link,
   RouteComponentProps,
 } from "react-router-dom";
-import useProducts from "domain/hook/products/products.hook";
+import useProducts from "domain/hook/products.hook";
 import CircularProgress from "app/ui/common/progress/circular-progress";
 import ProductDetail from "app/ui/component/product/product-detail";
 
