@@ -16,7 +16,7 @@ const MenuIconButtonItemContainer = styled.div`
 interface Props {
     permission?: string;
     item: MenuItemType;
-    onClick?: () => void;
+    onClick?: (item: MenuItemType) => void;
     style?: any;
 }
 
@@ -29,8 +29,14 @@ const MenuIconButtonItem: React.FC<Props> = ({ permission, item, onClick, style 
     const history = useHistory();
 
     const toggleMenu = () => {
-        if (item.submenu === null) history.push(item.path)
-        else setIsOpen(!isOpen);
+        setIsOpen(!isOpen); // open or close MenuListFloat
+    };
+
+    const handleClick = (item: MenuItemType) => {
+        toggleMenu(); // open or close MenuListFloat
+        if ((item.submenu === null) && item.path)
+            history.push(item.path) //redirect
+        if (onClick) onClick(item);
     };
 
     const getSubmenuData = (): MenuItemType[] => {
@@ -41,7 +47,7 @@ const MenuIconButtonItem: React.FC<Props> = ({ permission, item, onClick, style 
         {...(style && 
             (style= {style})
           )}>
-        <IconButton onClick={() => toggleMenu()}
+        <IconButton onClick={() => handleClick(item)}
         >
             {item.icon}
         </IconButton>
@@ -51,7 +57,8 @@ const MenuIconButtonItem: React.FC<Props> = ({ permission, item, onClick, style 
                 isOpen={isOpen}
                 permission={permission}
                 menuList={getSubmenuData()}
-                onClick={() => toggleMenu()}
+                toogle={()=>toggleMenu()}
+                onClick={(itemElement: MenuItemType) => handleClick(itemElement)}
             />
         ))}
     </MenuIconButtonItemContainer>

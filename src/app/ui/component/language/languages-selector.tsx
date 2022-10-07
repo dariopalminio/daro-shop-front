@@ -1,7 +1,6 @@
 import { FunctionComponent, useContext } from "react";
 import logo from "app/ui/image/logo_app.png";
 import styled, { useTheme } from "styled-components";
-import CartTopMenu from "./cart-top-menu";
 import { RiMenuFill } from "react-icons/ri";
 import IconButton from "app/ui/common/icon-button/icon-button";
 import { ILayoutContext, LayoutContext } from "app/ui/provider/layout-context-provider";
@@ -12,10 +11,9 @@ import { MenuItemType, AccessType } from "app/ui/common/menu-list/menu-item.type
 //https://react-icons.github.io/react-icons/icons?name=ri
 import { RiAccountCircleFill } from "react-icons/ri";
 import { RiShieldUserFill } from "react-icons/ri";
-import { RiUserAddFill } from "react-icons/ri";
+import { RiEarthLine } from "react-icons/ri";
 import { RiUserSearchFill } from "react-icons/ri";
 import { useTranslation } from "react-i18next";
-import LanguageSelector from "app/ui/component/language/languages-selector";
 
 const Topbar = styled.div`
   position: relative;
@@ -56,91 +54,60 @@ interface Props {
  * Header component.
  * @visibleName TopNavBar View
  */
-const TopNavBar: React.FC<Props> = ({ menuList, style }) => {
-  const { t } = useTranslation();
+const LanguageSelector: React.FC<Props> = ({ menuList, style }) => {
   const theme: any = useTheme();
   const { sidebarWidth,
     isSidebarOpen,
     toggleSidebar } = useContext(LayoutContext) as ILayoutContext;
   const { permission } = useContext(SessionContext) as ISessionContext;
+  const { t, i18n } = useTranslation();
 
-  const SubMenuUser: MenuItemType[] = [
+  const SubMenuLang: MenuItemType[] = [
     {
       key: "1",
-      title: t("menu.login"),
-      path: "/user/auth",
-      icon: <RiShieldUserFill />,
+      title: 'es',
+      path: "#",
+      icon: null,
       access: [AccessType.ANONYMOUS],
-      divider: false,
-      submenu: null
-    },
-    {
-      key: "1",
-      title: t("menu.logout"),
-      path: "/user/auth",
-      icon: <RiShieldUserFill />,
-      access: [AccessType.USER, AccessType.ADMIN],
       divider: false,
       submenu: null
     },
     {
       key: "2",
-      title: t("menu.register"),
-      path: "/user/register/form",
-      icon: <RiUserAddFill />,
+      title: 'en',
+      path: "#",
+      icon: null,
       access: [AccessType.ANONYMOUS],
       divider: false,
       submenu: null
-    },
-    {
-      key: "3",
-      title: t("menu.profile"),
-      path: "/user/profile",
-      icon: <RiUserSearchFill />,
-      access: [AccessType.ANONYMOUS, AccessType.USER, AccessType.ADMIN],
-      divider: false,
-      submenu: null
-    },
+    }
   ];
 
-  const TopMenuData: MenuItemType[] = [
+  const LngButton: MenuItemType[] = [
     {
       key: "1",
-      title: t("menu.user"),
-      path: "/",
-      icon: <RiAccountCircleFill size={24} />,
-      access: [AccessType.ANONYMOUS, AccessType.USER, AccessType.ADMIN],
+      title: '',
+      path: "#",
+      icon: <RiEarthLine size={24} />,
+      access: [AccessType.ANONYMOUS],
       divider: false,
-      submenu: SubMenuUser
-    },
+      submenu: SubMenuLang
+    }
   ];
 
+  const changeLanguage = (itemElement: MenuItemType) => {
+    if (itemElement && itemElement.title && itemElement.title.trim() !==''){
+      const lng = itemElement.title;
+      i18n.changeLanguage(lng);
+    }
+  };
+
   return (
-
-    <Topbar>
-      {!isSidebarOpen &&
-        <IconButton onClick={toggleSidebar} style={{ justifySelf: "left", marginLeft: "5px" }}>
-          <RiMenuFill size={24} />
-        </IconButton>
-      }
-
-      <div style={containerTopMenuStyle}>
-        <LogoImg style={{ width: "34", height: "34", marginRight: "10px" }} src={logo} />
-      </div>
-
-      <TopMenuContainer>
-
-      <LanguageSelector />
-      
-        <MenuIconButton permission={permission} menuList={TopMenuData} />
-
-        <CartTopMenu />
-
-      </TopMenuContainer>
-
-    </Topbar>
+    <>
+      <MenuIconButton permission={permission} menuList={LngButton} onClick={(itemElement: MenuItemType)=>changeLanguage(itemElement)}/>
+    </>
 
   );
 };
 
-export default TopNavBar;
+export default LanguageSelector;

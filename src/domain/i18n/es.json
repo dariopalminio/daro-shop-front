@@ -124,5 +124,6 @@
     "back.to.home": "Volver",
     "previous": "Anterior",
     "next": "Siguiente",
-    "of": "de"
+    "of": "de",
+    "fetching.error.malformed": "There was a problem fetching the data. Some data is inconsistent."
  }

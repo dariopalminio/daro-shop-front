@@ -6,9 +6,6 @@ import IconButton from "app/ui/common/icon-button/icon-button";
 import CartContext, { ICartContext } from "domain/context/cart.context";
 import styled from "styled-components";
 
-//@material-ui https://v4.mui.com/
-//import IconButton from "@material-ui/core/IconButton";
-
 const CartCircle = styled.div`
 position: relative;
 `;

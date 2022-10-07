@@ -26,7 +26,7 @@ export default function useCatalog(authClientInjected: IAuthTokensClient | null 
     const productClient: IProductClient = productClientInjected ? productClientInjected : StateConfig.productClient;
 
     const [categories, setCategories] = useState<Array<CategoryType>>([]);
-    const [categorySelected, setCategorySelected] = useState<CategoryType|null>(null);
+    const [categorySelectedIndex, setCategorySelectedIndex] = useState<number>(-1);
 
 
     const LIMIT_ITEMS_BY_PAGE = 8;
@@ -42,7 +42,7 @@ export default function useCatalog(authClientInjected: IAuthTokensClient | null 
           // make sure to catch any error
           .catch(console.error);;
     
-      }, [categorySelected]);
+      }, [categorySelectedIndex]);
       
     const getCategories =  async () => {
         const data: Array<CategoryType> = await productClient.getCategories();
@@ -52,12 +52,18 @@ export default function useCatalog(authClientInjected: IAuthTokensClient | null 
 
     const getCatalog = async (page: number) => {
         setState({ isProcessing: true, hasError: false, msg: '', isSuccess: false });
-console.log(`******************************getCatalog page ${page} categorySelected ${categorySelected}`);
-        try {
-            const catStrin : string = categorySelected? categorySelected.name : '';
-            const data: FilteredProductsDTO = await productClient.getCatalog(catStrin, page, LIMIT_ITEMS_BY_PAGE, "name");
 
-            console.log("hook getCatalog data:", data);
+        try {
+            console.log("categories:", categories);
+            let categoryName: string = '';
+            if (categories && categories.length>0) 
+                categoryName = categories[categorySelectedIndex].name? categories[categorySelectedIndex].name : '';
+            
+            const data: FilteredProductsDTO = await productClient.getCatalog(categoryName, page, LIMIT_ITEMS_BY_PAGE, "name");
+            
+            if (!data || !data.list || !data.page) {
+                throw Error("fetching.error.malformed");
+            }
 
             setProducts(data.list);
             setPage(data.page);
@@ -75,7 +81,6 @@ console.log(`******************************getCatalog page ${page} categorySelec
             }
             console.error(error);
             setState({ isProcessing: false, hasError: true, msg: errorKey, isSuccess: false });
-            throw error;
         }
     };
 
@@ -100,6 +105,6 @@ console.log(`******************************getCatalog page ${page} categorySelec
         getCatalog,
         getPreviousPage,
         getNextPage,
-        categories, categorySelected, setCategorySelected, getCategories
+        categories, categorySelectedIndex, setCategorySelectedIndex, getCategories
     };
 };

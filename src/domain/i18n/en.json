@@ -123,6 +123,7 @@
     "producto.error.loading": "No se ha podido cargar producto!",
     "previous": "Previous",
     "next": "Next",
-    "of": "of"
+    "of": "of",
+    "fetching.error.malformed": "There was a problem fetching the data. Some data is inconsistent."
 
 }

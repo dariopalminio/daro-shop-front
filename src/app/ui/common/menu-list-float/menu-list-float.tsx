@@ -46,7 +46,8 @@ interface Props {
     isOpen: boolean;
     permission?: string;
     menuList: MenuItemType[];
-    onClick: () => void;
+    onClick: (item: MenuItemType) => void;
+    toogle: () => void;
 }
 
 /**
@@ -59,21 +60,25 @@ interface Props {
               <ListItemText primary={item.title} />
             </ListItem>
  */
-const MenuListFloat: React.FC<Props> = ({ isOpen, permission, menuList, onClick }) => {
+const MenuListFloat: React.FC<Props> = ({ isOpen, permission, menuList, onClick, toogle }) => {
 
     const isShowed = (item: MenuItemType) => {
         return permission ? item.access.includes(permission) : false;
     }
 
+    const handleHoverOff = () => {
+        toogle();
+    }
+
     return (<>
         {isOpen && (
             <StylesMenuListFloat>
-                <div className="menu_float">
-                    {menuList.map((item) => {
+                <div className="menu_float" onMouseLeave={() => handleHoverOff()}>
+                    {menuList.map((item, index) => {
                         if (isShowed(item))
                             return (
                                 <div className="menu_float_items">
-                                    <Link to={item.path} className="menu_float_link" onClick={() => onClick()}>
+                                    <Link to={item.path} className="menu_float_link" onClick={() => onClick(item)}>
                                         {item.icon}&nbsp;{item.title}
                                     </Link>
                                 </div>

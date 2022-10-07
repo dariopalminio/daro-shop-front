@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import { useTranslation } from 'react-i18next';
 import Button from "app/ui/common/button/button";
 import TextField from "app/ui/common/text-field/text-field";
-import ProfileLanguage from "./profile-language";
 import MyAddresses from "./my-addresses";
 import { SelectOpts } from "app/ui/common/select-opts";
 
@@ -47,14 +46,6 @@ const ProfileForm: React.FC<Props> = ({ initialized, profile, onChange, onSubmit
     console.log("handleUpdateSubmit...");
     e.preventDefault();
     onSubmit();
-  };
-
-  const handleLanguageChange = (len: string): void => {
-    console.log("handleLanguageChange.len:",len);
-    onChange({
-      ...profile,
-      language: len
-    })
   };
 
   const handleFirstNameChange = async (firstNameValue: string) => {
@@ -194,9 +185,6 @@ const ProfileForm: React.FC<Props> = ({ initialized, profile, onChange, onSubmit
                 value={profile.telephone}
 
               />
-           
-              <ProfileLanguage
-                onChange={(len: string) => handleLanguageChange(len)} />
 
           </div>
 

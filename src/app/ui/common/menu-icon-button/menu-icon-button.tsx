@@ -5,7 +5,7 @@ interface Props {
     isOpen?: boolean;
     permission?: string;
     menuList: MenuItemType[];
-    onClick?: () => void;
+    onClick?: (itemElement: MenuItemType) => void;
     style?: any;
 }
 
@@ -19,15 +19,20 @@ const MenuIconButton: React.FC<Props> = ({ isOpen, permission, menuList, onClick
         return permission ? item.access.includes(permission) : false;
     }
 
+    const handleOnClick = (itemElement: MenuItemType) => {
+        if (onClick) onClick(itemElement)
+    }
+
     return (<>
         {menuList.map((item, index) => {
             if (isShowed(item))
                 return (
-                        <MenuIconButtonItem 
-                        permission={permission} 
-                        item={item} 
+                    <MenuIconButtonItem
+                        permission={permission}
+                        item={item}
+                        onClick={(itemElement: MenuItemType) => handleOnClick(itemElement)}
                         style={style}
-                        />
+                    />
 
                 );
         })}
