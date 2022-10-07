@@ -44,21 +44,18 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 # Useful commands to create project from zero
 
-npx create-react-app react-typescript-tech-radar --template typescript\
+npx create-react-app daro-shp-front --template typescript\
 npm install styled-components\
 npm install @types/styled-components\
 npm install react-router-dom\
 npm install @types/react-router-dom\
 npm install react-icons\
 npm install dotenv\
-npm install md5\
 npm install axios\
 
 # Install testing library
 npm install @testing-library/react-hooks\
 npm install react-test-renderer -D
-
-# npm i universal-cookie --save-dev
 
 ## Available Scripts
 
