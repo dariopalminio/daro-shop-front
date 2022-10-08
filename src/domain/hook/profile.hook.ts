@@ -1,8 +1,7 @@
 import { useContext, useState } from 'react';
 import { ApiError } from 'infra/client/api.error';
 import SessionContext, { ISessionContext } from 'domain/context/session.context';
-import * as StateConfig from 'infra/global.config';
-import { IAuthTokensClient } from 'domain/service/auth-tokens-client.interface';
+import * as GlobalConfig from 'infra/global.config';
 import { IProfileClient } from 'domain/service/profile-client.interface';
 import { IHookState, InitialState } from 'domain/hook/hook.type';
 
@@ -12,11 +11,10 @@ import { IHookState, InitialState } from 'domain/hook/hook.type';
  * 
  * @returns 
  */
-export default function useProfile(authClientInjected: IAuthTokensClient | null = null,
-    profileClientInjected: IProfileClient | null = null) {
-        
+export default function useProfile() {
+
+    const profileClient: IProfileClient = GlobalConfig.Factory.get<IProfileClient>('profileClient');
     const [state, setState] = useState<IHookState>(InitialState);
-    const profClient: IProfileClient = profileClientInjected ? profileClientInjected : StateConfig.profileClient;
     const { session, removeSessionValue } = useContext(SessionContext) as ISessionContext;
 
     const getProfile = async (userName: string | undefined) => {
@@ -29,7 +27,7 @@ export default function useProfile(authClientInjected: IAuthTokensClient | null 
 
         try {
 
-            let info = await profClient.getProfile(userName);
+            let info = await profileClient.getProfile(userName);
             
             setState({ isProcessing: false, hasError: false, msg: "profile.get.user.success", isSuccess: true });
             return info;
@@ -57,7 +55,7 @@ export default function useProfile(authClientInjected: IAuthTokensClient | null 
 
         try {
 
-            let info = await profClient.updateProfile(userProfile);
+            let info = await profileClient.updateProfile(userProfile);
             setState({ isProcessing: false, hasError: false, msg: "profile.update.success", isSuccess: true });
             return;
         } catch (error: any | ApiError) {

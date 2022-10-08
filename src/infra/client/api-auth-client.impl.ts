@@ -4,6 +4,7 @@ import { handleAxiosError, ApiError, AuthStatusEnum } from 'infra/client/api.err
 import qs from 'querystring';
 import { IAuthClient } from 'domain/service/auth-client.interface';
 import { Tokens } from 'domain/model/auth/tokens.type';
+import { IAuthTokensClient } from 'domain/service/auth-tokens-client.interface';
 
 /**
  * Auth Api Client Implementation
@@ -29,9 +30,10 @@ export default function ApiAuthClientImpl(): IAuthClient {
     email: string,
     password: string): Promise<any> {
 
+    const authTokensClient: IAuthTokensClient = GlobalConfig.Factory.get<IAuthTokensClient>('authTokensClient');
     let adminToken: string;
     try {
-      adminToken = await GlobalConfig.authTokensClient.getAdminTokenService();
+      adminToken = await authTokensClient.getAdminTokenService();
     } catch (error: any) {
       throw error;
     }
@@ -82,9 +84,10 @@ export default function ApiAuthClientImpl(): IAuthClient {
     lang: string
   ): Promise<any> {
 
+    const authTokensClient: IAuthTokensClient = GlobalConfig.Factory.get<IAuthTokensClient>('authTokensClient');
     let adminToken: string;
     try {
-      adminToken = await GlobalConfig.authTokensClient.getAdminTokenService();
+      adminToken = await authTokensClient.getAdminTokenService();
     } catch (error: any) {
       throw error;
     }
@@ -138,10 +141,11 @@ export default function ApiAuthClientImpl(): IAuthClient {
   async function confirmAccount(
     token: string,
     lang: string): Promise<any> {
-      console.log("******confirmAccount---info:", token);
+    
+    const authTokensClient: IAuthTokensClient = GlobalConfig.Factory.get<IAuthTokensClient>('authTokensClient');
     let adminToken: string;
     try {
-      adminToken = await GlobalConfig.authTokensClient.getAdminTokenService();
+      adminToken = await authTokensClient.getAdminTokenService();
     } catch (error: any) {
       throw error;
     }
@@ -230,9 +234,10 @@ export default function ApiAuthClientImpl(): IAuthClient {
     recoveryPageLink: string,
     lang: string): Promise<any> {
 
+    const authTokensClient: IAuthTokensClient = GlobalConfig.Factory.get<IAuthTokensClient>('authTokensClient');
     let adminToken: string;
     try {
-      adminToken = await GlobalConfig.authTokensClient.getAdminTokenService();
+      adminToken = await authTokensClient.getAdminTokenService();
     } catch (error: any) {
       throw error;
     }
@@ -279,9 +284,10 @@ export default function ApiAuthClientImpl(): IAuthClient {
     password: string,
     lang: string): Promise<any> {
 
+    const authTokensClient: IAuthTokensClient = GlobalConfig.Factory.get<IAuthTokensClient>('authTokensClient');
     let adminToken: string;
       try {
-        adminToken = await GlobalConfig.authTokensClient.getAdminTokenService();
+        adminToken = await authTokensClient.getAdminTokenService();
       } catch (error: any) {
         throw error;
     }

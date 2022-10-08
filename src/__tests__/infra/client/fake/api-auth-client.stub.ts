@@ -1,5 +1,5 @@
-import { Tokens } from '../../../domain/model/auth/tokens.type';
-import { IAuthClient } from '../../../domain/service/auth-client.interface';
+import { Tokens } from '../../../../domain/model/auth/tokens.type';
+import { IAuthClient } from '../../../../domain/service/auth-client.interface';
 
 /**
  * Stub factory function

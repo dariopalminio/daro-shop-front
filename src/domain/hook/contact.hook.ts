@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { ContactType } from 'domain/model/notification/contact.type';
 import { INotificationClient } from 'domain/service/notification-client.interface';
-import * as StateConfig from 'infra/global.config';
-import { IAuthTokensClient } from 'domain/service/auth-tokens-client.interface';
+import * as GlobalConfig from 'infra/global.config';
 import { IHookState, InitialState } from './hook.type';
 
 
@@ -12,12 +11,10 @@ import { IHookState, InitialState } from './hook.type';
  * 
  * @returns 
  */
-export default function useContact(
-    authClientInjected: IAuthTokensClient | null = null,
-    notifClientInjected: INotificationClient | null = null) {
+export default function useContact() {
     const [state, setState] = useState<IHookState>(InitialState);
-    const notifClient: INotificationClient = notifClientInjected ? notifClientInjected : StateConfig.notificationClient;
-    
+    const notifClient: INotificationClient = GlobalConfig.Factory.get<INotificationClient>('notificationClient');
+
     /**
      * sendContactEmail
      */

@@ -1,14 +1,5 @@
 import dotenv from 'dotenv';
-import { IAuthClient } from '../domain/service/auth-client.interface';
-import { IAuthTokensClient } from '../domain/service/auth-tokens-client.interface';
-import { INotificationClient } from '../domain/service/notification-client.interface';
-import { IProductClient } from '../domain/service/product-client.interface';
-import { IProfileClient } from '../domain/service/profile-client.interface';
-import { ApiAuthClientFactory } from './client/factory/api-auth-client.factory';
-import { AuthApiClientFactory } from './client/factory/auth-api-client.factory';
-import { NotificationApiClientFactory } from './client/factory/notification-api-client.factory';
-import { ProductApiClientFactory } from './client/factory/product-api.factory';
-import { ProfileApiClientFactory } from './client/factory/profile-api-factory';
+import GlobalFactory from './global-factory';
 
 /**
  * Global Config file
@@ -55,9 +46,6 @@ export const app_company_name = (process.env.REACT_APP_COMPANY_NAME ? process.en
 
 export const clientId = process.env.REACT_APP_AUTH_CLIENT_ID;
 
-//Injection of services from origin
-export const authTokensClient: IAuthTokensClient = AuthApiClientFactory.create(is_fake_mode);
-export const notificationClient: INotificationClient = NotificationApiClientFactory.create(is_fake_mode);
-export const userAuthClient: IAuthClient = ApiAuthClientFactory.create(is_fake_mode);
-export const profileClient: IProfileClient = ProfileApiClientFactory.create(is_fake_mode);
-export const productClient: IProductClient = ProductApiClientFactory.create(is_fake_mode);
+export const Factory = GlobalFactory();
+
+

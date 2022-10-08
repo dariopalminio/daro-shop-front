@@ -1,8 +1,7 @@
 import { useContext, useState } from 'react';
 import SessionContext, { ISessionContext } from 'domain/context/session.context';
 import { SessionType } from 'domain/model/auth/session.type';
-import * as StateConfig from 'infra/global.config';
-import { IAuthTokensClient } from 'domain/service/auth-tokens-client.interface';
+import * as GlobalConfig from 'infra/global.config';
 import { IAuthClient } from 'domain/service/auth-client.interface';
 import { IHookState, InitialState } from 'domain/hook/hook.type';
 import { convertJwtToSessionType } from './convert-jwt';
@@ -13,15 +12,12 @@ import { IProfileClient } from 'domain/service/profile-client.interface';
  * use Register
  * Custom Hook for create new user
  */
-export default function useRegister(authServiceInjected: IAuthTokensClient | null = null,
-    userClientInjected: IAuthClient | null = null,
-    profileClientInjected: IProfileClient | null = null) {
+export default function useRegister() {
 
     const { session, setNewSession, removeSessionValue } = useContext(SessionContext) as ISessionContext;
     const [state, setState] = useState<IHookState>(InitialState);
-    const authClient: IAuthClient = userClientInjected ? userClientInjected : StateConfig.userAuthClient;
-    const profClient: IProfileClient = profileClientInjected ? profileClientInjected : StateConfig.profileClient;
-
+    const authClient: IAuthClient = GlobalConfig.Factory.get<IAuthClient>('authClient');
+    const profClient: IProfileClient = GlobalConfig.Factory.get<IProfileClient>('profileClient');
 
     /**
      * Register function
@@ -84,7 +80,7 @@ export default function useRegister(authServiceInjected: IAuthTokensClient | nul
             setState({ isProcessing: true, hasError: false, msg: "Trying to send Email to Confirm!", isSuccess: false }); console.log();
             try {
                 console.log("startConfirmEmail logged:", session);
-                const verificationPageLink = `${StateConfig.app_url}/user/register/confirm/`;
+                const verificationPageLink = `${GlobalConfig.app_url}/user/register/confirm/`;
 
                 // Second: send email to confirmation process
                 const info = await authClient.sendStartEmailConfirm(userName, email, verificationPageLink, locale);

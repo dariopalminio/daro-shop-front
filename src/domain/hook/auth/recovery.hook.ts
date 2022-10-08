@@ -1,6 +1,5 @@
 import { useCallback, useState } from 'react';
-import * as StateConfig from 'infra/global.config';
-import { IAuthTokensClient } from 'domain/service/auth-tokens-client.interface';
+import * as GlobalConfig from 'infra/global.config';
 import { IAuthClient } from 'domain/service/auth-client.interface';
 import { IHookState, InitialState } from 'domain/hook/hook.type';
 
@@ -8,11 +7,10 @@ import { IHookState, InitialState } from 'domain/hook/hook.type';
 /**
  * Start process to password recovery
  */
-export default function useRecovery(authServiceInjected: IAuthTokensClient | null = null,
-    userClientInjected: IAuthClient | null = null) {
+export default function useRecovery() {
 
     const [state, setState] = useState<IHookState>(InitialState);
-    const authClient: IAuthClient = userClientInjected ? userClientInjected : StateConfig.userAuthClient;
+    const authClient: IAuthClient = GlobalConfig.Factory.get<IAuthClient>('authClient');
 
     /**
      * Send Email To Recovery
@@ -26,7 +24,7 @@ export default function useRecovery(authServiceInjected: IAuthTokensClient | nul
             setState({ isProcessing: false, isSuccess: false, hasError: true, msg: errorMsg });
         } else {
 
-            const recoveryPageLink = `${StateConfig.app_url}/user/recovery/form/`;
+            const recoveryPageLink = `${GlobalConfig.app_url}/user/recovery/form/`;
 
             // Second: send email to confirmation process
             authClient.sendEmailToRecoveryPass(email, recoveryPageLink, lang)

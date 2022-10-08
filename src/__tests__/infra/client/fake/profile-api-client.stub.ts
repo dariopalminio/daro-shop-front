@@ -1,6 +1,6 @@
 
 import { Profile } from 'domain/model/user/profile.type';
-import { IProfileClient } from '../../../domain/service/profile-client.interface';
+import { IProfileClient } from '../../../../domain/service/profile-client.interface';
 
 /**
  * A stub for Profile http client thet may simulate the behavior of real impementation code and be a temporary substitute for this. 

@@ -1,10 +1,9 @@
 import { useContext, useEffect, useState } from 'react';
 import { ApiError } from 'infra/client/api.error';
 import SessionContext, { ISessionContext } from 'domain/context/session.context';
-import * as StateConfig from 'infra/global.config';
+import * as GlobalConfig from 'infra/global.config';
 import { FilteredProductsDTO } from 'domain/model/product/filtered-products';
 import { ProductType } from 'domain/model/product/product.type';
-import { IAuthTokensClient } from 'domain/service/auth-tokens-client.interface';
 import { IProductClient } from 'domain/service/product-client.interface';
 import { IHookState, InitialState } from 'domain/hook/hook.type';
 import { CategoryType } from 'domain/model/category/category.type';
@@ -15,16 +14,14 @@ import { CategoryType } from 'domain/model/category/category.type';
  * 
  * @returns 
  */
-export default function useCatalog(authClientInjected: IAuthTokensClient | null = null,
-    productClientInjected: IProductClient | null = null) {
+export default function useCatalog() {
 
+    const productClient: IProductClient = GlobalConfig.Factory.get<IProductClient>('productClient');
     const [state, setState] = useState<IHookState>(InitialState);
     const [products, setProducts] = useState<Array<ProductType>>([]);
     const [page, setPage] = useState(1);
     const [maxPage, setMaxPage] = useState(0);
     const { removeSessionValue } = useContext(SessionContext) as ISessionContext;
-    const productClient: IProductClient = productClientInjected ? productClientInjected : StateConfig.productClient;
-
     const [categories, setCategories] = useState<Array<CategoryType>>([]);
     const [categorySelectedIndex, setCategorySelectedIndex] = useState<number>(-1);
 
@@ -79,6 +76,7 @@ export default function useCatalog(authClientInjected: IAuthTokensClient | null 
                 removeSessionValue();
             }
             console.error(error);
+            console.log("ERRROR:",error);
             setState({ isProcessing: false, hasError: true, msg: errorKey, isSuccess: false });
         }
     };

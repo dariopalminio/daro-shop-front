@@ -1,9 +1,8 @@
 import { useContext, useState } from 'react';
 import { ApiError } from 'infra/client/api.error';
 import SessionContext, { ISessionContext } from 'domain/context/session.context';
-import * as StateConfig from 'infra/global.config';
+import * as GlobalConfig from 'infra/global.config';
 import { ProductType } from 'domain/model/product/product.type';
-import { IAuthTokensClient } from 'domain/service/auth-tokens-client.interface';
 import { IProductClient } from 'domain/service/product-client.interface';
 import { IHookState, InitialState } from './hook.type';
 
@@ -13,13 +12,12 @@ import { IHookState, InitialState } from './hook.type';
  * 
  * @returns 
  */
-export default function useProducts(authClientInjected: IAuthTokensClient | null = null,
-    productClientInjected: IProductClient | null = null) {
+export default function useProducts() {
 
+    const productClient: IProductClient = GlobalConfig.Factory.get<IProductClient>('productClient');
     const [state, setState] = useState<IHookState>(InitialState);
     const [product, setProduct] = useState<ProductType|null>(null);
     const { removeSessionValue } = useContext(SessionContext) as ISessionContext;
-    const productClient: IProductClient = productClientInjected ? productClientInjected : StateConfig.productClient;
 
     const getDetail = async (id: string) => {
         setState({ isProcessing: true, hasError: false, msg: '', isSuccess: false });

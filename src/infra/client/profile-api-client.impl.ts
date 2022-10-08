@@ -6,6 +6,7 @@ import axiosInstance from './interceptor/axios.interceptor';
 import { Profile } from 'domain/model/user/profile.type';
 import axios from 'axios';
 import * as GlobalConfig from 'infra/global.config';
+import { IAuthTokensClient } from 'domain/service/auth-tokens-client.interface';
 
 export default function ProfileApiClientImpl(): IProfileClient {
 
@@ -64,9 +65,10 @@ export default function ProfileApiClientImpl(): IProfileClient {
   async function createProfile(
     userProfile: Profile): Promise<number> {
 
+      const authTokensClient: IAuthTokensClient = GlobalConfig.Factory.get<IAuthTokensClient>('authTokensClient');
       let adminToken: string;
       try {
-        adminToken = await GlobalConfig.authTokensClient.getAdminTokenService();
+        adminToken = await authTokensClient.getAdminTokenService();
       } catch (error: any) {
         throw error;
       }

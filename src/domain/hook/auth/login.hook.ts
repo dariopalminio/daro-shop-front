@@ -1,8 +1,7 @@
 import { useCallback, useContext, useState } from 'react';
 import SessionContext, { ISessionContext } from 'domain/context/session.context';
 import { SessionType } from 'domain/model/auth/session.type';
-import * as StateConfig from 'infra/global.config';
-import { Tokens } from 'domain/model/auth/tokens.type';
+import * as GlobalConfig from 'infra/global.config';
 import { IAuthClient } from 'domain/service/auth-client.interface';
 import { IHookState, InitialState } from 'domain/hook/hook.type';
 import { convertJwtToSessionType } from './convert-jwt';
@@ -17,12 +16,11 @@ import { convertJwtToSessionType } from './convert-jwt';
  *      login function
  *      logout function
  */
-export default function useLogin(
-    userClientInjected: IAuthClient | null = null) {
+export default function useLogin() {
     const { setNewSession, removeSessionValue } = useContext(SessionContext) as ISessionContext;
     const [state, setState] = useState<IHookState>(InitialState);
 
-    const authClient: IAuthClient = userClientInjected ? userClientInjected : StateConfig.userAuthClient;
+    const authClient: IAuthClient = GlobalConfig.Factory.get<IAuthClient>('authClient');
 
     /**
      * login

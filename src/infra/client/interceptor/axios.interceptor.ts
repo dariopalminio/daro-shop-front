@@ -1,6 +1,7 @@
 import * as GlobalConfig from '../../global.config';
 import axios from 'axios';
 import * as SessionStorage from '../../storage/session.storage';
+import { IAuthTokensClient } from 'domain/service/auth-tokens-client.interface';
 
 
 /**
@@ -20,7 +21,8 @@ axiosInstance.interceptors.request.use(async (config) => {
     console.log("interceptors-->No accessToken");
     try {
       console.log("interceptors-->Tray obtain app token");
-      accessToken = await GlobalConfig.authTokensClient.getAppTokenService();
+      const authTokensClient: IAuthTokensClient = GlobalConfig.Factory.get<IAuthTokensClient>('authTokensClient');
+      accessToken = await authTokensClient.getAppTokenService();
     } catch (error: any) {
       throw error;
     }
@@ -43,7 +45,7 @@ axiosInstance.interceptors.response.use((response) => {
   return response
 }, async (error) => {
   const config = error.config;
-  console.warn('Error status', error.response.status);
+  //console.warn('Error status in interceptor:', error.response.status);
   // return Promise.reject(error)
   if (error.response) {
 
@@ -52,7 +54,8 @@ axiosInstance.interceptors.response.use((response) => {
       config._retry = true;
       try {
         const localRefreshToken: string = SessionStorage.getRefreshToken();
-        const res = await GlobalConfig.authTokensClient.getRefreshTokenService(localRefreshToken);
+        const authTokensClient: IAuthTokensClient = GlobalConfig.Factory.get<IAuthTokensClient>('authTokensClient');
+        const res = await authTokensClient.getRefreshTokenService(localRefreshToken);
 
         if (res?.status === 200) {
           const { access_token, refresh_token } = res.data;
