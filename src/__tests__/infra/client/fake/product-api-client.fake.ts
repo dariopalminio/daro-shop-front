@@ -21,7 +21,7 @@ export default function ProductClientFake(): IProductClient {
                 grossPrice: 23.4,
                 description: "Cuadro en oleo de u paisaje con palmeras realizado por el pintos Daro 2022.",
                 stock: 1,
-                category: "toy"
+                category: "Category 1"
             },
             {
                 _id: "2",
@@ -31,7 +31,7 @@ export default function ProductClientFake(): IProductClient {
                 grossPrice: 34.6,
                 description: "Pintura impresión digital con motivo de Amanecer digital.",
                 stock: 1,
-                category: "toy"
+                category: "Category 1"
             },
             {
                 _id: "3",
@@ -40,7 +40,8 @@ export default function ProductClientFake(): IProductClient {
                 images: ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2SmahEEhWXut-9211CpUtZLrOljU8BfdnBUlt60UwBVemJ0rXC3T9-SEuMAfH6ttUmMg&usqp=CAU"],
                 grossPrice: 50,
                 description: "Pintura de Entre montañas 3D en colores violetas.",
-                stock: 1, category: "toy"
+                stock: 1, 
+                category: "Category 1"
             },
             {
                 _id: "4",
@@ -52,7 +53,7 @@ export default function ProductClientFake(): IProductClient {
                 grossPrice: 320,
                 description: "Las pirámides digitales galácticas.",
                 stock: 1,
-                category: "toy"
+                category: "Category 1"
             },
             {
                 _id: "6",
@@ -61,7 +62,8 @@ export default function ProductClientFake(): IProductClient {
                 images: ["https://wallpaperbat.com/img/11896-outrun-sunset-wallpaper.jpg"],
                 grossPrice: 88,
                 description: "Ciadro primaveral de palmeras al sol.",
-                stock: 1
+                stock: 1,
+                category: "Category 1"
             },
         ]
     };
@@ -73,26 +75,26 @@ export default function ProductClientFake(): IProductClient {
             {
                 _id: "5",
                 sku: "1333",
-                name: "Einstein",
+                name: "Einstein I",
                 images: ["https://www.biografiasyvidas.com/monografia/einstein/fotos/einstein_1947.jpg",
                     "https://upload.wikimedia.org/wikipedia/commons/a/a0/Einstein_patentoffice.jpg"
                 ],
                 grossPrice: 100,
-                description: "Obras de Albert Einstein completas.",
+                description: "Obras de Albert Einstein completas I.",
                 stock: 1,
-                category: "toy"
+                category: "Category 2"
             },
             {
                 _id: "8",
                 sku: "1333",
-                name: "Einstein",
+                name: "Einstein II",
                 images: [
                     "https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Albert_Einstein_photo_1920.jpg/1200px-Albert_Einstein_photo_1920.jpg",
                     "https://historia.nationalgeographic.com.es/medio/2018/02/27/einstein3__550x807.JPG"],
                 grossPrice: 100,
-                description: "Obras de Albert Einstein completas.",
+                description: "Obras de Albert Einstein completas II.",
                 stock: 1,
-                category: "toy"
+                category: "Category 2"
             },
         ]
     };
@@ -110,7 +112,7 @@ export default function ProductClientFake(): IProductClient {
                 grossPrice: 100,
                 description: "Obras de Richard Stallman.",
                 stock: 1,
-                category: "toy"
+                category: "Category 3"
             },
         ]
     };
