@@ -18,6 +18,10 @@ import NotificationClientStub from "../__tests__/infra/client/fake/notification-
 import ProductClientFake from "../__tests__/infra/client/fake/product-api-client.fake";
 import ProfileClientStub from "../__tests__/infra/client/fake/profile-api-client.stub";
 
+
+
+
+
 /**
  * Global Factory for dependency injection
  * This is used to inversion of control (IoC). 
@@ -29,8 +33,6 @@ export default function GlobalFactory() {
     const container: Map<string, any> = new Map();
 
     const is_fake_mode = ((process.env.REACT_APP_FAKE === 'true') ? true : false) as boolean;
-
-    console.log('GlobalFactory initialization...');
 
     if (is_fake_mode) {
         /** Instances for injection of fakes for app simulation */
