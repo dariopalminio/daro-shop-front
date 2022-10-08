@@ -8,6 +8,8 @@ const CircularIconButton = styled.button`
     color: black;
     width: 34px;
     height: 34px;
+    padding-top: 4px;
+    padding-left: 5px;
     font-size: 16px;
     cursor: pointer;
     &:hover {
