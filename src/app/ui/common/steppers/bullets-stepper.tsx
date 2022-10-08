@@ -44,13 +44,13 @@ const StepConnector = styled.div<CheckedProps>`
 `;
 
 const StepLabel = styled.p<CheckedProps>`
-position: relative;
-display: inline-block;
-font-size: small;
-text-align: center;
-font-family: Arial, Helvetica, sans-serif;
-color: ${(props) => (props.isChecked ? "green" : "grey")};
-width: 100%;
+    position: relative;
+    display: inline-block;
+    font-size: small;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    color: ${(props) => (props.isChecked ? "green" : "grey")};
+    width: 100%;
 `;
 
 
@@ -107,7 +107,7 @@ const BulletsStepper: React.FC<Props> = ({ list, onClick }) => {
                                         <RiCheckFill style={{ marginTop: "3px" }} color="white" />}
 
                                 </Step>
-                                <StepLabel isChecked={(element?.checked)}>{element.name}</StepLabel>
+                                <StepLabel isChecked={(element?.checked)}>{element?.name}</StepLabel>
                             </StepWrapper>
                         </>
                     )

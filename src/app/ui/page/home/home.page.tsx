@@ -11,9 +11,6 @@ const HomePage: FunctionComponent = () => {
   return (
     <div className="page_container" data-testid="page_container_home">
 
-      <div style={{ width: "300px" }}>
-
-      </div>
       <CatalogPage></CatalogPage>
 
     </div>
