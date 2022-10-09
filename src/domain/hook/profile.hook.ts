@@ -28,7 +28,7 @@ export default function useProfile() {
         try {
 
             let info = await profileClient.getProfile(userName);
-            
+
             setState({ isProcessing: false, hasError: false, msg: "profile.get.user.success", isSuccess: true });
             return info;
 

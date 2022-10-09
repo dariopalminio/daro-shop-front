@@ -1,4 +1,4 @@
-import { FunctionComponent, useContext } from "react";
+import { FunctionComponent, useContext, useEffect } from "react";
 import SessionContext, {
   ISessionContext,
 } from "domain/context/session.context";
@@ -13,8 +13,9 @@ import UserProfile from "./user-profile";
 const ProfilePage: FunctionComponent = () => {
   const { session } = useContext(SessionContext) as ISessionContext;
 
+
   const isNotLogged = () => {
-    return session && !session.isLogged;
+    return !session || !session.isLogged;
   };
 
   return (

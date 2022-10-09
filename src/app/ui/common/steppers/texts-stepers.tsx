@@ -10,31 +10,28 @@ const StepsContainer = styled.div`
 
 
 //Custom props for attaching additional props to Styled-components
+interface StepLinkProps {
+    readonly isChecked?: boolean;
+    readonly isCurrent?: boolean;
+}
+
+const StepLink = styled.a<StepLinkProps>`
+    color: ${(props) => (props.isChecked ? "#70D58F" : "grey")};
+    border-radius: 4px;
+    text-decoration: ${(props) => (props.isCurrent ? "underline" : "none")};
+    font-weight: ${(props) => (props.isCurrent ? "bold" : "normal")};
+    &:hover {
+        background: #DDF6FF;
+      }
+`;
+
 interface CheckedProps {
     readonly isChecked?: boolean;
 }
 
-const StepLink = styled.a<CheckedProps>`
-    color: ${(props) => (props.isChecked ? "#70D58F" : "grey")};
-    text-decoration:none;
-    border-radius: 4px;
-    font-weight: normal;
-    &:hover {
-        background: #DDF6FF;
-        font-weight: bold;
-      }
-`;
-
 const StepLinkConnector = styled.label<CheckedProps>`
     color: ${(props) => (props.isChecked ? "#70D58F" : "grey")};
 `;
-
-
-
-interface Props {
-    list: Array<any>;
-    onClick: (index: number) => void;
-}
 
 export const exampleStepLinkList = [
     {
@@ -59,6 +56,11 @@ export const exampleStepLinkList = [
     }
 ];
 
+interface Props {
+    list: Array<any>;
+    onClick: (index: number) => void;
+}
+
 /**
  * Bullets Stepper
  * Stateless components and controlled component
@@ -77,7 +79,10 @@ const TextsStepper: React.FC<Props> = ({ list, onClick }) => {
                         <>
                             {isNotFirst(index) && <StepLinkConnector isChecked={(element?.checked)}>&nbsp;{">"}&nbsp;</StepLinkConnector>}
 
-                            <StepLink href="#" isChecked={(element?.checked)} onClick={()=>onClick(index)}>
+                            <StepLink href="#" 
+                            isChecked={(element?.checked)} 
+                            isCurrent={(element?.current)} 
+                            onClick={()=>onClick(index)}>
                                 {element?.name}
                             </StepLink>
                         </>

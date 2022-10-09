@@ -38,7 +38,7 @@ const RegisterConfirmStartPage: FunctionComponent = () => {
    * Handle send email with verification link.
    */
   const handleSendEmail = async () => {
-    const userName = session ? session.given_name : "";
+    const userName = session ? session.userName : "";
     const userEmail = session ? session.email : undefined;
     startConfirmEmail(userName, userEmail, i18n.language); //send to server
   };

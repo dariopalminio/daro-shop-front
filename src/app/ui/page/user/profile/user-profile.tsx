@@ -48,15 +48,15 @@ const UserProfile: FunctionComponent = () => {
 
 
     const fetchData = async () => {
-        const username = session ? session.preferred_username : '';
+        const username = session ? session.userName : '';
 
         try {
+
             const info = await getProfile(username);
 
-            if (info.language) i18n.changeLanguage(info.language.toLowerCase());
+            if (info?.language) i18n.changeLanguage(info.language.toLowerCase());
 
-
-            console.log('****************UserProfile PAGE fetchData.info.userName', info);
+            console.log('****************UserProfile PAGE fetchData.info', info);
 
             if (info.userName) {
                 setProfile({
@@ -75,14 +75,14 @@ const UserProfile: FunctionComponent = () => {
             }
 
         } catch (e) {
-            console.log(e);
+            console.log("Error in UserProfile fetchData:", e);
         }
 
         setInitialized(true);
     };
 
     useEffect(() => {
-
+console.log("UserProfile-->useEffect");
         fetchData();
 
     }, []);

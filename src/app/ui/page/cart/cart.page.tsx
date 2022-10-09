@@ -3,7 +3,7 @@ import { FunctionComponent, useContext } from 'react'
 import CartContext, { ICartContext } from "domain/context/cart.context";
 import CartItem from "app/ui/component/cart/cart-item";
 import Cart from "app/ui/component/cart/cart";
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 /**
@@ -18,14 +18,18 @@ const CartPage: FunctionComponent = () => {
         getCartCount,
         changeItemQuantity } = useContext(CartContext) as ICartContext;
     const { t } = useTranslation();
+    const history = useHistory();
     
     const getCartSubTotal = () => {
         return cartSubTotal;
     };
 
     const handleContinue = () => {
-        //TODO
-        console.log('handleContinue... TODO');
+        if (getCartCount()>0)
+            history.push("/checkout");
+            else{
+                alert("Tiene el carro vacío");
+            }
     };
 
     return (

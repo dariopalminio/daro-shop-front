@@ -121,9 +121,14 @@
     "cart.detail.state": "Estado",
     "cart.button.add.to.cart": "Agregar",
     "producto.error.loading": "No se ha podido cargar producto!",
-    "back.to.home": "Volver",
+    "back.to.home": "Inicio",
     "previous": "Anterior",
     "next": "Siguiente",
     "of": "de",
-    "fetching.error.malformed": "There was a problem fetching the data. Some data is inconsistent."
+    "fetching.error.malformed": "There was a problem fetching the data. Some data is inconsistent.",
+    "steps.cart": "Carro",
+    "steps.information": "Información",
+    "steps.confirmation": "Confirmación",
+    "steps.payment": "Pago",
+    "steps.success": "Completado"
  }

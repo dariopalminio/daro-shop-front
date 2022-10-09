@@ -1,7 +1,6 @@
 import { createContext } from 'react';
 import { ProductType } from 'domain/model/product/product.type';
 
-// Global user session context interface for provider
 export interface ICartContext {
     cartItems: Array<any>
     cartSubTotal: number
@@ -13,7 +12,6 @@ export interface ICartContext {
     changeItemQuantity: (id: string, qty: number) => void
 };
 
-// Initial values for global user context 
 export const CartContextDefaultValues: ICartContext = {
     cartItems: [],
     cartSubTotal: 0,

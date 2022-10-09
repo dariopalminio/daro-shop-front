@@ -41,7 +41,7 @@ export default function useRegister() {
             //mover la creación de profile al server o buscar otra estrategia
             const newProf = {
                 userId: userSessionValue.userId,
-                userName: userSessionValue.preferred_username,
+                userName: userSessionValue.userName,
                 firstName: userSessionValue.firstName,
                 lastName: userSessionValue.lastName,
                 email: userSessionValue.email,

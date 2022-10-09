@@ -1,4 +1,4 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import Link from "app/ui/common/link/link";
 import Paper from "app/ui/common/paper/paper";
@@ -9,6 +9,7 @@ import Paper from "app/ui/common/paper/paper";
  */
 const AnonymousProfile: FunctionComponent = () => {
     const { t, i18n } = useTranslation();
+
 
     return (
         <div>

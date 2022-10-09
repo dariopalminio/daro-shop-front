@@ -8,14 +8,14 @@ import GlobalFactory from './global-factory';
  * improves the maintainability of the codebase since all the variables are in the 
  * same file. 
  */
-
+/*
 const result = dotenv.config();
 
 if (result.error) {
   console.log(result.error);
 };
 console.log(result.parsed);
-
+*/
 // REACT_APP_ENV: prod | dev | qa
 export const environment = process.env.REACT_APP_ENV;
 

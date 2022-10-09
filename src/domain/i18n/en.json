@@ -124,6 +124,11 @@
     "previous": "Previous",
     "next": "Next",
     "of": "of",
-    "fetching.error.malformed": "There was a problem fetching the data. Some data is inconsistent."
+    "fetching.error.malformed": "There was a problem fetching the data. Some data is inconsistent.",
+    "steps.cart": "Cart",
+    "steps.information": "Information",
+    "steps.confirmation": "confirmation",
+    "steps.payment": "Payment",
+    "steps.success": "Success"
 
 }

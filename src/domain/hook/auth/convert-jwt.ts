@@ -23,17 +23,12 @@ export const convertJwtToSessionType = (tokens: Tokens) => {
     if (payload.roles && Array.isArray(payload.roles)) theRoles = payload.roles;
 
     const userSessionData: SessionType = {
-        createdTimestamp: '', //TODO
         access_token: tokens.access_token ? tokens.access_token : null,
         refresh_token: tokens.refresh_token ? tokens.refresh_token : null,
-        expires_in: tokens.expires_in ? tokens.expires_in : 0,
-        refresh_expires_in: tokens.refresh_expires_in ? tokens.refresh_expires_in : 0,
-        date: tokens.date ? tokens.date : null,
         isLogged: payload.email_verified ? payload.email_verified : false, //If email ferified is logged
         email: payload.email ? payload.email : '',
         email_verified: payload.email_verified ? payload.email_verified : false,
-        given_name: payload.username ? payload.username : '',
-        preferred_username: payload.username ? payload.username : '',
+        userName: payload.userName ? payload.userName : '',
         userId: payload.sub ? payload.sub : '',
         roles: theRoles,
         firstName: payload.firstName ? payload.firstName : '',

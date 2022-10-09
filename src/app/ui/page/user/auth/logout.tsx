@@ -30,7 +30,7 @@ const Logout: FunctionComponent = () => {
 
       <Alert severity="success">
 
-        {session?.given_name}  {t('logout.success.already.logged')} {" "}
+        {session?.userName}  {t('logout.success.already.logged')} {" "}
       </Alert>
 
       <br />

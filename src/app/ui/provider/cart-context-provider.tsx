@@ -1,11 +1,11 @@
-import { FC, useEffect } from "react";
+import { FC } from "react";
 import CartContext from "domain/context/cart.context";
 import { useCart } from "domain/hook/cart.hook";
 
 interface Props {children?: React.ReactNode}
 
 /**
- * Session Context Provider
+ * Cart Context Provider
  */
 const CartContextProvider: FC<Props> = ({ children }) => {
     const {

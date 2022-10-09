@@ -10,6 +10,7 @@ import RegisterConfirmStartPage from "./user/register/register-confirm-start.pag
 
 // lazy loading for components that must get loaded when it is required. 
 const HomePage = lazy(() => import("./home/home.page"));
+const InformationPage = lazy(() => import("./checkout/information.page"));
 const AuthPage = lazy(() => import("./user/auth/auth.page"));
 const CartPage = lazy(() => import("./cart/cart.page"));
 const CatalogPage = lazy(() => import("./catalog/catalog.page"));
@@ -47,6 +48,12 @@ const MainContainer: FunctionComponent = () => {
               <CartPage />
             </Suspense>
           </Route>
+          <Route path="/checkout" exact>
+            <Suspense fallback={<CircularProgress />}>
+            <InformationPage/>
+            </Suspense>
+          </Route>
+
           <Route path="/catalog" exact>
             <Suspense fallback={<CircularProgress />}>
               <CatalogPage />

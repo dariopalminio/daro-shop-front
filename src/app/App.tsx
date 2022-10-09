@@ -11,6 +11,7 @@ import Footer from "app/ui/page/footer"
 import SideBar from "app/ui/component/layout/core/sidebar"
 import * as GlobalConfig from 'infra/global.config';
 import Themes from "app/ui/common/themes/themes";
+import CheckoutContextProvider from "./ui/provider/checkout-context-provider"
 
 /**
  * Dario Palminio
@@ -25,17 +26,19 @@ const App: FunctionComponent = () => {
     <SessionContextProvider>
       <ThemeProvider theme={Themes.primary}>
         <CartContextProvider>
-          <LayoutContextProvider>
-            <Router>
-              <Layout
-                topbar={<TopNavBar />}
-                leftbar={<SideBar style={{background: "#F9F9F9"}}></SideBar>}
-                footer={<Footer companyName={GlobalConfig.app_company_name}/>}
+          <CheckoutContextProvider>
+            <LayoutContextProvider>
+              <Router>
+                <Layout
+                  topbar={<TopNavBar />}
+                  leftbar={<SideBar style={{ background: "#F9F9F9" }}></SideBar>}
+                  footer={<Footer companyName={GlobalConfig.app_company_name} />}
                 >
-                <MainContainer />
-              </Layout>
-            </Router>
-          </LayoutContextProvider>
+                  <MainContainer />
+                </Layout>
+              </Router>
+            </LayoutContextProvider>
+          </CheckoutContextProvider>
         </CartContextProvider>
       </ThemeProvider>
     </SessionContextProvider>
