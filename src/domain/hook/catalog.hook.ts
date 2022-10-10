@@ -29,11 +29,10 @@ export default function useCatalog() {
     const LIMIT_ITEMS_BY_PAGE = 8;
 
     useEffect(() => {
-        console.log("useCatalog->useEffect:");
         // declare the async data fetching function
         const fetchData = async () => {
-            if (!categories) await getCategories(); //search data
-            await getCatalog(1); //search data
+            if (!categories)  getCategories(); //search data
+             getCatalog(1); //search data
         };
 
         fetchData()
@@ -43,16 +42,14 @@ export default function useCatalog() {
     }, [categorySelectedIndex]);
 
     const getCategories = async () => {
-        console.log("useCatalog->getCategories:");
         const data: Array<CategoryType> = await productClient.getCategories();
         setCategories(data);
     };
 
     const getCatalog = async (page: number) => {
         setState({ isProcessing: true, hasError: false, msg: '', isSuccess: false });
-        console.log("useCatalog->getCatalog:");
+
         try {
-            console.log("categorySelectedIndex:", categorySelectedIndex);
             let categoryName: string = '';
             if (categories && categories.length > 0)
                 categoryName = categories[categorySelectedIndex].name ? categories[categorySelectedIndex].name : '';

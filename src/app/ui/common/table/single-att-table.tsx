@@ -42,11 +42,11 @@ const SingleAttrTable: React.FC<Props> = ({ rowDictionary, style }) => {
             {rowDictionary.map((item, index) => {
                 if ((index % 2) === 0)
                     return (
-                        <Row> <LabelRow>{item.label}</LabelRow><ValueRow>{item.value}</ValueRow></Row>
+                        <Row key={index}> <LabelRow>{item.label}</LabelRow><ValueRow>{item.value}</ValueRow></Row>
                     );
                 else
                     return (
-                        <Row> <LabelRow style={{ background: "#E0E0E0" }}>{item.label}</LabelRow><ValueRow style={{ background: "#f3f6f4" }}>{item.value}</ValueRow></Row>
+                        <Row key={index}> <LabelRow style={{ background: "#E0E0E0" }}>{item.label}</LabelRow><ValueRow style={{ background: "#f3f6f4" }}>{item.value}</ValueRow></Row>
                     );
             })}
 

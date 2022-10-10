@@ -29,8 +29,6 @@ export default function useProducts() {
         try {
             const data = await productClient.getProductDetail(id);
 
-            console.log("hook Detail data:", data);
-
             setProduct(data);
 
             setState({ isProcessing: false, hasError: false, msg: "Success", isSuccess: true });
