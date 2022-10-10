@@ -1,10 +1,11 @@
-import "./profile-form.css";
+import "./user-contact-info-form.css";
 import React, { useState } from "react";
 import { useTranslation } from 'react-i18next';
 import Button from "app/ui/common/button/button";
 import TextField from "app/ui/common/text-field/text-field";
-import MyAddresses from "../../address/my-addresses";
 import { SelectOpts } from "app/ui/common/select-opts";
+import MyAddresses from "../address/my-addresses";
+import SelectAddress from "../address/select-address";
 
 const validationFlagInit = {
   userName: true,
@@ -27,11 +28,11 @@ interface Props {
 }
 
 /**
- * LoginForm
+ * UserContactInfoForm
  * 
  * Pattern: Presentation Component, Controled Component and Extensible Style
  */
-const ProfileForm: React.FC<Props> = ({ initialized, profile, onChange, onSubmit, style }) => {
+const UserContactInfoForm: React.FC<Props> = ({ initialized, profile, onChange, onSubmit, style }) => {
   const docTypeOptions = ["RUT", "DNI", "OTHER", "None"];
   const [validationFlag, setValidationFlag] = useState(validationFlagInit);
   const { t, i18n } = useTranslation();
@@ -45,6 +46,10 @@ const ProfileForm: React.FC<Props> = ({ initialized, profile, onChange, onSubmit
   const handleUpdateSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     onSubmit();
+  };
+
+  const handleOnClickSelect = (item: string, index: number) => {
+    alert(index);
   };
 
   const handleFirstNameChange = async (firstNameValue: string) => {
@@ -129,7 +134,7 @@ const ProfileForm: React.FC<Props> = ({ initialized, profile, onChange, onSubmit
           <div className="wrapper-user-data">
 
             <h1>
-              {t('profile.title')}
+              {t('information.contact.title')}
             </h1>
 
               <TextField
@@ -188,10 +193,13 @@ const ProfileForm: React.FC<Props> = ({ initialized, profile, onChange, onSubmit
           </div>
 
           <div className="wrapper-user-address">
-            {initialized &&
-              <MyAddresses country={"Chile"} addresses={profile.addresses}
-                onChange={(newAddresses: Array<any>) => handleAddClose(newAddresses)} />
+            {initialized && <>
+              <SelectAddress country={"Chile"} addresses={profile.addresses}
+                onChange={(newAddresses: Array<any>) => handleAddClose(newAddresses)} 
+                onClickSelect={(item: string, index: number) => handleOnClickSelect(item, index)}
+                />
 
+                </>
             }
 
           </div>
@@ -222,4 +230,4 @@ const ProfileForm: React.FC<Props> = ({ initialized, profile, onChange, onSubmit
   );
 };
 
-export default ProfileForm;
+export default UserContactInfoForm;

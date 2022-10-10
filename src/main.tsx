@@ -1,6 +1,7 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
+import React from 'react';
+import ReactDOM from 'react-dom/client';
 import App from "./app/App";
+import "./app/ui/style/normalize.css";
 import "./app/ui/style/global.css";
 import './infra/i18n/i18n-index';
 

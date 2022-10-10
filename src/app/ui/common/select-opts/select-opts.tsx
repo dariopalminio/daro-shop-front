@@ -47,7 +47,7 @@ const SelectGroupContainer = styled.div`
 `;
 
 const Selector = styled.div`
-    padding: 7px 20px;
+    padding: 7px 5px 5px 0px;
     cursor: pointer;
 
     &:active {
@@ -132,7 +132,7 @@ const SelectOptions: React.FC<Props> = ({ label, list, selectedOption, setSelect
                                 : "select-options hide-dropdown-options"
                         }
                     >
-                        {list.map((item: string, index: number) => {
+                        {list && list.map((item: string, index: number) => {
                             return (
                                 <Opts key={'Opts'+item+index.toString()}
                                 value={item} changeSelectedOption={(valueSelected: string) => updateSelectedOption(valueSelected)}>{item}</Opts>

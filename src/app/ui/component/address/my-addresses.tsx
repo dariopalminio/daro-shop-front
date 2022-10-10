@@ -1,22 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Address } from "domain/model/user/address.type";
+import { AddressType } from "domain/model/user/address.type";
 import Button from "app/ui/common/button/button";
 import useModalDialog from "app/ui/common/dialog/use-modal-dialog";
 import SelectList from "app/ui/common/select-list/select-list";
-import NewAddressDialog from "./new-address-dialog";
+import NewAddressDialog from "app/ui/component/address/new-address-dialog";
+import useAddress from "domain/hook/address.hook";
 
-const initialNewAddress: Address = {
-    street: '',
-    department: '',
-    neighborhood: '',
-    city: '',
-    state: '',
-    country: ''
-};
 
 interface IMyProps {
-    addresses: Array<Address>,
+    country: string;
+    addresses: Array<AddressType>,
     onChange: (newAddresses: Array<any>) => void //is used as: onChange={(newAddresses: Array<any>) => handleAddClose(newAddresses)}
 }
 
@@ -27,12 +21,17 @@ interface IMyProps {
  */
 const MyAddresses: React.FC<IMyProps> = (props: IMyProps) => {
 
+    const { getInitialAddress } = useAddress();
     const { addresses, onChange } = props;
     const { t } = useTranslation();
-    const [myAddresses, setMyAddresses] = useState<Array<Address>>(addresses);
+    const [myAddresses, setMyAddresses] = useState<Array<AddressType>>(addresses);
     const { isDialogOpen, toggle } = useModalDialog();
-    const [newAddress, setNewAddress] = React.useState(initialNewAddress);
+    const [newAddress, setNewAddress] = React.useState(getInitialAddress(props.country));
 
+    useEffect(() => {
+        console.log("MyAddresses->useEffect->props?.addresses:", props?.addresses);
+    }, []);
+    
     const convertAddressOneLine = (address: any) => {
         return address?.street + " " + address?.department;
     };
@@ -47,19 +46,19 @@ const MyAddresses: React.FC<IMyProps> = (props: IMyProps) => {
     };
 
     const handleDeleteAddress = async (index: number) => {
-        const arrayOfAddresses: Array<Address> = myAddresses;
+        const arrayOfAddresses: Array<AddressType> = myAddresses;
         arrayOfAddresses.splice(index, 1); //delete element of index
         setMyAddresses(arrayOfAddresses);
         onChange(myAddresses); //set addresses array in parent
     };
 
     const handleAddNewAddressAndClose = () => {
-        const arrayOfAddresses: Array<Address> = myAddresses;
+        const arrayOfAddresses: Array<AddressType> = myAddresses;
         arrayOfAddresses.push(newAddress);
         setMyAddresses(arrayOfAddresses);
         toggle();
         onChange(myAddresses); //set addresses array in parent
-        setNewAddress(initialNewAddress);
+        setNewAddress(getInitialAddress(props.country));
     };
 
     const handleNewAddressChange = (newAddress: any) => {
@@ -68,7 +67,7 @@ const MyAddresses: React.FC<IMyProps> = (props: IMyProps) => {
 
     const handleCloseNewAddressDialog = () => {
         toggle();
-        setNewAddress(initialNewAddress);
+        setNewAddress(getInitialAddress(props.country));
     };
 
     return (

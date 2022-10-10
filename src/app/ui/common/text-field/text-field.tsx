@@ -84,6 +84,7 @@ interface Props {
     helperText?: string;
     multiline?: boolean;
     style?: any;
+    readonly?: boolean;
 }
 
 /**
@@ -100,7 +101,8 @@ const TextField: React.FC<Props> = ({
     error,
     helperText,
     multiline,
-    style
+    style,
+    readonly
 }) => {
 
     const getType = () => {
@@ -122,6 +124,8 @@ const TextField: React.FC<Props> = ({
                     defaultValue={value}
                     onChange={(e) => onChange(e)}
                     style={style ? style : {}}
+                    readOnly={readonly}
+
                 />)}
                 {multiline && (<textarea className='input-text-field' id={id} name={id}
                     style={style ? style : { width: "98%", height: "100px" }}

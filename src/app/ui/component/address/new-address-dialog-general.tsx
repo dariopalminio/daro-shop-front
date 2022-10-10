@@ -4,9 +4,10 @@ import Button from "app/ui/common/button/button";
 import ModalDialog from "app/ui/common/dialog/modal-dialog";
 import { CenteringContainer } from "app/ui/common/elements/centering-container";
 import TextField from "app/ui/common/text-field/text-field";
+import { AddressType } from "domain/model/user/address.type";
 
 interface Props {
-    address: any;
+    address: AddressType;
     isOpen: boolean;
     onClose: () => void;
     onChange: (newAddress: any) => void;
@@ -19,7 +20,7 @@ interface Props {
  * 
  * Pattern: Presentation Component, Controled Component 
  */
-const NewAddressDialog: React.FC<Props> = ({ address, isOpen, onClose, onChange, onAccept }) => {
+const NewAddressDialogGeneral: React.FC<Props> = ({ address, isOpen, onClose, onChange, onAccept }) => {
 
     const { t } = useTranslation();
     const [streetValid, setStreetValid] = useState(false);
@@ -98,7 +99,34 @@ const NewAddressDialog: React.FC<Props> = ({ address, isOpen, onClose, onChange,
             isOpen={isOpen}
             onClose={onClose}
         >
+            <TextField
+                id="country"
+                label={t('my.addresses.country')}
+                value={address.country}
+                onChange={(e) => handleCountryChange(e.target.value)}
 
+            />
+            <TextField
+                id="state"
+                label={t('my.addresses.state')}
+                value={address.state}
+                onChange={(e) => handleStateChange(e.target.value)}
+
+            />
+            <TextField
+                id="city"
+                label={t('my.addresses.city')}
+                value={address.city}
+                onChange={(e) => handleCityChange(e.target.value)}
+
+            />
+            <TextField
+                id="neighborhood"
+                label={t('my.addresses.neighborhood')}
+                value={address.neighborhood}
+                onChange={(e) => handleNeighborhoodChange(e.target.value)}
+
+            />
             <TextField
                 id="street"
                 label={t('my.addresses.street')}
@@ -118,34 +146,6 @@ const NewAddressDialog: React.FC<Props> = ({ address, isOpen, onClose, onChange,
                     error: true,
                     helperText: t('register.info.helper.text.required')
                 })}
-            />
-            <TextField
-                id="neighborhood"
-                label={t('my.addresses.neighborhood')}
-                value={address.neighborhood}
-                onChange={(e) => handleNeighborhoodChange(e.target.value)}
-
-            />
-            <TextField
-                id="city"
-                label={t('my.addresses.city')}
-                value={address.city}
-                onChange={(e) => handleCityChange(e.target.value)}
-
-            />
-            <TextField
-                id="state"
-                label={t('my.addresses.state')}
-                value={address.state}
-                onChange={(e) => handleStateChange(e.target.value)}
-
-            />
-            <TextField
-                id="country"
-                label={t('my.addresses.country')}
-                value={address.country}
-                onChange={(e) => handleCountryChange(e.target.value)}
-
             />
             <br />
             <CenteringContainer>
@@ -173,4 +173,4 @@ const NewAddressDialog: React.FC<Props> = ({ address, isOpen, onClose, onChange,
     );
 };
 
-export default NewAddressDialog;
+export default NewAddressDialogGeneral;

@@ -4,6 +4,30 @@ import SessionContext, { ISessionContext } from 'domain/context/session.context'
 import * as GlobalConfig from 'infra/global.config';
 import { IProfileClient } from 'domain/service/profile-client.interface';
 import { IHookState, InitialState } from 'domain/hook/hook.type';
+import { Profile } from 'domain/model/user/profile.type';
+import { AddressType } from 'domain/model/user/address.type';
+
+const initialNewAddress: AddressType = {
+    street: '',
+    department: '',
+    neighborhood: '',
+    city: '',
+    state: '',
+    country: ''
+};
+
+const initialEmptyProfile: Profile = {
+    userId: '',
+    userName: '',
+    firstName: '',
+    lastName: '',
+    email: '',
+    docType: '',
+    document: '',
+    telephone: '',
+    language: '',
+    addresses: [initialNewAddress]
+};
 
 /**
  * use Profile
@@ -16,6 +40,10 @@ export default function useProfile() {
     const profileClient: IProfileClient = GlobalConfig.Factory.get<IProfileClient>('profileClient');
     const [state, setState] = useState<IHookState>(InitialState);
     const { session, removeSessionValue } = useContext(SessionContext) as ISessionContext;
+
+    const getInitialProfile = () => {
+        return initialEmptyProfile;
+    }
 
     const getProfile = async (userName: string | undefined) => {
         setState({ isProcessing: true, hasError: false, msg: '', isSuccess: false });
@@ -77,6 +105,7 @@ export default function useProfile() {
         msg: state.msg,
         isSuccess: state.isSuccess,
         getProfile,
-        updateProfile
+        updateProfile,
+        getInitialProfile
     };
 };

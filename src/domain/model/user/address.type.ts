@@ -1,9 +1,9 @@
 
-export type Address = {
+export type AddressType = {
+    country: string; 
+    state: string; //region
+    city: string;
+    neighborhood: string; //commune
     street: string;
     department: string;
-    neighborhood: string;
-    city: string;
-    state: string;
-    country: string;
 };

@@ -130,5 +130,7 @@
     "steps.information": "Información",
     "steps.confirmation": "Confirmación",
     "steps.payment": "Pago",
-    "steps.success": "Completado"
+    "steps.success": "Completado",
+    "field.placeholder.select.option": "Elija una opción...",
+    "information.contact.title": "Datos de contacto"
  }

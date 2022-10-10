@@ -1,0 +1,108 @@
+import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { AddressType } from "domain/model/user/address.type";
+import Button from "app/ui/common/button/button";
+import useModalDialog from "app/ui/common/dialog/use-modal-dialog";
+import SelectList from "app/ui/common/select-list/select-list";
+import NewAddressDialog from "app/ui/component/address/new-address-dialog";
+import useAddress from "domain/hook/address.hook";
+import RadioButtonList from "app/ui/common/select-list-radio-button/radio-button-list";
+
+
+interface IMyProps {
+    country: string;
+    addresses: Array<AddressType>;
+    onChange: (newAddresses: Array<any>) => void;
+    onClickSelect?: (item: string, index: number) => void;
+}
+
+/**
+ * My Address component
+ * 
+ * Pattern: Presentation Component, Controled Component 
+ */
+const SelectAddress: React.FC<IMyProps> = (props: IMyProps) => {
+
+    const { getInitialAddress } = useAddress();
+    const { addresses, onChange } = props;
+    const { t } = useTranslation();
+    const [myAddresses, setMyAddresses] = useState<Array<AddressType>>(addresses);
+    const { isDialogOpen, toggle } = useModalDialog();
+    const [newAddress, setNewAddress] = React.useState(getInitialAddress(props.country));
+
+    useEffect(() => {
+        console.log("MyAddresses->useEffect->props?.addresses:", props?.addresses);
+    }, []);
+    
+    const convertAddressOneLine = (address: any) => {
+        return address?.street + " " + address?.department;
+    };
+
+    const getStrinArrayAddresses = () => {
+        const stringArray: string[] = myAddresses.map((address: any, index: number) => convertAddressOneLine(address));
+        return stringArray;
+    }
+
+    const handleClickOpen = () => {
+        toggle();
+    };
+
+    const handleSelectAddress = async (item: string, index: number) => {
+        props?.onClickSelect && props.onClickSelect(item, index);
+    };
+
+    const handleAddNewAddressAndClose = () => {
+        const arrayOfAddresses: Array<AddressType> = myAddresses;
+        arrayOfAddresses.push(newAddress);
+        setMyAddresses(arrayOfAddresses);
+        toggle();
+        onChange(myAddresses); //set addresses array in parent
+        setNewAddress(getInitialAddress(props.country));
+    };
+
+    const handleNewAddressChange = (newAddress: any) => {
+        setNewAddress(newAddress);
+    };
+
+    const handleCloseNewAddressDialog = () => {
+        toggle();
+        setNewAddress(getInitialAddress(props.country));
+    };
+
+    return (
+        <div>
+            <h1>
+                {t('my.addresses.title')}
+            </h1>
+
+            <div style={{textAlign: "left"}}>
+                <RadioButtonList
+                    id="mySelectListAddress"
+                    label="Tus direcciones:"
+                    list={getStrinArrayAddresses()}
+                    onClickSelect={(item: string, index: number) => handleSelectAddress(item, index)} />
+            </div>
+
+            <div>
+                <Button type="button" onClick={handleClickOpen}
+                    style={{ marginTop: "15px" }}
+                >
+                    {t('my.addresses.add')}
+                </Button>
+            </div>
+
+            <NewAddressDialog
+                address={newAddress}
+                isOpen={isDialogOpen}
+                onClose={handleCloseNewAddressDialog}
+                onChange={(newAddress: any) => handleNewAddressChange(newAddress)}
+                onAccept={() => handleAddNewAddressAndClose()}
+            >
+
+            </NewAddressDialog>
+
+        </div>
+    );
+};
+
+export default SelectAddress;
