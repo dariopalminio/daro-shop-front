@@ -7,7 +7,7 @@ Daro web app
 - Frontend Frameworks & libraries: React
 - i18: react-i18next, i18next
 - Testing: Jest, React Testing Library
-- Build, pack & automation tool: npm
+- Build, pack & automation tool: npm & VITE
 - Segurity, authentication & authorization: OAuth 2.0
 - Backend Frameworks & libraries: NodeJS, NestJS
 - Validation data: avj, typebox
