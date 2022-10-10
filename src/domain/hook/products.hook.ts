@@ -19,9 +19,13 @@ export default function useProducts() {
     const [product, setProduct] = useState<ProductType|null>(null);
     const { removeSessionValue } = useContext(SessionContext) as ISessionContext;
 
-    const getDetail = async (id: string) => {
+    const getDetail = async (id: string | undefined) => {
         setState({ isProcessing: true, hasError: false, msg: '', isSuccess: false });
 
+        if (!id || id.trim()==='') {
+            setState({ isProcessing: false, hasError: true, msg: 'Product Id is undefined!', isSuccess: false });
+            return;
+        }
         try {
             const data = await productClient.getProductDetail(id);
 

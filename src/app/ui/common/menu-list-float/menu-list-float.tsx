@@ -43,6 +43,7 @@ const StylesMenuListFloat = styled.div`
 `;
 
 interface Props {
+    id: string;
     isOpen: boolean;
     permission?: string;
     menuList: MenuItemType[];
@@ -60,7 +61,7 @@ interface Props {
               <ListItemText primary={item.title} />
             </ListItem>
  */
-const MenuListFloat: React.FC<Props> = ({ isOpen, permission, menuList, onClick, toogle }) => {
+const MenuListFloat: React.FC<Props> = ({ id, isOpen, permission, menuList, onClick, toogle }) => {
 
     const isShowed = (item: MenuItemType) => {
         return permission ? item.access.includes(permission) : false;
@@ -77,7 +78,7 @@ const MenuListFloat: React.FC<Props> = ({ isOpen, permission, menuList, onClick,
                     {menuList.map((item, index) => {
                         if (isShowed(item))
                             return (
-                                <div className="menu_float_items">
+                                <div className="menu_float_items" key={index}>
                                     <Link to={item.path} className="menu_float_link" onClick={() => onClick(item)}>
                                         {item.icon}&nbsp;{item.title}
                                     </Link>

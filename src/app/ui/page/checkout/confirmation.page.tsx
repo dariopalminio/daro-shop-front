@@ -4,7 +4,7 @@ import CartContext, { ICartContext } from "domain/context/cart.context";
 import { useTranslation } from 'react-i18next';
 import CheckoutContext, { ICheckoutContext } from 'domain/context/checkout.context';
 import TextsStepper from 'app/ui/common/steppers/texts-stepers';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import SessionContext, { ISessionContext } from 'domain/context/session.context';
 
 
@@ -21,7 +21,7 @@ const ConfirmationPage: FunctionComponent = () => {
         getCartCount,
         changeItemQuantity } = useContext(CartContext) as ICartContext;
     const { steps, setSteps } = useContext(CheckoutContext) as ICheckoutContext;
-    const history = useHistory();
+    const navigate = useNavigate();
     const { t } = useTranslation();
 
     useEffect(() => {
@@ -57,7 +57,7 @@ const ConfirmationPage: FunctionComponent = () => {
     }, []);
     
     const changeStep = (index: number) => {
-        if (index===0) history.push("/cart");
+        if (index===0) navigate("/cart");
         alert("index");
     }
 

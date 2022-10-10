@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import { CartItemType } from 'domain/model/cart/cart-item.type';
 import { ProductType } from 'domain/model/product/product.type';
-import { v4 as uuidv4 } from 'uuid';
 
 const CART_ITEM_NAME = 'CART';
 
@@ -36,11 +35,11 @@ export const useCart = () => {
         for (let i = 0; i < cartItems.length; i++) {
             totalVal += cartItems[i].amount;
         }
-        setCartSubTotal(totalVal);
+        setCartSubTotal(roundNumber(totalVal));
     };
 
     const addToCart = (productItem: ProductType, qty: number) => {
-        const newItem: CartItemType = { itemId: uuidv4(), productId: productItem._id, imageUrl: productItem.images[0], name: productItem.name, grossPrice: productItem.grossPrice, qty: qty, stock: productItem.stock, amount: (productItem.grossPrice * qty) };
+        const newItem: CartItemType = { itemId: cartItems.length.toString(), productId: productItem._id, imageUrl: productItem.images[0], name: productItem.name, grossPrice: productItem.grossPrice, qty: qty, stock: productItem.stock, amount: (productItem.grossPrice * qty) };
         const newCartItems = [...cartItems, newItem];
         setCartItems(newCartItems);
         saveCart(newCartItems);
@@ -80,9 +79,7 @@ export const useCart = () => {
         const indexToUpdate = cartItems.findIndex((cartItem) => cartItem.itemId === id);
         const searchObject = cartItems[indexToUpdate];
 
-        const num: number = Number(qty * searchObject.grossPrice) // The Number() only visualizes the type and is not needed
-        const roundedString: string = num.toFixed(2); // toFixed() returns a string rounded
-        const newAmount: number = Number(roundedString); 
+        const newAmount: number = roundNumber(qty * searchObject.grossPrice); 
 
         const itemChanged = {
             ...searchObject,
@@ -94,6 +91,12 @@ export const useCart = () => {
         setCartItems(newCartItems);
         saveCart(newCartItems);
     };
+
+const roundNumber = (numberToRound: number): number =>{
+        const num: number = Number(numberToRound) // The Number() only visualizes the type and is not needed
+        const roundedString: string = num.toFixed(2); // toFixed() returns a string rounded
+        return Number(roundedString); 
+}
 
     /**
      * Save cart in storage

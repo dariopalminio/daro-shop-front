@@ -2,8 +2,7 @@
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import {
-  Link,
-  RouteComponentProps,
+  Link, useParams,
 } from "react-router-dom";
 import useProducts from "domain/hook/products.hook";
 import CircularProgress from "app/ui/common/progress/circular-progress";
@@ -16,14 +15,16 @@ type TParams = { productId: string };
  * 
  * Pattern: Container Component and Conditional Rendering
  */
-function ProductDetailPage({ match,}: RouteComponentProps<TParams>) {
+function ProductDetailPage() {
 
   const { isProcessing, hasError, msg, isSuccess, product, getDetail } = useProducts();
   const { t } = useTranslation();
+  const { productId } = useParams();
   
   useEffect(() => {
     const fetchData = async () => {
-      return await getDetail(match.params.productId); //search data
+      if (productId)
+      return await getDetail(productId? productId : ''); //search data
     };
 
     const result = fetchData()

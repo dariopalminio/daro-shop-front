@@ -28,6 +28,7 @@ const MenuIconButton: React.FC<Props> = ({ isOpen, permission, menuList, onClick
             if (isShowed(item))
                 return (
                     <MenuIconButtonItem
+                        key={'MenuIconButtonItem' + index.toString()}
                         permission={permission}
                         item={item}
                         onClick={(itemElement: MenuItemType) => handleOnClick(itemElement)}

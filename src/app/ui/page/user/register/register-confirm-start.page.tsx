@@ -7,11 +7,11 @@ import SessionContext, {
   ISessionContext,
 } from "domain/context/session.context";
 import useRegister from "domain/hook/auth/register.hook";
-import { Redirect } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import CircularProgress from "app/ui/common/progress/circular-progress";
 import Alert from "app/ui/common/alert/alert";
 import RegisterConfirmStart from "app/ui/component/user/register/register-confirm-start";
+import { useNavigate } from "react-router-dom";
 
 /**
  * Register Confirm Start Page (Register STEP 2)
@@ -21,7 +21,8 @@ import RegisterConfirmStart from "app/ui/component/user/register/register-confir
 const RegisterConfirmStartPage: FunctionComponent = () => {
   const { session } = useContext(SessionContext) as ISessionContext;
   const { t, i18n } = useTranslation();
-
+  const navigate = useNavigate();
+  
   useEffect(() => {
     console.log("RegisterConfirmStartPage-->useEffect");
   }, []);
@@ -43,9 +44,13 @@ const RegisterConfirmStartPage: FunctionComponent = () => {
     startConfirmEmail(userName, userEmail, i18n.language); //send to server
   };
 
+  const redirect = () => {
+    navigate("/user/auth");
+  }
+
   return (
-    <div className="page_container">
-      {isSuccess && (<Redirect to='/user/auth' />)}
+    <>
+      {isSuccess && redirect()}
 
       <RegisterConfirmStart
         successMsg={t('register.start.success.temporarily.created')}
@@ -60,7 +65,7 @@ const RegisterConfirmStartPage: FunctionComponent = () => {
 
       {isProcessing && (<CircularProgress />)}
 
-    </div>
+    </>
   );
 };
 

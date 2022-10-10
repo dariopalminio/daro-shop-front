@@ -117,7 +117,7 @@ const ImgCarousel: React.FC<Props> = ({ uniqueId, images, width, height }) => {
                     const referenceName = `imgcarousel-slide-${uniqueId}-${index}`;
                     const cyecleColor =  (selected === index) ? "#31C4F3" : "grey";
                     return (
-                        <LabelCyrcle htmlFor={referenceName} style={{background: cyecleColor}}/>
+                        <LabelCyrcle key={uniqueId+index.toString()} htmlFor={referenceName} style={{background: cyecleColor}}/>
                     );
                 })}
 
@@ -131,12 +131,12 @@ const ImgCarousel: React.FC<Props> = ({ uniqueId, images, width, height }) => {
                 const imgZIndex = isSelected ? zIndexUp : zIndexDown;
                 const visible = isSelected ? "visible" : "hidden";
                 return (<>
-                    <input id={referenceName} type="radio" name="slides" onClick={() => selectImage(index)}
+                    <input key={referenceName} id={referenceName} type="radio" name="slides" onClick={() => selectImage(index)}
                         style={{ zIndex: 1 }}
                         defaultChecked={isSelected}
                     />
 
-                    <ContainerImg>
+                    <ContainerImg key={'ContainerImg'+referenceName}>
                         <ImgObject src={image} style={{ zIndex: imgZIndex, left: 0, transition: "left .65s ease-out", visibility: visible }} />
                     </ContainerImg>
                 </>

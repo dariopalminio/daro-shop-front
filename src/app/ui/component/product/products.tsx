@@ -34,8 +34,8 @@ const Products: React.FC<Props> = ({ productList }) => {
         <CatalogContainer>
             <ProductsContainer>
                 {
-                    productList.map((product: any) => (
-                        <ProductItem
+                    productList.map((product: any, index) => (
+                        <ProductItem key={index}
                             productItem={product}
                         />
                     ))

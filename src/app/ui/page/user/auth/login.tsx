@@ -3,7 +3,7 @@ import Alert from "app/ui/common/alert/alert";
 import { useTranslation } from 'react-i18next';
 import CircularProgress from "app/ui/common/progress/circular-progress";
 import LoginForm from "app/ui/component/user/auth/login-form";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 
 interface Props {
@@ -26,7 +26,7 @@ interface Props {
     login,
   } = useLogin();
 
-  const history = useHistory();
+  const navigate = useNavigate();
   const { t } = useTranslation();
 
   /**
@@ -38,11 +38,11 @@ interface Props {
   };
 
   const redirectToPage = () => {
-    history.push(redirectToPath? redirectToPath : "/");
+    navigate(redirectToPath? redirectToPath : "/");
   }
 
   return (
-    <div>
+    <>
 
       {!isSuccess && (
         <LoginForm onSubmit={(email: string, password: string) => handleLoginSubmit(email, password)} 
@@ -61,7 +61,7 @@ interface Props {
         redirectToPage()
       )}
 
-    </div>
+    </>
   );
 };
 

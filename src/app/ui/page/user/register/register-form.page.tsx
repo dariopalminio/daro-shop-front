@@ -5,7 +5,7 @@ import useRegister from "domain/hook/auth/register.hook";
 import { useTranslation } from 'react-i18next';
 import Alert from "app/ui/common/alert/alert";
 import CircularProgress from "app/ui/common/progress/circular-progress";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const userToRegisterInitialized = {
   userName: '',
@@ -25,7 +25,7 @@ const RegisterPage: FunctionComponent = () => {
   const { t } = useTranslation();
   const { isProcessing, isSuccess, hasError, msg, register } =
     useRegister(); //Custom Hooks
-  const history = useHistory();
+  const navigate = useNavigate();
     
     useEffect(() => {
       console.log("RegisterPage-->useEffect");
@@ -56,11 +56,13 @@ const RegisterPage: FunctionComponent = () => {
   };
 
   const redirectToStep2 = () => {
-    history.push("/user/register/confirm/start");
+    //history.push("/user/register/confirm/start");
+    navigate("/user/register/confirm/start");
   }
 
   return (
-    <div className="page_container">
+    <>
+
       {isSuccess && redirectToStep2()}
 
       {!isSuccess && (
@@ -80,7 +82,8 @@ const RegisterPage: FunctionComponent = () => {
 
       {hasError && <Alert severity="error">{t(msg)}</Alert>}
 
-    </div>
+
+    </>
   );
 };
 

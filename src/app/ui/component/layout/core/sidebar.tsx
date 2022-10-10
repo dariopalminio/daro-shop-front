@@ -70,7 +70,7 @@ const SideBar: React.FC<Props> = ({ menuList, style }) => {
 
     return (
         <SideBarInner style={style ? style: { }}>
-            <MenuList permission={permission} menuList={LeftMenuData}></MenuList>
+            <MenuList id="MenuLeft" permission={permission} menuList={LeftMenuData}></MenuList>
         </SideBarInner>
     );
 };

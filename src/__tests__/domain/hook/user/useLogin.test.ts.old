@@ -1,3 +1,4 @@
+/*
 require('@testing-library/react');
 import { renderHook, act } from '@testing-library/react-hooks';
 import useLogin from "domain/hook/auth/login.hook";
@@ -34,7 +35,7 @@ jest.mock("../../../client/user/GetUserInfoService", () => {
     }
 });
 */
-
+/*
 describe('Test useUser Hook', () => {
 /*
     test('login with BAD credentials should to FAIL', async () => {
@@ -58,5 +59,7 @@ describe('Test useUser Hook', () => {
         await waitForNextUpdate();
         expect(result.current.isLoggedOk).toBe(true);
     });
-*/
+
 });
+
+*/

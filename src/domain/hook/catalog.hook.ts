@@ -22,49 +22,51 @@ export default function useCatalog() {
     const [page, setPage] = useState(1);
     const [maxPage, setMaxPage] = useState(0);
     const { removeSessionValue } = useContext(SessionContext) as ISessionContext;
-    const [categories, setCategories] = useState<Array<CategoryType>>([]);
+    const [categories, setCategories] = useState<Array<CategoryType>>();
     const [categorySelectedIndex, setCategorySelectedIndex] = useState<number>(-1);
 
 
     const LIMIT_ITEMS_BY_PAGE = 8;
 
     useEffect(() => {
+        console.log("useCatalog->useEffect:");
         // declare the async data fetching function
         const fetchData = async () => {
-    
-          return await getCatalog(1); //search data
+            if (!categories) await getCategories(); //search data
+            await getCatalog(1); //search data
         };
-    
-        fetchData()
-          // make sure to catch any error
-          .catch(console.error);;
-    
-      }, [categorySelectedIndex]);
-      
-    const getCategories =  async () => {
-        const data: Array<CategoryType> = await productClient.getCategories();
 
+        fetchData()
+            // make sure to catch any error
+            .catch(console.error);;
+
+    }, [categorySelectedIndex]);
+
+    const getCategories = async () => {
+        console.log("useCatalog->getCategories:");
+        const data: Array<CategoryType> = await productClient.getCategories();
         setCategories(data);
     };
 
     const getCatalog = async (page: number) => {
         setState({ isProcessing: true, hasError: false, msg: '', isSuccess: false });
-
+        console.log("useCatalog->getCatalog:");
         try {
+            console.log("categorySelectedIndex:", categorySelectedIndex);
             let categoryName: string = '';
-            if (categories && categories.length>0) 
-                categoryName = categories[categorySelectedIndex].name? categories[categorySelectedIndex].name : '';
-            
+            if (categories && categories.length > 0)
+                categoryName = categories[categorySelectedIndex].name ? categories[categorySelectedIndex].name : '';
+
             const data: FilteredProductsDTO = await productClient.getCatalog(categoryName, page, LIMIT_ITEMS_BY_PAGE, "name");
-            
+
             if (!data || !data.list || !data.page) {
                 throw Error("fetching.error.malformed");
             }
 
             setProducts(data.list);
             setPage(data.page);
-            let max = Math.round((data.count/LIMIT_ITEMS_BY_PAGE)+0.4);
-            if (max===0) max = 1;
+            let max = Math.round((data.count / LIMIT_ITEMS_BY_PAGE) + 0.4);
+            if (max === 0) max = 1;
             setMaxPage(max);
 
             setState({ isProcessing: false, hasError: false, msg: "Success", isSuccess: true });
@@ -76,19 +78,19 @@ export default function useCatalog() {
                 removeSessionValue();
             }
             console.error(error);
-            console.log("ERRROR:",error);
+            console.log("ERRROR:", error);
             setState({ isProcessing: false, hasError: true, msg: errorKey, isSuccess: false });
         }
     };
 
-    const getNextPage = async () =>{
-        if (page!==maxPage) await getCatalog(page + 1); //search data
-      }
-    
-      const getPreviousPage = async () =>{
+    const getNextPage = async () => {
+        if (page !== maxPage) await getCatalog(page + 1); //search data
+    }
+
+    const getPreviousPage = async () => {
         console.log();
-        if (page>0) await getCatalog(page - 1); //search data
-      }
+        if (page > 0) await getCatalog(page - 1); //search data
+    }
 
 
     return {
@@ -102,6 +104,9 @@ export default function useCatalog() {
         getCatalog,
         getPreviousPage,
         getNextPage,
-        categories, categorySelectedIndex, setCategorySelectedIndex, getCategories
+        categories,
+        categorySelectedIndex,
+        setCategorySelectedIndex,
+        getCategories
     };
 };

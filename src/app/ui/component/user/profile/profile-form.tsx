@@ -191,8 +191,8 @@ const ProfileForm: React.FC<Props> = ({ initialized, profile, onChange, onSubmit
           <div className="wrapper-user-address">
             {initialized &&
               <MyAddresses addresses={profile.addresses}
-                onChange={(newAddresses: Array<any>) => handleAddClose(newAddresses)}>
-              </MyAddresses>
+                onChange={(newAddresses: Array<any>) => handleAddClose(newAddresses)} />
+
             }
 
           </div>
@@ -203,14 +203,14 @@ const ProfileForm: React.FC<Props> = ({ initialized, profile, onChange, onSubmit
           {fieldsAreValid() &&
             <Button
               type="submit"
-              style={{ "margin-top": "5px" }}
+              style={{ marginTop: "5px" }}
             >
               {t('profile.command.submit')}
             </Button>
           }
           {!fieldsAreValid() &&
             <Button
-              style={{ "margin-top": "5px" }}
+              style={{ marginTop: "5px" }}
               disabled
             >
               {t('profile.command.submit')}

@@ -134,7 +134,8 @@ const SelectOptions: React.FC<Props> = ({ label, list, selectedOption, setSelect
                     >
                         {list.map((item: string, index: number) => {
                             return (
-                                <Opts value={item} changeSelectedOption={(valueSelected: string) => updateSelectedOption(valueSelected)}>{item}</Opts>
+                                <Opts key={'Opts'+item+index.toString()}
+                                value={item} changeSelectedOption={(valueSelected: string) => updateSelectedOption(valueSelected)}>{item}</Opts>
                             )
                         }
                         )}

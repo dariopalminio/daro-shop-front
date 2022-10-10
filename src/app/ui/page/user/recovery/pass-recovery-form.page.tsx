@@ -1,11 +1,10 @@
-import {
-  RouteComponentProps,
-} from "react-router-dom";
+
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import useRecovery from "domain/hook/auth/recovery.hook";
 import Alert from "app/ui/common/alert/alert";
 import PassRecoveryForm from "app/ui/component/user/recovery/pass-recovery-form";
+import { useParams } from "react-router-dom";
 
 type TParams = { token: string }; //match.params.token
 
@@ -17,10 +16,12 @@ const passwordsInitialized = {
  * PassRecoveryFormPage (Password recovery STEP 3)
  * Pattern: Container Component (Stateful/Container/Smart component), Conditional Rendering and Context Provider
  */
-function PassRecoveryFormPage({ match, }: RouteComponentProps<TParams>) {
+function PassRecoveryFormPage() {
   const [passwords, setPasswords] = useState(passwordsInitialized);
   const { isProcessing, isSuccess, hasError, msg, updatePassword } = useRecovery();
   const { t, i18n } = useTranslation();
+  const { token } = useParams();
+
   const expressions = {
     password: /^(?=.*?[a-z])(?=.*?[0-9])(?=.*?[A-Z]).{10,}$/gs
   };
@@ -33,7 +34,7 @@ function PassRecoveryFormPage({ match, }: RouteComponentProps<TParams>) {
    * Submit update password 
    */
   const handleSubmit = async () => {
-    updatePassword(match.params.token, passwords.password, i18n.language);
+    updatePassword(token? token : '', passwords.password, i18n.language);
   };
 
   return (

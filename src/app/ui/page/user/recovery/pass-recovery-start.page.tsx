@@ -1,10 +1,10 @@
 import { FunctionComponent, useState } from "react";
 import useRecovery from "domain/hook/auth/recovery.hook";
-import { Redirect } from "react-router";
 import { useTranslation } from 'react-i18next';
 import Alert from "app/ui/common/alert/alert";
 import CircularProgress from "app/ui/common/progress/circular-progress";
 import PassRecoveryStartForm from "app/ui/component/user/recovery/pass-recovery-start-form";
+import { useNavigate } from "react-router-dom";
 
 
 /**
@@ -15,7 +15,8 @@ const PassRecoveryStartPage: FunctionComponent = () => {
   const [email, setEmail] = useState("");
   const { isProcessing, isSuccess, hasError, msg, sendEmailToRecovery } = useRecovery();
   const { t, i18n } = useTranslation();
-
+  const navigate = useNavigate();
+  
   const errorText = {
     email: t('register.email.invalid')
   };
@@ -28,10 +29,14 @@ const PassRecoveryStartPage: FunctionComponent = () => {
     sendEmailToRecovery(email, i18n.language); //send to server
   };
 
-  return (
-    <div className="page_container"  data-testid="page_container_recovery_step1">
+  const redirect = () => {
+    navigate("/user/recovery/msg");
+  }
 
-      {isSuccess && <Redirect to="/user/recovery/msg" />}
+  return (
+    <>
+
+      {isSuccess && redirect()}
 
       <PassRecoveryStartForm
         email={email}
@@ -51,7 +56,7 @@ const PassRecoveryStartPage: FunctionComponent = () => {
 
       <br />
 
-    </div>
+    </>
   );
 };
 

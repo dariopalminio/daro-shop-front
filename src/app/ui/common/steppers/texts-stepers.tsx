@@ -57,7 +57,7 @@ export const exampleStepLinkList = [
 ];
 
 interface Props {
-    list: Array<any>;
+    list: Array<any> | undefined;
     onClick: (index: number) => void;
 }
 
@@ -68,24 +68,27 @@ interface Props {
 const TextsStepper: React.FC<Props> = ({ list, onClick }) => {
 
     const isNotFirst = (index: number) => {
-        return ((list.length > 1) && (index > 0));
+        return (list && ((list.length > 1) && (index > 0)));
     }
 
     return (
         <>
             <StepsContainer>
-                {list.map((element: any, index: number) => {
+                {list && list.map((element: any, index: number) => {
                     return (
-                        <>
-                            {isNotFirst(index) && <StepLinkConnector isChecked={(element?.checked)}>&nbsp;{">"}&nbsp;</StepLinkConnector>}
+                        <div key={element.key}>
+                            {isNotFirst(index) &&
+                                <StepLinkConnector
+                                    isChecked={(element?.checked)}>&nbsp;{">"}&nbsp;</StepLinkConnector>}
 
-                            <StepLink href="#" 
-                            isChecked={(element?.checked)} 
-                            isCurrent={(element?.current)} 
-                            onClick={()=>onClick(index)}>
+                            <StepLink
+                                href="#"
+                                isChecked={(element?.checked)}
+                                isCurrent={(element?.current)}
+                                onClick={() => onClick(index)}>
                                 {element?.name}
                             </StepLink>
-                        </>
+                        </div>
                     )
                 }
                 )}

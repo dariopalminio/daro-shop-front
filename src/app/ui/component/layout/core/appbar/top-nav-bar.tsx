@@ -66,7 +66,7 @@ const TopNavBar: React.FC<Props> = ({ menuList, style }) => {
 
   const SubMenuUser: MenuItemType[] = [
     {
-      key: "1",
+      key: "11",
       title: t("menu.login"),
       path: "/user/auth",
       icon: <RiShieldUserFill />,
@@ -75,7 +75,7 @@ const TopNavBar: React.FC<Props> = ({ menuList, style }) => {
       submenu: null
     },
     {
-      key: "1",
+      key: "12",
       title: t("menu.logout"),
       path: "/user/auth",
       icon: <RiShieldUserFill />,
@@ -84,7 +84,7 @@ const TopNavBar: React.FC<Props> = ({ menuList, style }) => {
       submenu: null
     },
     {
-      key: "2",
+      key: "13",
       title: t("menu.register"),
       path: "/user/register/form",
       icon: <RiUserAddFill />,
@@ -93,7 +93,7 @@ const TopNavBar: React.FC<Props> = ({ menuList, style }) => {
       submenu: null
     },
     {
-      key: "3",
+      key: "14",
       title: t("menu.profile"),
       path: "/user/profile",
       icon: <RiUserSearchFill />,
@@ -105,7 +105,7 @@ const TopNavBar: React.FC<Props> = ({ menuList, style }) => {
 
   const TopMenuData: MenuItemType[] = [
     {
-      key: "1",
+      key: "15",
       title: t("menu.user"),
       path: "/",
       icon: <RiAccountCircleFill size={24} />,

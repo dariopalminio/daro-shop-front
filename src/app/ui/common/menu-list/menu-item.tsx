@@ -58,7 +58,7 @@ const handleMouseEvent = (e: MouseEvent<HTMLButtonElement>) => {
      */
     return (
         <StylesSubMenuItem>
-        <div className="submenuItems"
+        <div key={menuItem.key} className="submenuItems"
             {...(backgroundColor && {
                 style: { background: backgroundColor },
             })}

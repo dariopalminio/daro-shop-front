@@ -1,14 +1,25 @@
 import { FunctionComponent } from "react";
 import { lazy, Suspense } from 'react';
-import { Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import RegisterConfirmEmailPage from "./user/register/register-confirm-email.page";
 import PassRecoveryFormPage from "./user/recovery/pass-recovery-form.page";
 import ProductDetailPage from "./catalog/product-detail.page";
 import Alert from "app/ui/common/alert/alert";
 import CircularProgress from "app/ui/common/progress/circular-progress";
 import RegisterConfirmStartPage from "./user/register/register-confirm-start.page";
+import HomePage from "./home/home.page";
+import AuthPage from "./user/auth/auth.page";
+import CartPage from "./cart/cart.page";
+import InformationPage from "./checkout/information.page";
+import CatalogPage from "./catalog/catalog.page";
+import ContactPage from "./contact/contact.page";
+import RegisterPage from "./user/register/register-form.page";
+import PassRecoveryStartPage from "./user/recovery/pass-recovery-start.page";
+import PassRecoveryMsgPage from "./user/recovery/pass-recovery-msg.page";
+import ProfilePage from "./user/profile/profile.page";
 
 // lazy loading for components that must get loaded when it is required. 
+/*
 const HomePage = lazy(() => import("./home/home.page"));
 const InformationPage = lazy(() => import("./checkout/information.page"));
 const AuthPage = lazy(() => import("./user/auth/auth.page"));
@@ -16,11 +27,11 @@ const CartPage = lazy(() => import("./cart/cart.page"));
 const CatalogPage = lazy(() => import("./catalog/catalog.page"));
 const ContactPage = lazy(() => import("./contact/contact.page"));
 const RegisterPage = lazy(() => import("./user/register/register-form.page"));
-//const RegisterConfirmStartPage = lazy(() => import("./user/register/register-confirm-start.page"));
+const RegisterConfirmStartPage = lazy(() => import("./user/register/register-confirm-start.page"));
 const PassRecoveryStartPage = lazy(() => import("./user/recovery/pass-recovery-start.page"));
 const PassRecoveryMsgPage = lazy(() => import("./user/recovery/pass-recovery-msg.page"));
 const ProfilePage = lazy(() => import("./user/profile/profile.page"));
-
+*/
 
 /**
  * Main Container with principals routes
@@ -32,68 +43,39 @@ const MainContainer: FunctionComponent = () => {
   try {
     return (
       <div id="MainContainer" className="main-container" data-testid="MainContainer">
-        <Switch>
-          <Route path="/" exact>
-            <Suspense fallback={<CircularProgress />}>
-              <HomePage />
-            </Suspense>
-          </Route>
-          <Route path="/user/auth" exact>
-            <Suspense fallback={<CircularProgress />}>
-              <AuthPage />
-            </Suspense>
-          </Route>
-          <Route path="/cart" exact>
-            <Suspense fallback={<CircularProgress />}>
-              <CartPage />
-            </Suspense>
-          </Route>
-          <Route path="/checkout" exact>
-            <Suspense fallback={<CircularProgress />}>
-            <InformationPage/>
-            </Suspense>
-          </Route>
-
-          <Route path="/catalog" exact>
-            <Suspense fallback={<CircularProgress />}>
-              <CatalogPage />
-            </Suspense>
-          </Route>
-          <Route path="/catalog/product/detail/:productId" component={ProductDetailPage} exact />
-
-          <Route path="/contact" exact>
-            <Suspense fallback={<CircularProgress />}>
-              <ContactPage />
-            </Suspense>
-          </Route>
+      
+        <Routes>
+          <Route path="/"  element={<HomePage />} />
 
 
-          <Route path="/user/register/form" exact>
-            <Suspense fallback={<CircularProgress />}>
-              <RegisterPage />
-            </Suspense>
-          </Route>
-          <Route path="/user/register/confirm/start" component={RegisterConfirmStartPage} exact/>
-          <Route path="/user/register/confirm/:token" component={RegisterConfirmEmailPage} exact/>
+          <Route path="/user/auth"  element={<AuthPage />} />
 
-          <Route path="/user/recovery/start" exact>
-            <Suspense fallback={<CircularProgress />}>
-              <PassRecoveryStartPage />
-            </Suspense>
-          </Route>
-          <Route path="/user/recovery/msg" component={PassRecoveryMsgPage} exact>
-            <Suspense fallback={<CircularProgress />}>
-              <PassRecoveryMsgPage />
-            </Suspense>
-          </Route>
-          <Route path="/user/recovery/form/:token" component={PassRecoveryFormPage} exact></Route>
+          <Route path="/cart"  element={<CartPage />} />
+
+          <Route path="/checkout" element={<InformationPage />} />
+
+          <Route path="/catalog" element={<CatalogPage />} />
+
+   
+          <Route path="/catalog/product/detail/:productId" element={<ProductDetailPage/>}  />
+
+          <Route path="/contact" element={<ContactPage/>}  />
+
+          <Route path="/user/register/form" element={<RegisterPage/>}  />
+  
+          <Route path="/user/register/confirm/start" element={<RegisterConfirmStartPage/>} />
+          <Route path="/user/register/confirm/:token" element={<RegisterConfirmEmailPage/>} />
+
+          <Route path="/user/recovery/start" element={<PassRecoveryStartPage/>}  />
+
+          <Route path="/user/recovery/msg" element={<PassRecoveryMsgPage/>} />
+
+          <Route path="/user/recovery/form/:token" element={<PassRecoveryFormPage/>} ></Route>
           
-          <Route path="/user/profile" exact>
-            <Suspense fallback={<CircularProgress />}>
-              <ProfilePage />
-            </Suspense>
-          </Route>
-        </Switch>
+          <Route path="/user/profile" element={<ProfilePage/>} />
+
+        </Routes>
+        
       </div>
     );
   } catch (error: any) {

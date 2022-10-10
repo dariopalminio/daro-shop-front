@@ -2,6 +2,7 @@ import { MenuItemType } from "./menu-item.type";
 import MenuItem from "./menu-item";
 
 interface Props {
+    id: string;
     permission?: string;
     menuList: MenuItemType[];
     backgroundColor?: string;
@@ -12,7 +13,7 @@ interface Props {
 /**
  * Menu Accordion
  */
-const MenuList: React.FC<Props> = ({ permission, menuList, backgroundColor, hoverColor, style }) => {
+const MenuList: React.FC<Props> = ({ id, permission, menuList, backgroundColor, hoverColor, style }) => {
 
     const isShowed = (item: MenuItemType) => {
         return permission? item.access.includes(permission) : false;
@@ -26,7 +27,8 @@ const MenuList: React.FC<Props> = ({ permission, menuList, backgroundColor, hove
             {menuList.map((item, index) => {
                 if (isShowed(item))
                 return (
-                    <MenuItem menuItem={item} backgroundColor={backgroundColor} hoverColor={hoverColor}></MenuItem>
+                    <MenuItem key={index}
+                    menuItem={item} backgroundColor={backgroundColor} hoverColor={hoverColor}></MenuItem>
                 );
             })}
 

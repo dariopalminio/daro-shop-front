@@ -87,14 +87,16 @@ const CartItem: React.FC<Props> = ({ item, qtyChangeHandler, removeHandler }) =>
         <img src={item.imageUrl} alt={item.name} width="100px" height="100px" />
       </div>
 
-      <Link to={`/catalog/product/detail/${item.productId}`} className="cartItem_name">
+      <Link
+        to={`/catalog/product/detail/${item.productId}`} className="cartItem_name">
         <p>{item.name}</p>
       </Link>
 
       <p className="cartitem_price">${item.grossPrice}</p>
 
       <div className="cartitem_qty">
-        <ButtonQuantity value={item.qty} onChange={(newQuantityValue: number) => handlerNewQuantityValue(newQuantityValue)} />
+        <ButtonQuantity
+          value={item.qty} onChange={(newQuantityValue: number) => handlerNewQuantityValue(newQuantityValue)} />
       </div>
       <p className="cartitem_amount">${item.amount}</p>
       <div className="cartitem_delete">

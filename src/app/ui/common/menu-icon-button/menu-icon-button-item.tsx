@@ -1,5 +1,5 @@
 
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { MenuItemType } from "../menu-list/menu-item.type";
 import styled from "styled-components";
 import IconButton from "../icon-button/icon-button";
@@ -26,7 +26,7 @@ interface Props {
 const MenuIconButtonItem: React.FC<Props> = ({ permission, item, onClick, style }) => {
 
     const [isOpen, setIsOpen] = React.useState(false);
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const toggleMenu = () => {
         setIsOpen(!isOpen); // open or close MenuListFloat
@@ -35,7 +35,7 @@ const MenuIconButtonItem: React.FC<Props> = ({ permission, item, onClick, style 
     const handleClick = (item: MenuItemType) => {
         toggleMenu(); // open or close MenuListFloat
         if ((item.submenu === null) && item.path)
-            history.push(item.path) //redirect
+            navigate(item.path) //redirect
         if (onClick) onClick(item);
     };
 
@@ -43,7 +43,8 @@ const MenuIconButtonItem: React.FC<Props> = ({ permission, item, onClick, style 
         return item.submenu ? item.submenu : [];
     };
 
-    return (<MenuIconButtonItemContainer
+    return (
+    <MenuIconButtonItemContainer
         {...(style && 
             (style= {style})
           )}>
@@ -54,6 +55,7 @@ const MenuIconButtonItem: React.FC<Props> = ({ permission, item, onClick, style 
 
         {((item.submenu) && (
             <MenuListFloat
+                id={"MenuListFloat"+item.key}
                 isOpen={isOpen}
                 permission={permission}
                 menuList={getSubmenuData()}

@@ -1,0 +1,11 @@
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import App from "./app/App";
+import "./app/ui/style/global.css";
+import './infra/i18n/i18n-index';
+
+ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+)

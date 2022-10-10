@@ -27,7 +27,7 @@ export const exampleOptionsList = [
 ];
 
 interface Props {
-    list: Array<any>; //this must have a field called name
+    list: Array<any> | undefined; //this must have a field called name
     currentIndex: number;
     onClick: (index: number) => void;
 }
@@ -39,7 +39,7 @@ interface Props {
 const LinksStepper: React.FC<Props> = ({ list, currentIndex, onClick }) => {
 
     const getLinkColor = (el: any) => {
-        if (el.name === list[currentIndex]?.name) return 'red';
+        if (list && (el.name === list[currentIndex]?.name)) return 'red';
         return 'blue';
     }
 
@@ -47,15 +47,14 @@ const LinksStepper: React.FC<Props> = ({ list, currentIndex, onClick }) => {
         <>
             <OptionsLinksWrapper>
                 <CenteringContainer>
-                    {list.map((element: any, index: number) => {
+                    {list && list.map((element: any, index: number) => {
                         return (
-                            <>
-                                <OptionCategoryLink href="#"
+                                <OptionCategoryLink key={index.toString()}
+                                    href="#"
                                     style={{ color: getLinkColor(element) }}
                                     onClick={() => onClick(index)}>
                                     {element.name}
                                 </OptionCategoryLink>
-                            </>
                         )
                     }
                     )}

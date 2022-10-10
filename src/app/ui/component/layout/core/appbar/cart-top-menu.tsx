@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { useTranslation } from 'react-i18next';
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { RiShoppingCart2Fill } from "react-icons/ri";
 import IconButton from "app/ui/common/icon-button/icon-button";
 import CartContext, { ICartContext } from "domain/context/cart.context";
@@ -46,10 +46,10 @@ interface Props {
     getCartCount,
     changeItemQuantity } = useContext(CartContext) as ICartContext;
 
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const handleViewCart = () => {
-    history.push("/cart");
+    navigate("/cart");
   };
 
 

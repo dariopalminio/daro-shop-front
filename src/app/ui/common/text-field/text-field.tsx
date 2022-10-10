@@ -119,13 +119,13 @@ const TextField: React.FC<Props> = ({
                 {!multiline && (<input className='input-text-field' id={id} name={id}
                     type={getType()}
                     placeholder={placeholder ? placeholder : ''}
-                    value={value}
+                    defaultValue={value}
                     onChange={(e) => onChange(e)}
                     style={style ? style : {}}
                 />)}
                 {multiline && (<textarea className='input-text-field' id={id} name={id}
                     style={style ? style : { width: "98%", height: "100px" }}
-                    value={value}
+                    defaultValue={value}
                     onChange={(e) => onChange(e)}
                 />)}
 

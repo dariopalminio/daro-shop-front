@@ -1,6 +1,18 @@
 import { SessionType } from "domain/model/auth/session.type";
 import { Tokens } from "domain/model/auth/tokens.type";
-var jws = require('jws');
+//var jws = require('jws');
+
+import { isExpired, decodeToken } from "react-jwt";
+
+const payload_fake = {payload: {
+    roles: [],
+    email_verified: false,
+    email: "daro@gmail.com",
+    userName: "daro@gmail.com",
+    sub: "",
+    firstName: "",
+    lastName: ""
+}};
 
 /**
  * Decode JWT and return data from payload in SessionType value.
@@ -8,16 +20,17 @@ var jws = require('jws');
  * @returns SessionType object
  */
 export const convertJwtToSessionType = (tokens: Tokens) => {
-    let jwtDecoded;
+    let jwtDecoded: any;
     try {
-        jwtDecoded = jws.decode(tokens.access_token);
-        if (!jwtDecoded || !jwtDecoded.payload) throw Error("Error decoding the JWT: Does not exist payload!");
+        jwtDecoded = decodeToken(tokens.access_token);//jwt.decode(tokens.access_token);
+        console.log("jwtDecoded:", jwtDecoded);
+        if (!jwtDecoded) throw Error("Error decoding the JWT: Does not exist payload!");
     } catch (error: any) {
         console.log('JWT decoding:', error.message);
         throw error;
     }
 
-    const payload = jwtDecoded.payload;
+    const payload = jwtDecoded;
 
     let theRoles: Array<string> = []; //By default it is anonymous with no roles
     if (payload.roles && Array.isArray(payload.roles)) theRoles = payload.roles;

@@ -55,7 +55,7 @@ const StepLabel = styled.p<CheckedProps>`
 
 
 interface Props {
-    list: Array<any>;
+    list: Array<any> | undefined;
     onClick: (index: number) => void;
 }
 
@@ -89,25 +89,28 @@ export const exampleStepList = [
 const BulletsStepper: React.FC<Props> = ({ list, onClick }) => {
 
     const isNotFirst = (index: number) => {
-        return ((list.length > 1) && (index > 0));
+        return (list && ((list.length > 1) && (index > 0)));
     }
 
     return (
         <>
             <StepsContainer>
 
-                {list.map((element: any, index: number) => {
+                {list && list.map((element: any, index: number) => {
                     return (
                         <>
-
-                            {isNotFirst(index) && <StepConnector isChecked={(element?.checked)}></StepConnector>}
-                            <StepWrapper onClick={()=>onClick(index)}>
-                                <Step isChecked={(element?.checked)}>
+                            {isNotFirst(index) &&
+                                <StepConnector isChecked={(element?.checked)}></StepConnector>}
+                            <StepWrapper key={'StepWrapper' + index.toString()}
+                                onClick={() => onClick(index)}>
+                                <Step key={'Step' + index.toString()}
+                                    isChecked={(element?.checked)}>
                                     {(element?.checked) &&
                                         <RiCheckFill style={{ marginTop: "3px" }} color="white" />}
 
                                 </Step>
-                                <StepLabel isChecked={(element?.checked)}>{element?.name}</StepLabel>
+                                <StepLabel key={'StepLabel' + index.toString()}
+                                isChecked={(element?.checked)}>{element?.name}</StepLabel>
                             </StepWrapper>
                         </>
                     )

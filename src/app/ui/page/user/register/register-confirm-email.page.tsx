@@ -1,11 +1,10 @@
-import {
-  RouteComponentProps,
-} from "react-router-dom";
+import {useParams} from 'react-router-dom';
 import { useEffect, useState } from "react";
 import { useTranslation } from 'react-i18next';
 import CircularProgress from "app/ui/common/progress/circular-progress";
 import Alert from "app/ui/common/alert/alert";
 import emailOkImage from "app/ui/image/email_ok.png";
+
 import useRegister from "domain/hook/auth/register.hook";
 
 type TParams = { token: string }; //match.params.token
@@ -15,23 +14,25 @@ type TParams = { token: string }; //match.params.token
  * This page receives a 'token' parameter and passes it to the child component.
  * Pattern: Container Component (Stateful/Container/Smart component), Conditional Rendering and Custom hook
  */
-function RegisterConfirmEmailPage({match,}: RouteComponentProps<TParams>) {
+function RegisterConfirmEmailPage() {
 
   const [isExecuted, setIsExecuted] = useState(false);
   const { isProcessing, isSuccess, hasError, msg, confirmAccount } = useRegister();
   const { t, i18n } = useTranslation();
-  
+  //const params = useParams();
+  const { token } = useParams();
+
   useEffect(() => {
     console.log("RegisterConfirmEmailPage-->useEffect");
   }, []);
   
   const executeConfirmRequest = () => {
     setIsExecuted(true);
-    confirmAccount(match.params.token, i18n.language);
+    confirmAccount(token? token : '', i18n.language);
   };
 
   return (
-    <div className="page_container">
+    <>
       
       {!isExecuted && executeConfirmRequest()}
 
@@ -48,7 +49,7 @@ function RegisterConfirmEmailPage({match,}: RouteComponentProps<TParams>) {
       }
 
       {(!isSuccess && !isProcessing && hasError) && <Alert severity="error">{t(msg)}</Alert>}
-    </div>
+    </>
   );
 };
 

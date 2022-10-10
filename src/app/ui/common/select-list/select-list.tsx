@@ -89,9 +89,10 @@ const SelectList: React.FC<Props> = ({ id, label, list, onClickSelect, onClickDe
             <UlSelectList>
                 {list.map((item: string, index: number) => {
                     return (
-                        <li
+                        <li key={id+index.toString()}
                             onClick={() => selectItem(item, index)}>{item}
                             <SelectListDelete
+                                key={'SelectListDelete'+id+index.toString()}
                                 aria-hidden="true"
                                 onClick={() => deleteItem(item, index)}>
                                     <RiDeleteBin7Fill size={20}/>

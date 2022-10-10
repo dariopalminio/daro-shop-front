@@ -65,7 +65,10 @@ const ButtonQuantity: React.FC<Props> = ({ value, onChange }) => {
   return (
     <QtyContainer>
       <InputQtyMinus type='button' value='-' onClick={() => handlerQtyminus()} />
-      <InputQty type='text' name='quantity' value={value} />
+      <InputQty 
+      type='text' 
+      name='quantity' 
+      value={value} onChange={()=>{}}/>
       <InputQtyPlus type='button' value='+' onClick={() => handlerQtyplus()} />
     </QtyContainer>
   );

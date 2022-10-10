@@ -19,29 +19,16 @@ const CatalogPage: FunctionComponent = () => {
   const { isProcessing, hasError, msg, isSuccess, page, maxPage, products, getPreviousPage,
     getNextPage, getCatalog, categories, getCategories, setCategorySelectedIndex, categorySelectedIndex } = useCatalog();
 
-  useEffect(() => {
-    // declare the async data fetching function
-    const fetchData = async () => {
-
-      return await getCategories(); //search data
-    };
-
-    fetchData()
-      // make sure to catch any error
-      .catch(console.error);;
-
-  }, []);
-
-  const handleClick = async (index: number) => {
+  const handleChangeCategory = async (index: number) => {
     setCategorySelectedIndex(index);
-    await getCatalog(1); //search data
+
   }
 
 
   return (
     <div className="page_container">
 
-      <LinksStepper list={categories} currentIndex={categorySelectedIndex} onClick={(index: number) => handleClick(index)}/>
+      <LinksStepper list={categories} currentIndex={categorySelectedIndex} onClick={(index: number) => handleChangeCategory(index)}/>
 
       {isProcessing &&
         <CircularProgress>{t('progress.loading')}</CircularProgress>
