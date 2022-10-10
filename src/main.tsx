@@ -9,3 +9,9 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     <App />
   </React.StrictMode>
 )
+
+/**
+For production remove the <React.StrictMode>
+React's StrictMode renders components several times (intentionally) to help you detect rendering side effects.
+It only happens during development.
+ */
