@@ -1,15 +1,27 @@
-import { FunctionComponent, useEffect } from "react";
+import { FunctionComponent, MouseEvent, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import Link from "app/ui/common/link/link";
 import Paper from "app/ui/common/paper/paper";
+import { useLocation, useNavigate } from "react-router-dom";
 
+interface MyProps {
+    redirectTo: string;
+}
 
 /**
  * Anonymous Profile
  */
-const AnonymousProfile: FunctionComponent = () => {
+const AnonymousProfile: FunctionComponent<MyProps> = ({redirectTo}) => {
     const { t, i18n } = useTranslation();
-
+    const navigate = useNavigate();
+    const location = useLocation();
+    
+    const redirectToLogin = ()=>{
+        //e.preventDefault();
+        //navigate("/user/login", { state: { from: location } });
+        navigate({
+            pathname: '/user/login/'+redirectTo,
+          });
+    }
 
     return (
         <div>
@@ -17,13 +29,13 @@ const AnonymousProfile: FunctionComponent = () => {
             {t("profile.msg.anonymous")}
 
             &nbsp;&nbsp;
-            <Link href="/user/auth">
+            <a href="#" onClick={() => redirectToLogin()}>
                 {t('login.command')}
-            </Link>
+            </a>
             &nbsp;&nbsp;
-            <Link href="/user/register/form">
+            <a href="#">
                 {t('register.command.link')}
-            </Link>
+            </a>
 
             <br/>
             

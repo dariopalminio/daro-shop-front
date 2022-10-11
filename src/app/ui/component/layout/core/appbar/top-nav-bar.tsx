@@ -68,7 +68,7 @@ const TopNavBar: React.FC<Props> = ({ menuList, style }) => {
     {
       key: "11",
       title: t("menu.login"),
-      path: "/user/auth",
+      path: "/user/login/home",
       icon: <RiShieldUserFill />,
       access: [AccessType.ANONYMOUS],
       divider: false,
@@ -77,7 +77,7 @@ const TopNavBar: React.FC<Props> = ({ menuList, style }) => {
     {
       key: "12",
       title: t("menu.logout"),
-      path: "/user/auth",
+      path: "/user/logout",
       icon: <RiShieldUserFill />,
       access: [AccessType.USER, AccessType.ADMIN],
       divider: false,
@@ -95,7 +95,7 @@ const TopNavBar: React.FC<Props> = ({ menuList, style }) => {
     {
       key: "14",
       title: t("menu.profile"),
-      path: "/user/profile",
+      path: "/profile",
       icon: <RiUserSearchFill />,
       access: [AccessType.ANONYMOUS, AccessType.USER, AccessType.ADMIN],
       divider: false,
@@ -103,7 +103,7 @@ const TopNavBar: React.FC<Props> = ({ menuList, style }) => {
     },
   ];
 
-  const TopMenuData: MenuItemType[] = [
+  const UserTopMenuData: MenuItemType[] = [
     {
       key: "15",
       title: t("menu.user"),
@@ -132,7 +132,7 @@ const TopNavBar: React.FC<Props> = ({ menuList, style }) => {
 
       <LanguageSelector />
       
-        <MenuIconButton permission={permission} menuList={TopMenuData} />
+        <MenuIconButton permission={permission} menuList={UserTopMenuData} />
 
         <CartTopMenu />
 

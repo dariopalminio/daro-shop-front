@@ -1,5 +1,5 @@
 import { FunctionComponent } from "react"
-import { BrowserRouter, BrowserRouter as Router } from "react-router-dom"
+import { BrowserRouter as Router } from "react-router-dom"
 import SessionContextProvider from "app/ui/provider/session-context-provider"
 import CartContextProvider from "app/ui/provider/cart-context-provider"
 import Layout from "app/ui/component/layout/core/layout"
@@ -23,12 +23,13 @@ import CheckoutContextProvider from "./ui/provider/checkout-context-provider"
 const App: FunctionComponent = () => {
 
   return (
-    <SessionContextProvider>
-      <ThemeProvider theme={Themes.primary}>
-        <CartContextProvider>
-          <CheckoutContextProvider>
-            <LayoutContextProvider>
-            <BrowserRouter>
+    <Router>
+      <SessionContextProvider>
+        <ThemeProvider theme={Themes.primary}>
+          <CartContextProvider>
+            <CheckoutContextProvider>
+              <LayoutContextProvider>
+
                 <Layout
                   topbar={<TopNavBar />}
                   leftbar={<SideBar style={{ background: "#F9F9F9" }}></SideBar>}
@@ -36,12 +37,13 @@ const App: FunctionComponent = () => {
                 >
                   <MainContainer />
                 </Layout>
-                </BrowserRouter>
-            </LayoutContextProvider>
-          </CheckoutContextProvider>
-        </CartContextProvider>
-      </ThemeProvider>
-    </SessionContextProvider>
+
+              </LayoutContextProvider>
+            </CheckoutContextProvider>
+          </CartContextProvider>
+        </ThemeProvider>
+      </SessionContextProvider>
+    </Router>
   )
 }
 

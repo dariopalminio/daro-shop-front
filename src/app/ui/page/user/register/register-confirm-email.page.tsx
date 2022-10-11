@@ -33,7 +33,6 @@ function RegisterConfirmEmailPage() {
 
   return (
     <>
-      
       {!isExecuted && executeConfirmRequest()}
 
       {isProcessing && (

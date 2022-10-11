@@ -7,12 +7,13 @@
     display: block;
     width: 50%;
     text-align: left;
-    padding: 25px;
+    padding: 5px;
 }
 
 .wrapper-user-address {
     display: block;
     width: 50%;
+    padding: 5px;
 }
 
 .wrapper-user-action {

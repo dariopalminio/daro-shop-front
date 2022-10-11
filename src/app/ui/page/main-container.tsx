@@ -8,7 +8,7 @@ import Alert from "app/ui/common/alert/alert";
 import CircularProgress from "app/ui/common/progress/circular-progress";
 import RegisterConfirmStartPage from "./user/register/register-confirm-start.page";
 import HomePage from "./home/home.page";
-import AuthPage from "./user/auth/auth.page";
+import LoginPage from "./user/auth/login.page";
 import CartPage from "./cart/cart.page";
 import InformationPage from "./checkout/information.page";
 import CatalogPage from "./catalog/catalog.page";
@@ -17,6 +17,8 @@ import RegisterPage from "./user/register/register-form.page";
 import PassRecoveryStartPage from "./user/recovery/pass-recovery-start.page";
 import PassRecoveryMsgPage from "./user/recovery/pass-recovery-msg.page";
 import ProfilePage from "./user/profile/profile.page";
+import LogoutPage from "./user/auth/logout.page";
+import NoMatchPage from "./no-match.page";
 
 // lazy loading for components that must get loaded when it is required. 
 /*
@@ -47,16 +49,16 @@ const MainContainer: FunctionComponent = () => {
         <Routes>
           <Route path="/"  element={<HomePage />} />
 
+          <Route path="/user/login/:redirectto"  element={<LoginPage />} />
 
-          <Route path="/user/auth"  element={<AuthPage />} />
+          <Route path="/user/logout"  element={<LogoutPage />} />
 
           <Route path="/cart"  element={<CartPage />} />
 
-          <Route path="/checkout" element={<InformationPage />} />
+          <Route path="/information" element={<InformationPage />} />
 
           <Route path="/catalog" element={<CatalogPage />} />
 
-   
           <Route path="/catalog/product/detail/:productId" element={<ProductDetailPage/>}  />
 
           <Route path="/contact" element={<ContactPage/>}  />
@@ -72,7 +74,9 @@ const MainContainer: FunctionComponent = () => {
 
           <Route path="/user/recovery/form/:token" element={<PassRecoveryFormPage/>} ></Route>
           
-          <Route path="/user/profile" element={<ProfilePage/>} />
+          <Route path="/profile" element={<ProfilePage/>} />
+
+          <Route path="*" element={<NoMatchPage />} />
 
         </Routes>
         

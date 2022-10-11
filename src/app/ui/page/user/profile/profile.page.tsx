@@ -21,7 +21,7 @@ const ProfilePage: FunctionComponent = () => {
   return (
       <div className="page_container"  data-testid="page_container_profile">
 
-        {isNotLogged() && <AnonymousProfile />}
+        {isNotLogged() && <AnonymousProfile redirectTo="profile"/>}
 
         <UserProfile />
 

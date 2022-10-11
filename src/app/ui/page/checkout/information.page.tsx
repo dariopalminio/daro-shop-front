@@ -140,7 +140,7 @@ const InformationPage: FunctionComponent = () => {
 
             <TextsStepper list={steps} onClick={(index: number) => changeStep(index)}></TextsStepper>
 
-            {isNotLogged() && <AnonymousProfile />}
+            {isNotLogged() && <AnonymousProfile redirectTo="information"/>}
 
             <div className="wrapper-checkout-information">
 
