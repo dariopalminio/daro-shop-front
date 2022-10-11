@@ -55,7 +55,9 @@ const RadioButtonList: React.FC<Props> = ({ id, label, list, onClickSelect, styl
                     return (
                         <label key={index} className="radio_item_label">
                             <input key={'inputRadioButtons'+id+index.toString()}
-                            className="input_radio_button" type="radio" id="html" name="radio" onClick={()=>selectItem(item,index)}/>
+                            className="input_radio_button" type="radio" id="html" name="radio" 
+                            onClick={()=>selectItem(item,index)}
+                            />
                             <span className="span_radio">{item}</span>
                         </label>
                     )

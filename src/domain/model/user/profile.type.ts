@@ -1,4 +1,4 @@
-import { Address } from "./address.type";
+import { AddressType } from "./address.type";
 
 export type Profile = {
     userId: string;
@@ -10,6 +10,6 @@ export type Profile = {
     document: string;
     telephone: string;
     language: string;
-    addresses: Address[];
+    addresses: AddressType[];
   };
 

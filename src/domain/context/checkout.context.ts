@@ -1,13 +1,25 @@
+import { addresEmpty } from 'domain/hook/address.hook';
+import { initialEmptyProfile } from 'domain/hook/profile.hook';
+import { AddressType } from 'domain/model/user/address.type';
+import { Profile } from 'domain/model/user/profile.type';
 import { createContext } from 'react';
 
 export interface ICheckoutContext {
-    steps: Array<any>
-    setSteps: (changedSteps: Array<any>) => void
+    steps: Array<any>;
+    setSteps: (changedSteps: Array<any>) => void;
+    addressToDelivery: AddressType | undefined;
+    setAddressToDelivery: (addrs: AddressType) => void;
+    profile: Profile;
+    setProfile:  (prof: Profile) => void;
 };
 
 export const CheckoutContextDefaultValues: ICheckoutContext = {
     steps: [],
-    setSteps: (changedSteps: Array<any>) => { }
+    setSteps: (changedSteps: Array<any>) => { },
+    addressToDelivery: undefined,
+    setAddressToDelivery: (addrs: AddressType) => { },
+    profile: initialEmptyProfile, 
+    setProfile:  (prof: Profile) =>  { }
 };
 
 // Global Checkout context

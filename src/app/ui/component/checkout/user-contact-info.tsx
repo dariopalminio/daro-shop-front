@@ -1,4 +1,4 @@
-import "./user-contact-info-form.css";
+
 import React, { useState } from "react";
 import { useTranslation } from 'react-i18next';
 import Button from "app/ui/common/button/button";
@@ -20,10 +20,9 @@ const validationFlagInit = {
 };
 
 interface Props {
-  initialized: boolean;
   profile: any;
   onChange: (profile: any) => void;
-  onSubmit: () => void;
+
   style?: any;
 }
 
@@ -32,7 +31,7 @@ interface Props {
  * 
  * Pattern: Presentation Component, Controled Component and Extensible Style
  */
-const UserContactInfoForm: React.FC<Props> = ({ initialized, profile, onChange, onSubmit, style }) => {
+const UserContactInfo: React.FC<Props> = ({ profile, onChange, style }) => {
   const docTypeOptions = ["RUT", "DNI", "OTHER", "None"];
   const [validationFlag, setValidationFlag] = useState(validationFlagInit);
   const { t, i18n } = useTranslation();
@@ -41,15 +40,6 @@ const UserContactInfoForm: React.FC<Props> = ({ initialized, profile, onChange, 
     firstName: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letters and spaces can carry accents.
     lastName: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letters and spaces can carry accents.
     telephone: /^\d{7,14}$/ // 7 to 14 numbers.
-  };
-
-  const handleUpdateSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    onSubmit();
-  };
-
-  const handleOnClickSelect = (item: string, index: number) => {
-    alert(index);
   };
 
   const handleFirstNameChange = async (firstNameValue: string) => {
@@ -115,24 +105,9 @@ const UserContactInfoForm: React.FC<Props> = ({ initialized, profile, onChange, 
     return false;
   };
 
-  const handleAddClose = (newAddresses: Array<any>): void => {
-    onChange({
-      ...profile,
-      addresses: newAddresses
-    })
-  };
 
   return (
-    <div style={style? style : {}}>
-      <form
-        id="RegisterForm"
-        data-testid="RegisterForm"
-        action="#"
-        onSubmit={handleUpdateSubmit}
-      >
-        <div className="wrapper-user-profile">
-          <div className="wrapper-user-data">
-
+    <div>
             <h1>
               {t('information.contact.title')}
             </h1>
@@ -187,47 +162,9 @@ const UserContactInfoForm: React.FC<Props> = ({ initialized, profile, onChange, 
                 label={t('profile.telephone')}
                 onChange={(e) => handleTelephoneChange(e.target.value)}
                 value={profile.telephone}
-
               />
-
-          </div>
-
-          <div className="wrapper-user-address">
-            {initialized && <>
-              <SelectAddress country={"Chile"} addresses={profile.addresses}
-                onChange={(newAddresses: Array<any>) => handleAddClose(newAddresses)} 
-                onClickSelect={(item: string, index: number) => handleOnClickSelect(item, index)}
-                />
-
-                </>
-            }
-
-          </div>
-
-        </div>
-
-        <div className="wrapper-user-action">
-          {fieldsAreValid() &&
-            <Button
-              type="submit"
-              style={{ marginTop: "5px" }}
-            >
-              {t('profile.command.submit')}
-            </Button>
-          }
-          {!fieldsAreValid() &&
-            <Button
-              style={{ marginTop: "5px" }}
-              disabled
-            >
-              {t('profile.command.submit')}
-            </Button>
-          }
-        </div>
-
-      </form>
     </div>
   );
 };
 
-export default UserContactInfoForm;
+export default UserContactInfo;

@@ -1,4 +1,5 @@
 {
+    "address.label.selection": "Select an address",
     "home.title": "Home ",
     "progress.loading": "Loading... ",
     "login.command": "Login",
@@ -131,6 +132,7 @@
     "steps.payment": "Payment",
     "steps.success": "Success",
     "field.placeholder.select.option": "Choose an option",
-    "information.contact.title": "Contact Data"
+    "information.contact.title": "Contact Data",
+    "information.delivery.addres.title": "Delivery address:"
 
 }

@@ -68,7 +68,7 @@ const LanguageSelector: React.FC<Props> = ({ menuList, style }) => {
       title: 'es',
       path: "#",
       icon: null,
-      access: [AccessType.ANONYMOUS],
+      access: [AccessType.ANONYMOUS, AccessType.USER, AccessType.ADMIN],
       divider: false,
       submenu: null
     },
@@ -77,7 +77,7 @@ const LanguageSelector: React.FC<Props> = ({ menuList, style }) => {
       title: 'en',
       path: "#",
       icon: null,
-      access: [AccessType.ANONYMOUS],
+      access: [AccessType.ANONYMOUS, AccessType.USER, AccessType.ADMIN],
       divider: false,
       submenu: null
     }
@@ -89,7 +89,7 @@ const LanguageSelector: React.FC<Props> = ({ menuList, style }) => {
       title: '',
       path: "#",
       icon: <RiEarthLine size={24} />,
-      access: [AccessType.ANONYMOUS],
+      access: [AccessType.ANONYMOUS, AccessType.USER, AccessType.ADMIN],
       divider: false,
       submenu: SubMenuLang
     }

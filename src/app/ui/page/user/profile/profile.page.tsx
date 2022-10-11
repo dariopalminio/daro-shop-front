@@ -2,7 +2,7 @@ import { FunctionComponent, useContext, useEffect } from "react";
 import SessionContext, {
   ISessionContext,
 } from "domain/context/session.context";
-import AnonymousProfile from "./anonymous-profile";
+import AnonymousProfile from "../../../component/user/profile/anonymous-profile";
 import UserProfile from "./user-profile";
 
 /**

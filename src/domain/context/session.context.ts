@@ -7,7 +7,7 @@ import { DefaultSession as SessionDefaultValue} from 'domain/model/auth/default-
 export interface ISessionContext {
   session:  SessionType 
   setNewSession: (newSession: SessionType) => void
-  removeSessionValue: () => void,
+  removeSessionValue: () => void
   permission: string,
 };
 

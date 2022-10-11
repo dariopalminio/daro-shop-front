@@ -1,3 +1,4 @@
+import "./information-page.css";
 import { FunctionComponent, useContext, useEffect, useState } from 'react'
 import CartContext, { ICartContext } from "domain/context/cart.context";
 import { useTranslation } from 'react-i18next';
@@ -6,7 +7,12 @@ import TextsStepper from 'app/ui/common/steppers/texts-stepers';
 import { useNavigate } from 'react-router-dom';
 import SessionContext, { ISessionContext } from 'domain/context/session.context';
 import useProfile from 'domain/hook/profile.hook';
-import UserContactInfoForm from 'app/ui/component/checkout/user-contact-info-form';
+import UserContactInfo from 'app/ui/component/checkout/user-contact-info';
+import SelectAddress from 'app/ui/component/address/select-address';
+import Button from 'app/ui/common/button/button';
+import { CenteringContainer } from 'app/ui/common/elements/centering-container';
+import AnonymousProfile from "../../component/user/profile/anonymous-profile";
+import { Profile } from "domain/model/user/profile.type";
 
 /**
  * InformationPage
@@ -21,11 +27,11 @@ const InformationPage: FunctionComponent = () => {
         removeFromCart,
         getCartCount,
         changeItemQuantity } = useContext(CartContext) as ICartContext;
-    const { steps, setSteps } = useContext(CheckoutContext) as ICheckoutContext;
+    const { steps, setSteps, profile, setProfile, addressToDelivery,
+        setAddressToDelivery } = useContext(CheckoutContext) as ICheckoutContext;
     const navigate = useNavigate();
     const { t } = useTranslation();
     const [initialized, setInitialized] = useState(false);
-    const [profile, setProfile] = useState(getInitialProfile()); //puede colocarse en el hook
 
     const fetchData = async () => {
         try {
@@ -34,18 +40,19 @@ const InformationPage: FunctionComponent = () => {
                 const info = await getProfile(username);
                 console.log('****************UserProfile PAGE fetchData.info', info);
                 if (info.userName) {
-                    setProfile({
+                    const p: Profile = {
                         ...profile,
-                        userName: info.userName,
-                        firstName: info.firstName,
-                        lastName: info.lastName,
-                        email: info.email,
+                        userName: info.userName?info.userName:'',
+                        firstName: info.firstName?info.firstName:'',
+                        lastName: info.lastName?info.lastName:'',
+                        email: info.email?info.email:'',
                         docType: info.docType ? info.docType.toUpperCase() : '',
-                        document: info.document,
-                        telephone: info.telephone,
+                        document: info.document?info.document:'',
+                        telephone: info.telephone?info.telephone:'',
                         language: info.language ? info.language.toLowerCase() : '',
-                        addresses: info.addresses
-                    });
+                        addresses: info.addresses? info.addresses:[]
+                    };
+                    setProfile(p);
 
                 }
             }
@@ -106,24 +113,70 @@ const InformationPage: FunctionComponent = () => {
         return session && !session.isLogged;
     };
 
-    const handleUpdateSubmit = async () => {
-        try {
-            console.log('handleUpdateSubmit... TODO...');
-            //await updateProfile(profile);
-        } catch (e) {
-            console.log(e);
-        }
+    const handleOnClickSelect = (item: string, index: number) => {
+        const addrsSelected = profile.addresses[index];
+        console.log("addrsSelected:",addrsSelected);
+        setAddressToDelivery(addrsSelected);
     };
 
+    const handleAddNeAddressAndClose = (newAddresses: Array<any>): void => {
+        setProfile({
+            ...profile,
+            addresses: newAddresses
+        })
+    };
+
+    const isInfoValid = (): boolean => {
+        return ( (profile.email.trim() !== '') &&  addressToDelivery!==undefined);
+    };
+
+    const handleNext = (): void => {
+        console.log("profile:",profile);
+        if (isInfoValid()) console.log("OKKKKKKKKKKKKKKKK") 
+    };
 
     return (
         <div className="container-page">
 
             <TextsStepper list={steps} onClick={(index: number) => changeStep(index)}></TextsStepper>
 
-            <UserContactInfoForm initialized={initialized} profile={profile}
-                onChange={(profile: any) => setProfile(profile)}
-                onSubmit={() => handleUpdateSubmit()} />
+            {isNotLogged() && <AnonymousProfile />}
+
+            <div className="wrapper-checkout-information">
+
+                <div className="wrapper-contact-user-data">
+                    <UserContactInfo profile={profile}
+                        onChange={(profile: any) => setProfile(profile)}
+                         />
+                </div>
+                <div className="wrapper-delivery-address">
+                    {initialized && <>
+                        <SelectAddress title={t("information.delivery.addres.title")}
+                            country={"Chile"}
+                            addresses={profile.addresses}
+                            onChange={(newAddresses: Array<any>) => handleAddNeAddressAndClose(newAddresses)}
+                            onClickSelect={(item: string, index: number) => handleOnClickSelect(item, index)}
+                        />
+
+                    </>
+                    }
+                </div>
+            </div>
+
+            <div style={{ ...{ margin: "0px auto", left: "0" } }}>
+                <CenteringContainer>
+                  
+                        <Button
+                            type="button"
+                            style={{ marginTop: "5px" }}
+                            onClick={()=>handleNext()}
+                        >
+                            {t('next')}
+                        </Button>
+
+
+                </CenteringContainer>
+            </div>
 
         </div>
     );

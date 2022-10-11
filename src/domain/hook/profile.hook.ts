@@ -16,7 +16,7 @@ const initialNewAddress: AddressType = {
     country: ''
 };
 
-const initialEmptyProfile: Profile = {
+export const initialEmptyProfile: Profile = {
     userId: '',
     userName: '',
     firstName: '',
@@ -26,7 +26,7 @@ const initialEmptyProfile: Profile = {
     document: '',
     telephone: '',
     language: '',
-    addresses: [initialNewAddress]
+    addresses: []
 };
 
 /**

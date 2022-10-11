@@ -7,10 +7,12 @@ import SelectList from "app/ui/common/select-list/select-list";
 import NewAddressDialog from "app/ui/component/address/new-address-dialog";
 import useAddress from "domain/hook/address.hook";
 import RadioButtonList from "app/ui/common/select-list-radio-button/radio-button-list";
+import { CenteringContainer } from "app/ui/common/elements/centering-container";
 
 
 interface IMyProps {
     country: string;
+    title?: string;
     addresses: Array<AddressType>;
     onChange: (newAddresses: Array<any>) => void;
     onClickSelect?: (item: string, index: number) => void;
@@ -30,9 +32,6 @@ const SelectAddress: React.FC<IMyProps> = (props: IMyProps) => {
     const { isDialogOpen, toggle } = useModalDialog();
     const [newAddress, setNewAddress] = React.useState(getInitialAddress(props.country));
 
-    useEffect(() => {
-        console.log("MyAddresses->useEffect->props?.addresses:", props?.addresses);
-    }, []);
     
     const convertAddressOneLine = (address: any) => {
         return address?.street + " " + address?.department;
@@ -69,26 +68,33 @@ const SelectAddress: React.FC<IMyProps> = (props: IMyProps) => {
         setNewAddress(getInitialAddress(props.country));
     };
 
+    const getTitle = ()=>{
+        return props.title? props.title : t('my.addresses.title');
+    }
+
     return (
-        <div>
+        <div style={{ ...{ display: "block" } }}>
             <h1>
-                {t('my.addresses.title')}
+                {getTitle()}
             </h1>
 
             <div style={{textAlign: "left"}}>
                 <RadioButtonList
                     id="mySelectListAddress"
-                    label="Tus direcciones:"
+                    label={t("address.label.selection")}
                     list={getStrinArrayAddresses()}
-                    onClickSelect={(item: string, index: number) => handleSelectAddress(item, index)} />
+                    onClickSelect={(item: string, index: number) => handleSelectAddress(item, index)} 
+                    />
             </div>
 
             <div>
+
                 <Button type="button" onClick={handleClickOpen}
                     style={{ marginTop: "15px" }}
                 >
                     {t('my.addresses.add')}
                 </Button>
+ 
             </div>
 
             <NewAddressDialog
