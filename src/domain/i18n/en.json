@@ -1,6 +1,7 @@
 {
     "address.label.selection": "Select an address",
     "home.title": "Home ",
+    "page.not.found" : "Page not found!",
     "progress.loading": "Loading... ",
     "login.command": "Login",
     "login.title": "Login Form",

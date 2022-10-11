@@ -1,6 +1,7 @@
 {
     "address.label.selection": "Seleccione una dirección",
     "home.title": "Principal ",
+    "page.not.found" : "¡Página no encontrada!",
     "progress.loading": "Cargando... ",
     "login.command": "Login",
     "login.title": "Ingresa a tu cuenta",
