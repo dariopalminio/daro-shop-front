@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { CenteringContainer } from "../elements/centering-container";
 
@@ -7,10 +8,6 @@ const OptionsLinksWrapper = styled.div`
     margin: 0px 0px 15px 0px;
     height: 3em;
     border: none;
-    padding: 5px 5px 5px 5px;
-`;
-
-const OptionCategoryLink = styled.a`
     padding: 5px 5px 5px 5px;
 `;
 
@@ -49,12 +46,12 @@ const LinksStepper: React.FC<Props> = ({ list, currentIndex, onClick }) => {
                 <CenteringContainer>
                     {list && list.map((element: any, index: number) => {
                         return (
-                                <OptionCategoryLink key={index.toString()}
-                                    href="#"
-                                    style={{ color: getLinkColor(element) }}
+                                <Link key={index.toString()}
+                                    to="#"
+                                    style={{ color: getLinkColor(element), padding: "5px" }}
                                     onClick={() => onClick(index)}>
                                     {element.name}
-                                </OptionCategoryLink>
+                                </Link>
                         )
                     }
                     )}
