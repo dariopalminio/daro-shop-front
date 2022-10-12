@@ -66,7 +66,7 @@ const Alert: React.FC<Props> = ({ severity, children }) => {
         event.stopPropagation();
     };
 
-    const getBackgroundColor = () => {
+    const getBackgroundBySeverity = () => {
         switch (severity) {
             case 'success':
                 return '#12DBAD';
@@ -82,7 +82,7 @@ const Alert: React.FC<Props> = ({ severity, children }) => {
     };
 
     return (
-        <AlertBox id={getId()} style={{ backgroundColor: getBackgroundColor() }}>
+        <AlertBox id={getId()} style={{ backgroundColor: getBackgroundBySeverity() }}>
             <AlertCloseButton className="closebtn" onClick={(event) => handlerClick(event)}>&times;</AlertCloseButton>
                 {children}
         </AlertBox>

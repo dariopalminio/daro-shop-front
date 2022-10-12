@@ -135,5 +135,6 @@
     "steps.success": "Completado",
     "field.placeholder.select.option": "Elija una opción...",
     "information.contact.title": "Datos de contacto",
-    "information.delivery.addres.title": "Dirección de envío"
+    "information.delivery.addres.title": "Dirección de envío",
+    "checkout.info.validation.error": "Falta ingresar algún dato"
  }

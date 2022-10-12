@@ -10,20 +10,17 @@ const LayoutContainer = styled.div`
         width: 100%;
     `;
 
-//Styled-components
 const Header = styled.div`
         position: relative;
         height: ${props => props.theme.layout.headerHeight}px;
         width: 100%;
     `;
 
-//Styled-components
 const ContentSection = styled.section`
         position: relative;
         width: 100%;
     `;
 
-//Styled-components
 const FooterSection = styled.section`
         position: relative;
         height: 23px;

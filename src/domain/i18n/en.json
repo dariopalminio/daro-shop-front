@@ -134,6 +134,7 @@
     "steps.success": "Success",
     "field.placeholder.select.option": "Choose an option",
     "information.contact.title": "Contact Data",
-    "information.delivery.addres.title": "Delivery address:"
+    "information.delivery.addres.title": "Delivery address:",
+    "checkout.info.validation.error": "Missing to enter some data"
 
 }
