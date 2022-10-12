@@ -13,6 +13,7 @@ import Button from 'app/ui/common/button/button';
 import { CenteringContainer } from 'app/ui/common/elements/centering-container';
 import AnonymousProfile from "../../component/user/profile/anonymous-profile";
 import { Profile } from "domain/model/user/profile.type";
+import Alert from "app/ui/common/alert/alert";
 
 /**
  * InformationPage
@@ -32,6 +33,7 @@ const InformationPage: FunctionComponent = () => {
     const navigate = useNavigate();
     const { t } = useTranslation();
     const [initialized, setInitialized] = useState(false);
+    const [hasErrorOfValidation, setHasErrorOfValidation] = useState(false);
 
     const fetchData = async () => {
         try {
@@ -42,15 +44,15 @@ const InformationPage: FunctionComponent = () => {
                 if (info.userName) {
                     const p: Profile = {
                         ...profile,
-                        userName: info.userName?info.userName:'',
-                        firstName: info.firstName?info.firstName:'',
-                        lastName: info.lastName?info.lastName:'',
-                        email: info.email?info.email:'',
+                        userName: info.userName ? info.userName : '',
+                        firstName: info.firstName ? info.firstName : '',
+                        lastName: info.lastName ? info.lastName : '',
+                        email: info.email ? info.email : '',
                         docType: info.docType ? info.docType.toUpperCase() : '',
-                        document: info.document?info.document:'',
-                        telephone: info.telephone?info.telephone:'',
+                        document: info.document ? info.document : '',
+                        telephone: info.telephone ? info.telephone : '',
                         language: info.language ? info.language.toLowerCase() : '',
-                        addresses: info.addresses? info.addresses:[]
+                        addresses: info.addresses ? info.addresses : []
                     };
                     setProfile(p);
 
@@ -115,7 +117,7 @@ const InformationPage: FunctionComponent = () => {
 
     const handleOnClickSelect = (item: string, index: number) => {
         const addrsSelected = profile.addresses[index];
-        console.log("addrsSelected:",addrsSelected);
+        console.log("addrsSelected:", addrsSelected);
         setAddressToDelivery(addrsSelected);
     };
 
@@ -127,12 +129,15 @@ const InformationPage: FunctionComponent = () => {
     };
 
     const isInfoValid = (): boolean => {
-        return ( (profile.email.trim() !== '') &&  addressToDelivery!==undefined);
+        const isValidFields = ((profile.email.trim() !== '') && addressToDelivery !== undefined);
+        setHasErrorOfValidation(!isValidFields);
+        return isValidFields;
     };
 
     const handleNext = (): void => {
-        console.log("profile:",profile);
-        if (isInfoValid()) console.log("OKKKKKKKKKKKKKKKK") 
+        console.log("profile:", profile);
+        console.log("hasErrorOfValidation", hasErrorOfValidation)
+        if (isInfoValid()) console.log("OKKKKKKKKKKKKKKKK")
     };
 
     return (
@@ -140,14 +145,14 @@ const InformationPage: FunctionComponent = () => {
 
             <TextsStepper list={steps} onClick={(index: number) => changeStep(index)}></TextsStepper>
 
-            {isNotLogged() && <AnonymousProfile redirectTo="information"/>}
+            {isNotLogged() && <AnonymousProfile redirectTo="information" />}
 
             <div className="wrapper-checkout-information">
 
                 <div className="wrapper-contact-user-data">
                     <UserContactInfo profile={profile}
                         onChange={(profile: any) => setProfile(profile)}
-                         />
+                    />
                 </div>
                 <div className="wrapper-delivery-address">
                     {initialized && <>
@@ -165,19 +170,20 @@ const InformationPage: FunctionComponent = () => {
 
             <div style={{ ...{ margin: "0px auto", left: "0" } }}>
                 <CenteringContainer>
-                  
-                        <Button
-                            type="button"
-                            style={{ marginTop: "5px" }}
-                            onClick={()=>handleNext()}
-                        >
-                            {t('next')}
-                        </Button>
+
+                    <Button
+                        type="button"
+                        style={{ marginTop: "5px" }}
+                        onClick={() => handleNext()}
+                    >
+                        {t('next')}
+                    </Button>
 
 
                 </CenteringContainer>
             </div>
 
+            {hasErrorOfValidation && <Alert severity="error">{t('checkout.info.validation.error')}</Alert>}
         </div>
     );
 };

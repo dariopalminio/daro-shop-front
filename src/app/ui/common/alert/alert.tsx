@@ -24,7 +24,8 @@ const AlertBox = styled.div`
 
 //Styled-components
 const AlertCloseButton = styled.span`
-        margin-left: 15px;
+        margin-left: 5px;
+        margin-right: 5px;
         color: white;
         font-weight: bold;
         float: none;

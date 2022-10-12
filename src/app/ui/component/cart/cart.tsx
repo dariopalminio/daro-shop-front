@@ -15,11 +15,7 @@ const CartSummary = styled.div`
         border: none;
     }
     div button {
-        padding: 10px 17px;
         width: 100%;
-    }
-    div button:hover {
-        opacity: 0.9;
     }
     @media (max-width: 960px) {
           margin: 1rem;

@@ -57,7 +57,7 @@ const MainContainer: FunctionComponent = () => {
 
           <Route path="/cart"  element={<CartPage />} />
 
-          <Route path="/information" element={<InformationPage />} />
+          <Route path="/checkout/information" element={<InformationPage />} />
 
           <Route path="/catalog" element={<CatalogPage />} />
 

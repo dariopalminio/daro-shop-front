@@ -26,9 +26,9 @@ const CartPage: FunctionComponent = () => {
 
     const handleContinue = () => {
         if (getCartCount()>0)
-            navigate("/information");
+            navigate("/checkout/information");
             else{
-                alert("Tiene el carro vacío");
+                alert(t('cart.empty'));
             }
     };
 
