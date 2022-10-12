@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import styled from "styled-components";
-import { RiHome2Fill } from "react-icons/ri";
+import { RiHome2Fill, RiShieldUserFill, RiUserAddFill } from "react-icons/ri";
 import { RiShoppingCart2Fill } from "react-icons/ri";
 import { RiFunctionFill } from "react-icons/ri";
 import { RiMailSendFill} from "react-icons/ri";
@@ -31,39 +31,59 @@ const SideBar: React.FC<Props> = ({ menuList, style }) => {
 
     const LeftMenuData: MenuItemType[] = [
         {
-          key: "1",
+          key: "11",
           title: t("menu.home"),
           path: "/",
           icon: <RiHome2Fill />,
           access: [AccessType.ANONYMOUS, AccessType.USER, AccessType.ADMIN],
-          divider: false,
           submenu: null
         },
         {
-          key: "2",
-          title: t("menu.my.cart"),
-          path: "/cart",
-          icon: <RiShoppingCart2Fill />,
-          access: [AccessType.ANONYMOUS, AccessType.USER, AccessType.ADMIN],
-          divider: false,
-          submenu: null
-        },
-        {
-          key: "3",
+          key: "12",
           title: t("menu.catalog"),
           path: "/catalog",
           icon: <RiFunctionFill />,
           access: [AccessType.ANONYMOUS, AccessType.USER, AccessType.ADMIN],
-          divider: false,
           submenu: null
         },
         {
-          key: "4",
+          key: "13",
+          title: t("menu.my.cart"),
+          path: "/cart",
+          icon: <RiShoppingCart2Fill />,
+          access: [AccessType.ANONYMOUS, AccessType.USER, AccessType.ADMIN],
+          submenu: null
+        },
+        {
+          key: "14",
+          title: t("menu.login"),
+          path: "/user/login",
+          icon: <RiShieldUserFill />,
+          access: [AccessType.ANONYMOUS],
+          submenu: null
+        },
+        {
+          key: "15",
+          title: t("menu.logout"),
+          path: "/user/logout",
+          icon: <RiShieldUserFill />,
+          access: [AccessType.USER, AccessType.ADMIN],
+          submenu: null
+        },
+        {
+          key: "16",
+          title: t("menu.register"),
+          path: "/user/register/form",
+          icon: <RiUserAddFill />,
+          access: [AccessType.ANONYMOUS],
+          submenu: null
+        },
+        {
+          key: "17",
           title: t("menu.contact"),
           path: "/contact",
           icon: <RiMailSendFill />,
           access: [AccessType.ANONYMOUS, AccessType.USER, AccessType.ADMIN],
-          divider: false,
           submenu: null
         }
       ];

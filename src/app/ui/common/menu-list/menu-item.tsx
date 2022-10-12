@@ -1,5 +1,5 @@
 import { MenuItemType } from "./menu-item.type";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
 import styled from "styled-components";
 
@@ -41,6 +41,7 @@ interface Props {
  */
 const MenuItem: React.FC<Props> = ({ menuItem, backgroundColor, hoverColor, style }) => {
     const [styleHover, setStyleHover] = useState({});
+    const location = useLocation();
 
     const handleMouseEnter = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
         e.preventDefault();
@@ -51,23 +52,19 @@ const MenuItem: React.FC<Props> = ({ menuItem, backgroundColor, hoverColor, styl
         setStyleHover(backgroundColor ? { background: backgroundColor } : {});
     };
 
-    /**
-const handleMouseEvent = (e: MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-  };
-     */
     return (
         <StylesSubMenuItem>
-        <div key={menuItem.key} className="submenuItems"
-            {...(backgroundColor && {
-                style: { background: backgroundColor },
-            })}
-        >
-            <Link to={menuItem.path} className="submenulink" onMouseEnter={(e)=>handleMouseEnter(e)}
-                onMouseLeave={(e)=>handleMouseLeave(e)} style={styleHover}>
-                {menuItem.icon}&nbsp;{menuItem.title}
-            </Link>
-        </div>
+            <div key={menuItem.key} className="submenuItems"
+                {...(backgroundColor && {
+                    style: { background: backgroundColor },
+                })}
+            >
+                <Link to={menuItem.path} state={location}
+                    className="submenulink" onMouseEnter={(e) => handleMouseEnter(e)}
+                    onMouseLeave={(e) => handleMouseLeave(e)} style={styleHover}>
+                    {menuItem.icon}&nbsp;{menuItem.title}
+                </Link>
+            </div>
         </StylesSubMenuItem>
     );
 };

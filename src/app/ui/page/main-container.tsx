@@ -51,7 +51,7 @@ const MainContainer: FunctionComponent = () => {
 
           <Route path="/home"  element={<HomePage />} />
 
-          <Route path="/user/login/:redirectto"  element={<LoginPage />} />
+          <Route path="/user/login"  element={<LoginPage />} />
 
           <Route path="/user/logout"  element={<LogoutPage />} />
 

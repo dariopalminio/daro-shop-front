@@ -14,7 +14,6 @@ export interface MenuItemType {
     path: string
     icon: any
     access: string[] //AccessType.ANONYMOUS | AccessType.USER | AccessType.ADMIN
-    divider: boolean
     submenu: MenuItemType[] | null
 };
 

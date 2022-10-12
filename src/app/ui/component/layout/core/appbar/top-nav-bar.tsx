@@ -68,10 +68,9 @@ const TopNavBar: React.FC<Props> = ({ menuList, style }) => {
     {
       key: "11",
       title: t("menu.login"),
-      path: "/user/login/home",
+      path: "/user/login",
       icon: <RiShieldUserFill />,
       access: [AccessType.ANONYMOUS],
-      divider: false,
       submenu: null
     },
     {
@@ -80,7 +79,6 @@ const TopNavBar: React.FC<Props> = ({ menuList, style }) => {
       path: "/user/logout",
       icon: <RiShieldUserFill />,
       access: [AccessType.USER, AccessType.ADMIN],
-      divider: false,
       submenu: null
     },
     {
@@ -89,7 +87,6 @@ const TopNavBar: React.FC<Props> = ({ menuList, style }) => {
       path: "/user/register/form",
       icon: <RiUserAddFill />,
       access: [AccessType.ANONYMOUS],
-      divider: false,
       submenu: null
     },
     {
@@ -98,7 +95,6 @@ const TopNavBar: React.FC<Props> = ({ menuList, style }) => {
       path: "/profile",
       icon: <RiUserSearchFill />,
       access: [AccessType.ANONYMOUS, AccessType.USER, AccessType.ADMIN],
-      divider: false,
       submenu: null
     },
   ];
@@ -110,7 +106,6 @@ const TopNavBar: React.FC<Props> = ({ menuList, style }) => {
       path: "/",
       icon: <RiAccountCircleFill size={24} />,
       access: [AccessType.ANONYMOUS, AccessType.USER, AccessType.ADMIN],
-      divider: false,
       submenu: SubMenuUser
     },
   ];

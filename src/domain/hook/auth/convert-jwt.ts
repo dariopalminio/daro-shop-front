@@ -22,8 +22,7 @@ const payload_fake = {payload: {
 export const convertJwtToSessionType = (tokens: Tokens) => {
     let jwtDecoded: any;
     try {
-        jwtDecoded = decodeToken(tokens.access_token);//jwt.decode(tokens.access_token);
-        console.log("jwtDecoded:", jwtDecoded);
+        jwtDecoded = decodeToken(tokens.access_token);
         if (!jwtDecoded) throw Error("Error decoding the JWT: Does not exist payload!");
     } catch (error: any) {
         console.log('JWT decoding:', error.message);

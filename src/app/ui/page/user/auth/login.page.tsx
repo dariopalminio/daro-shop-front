@@ -5,12 +5,12 @@ import SessionContext, {
 import { useTranslation } from 'react-i18next';
 import Alert from "app/ui/common/alert/alert";
 import useLogin from "domain/hook/auth/login.hook";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { Navigate, useLocation, useNavigate, useParams } from "react-router-dom";
 import LoginForm from "app/ui/component/user/auth/login-form";
 import CircularProgress from "app/ui/common/progress/circular-progress";
 
 /**
- * AuthPage for Login or Logout options
+ * Login Page for Login or Logout options
  * 
  * Pattern: Container Component (Stateful/Container/Smart component), Conditional Rendering and Context Provider
  */
@@ -23,11 +23,9 @@ const LoginPage: FunctionComponent = () => {
     isSuccess,
     login,
   } = useLogin();
-
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const { redirectto } = useParams();
-
+  const location = useLocation();
 
   const isLogged = () => {
     return session && session.isLogged;
@@ -38,14 +36,22 @@ const LoginPage: FunctionComponent = () => {
   };
 
   const redirectToPage = () => {
-    console.log("redirectToPage:", redirectto);
-    if (redirectto) navigate(`/${redirectto}`);
-    else navigate('/');
+    const pathname = location?.state?.pathname ? location.state.pathname : "/";
+    navigate(pathname);
+  }
+
+  /** 
+   * Retrieves the pathname entered in the state for the last link using location.
+   * The pathname will be used to redirect after login success
+   */
+  const getPathname = () => {
+    const pathname = location?.state?.pathname ? location.state.pathname : "/";
+    return pathname;
   }
 
   /**
- * Login
- */
+   * Login
+   */
   const handleLoginSubmit = (email: string, password: string): void => {
     //e.preventDefault();
     login(email, password);
@@ -53,8 +59,6 @@ const LoginPage: FunctionComponent = () => {
 
   return (
     <>
-
-
       {!isSuccess && (
         <LoginForm onSubmit={(email: string, password: string) => handleLoginSubmit(email, password)}
           style={{ width: "300px", margin: "34px auto auto auto" }} />
@@ -69,19 +73,17 @@ const LoginPage: FunctionComponent = () => {
       {hasError && <Alert severity="error">{t(msg)}</Alert>}
 
       {isSuccess &&
-        redirectToPage()
+        <Navigate to={getPathname()} />
       }
 
       {needToVerifyEmail() &&
         <Alert severity="warning">
-          Warning: {t('auth.info.must.verify.email')}
+          {t('auth.info.must.verify.email')}
           <br />{" "}
         </Alert>
       }
 
       {isLogged() && <Alert severity="info">{t('logout.success.already.logged')}</Alert>}
-
-
     </>
   );
 };

@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { MenuItemType } from "../menu-list/menu-item.type";
 import styled from "styled-components";
 
@@ -63,6 +63,8 @@ interface Props {
  */
 const MenuListFloat: React.FC<Props> = ({ id, isOpen, permission, menuList, onClick, toogle }) => {
 
+    const location = useLocation();
+    
     const isShowed = (item: MenuItemType) => {
         return permission ? item.access.includes(permission) : false;
     }
@@ -79,7 +81,8 @@ const MenuListFloat: React.FC<Props> = ({ id, isOpen, permission, menuList, onCl
                         if (isShowed(item))
                             return (
                                 <div className="menu_float_items" key={index}>
-                                    <Link to={item.path} className="menu_float_link" onClick={() => onClick(item)}>
+                                    <Link to={item.path} state={location}
+                                     className="menu_float_link" onClick={() => onClick(item)}>
                                         {item.icon}&nbsp;{item.title}
                                     </Link>
                                 </div>

@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { useTranslation } from 'react-i18next';
 import Button from "app/ui/common/button/button";
 import TextField from "app/ui/common/text-field/text-field";
-import Link from "app/ui/common/link/link";
 import Paper from "app/ui/common/paper/paper";
 import { CenteringContainer } from "app/ui/common/elements/centering-container";
+import { Link } from "react-router-dom";
 
 interface Props {
     onSubmit: (email: string, password: string) => void;
@@ -96,11 +96,11 @@ const LoginForm: React.FC<Props> = ({ onSubmit, style }) => {
                     />
 
                     <div style={{ marginTop: "35px", justifyContent: "center", alignItems: "center", display: "flex" }}>
-                        <Link style={LinkStyle} href="/user/register/form">
+                        <Link to="/user/register/form">
                             {t('register.command.link')}
                         </Link>
                         &nbsp;&nbsp;
-                        <Link style={LinkStyle} href="/user/recovery/start">
+                        <Link to="/user/recovery/start">
                             {t('recovery.command.link')}
                         </Link>
                     </div>
