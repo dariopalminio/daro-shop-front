@@ -76,7 +76,7 @@ const TextsStepper: React.FC<Props> = ({ list, onClick }) => {
             <StepsContainer>
                 {list && list.map((element: any, index: number) => {
                     return (
-                        <div key={element.key}>
+                        <div key={index}>
                             {isNotFirst(index) &&
                                 <StepLinkConnector
                                     isChecked={(element?.checked)}>&nbsp;{">"}&nbsp;</StepLinkConnector>}

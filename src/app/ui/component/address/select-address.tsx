@@ -83,7 +83,7 @@ const SelectAddress: React.FC<IMyProps> = (props: IMyProps) => {
             <div style={{ textAlign: "left" }}>
                 <RadioButtonList
                     id="mySelectListAddress"
-                    label={t("address.label.selection")}
+                    label={t("address.label.selection")+" *"}
                     currentSelected={props.currentSelected}
                     list={getStrinArrayAddresses()}
                     onClickSelect={(item: string, index: number) => handleSelectAddress(item, index)}

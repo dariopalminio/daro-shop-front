@@ -73,7 +73,7 @@ export const StylesTextField = styled.div`
     }
 `;
 
-interface Props {
+interface IMyProps {
     id: string;
     label: string;
     placeholder?: string;
@@ -91,49 +91,36 @@ interface Props {
  * TextField "password" | "text"
  * Stateless components, extensible Style and controlled component
  */
-const TextField: React.FC<Props> = ({
-    id,
-    label,
-    placeholder,
-    onChange,
-    value,
-    type,
-    error,
-    helperText,
-    multiline,
-    style,
-    readonly
-}) => {
+const TextField: React.FC<IMyProps> = (props: IMyProps) => {
 
     const getType = () => {
-        return type ? type : "text";
+        return  props.type ?  props.type : "text";
     }
 
     const getClassName = () => {
-        return error ? "input-text-field-group error-text-field" : "input-text-field-group";
+        return props.error ? "input-text-field-group error-text-field" : "input-text-field-group";
     }
 
     return (
         <StylesTextField>
             <div className={getClassName()}>
-                <label className='label-text-field'>{label}</label>
+                <label className='label-text-field'>{ props.label}</label>
 
-                {!multiline && (<input className='input-text-field' id={id} name={id}
-                    type={getType()}
-                    placeholder={placeholder ? placeholder : ''}
-                    defaultValue={value}
-                    onChange={(e) => onChange(e)}
-                    style={style ? style : {}}
-                    readOnly={readonly}
+                {! props.multiline && (
+                    <input className='input-text-field' id={ props.id} name={ props.id}
+                        type={getType()}
+                        placeholder={ props.placeholder ?  props.placeholder : ''}
+                        defaultValue={ props.value}
+                        onChange={(e) =>  props.onChange(e)}
+                        style={ props.style ?  props.style : {}}
+                        readOnly={ props.readonly} />)}
+                { props.multiline && (
+                    <textarea className='input-text-field' id={ props.id} name={ props.id}
+                        style={ props.style ?  props.style : { width: "98%", height: "100px" }}
+                        defaultValue={ props.value}
+                        onChange={(e) =>  props.onChange(e)} />)}
 
-                />)}
-                {multiline && (<textarea className='input-text-field' id={id} name={id}
-                    style={style ? style : { width: "98%", height: "100px" }}
-                    defaultValue={value}
-                    onChange={(e) => onChange(e)}
-                />)}
-
-                <div className="error-message">{helperText}</div>
+                <div className="error-message">{ props.helperText}</div>
             </div>
         </StylesTextField>
     );

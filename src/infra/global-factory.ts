@@ -17,6 +17,8 @@ import AuthTokensClientOktub from "../__tests__/infra/client/fake/auth-token-cli
 import NotificationClientStub from "../__tests__/infra/client/fake/notification-api-client.stub";
 import ProductClientFake from "../__tests__/infra/client/fake/product-api-client.fake";
 import ProfileClientStub from "../__tests__/infra/client/fake/profile-api-client.stub";
+import ShippingClientStub from "../__tests__/infra/client/fake/shipping-api-client.fake";
+import { IShippingClient } from "domain/service/shipping-client.interface";
 
 
 /**
@@ -38,6 +40,7 @@ export default function GlobalFactory() {
         container.set('authTokensClient', AuthTokensClientOktub() as IAuthTokensClient);
         container.set('profileClient', ProfileClientStub() as IProfileClient);
         container.set('notificationClient', NotificationClientStub() as INotificationClient);
+        container.set('shippingClient', ShippingClientStub() as IShippingClient);
     } else {
         /** Instances for injection of the real */
         container.set('productClient', ProductApiClientImpl() as IProductClient);
@@ -45,6 +48,7 @@ export default function GlobalFactory() {
         container.set('authTokensClient', AuthTokensClientImpl() as IAuthTokensClient);
         container.set('profileClient', ProfileApiClientImpl() as IProfileClient);
         container.set('notificationClient', NotificationApiServiceImpl() as INotificationClient);
+        //container.set('shippingClient', ShippingClientImpl() as IShippingClient);
     }
 
     //Get instance for key name

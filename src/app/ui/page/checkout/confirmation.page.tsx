@@ -6,6 +6,9 @@ import CheckoutContext, { ICheckoutContext } from 'domain/context/checkout.conte
 import TextsStepper from 'app/ui/common/steppers/texts-stepers';
 import { useNavigate } from 'react-router-dom';
 import SessionContext, { ISessionContext } from 'domain/context/session.context';
+import PreviousNextButtons from 'app/ui/common/button/previous-next-buttons';
+import ResumeCartItem from 'app/ui/component/checkout/resume-cart-item';
+import ResumeCart from 'app/ui/component/checkout/resume-cart';
 
 
 /**
@@ -20,57 +23,108 @@ const ConfirmationPage: FunctionComponent = () => {
         removeFromCart,
         getCartCount,
         changeItemQuantity } = useContext(CartContext) as ICartContext;
-    const { steps, setSteps } = useContext(CheckoutContext) as ICheckoutContext;
+    const { steps, setSteps, profile, currentSelectedAddresIndex, getShippingPrice, shippingData } = useContext(CheckoutContext) as ICheckoutContext;
     const navigate = useNavigate();
     const { t } = useTranslation();
+
+    const fetchData = async () => {
+        try {
+            const address = profile.addresses[currentSelectedAddresIndex];
+            await getShippingPrice(address);
+        } catch (e) {
+            console.log("Error in getShippingPrice fetchData:", e);
+        }
+    };
 
     useEffect(() => {
         console.log("CheckoutPage...");
         const initialSteps = [
             {
+                key: "cart",
                 "name": t("cart"),
                 "checked": true,
-                "current": false
+                "current": false,
+                "path": "/cart"
             },
             {
+                key: "information",
                 "name": t("information"),
                 "checked": true,
-                "current": false
+                "current": false,
+                "path": "/checkout/information"
             },
             {
+                key: "confirmation",
                 "name": t("confirmation"),
                 "checked": false,
-                "current": true
+                "current": true,
+                "path": "/checkout/confirmation"
             },
             {
+                key: "payment",
                 "name": t("payment"),
                 "checked": false,
-                "current": false
+                "current": false,
+                "path": "/checkout/payment"
             },
             {
+                key: "success",
                 "name": t("success"),
                 "checked": false,
-                "current": false
+                "current": false,
+                "path": "/checkout/success"
             }
         ];
         setSteps(initialSteps);
+        fetchData();
     }, []);
-    
+
     const changeStep = (index: number) => {
-        if (index===0) navigate("/cart");
-        alert("index");
+        if ((index === 0) || (index === 1)) navigate(steps[index].path);
+        if (index === 3) handleNext();
     }
+
+    const handlePrevious = () => {
+        navigate(steps[1].path);
+    };
+
+    const handleNext = (): void => {
+    };
 
     const isNotLogged = () => {
         return session && !session.isLogged;
-      };
-      
+    };
+
     return (
         <div className="container-page">
 
             <TextsStepper list={steps} onClick={(index: number) => changeStep(index)}></TextsStepper>
 
-           Resumme...
+
+
+            <ResumeCart
+                empty={cartItems.length === 0}
+                count={getCartCount()}
+                subtotal={cartSubTotal}
+                onClick={()=>{}}
+            >
+                {cartItems.map((item, index) => (
+                    <ResumeCartItem
+                        key={item.id+index.toString()}
+                        item={item}
+                        qtyChangeHandler={changeItemQuantity}
+                        removeHandler={removeFromCart}
+                    />
+                ))}
+
+            </ResumeCart>
+
+            Resumme...
+            Price Shipping / Despacho: {shippingData?.price}
+
+            <PreviousNextButtons labelPrevious={t('previous')} labelNext={t('next')}
+                handlePrevious={() => handlePrevious()} handleNext={() => handleNext()} />
+
         </div>
     );
 };

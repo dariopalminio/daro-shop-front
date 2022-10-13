@@ -16,6 +16,15 @@ import { Profile } from "domain/model/user/profile.type";
 import Alert from "app/ui/common/alert/alert";
 import PreviousNextButtons from "app/ui/common/button/previous-next-buttons";
 
+const expresionsRegularByDefault = {
+    firstName: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letters and spaces can carry accents.
+    lastName: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letters and spaces can carry accents.
+    email: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
+    docType: /\s*/g, //always true
+    document: /\s*/g, //always true
+    telephone: /^\d{7,14}$/ // 7 to 14 numbers.
+};
+
 /**
  * InformationPage
  * 
@@ -80,39 +89,44 @@ const InformationPage: FunctionComponent = () => {
                 key: "cart",
                 "name": t("cart"),
                 "checked": true,
-                "current": false
+                "current": false,
+                "path": "/cart"
             },
             {
                 key: "information",
                 "name": t("information"),
                 "checked": false,
-                "current": true
+                "current": true,
+                "path": "/checkout/information"
             },
             {
                 key: "confirmation",
                 "name": t("confirmation"),
                 "checked": false,
-                "current": false
+                "current": false,
+                "path": "/checkout/confirmation"
             },
             {
                 key: "payment",
                 "name": t("payment"),
                 "checked": false,
-                "current": false
+                "current": false,
+                "path": "/checkout/payment"
             },
             {
                 key: "success",
                 "name": t("success"),
                 "checked": false,
-                "current": false
+                "current": false,
+                "path": "/checkout/success"
             }
         ];
         setSteps(initialSteps);
     }, []);
 
     const changeStep = (index: number) => {
-        if (index === 0) navigate("/cart");
-        alert(index);
+        if (index === 0) navigate(steps[index].path);
+        if (index === 2) handleNext();
     }
 
     const isNotLogged = () => {
@@ -137,13 +151,20 @@ const InformationPage: FunctionComponent = () => {
         setProfile(profile);
     };
 
+    const isAddressSelected = (): boolean => {
+        return (currentSelectedAddresIndex > -1);
+    }
+
+    const areFieldsValid = (): boolean => {
+        const fieldsOk: boolean = (expresionsRegularByDefault.firstName.test(profile.firstName) && 
+        expresionsRegularByDefault.lastName.test(profile.lastName) && 
+        expresionsRegularByDefault.email.test(profile.email));
+        return fieldsOk && isAddressSelected();
+      }
+
     const handleNext = (): void => {
-        const hasError = !((profile.email !== '') && (currentSelectedAddresIndex > -1));
-        console.log("hasError:", hasError);
-        console.log("currentSelectedAddresIndex:", currentSelectedAddresIndex);
-        console.log("profile.email:", profile.email);
-        setHasValidationError(hasError);
-        if (!hasError) navigate("/checkout/confirmation");
+        setHasValidationError(!areFieldsValid());
+        if (areFieldsValid()) navigate("/checkout/confirmation");
     };
 
     const handlePrevious = () => {
@@ -161,6 +182,7 @@ const InformationPage: FunctionComponent = () => {
 
                 <div className="wrapper-contact-user-data">
                     <UserContactInfo profile={profile}
+                        expresionsRegular={expresionsRegularByDefault}
                         onChange={(profile: any, isVaslid: boolean) => handleChangeSomeField(profile, isVaslid)}
                     />
                 </div>

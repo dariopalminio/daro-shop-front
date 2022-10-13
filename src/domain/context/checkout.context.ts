@@ -15,6 +15,8 @@ export interface ICheckoutContext {
     setAddressToDelivery: (addrs: AddressType) => void;
     profile: Profile;
     setProfile:  (prof: Profile) => void;
+    getShippingPrice: (address: AddressType) => void;
+    shippingData: any;
 };
 
 export const CheckoutContextDefaultValues: ICheckoutContext = {
@@ -27,7 +29,9 @@ export const CheckoutContextDefaultValues: ICheckoutContext = {
     addressToDelivery: undefined,
     setAddressToDelivery: (addrs: AddressType) => { },
     profile: initialEmptyProfile, 
-    setProfile:  (prof: Profile) =>  { }
+    setProfile:  (prof: Profile) =>  { },
+    getShippingPrice: (address: AddressType) =>  { },
+    shippingData: undefined
 };
 
 // Global Checkout context
