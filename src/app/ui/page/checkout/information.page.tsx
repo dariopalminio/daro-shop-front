@@ -14,6 +14,7 @@ import { CenteringContainer } from 'app/ui/common/elements/centering-container';
 import AnonymousProfile from "../../component/user/profile/anonymous-profile";
 import { Profile } from "domain/model/user/profile.type";
 import Alert from "app/ui/common/alert/alert";
+import PreviousNextButtons from "app/ui/common/button/previous-next-buttons";
 
 /**
  * InformationPage
@@ -28,12 +29,14 @@ const InformationPage: FunctionComponent = () => {
         removeFromCart,
         getCartCount,
         changeItemQuantity } = useContext(CartContext) as ICartContext;
-    const { steps, setSteps, profile, setProfile, addressToDelivery,
+    const { steps, setSteps, currentSelectedAddresIndex,
+        setCurrentSelectedAddresIndex, profile, setProfile, addressToDelivery,
         setAddressToDelivery } = useContext(CheckoutContext) as ICheckoutContext;
     const navigate = useNavigate();
     const { t } = useTranslation();
     const [initialized, setInitialized] = useState(false);
-    const [hasErrorOfValidation, setHasErrorOfValidation] = useState(false);
+    const [isAddressValid, setIsAddressValid] = useState(false);
+    const [isUserInfoValid, setIsUserInfoValid] = useState(false);
 
     const fetchData = async () => {
         try {
@@ -55,7 +58,7 @@ const InformationPage: FunctionComponent = () => {
                         addresses: info.addresses ? info.addresses : []
                     };
                     setProfile(p);
-
+                    setIsUserInfoValid(info.email != '');
                 }
             }
         } catch (e) {
@@ -119,25 +122,29 @@ const InformationPage: FunctionComponent = () => {
         const addrsSelected = profile.addresses[index];
         console.log("addrsSelected:", addrsSelected);
         setAddressToDelivery(addrsSelected);
+        setIsAddressValid(true);
+        setCurrentSelectedAddresIndex(index);
     };
 
     const handleAddNeAddressAndClose = (newAddresses: Array<any>): void => {
         setProfile({
             ...profile,
             addresses: newAddresses
-        })
+        });
     };
 
-    const isInfoValid = (): boolean => {
-        const isValidFields = ((profile.email.trim() !== '') && addressToDelivery !== undefined);
-        setHasErrorOfValidation(!isValidFields);
-        return isValidFields;
+    const handleChangeSomeField = (profile: any, isVaslid: boolean): void => {
+        setProfile(profile);
+        setIsUserInfoValid(isVaslid);
     };
 
     const handleNext = (): void => {
         console.log("profile:", profile);
-        console.log("hasErrorOfValidation", hasErrorOfValidation)
-        if (isInfoValid()) console.log("OKKKKKKKKKKKKKKKK")
+        if (isUserInfoValid && isAddressValid) navigate("/checkout/confirmation");
+    };
+
+    const handlePrevious = () => {
+        navigate("/cart");
     };
 
     return (
@@ -151,13 +158,14 @@ const InformationPage: FunctionComponent = () => {
 
                 <div className="wrapper-contact-user-data">
                     <UserContactInfo profile={profile}
-                        onChange={(profile: any) => setProfile(profile)}
+                        onChange={(profile: any, isVaslid: boolean) => handleChangeSomeField(profile, isVaslid)}
                     />
                 </div>
                 <div className="wrapper-delivery-address">
                     {initialized && <>
                         <SelectAddress title={t("information.delivery.addres.title")}
                             country={"Chile"}
+                            currentSelected={currentSelectedAddresIndex}
                             addresses={profile.addresses}
                             onChange={(newAddresses: Array<any>) => handleAddNeAddressAndClose(newAddresses)}
                             onClickSelect={(item: string, index: number) => handleOnClickSelect(item, index)}
@@ -168,22 +176,10 @@ const InformationPage: FunctionComponent = () => {
                 </div>
             </div>
 
-            <div style={{ ...{ margin: "0px auto", left: "0" } }}>
-                <CenteringContainer>
+            {(!isUserInfoValid || !isAddressValid) && <Alert severity="info">{t('checkout.info.validation.error')}</Alert>}
 
-                    <Button
-                        type="button"
-                        style={{ marginTop: "5px" }}
-                        onClick={() => handleNext()}
-                    >
-                        {t('next')}
-                    </Button>
-
-
-                </CenteringContainer>
-            </div>
-
-            {hasErrorOfValidation && <Alert severity="error">{t('checkout.info.validation.error')}</Alert>}
+            <PreviousNextButtons labelPrevious={t('previous')} labelNext={t('next')}
+                handlePrevious={() => handlePrevious()} handleNext={() => handleNext()} />
         </div>
     );
 };

@@ -32,7 +32,7 @@ interface Props {
  * Pattern: Presentation Component, Controled Component and Extensible Style
  */
 const ProfileForm: React.FC<Props> = ({ initialized, profile, onChange, onSubmit, style }) => {
-  const docTypeOptions = ["RUT", "DNI", "OTHER", "None"];
+  const docTypeOptions = ["RUT", "DNI", "PASSPORT", "OTHER", "None"];
   const [validationFlag, setValidationFlag] = useState(validationFlagInit);
   const { t, i18n } = useTranslation();
 

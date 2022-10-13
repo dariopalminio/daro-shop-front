@@ -136,5 +136,7 @@
     "field.placeholder.select.option": "Elija una opción...",
     "information.contact.title": "Datos de contacto",
     "information.delivery.addres.title": "Dirección de envío",
-    "checkout.info.validation.error": "Falta ingresar algún dato"
+    "information.delivery.addres.selected": "La dirección de envío es:",
+    "checkout.info.validation.error": "Tiene que ingresar todos los datos obligatorios (*)",
+    "selection.choose.option": "Elija una opción"
  }

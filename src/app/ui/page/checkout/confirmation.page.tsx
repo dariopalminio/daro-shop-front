@@ -34,7 +34,7 @@ const ConfirmationPage: FunctionComponent = () => {
             },
             {
                 "name": t("information"),
-                "checked": false,
+                "checked": true,
                 "current": false
             },
             {

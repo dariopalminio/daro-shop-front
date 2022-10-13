@@ -7,6 +7,8 @@ import { createContext } from 'react';
 export interface ICheckoutContext {
     steps: Array<any>;
     setSteps: (changedSteps: Array<any>) => void;
+    currentSelectedAddresIndex: number;
+    setCurrentSelectedAddresIndex: (index: number) => void
     addressToDelivery: AddressType | undefined;
     setAddressToDelivery: (addrs: AddressType) => void;
     profile: Profile;
@@ -16,6 +18,8 @@ export interface ICheckoutContext {
 export const CheckoutContextDefaultValues: ICheckoutContext = {
     steps: [],
     setSteps: (changedSteps: Array<any>) => { },
+    currentSelectedAddresIndex: -1,
+    setCurrentSelectedAddresIndex: (index: number) => { },
     addressToDelivery: undefined,
     setAddressToDelivery: (addrs: AddressType) => { },
     profile: initialEmptyProfile, 

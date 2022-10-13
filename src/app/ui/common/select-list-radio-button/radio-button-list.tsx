@@ -32,6 +32,7 @@ interface Props {
     id: string;
     label?: string;
     onClickSelect?: (item: string, index: number) => void;
+    currentSelected?: number;
     style?: any;
     list: string[];
 }
@@ -40,11 +41,17 @@ interface Props {
  * Select List with Radio Buttons component is used for collecting one data user provided information from a list of options.
  * Stateless components, extensible Style and controlled component
  */
-const RadioButtonList: React.FC<Props> = ({ id, label, list, onClickSelect, style }) => {
+const RadioButtonList: React.FC<Props> = ({ id, label, list, onClickSelect, currentSelected, style }) => {
 
 
     const selectItem = (item: string, index: number) => {
         onClickSelect && onClickSelect(item, index);
+    }
+
+    const isSelected = (index: number) => {
+        const selected = currentSelected? currentSelected : -1;
+        if (selected<0 && selected>=list.length) return false;
+        return currentSelected === index;
     }
 
     return (
@@ -56,7 +63,7 @@ const RadioButtonList: React.FC<Props> = ({ id, label, list, onClickSelect, styl
                         <label key={index} className="radio_item_label">
                             <input key={'inputRadioButtons'+id+index.toString()}
                             className="input_radio_button" type="radio" id="html" name="radio" 
-                            onClick={()=>selectItem(item,index)}
+                            onClick={()=>selectItem(item,index)} defaultChecked={isSelected(index)}
                             />
                             <span className="span_radio">{item}</span>
                         </label>
