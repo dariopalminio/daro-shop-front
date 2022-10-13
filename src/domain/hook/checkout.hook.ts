@@ -12,6 +12,7 @@ export const useCheckout = () => {
     const [addressToDelivery, setAddressToDelivery] = useState<AddressType | undefined>(undefined);
     const [profile, setProfile] = useState<Profile>(initialEmptyProfile); //puede colocarse en el hook
     const [currentSelectedAddresIndex, setCurrentSelectedAddresIndex] = useState(-1);
+    const [profileInitialized, setProfileInitialized] = useState<boolean>(false); //puede colocarse en el hook
 
     useEffect(() => {
     }, []);
@@ -19,6 +20,8 @@ export const useCheckout = () => {
     return {
         steps,
         setSteps,
+        profileInitialized,
+        setProfileInitialized,
         currentSelectedAddresIndex,
         setCurrentSelectedAddresIndex,
         addressToDelivery,

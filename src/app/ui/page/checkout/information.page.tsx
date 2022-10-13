@@ -29,21 +29,23 @@ const InformationPage: FunctionComponent = () => {
         removeFromCart,
         getCartCount,
         changeItemQuantity } = useContext(CartContext) as ICartContext;
-    const { steps, setSteps, currentSelectedAddresIndex,
+    const { steps, setSteps, profileInitialized,
+        setProfileInitialized,
+        currentSelectedAddresIndex,
         setCurrentSelectedAddresIndex, profile, setProfile, addressToDelivery,
         setAddressToDelivery } = useContext(CheckoutContext) as ICheckoutContext;
     const navigate = useNavigate();
     const { t } = useTranslation();
     const [initialized, setInitialized] = useState(false);
-    const [isAddressValid, setIsAddressValid] = useState(false);
-    const [isUserInfoValid, setIsUserInfoValid] = useState(false);
+
+    const [hasValidationError, setHasValidationError] = useState(false);
+
 
     const fetchData = async () => {
         try {
-            if (session && session.isLogged) {
+            if (session && session.isLogged && !profileInitialized) {
                 const username = session ? session.userName : '';
                 const info = await getProfile(username);
-                console.log('****************UserProfile PAGE fetchData.info', info);
                 if (info.userName) {
                     const p: Profile = {
                         ...profile,
@@ -58,14 +60,13 @@ const InformationPage: FunctionComponent = () => {
                         addresses: info.addresses ? info.addresses : []
                     };
                     setProfile(p);
-                    setIsUserInfoValid(info.email != '');
+                    setProfileInitialized(true);
                 }
             }
+            setInitialized(true);
         } catch (e) {
             console.log("Error in UserProfile fetchData:", e);
         }
-
-        setInitialized(true);
     };
 
     useEffect(() => {
@@ -122,7 +123,6 @@ const InformationPage: FunctionComponent = () => {
         const addrsSelected = profile.addresses[index];
         console.log("addrsSelected:", addrsSelected);
         setAddressToDelivery(addrsSelected);
-        setIsAddressValid(true);
         setCurrentSelectedAddresIndex(index);
     };
 
@@ -135,12 +135,15 @@ const InformationPage: FunctionComponent = () => {
 
     const handleChangeSomeField = (profile: any, isVaslid: boolean): void => {
         setProfile(profile);
-        setIsUserInfoValid(isVaslid);
     };
 
     const handleNext = (): void => {
-        console.log("profile:", profile);
-        if (isUserInfoValid && isAddressValid) navigate("/checkout/confirmation");
+        const hasError = !((profile.email !== '') && (currentSelectedAddresIndex > -1));
+        console.log("hasError:", hasError);
+        console.log("currentSelectedAddresIndex:", currentSelectedAddresIndex);
+        console.log("profile.email:", profile.email);
+        setHasValidationError(hasError);
+        if (!hasError) navigate("/checkout/confirmation");
     };
 
     const handlePrevious = () => {
@@ -176,7 +179,7 @@ const InformationPage: FunctionComponent = () => {
                 </div>
             </div>
 
-            {(!isUserInfoValid || !isAddressValid) && <Alert severity="info">{t('checkout.info.validation.error')}</Alert>}
+            {hasValidationError && <Alert severity="info">{t('checkout.info.validation.error')}</Alert>}
 
             <PreviousNextButtons labelPrevious={t('previous')} labelNext={t('next')}
                 handlePrevious={() => handlePrevious()} handleNext={() => handleNext()} />

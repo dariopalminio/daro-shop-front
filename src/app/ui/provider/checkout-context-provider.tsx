@@ -11,11 +11,13 @@ const CheckoutContextProvider: FC<Props> = ({ children }) => {
     const {
         steps,
         setSteps,
+        profileInitialized,
+        setProfileInitialized,
         currentSelectedAddresIndex,
         setCurrentSelectedAddresIndex,
         addressToDelivery,
         setAddressToDelivery,
-        profile, 
+        profile,
         setProfile
     } = useCheckout();
 
@@ -24,11 +26,13 @@ const CheckoutContextProvider: FC<Props> = ({ children }) => {
             value={{
                 steps,
                 setSteps,
+                profileInitialized,
+                setProfileInitialized,
                 currentSelectedAddresIndex,
                 setCurrentSelectedAddresIndex,
                 addressToDelivery,
                 setAddressToDelivery,
-                profile, 
+                profile,
                 setProfile
             }}
         >
