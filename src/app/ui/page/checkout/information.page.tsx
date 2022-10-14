@@ -4,13 +4,11 @@ import CartContext, { ICartContext } from "domain/context/cart.context";
 import { useTranslation } from 'react-i18next';
 import CheckoutContext, { ICheckoutContext } from 'domain/context/checkout.context';
 import TextsStepper from 'app/ui/common/steppers/texts-stepers';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import SessionContext, { ISessionContext } from 'domain/context/session.context';
 import useProfile from 'domain/hook/profile.hook';
 import UserContactInfo from 'app/ui/component/checkout/user-contact-info';
 import SelectAddress from 'app/ui/component/address/select-address';
-import Button from 'app/ui/common/button/button';
-import { CenteringContainer } from 'app/ui/common/elements/centering-container';
 import AnonymousProfile from "../../component/user/profile/anonymous-profile";
 import { Profile } from "domain/model/user/profile.type";
 import Alert from "app/ui/common/alert/alert";
@@ -35,11 +33,6 @@ const InformationPage: FunctionComponent = () => {
     const { session } = useContext(SessionContext) as ISessionContext;  //With Custom hook
     const { getCurrentCountry } = useAddress(); //Custom hook
     const { isProcessing, hasError, msg, isSuccess, getInitialProfile, getProfile, updateProfile } = useProfile(); //Custom hook
-    const { cartItems,
-        cartSubTotal,
-        removeFromCart,
-        getCartCount,
-        changeItemQuantity } = useContext(CartContext) as ICartContext;  //With Custom hook
     const { steps, setSteps, profileInitialized,
         setProfileInitialized,
         currentSelectedAddresIndex,
@@ -49,7 +42,7 @@ const InformationPage: FunctionComponent = () => {
     const { t } = useTranslation();
     const [initialized, setInitialized] = useState(false);
     const [hasValidationError, setHasValidationError] = useState(false);
-
+    const location = useLocation();
 
     const fetchData = async () => {
         try {
@@ -125,7 +118,7 @@ const InformationPage: FunctionComponent = () => {
     }, []);
 
     const changeStep = (index: number) => {
-        if (index === 0) navigate(steps[index].path);
+        if (index === 0) handlePrevious();
         if (index === 2) handleNext();
     }
 
@@ -161,13 +154,20 @@ const InformationPage: FunctionComponent = () => {
         return fieldsOk && isAddressSelected();
       }
 
+    /**
+     * Redirect to next page
+     */
     const handleNext = (): void => {
         setHasValidationError(!areFieldsValid());
-        if (areFieldsValid()) navigate("/checkout/confirmation");
+        if (areFieldsValid()) 
+            navigate("/checkout/confirmation", { state: location }); // programmatically redirect
     };
 
+    /**
+     * Redirect to previous page
+     */
     const handlePrevious = () => {
-        navigate("/cart");
+        navigate("/cart", { state: location }); // programmatically redirect
     };
 
     return (

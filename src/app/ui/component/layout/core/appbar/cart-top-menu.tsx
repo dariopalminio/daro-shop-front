@@ -1,13 +1,13 @@
 import { useContext } from "react";
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { RiShoppingCart2Fill } from "react-icons/ri";
 import IconButton from "app/ui/common/icon-button/icon-button";
 import CartContext, { ICartContext } from "domain/context/cart.context";
 import styled from "styled-components";
 
 const CartCircle = styled.div`
-position: relative;
+  position: relative;
 `;
 
 const CartCount = styled.div`
@@ -37,19 +37,15 @@ interface Props {
  const CartTopMenu: React.FC<Props> = (style) => {
 
   const { t } = useTranslation();
-  const { cartItems,
-    cartSubTotal,
-    setCartItems,
-    setCartSubTotal,
-    addToCart,
-    removeFromCart,
-    getCartCount,
-    changeItemQuantity } = useContext(CartContext) as ICartContext;
-
+  const { getCartCount } = useContext(CartContext) as ICartContext; //Custom Hook
+  const location = useLocation();
   const navigate = useNavigate();
 
+  /**
+   * Redirect to cart
+   */
   const handleViewCart = () => {
-    navigate("/cart");
+    navigate("/cart", { state: location });
   };
 
 

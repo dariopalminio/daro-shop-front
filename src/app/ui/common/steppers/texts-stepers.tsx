@@ -15,7 +15,9 @@ interface StepLinkProps {
     readonly isCurrent?: boolean;
 }
 
-const StepLink = styled.a<StepLinkProps>`
+const StepLink = styled.div<StepLinkProps>`
+    display: inline-block;
+    cursor: pointer;
     color: ${(props) => (props.isChecked ? "#70D58F" : "grey")};
     border-radius: 4px;
     text-decoration: ${(props) => (props.isCurrent ? "underline" : "none")};
@@ -82,7 +84,6 @@ const TextsStepper: React.FC<Props> = ({ list, onClick }) => {
                                     isChecked={(element?.checked)}>&nbsp;{">"}&nbsp;</StepLinkConnector>}
 
                             <StepLink
-                                href="#"
                                 isChecked={(element?.checked)}
                                 isCurrent={(element?.current)}
                                 onClick={() => onClick(index)}>

@@ -38,14 +38,14 @@ function ProductDetailPage() {
    * Retrieves the pathname entered in the state for the last link using location.
    * The pathname will be used to redirect after login success
    */
-   const getPathname = () => {
+   const getPathToComeback = () => {
     const pathname = location?.state?.pathname ? location.state.pathname : "/";
     return pathname;
   }
 
   return (
     <div className="container-page">
-      <Link to={getPathname()}>&#8249; {t("back.to.previous")}</Link>
+      <Link to={getPathToComeback()}>&#8249; {t("back.to.previous")}</Link>
       {isProcessing &&
         <CircularProgress>{t('progress.loading')}</CircularProgress>
       }
