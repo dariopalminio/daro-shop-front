@@ -9,6 +9,9 @@ import SessionContext, { ISessionContext } from 'domain/context/session.context'
 import PreviousNextButtons from 'app/ui/common/button/previous-next-buttons';
 import ShoppingCartItem from 'app/ui/component/cart/shopping-cart/shopping-cart-item';
 import ShoppingCart from 'app/ui/component/cart/shopping-cart/shopping-cart';
+import { useShipping } from 'domain/hook/shipping.hook';
+import CircularProgress from 'app/ui/common/progress/circular-progress';
+import Alert from 'app/ui/common/alert/alert';
 
 
 /**
@@ -17,17 +20,20 @@ import ShoppingCart from 'app/ui/component/cart/shopping-cart/shopping-cart';
  * Pattern: Container Component, Conditional Rendering and Context Provider
  */
 const ConfirmationPage: FunctionComponent = () => {
-    const { session } = useContext(SessionContext) as ISessionContext;
-    const { cartItems, cartSubTotal, removeFromCart, getCartCount,
-        changeItemQuantity, cartShipping, cartTotal, canContinueToPayment, getMoney } = useContext(CartContext) as ICartContext;
-    const { steps, setSteps, profile, currentSelectedAddresIndex, getShippingPrice, shippingData } = useContext(CheckoutContext) as ICheckoutContext;
-    const navigate = useNavigate();
+    const navigate = useNavigate(); 
     const { t } = useTranslation();
+    const { session } = useContext(SessionContext) as ISessionContext; // with Custom hook
+    const { isProcessing, hasError, msg, isSuccess, getShippingPrice } = useShipping(); // Custom hook
+    const { cartItems, cartSubTotal, removeFromCart, getCartCount,
+        changeItemQuantity, cartShipping, cartTotal, canContinueToPayment, getMoney } = useContext(CartContext) as ICartContext; // with Custom hook
+    const { steps, setSteps, profile, currentSelectedAddresIndex, shippingData, setShippingPrice } = useContext(CheckoutContext) as ICheckoutContext; // with Custom hook
 
     const fetchData = async () => {
         try {
             const address = profile.addresses[currentSelectedAddresIndex];
-            await getShippingPrice(address);
+            const data = await getShippingPrice(address);
+            setShippingPrice(data);
+
         } catch (e) {
             console.log("Error in getShippingPrice fetchData:", e);
         }
@@ -115,6 +121,12 @@ const ConfirmationPage: FunctionComponent = () => {
 
             <PreviousNextButtons labelPrevious={t('previous')} labelNext={t('next')}
                 handlePrevious={() => handlePrevious()} handleNext={() => handleNext()} />
+
+            {isProcessing && (
+                <CircularProgress>{t('login.info.loading')}</CircularProgress>
+            )}
+
+            {hasError && <Alert severity="error">{t(msg)}</Alert>}
 
         </div>
     );

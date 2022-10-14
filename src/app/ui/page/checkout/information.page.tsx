@@ -14,6 +14,7 @@ import { Profile } from "domain/model/user/profile.type";
 import Alert from "app/ui/common/alert/alert";
 import PreviousNextButtons from "app/ui/common/button/previous-next-buttons";
 import useAddress from "domain/hook/address.hook";
+import CircularProgress from "app/ui/common/progress/circular-progress";
 
 const expresionsRegularByDefault = {
     firstName: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letters and spaces can carry accents.
@@ -148,18 +149,18 @@ const InformationPage: FunctionComponent = () => {
     }
 
     const areFieldsValid = (): boolean => {
-        const fieldsOk: boolean = (expresionsRegularByDefault.firstName.test(profile.firstName) && 
-        expresionsRegularByDefault.lastName.test(profile.lastName) && 
-        expresionsRegularByDefault.email.test(profile.email));
+        const fieldsOk: boolean = (expresionsRegularByDefault.firstName.test(profile.firstName) &&
+            expresionsRegularByDefault.lastName.test(profile.lastName) &&
+            expresionsRegularByDefault.email.test(profile.email));
         return fieldsOk && isAddressSelected();
-      }
+    }
 
     /**
      * Redirect to next page
      */
     const handleNext = (): void => {
         setHasValidationError(!areFieldsValid());
-        if (areFieldsValid()) 
+        if (areFieldsValid())
             navigate("/checkout/confirmation", { state: location }); // programmatically redirect
     };
 
@@ -204,6 +205,12 @@ const InformationPage: FunctionComponent = () => {
 
             <PreviousNextButtons labelPrevious={t('previous')} labelNext={t('next')}
                 handlePrevious={() => handlePrevious()} handleNext={() => handleNext()} />
+
+            {isProcessing && (
+                <CircularProgress>{t('login.info.loading')}</CircularProgress>
+            )}
+
+            {hasError && <Alert severity="error">{t(msg)}</Alert>}
         </div>
     );
 };

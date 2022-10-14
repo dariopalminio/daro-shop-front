@@ -19,8 +19,8 @@ const CheckoutContextProvider: FC<Props> = ({ children }) => {
         setAddressToDelivery,
         profile,
         setProfile,
-        getShippingPrice,
-        shippingData
+        shippingData,
+        setShippingPrice
     } = useCheckout();
 
     return (
@@ -36,8 +36,8 @@ const CheckoutContextProvider: FC<Props> = ({ children }) => {
                 setAddressToDelivery,
                 profile,
                 setProfile,
-                getShippingPrice,
-                shippingData
+                shippingData,
+                setShippingPrice
             }}
         >
             {children}

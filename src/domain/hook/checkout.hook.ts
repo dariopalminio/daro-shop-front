@@ -33,35 +33,12 @@ export const useCheckout = () => {
     useEffect(() => {
     }, []);
 
-    /**
-     * get Shipping Price
-     * @param address 
-     */
-    const getShippingPrice = async (address: AddressType) => {
-
-        setState({ isProcessing: true, hasError: false, msg: '', isSuccess: false });
-        try {
-
-            let data = await shippingClient.getShippingPrice(address);
-
-            setState({ isProcessing: false, hasError: false, msg: "shipping.get.user.success", isSuccess: true });
-            setShippingData( data );
-            const shippingValue: number = parseInt(data.price);
-            setCartShipping( shippingValue );
-            calculateTotals();
-
-        } catch (error: any | ApiError) {
-            let errorKey = error.message;
-            if (error instanceof ApiError && (error.status === 400 || error.status === 401)) {
-                errorKey = "auth.error.expired.token";
-                removeSessionValue();
-            }
-            console.error(error);
-            setState({ isProcessing: false, hasError: true, msg: errorKey, isSuccess: false });
-            throw error;
-        }
-
-    };
+    const setShippingPrice = (data: any) => {
+        setShippingData(data);
+        const shippingValue: number = parseInt(data.price);
+        setCartShipping( shippingValue );
+        calculateTotals();
+    }
 
     return {
         steps,
@@ -74,7 +51,7 @@ export const useCheckout = () => {
         setAddressToDelivery,
         profile,
         setProfile,
-        getShippingPrice,
-        shippingData
+        shippingData,
+        setShippingPrice
     };
 };
