@@ -28,15 +28,17 @@ const CartPage: FunctionComponent = () => {
         if (getCartCount()>0)
             navigate("/checkout/information");
             else{
-                alert(t('cart.empty'));
+                alert(t('cart.empty')); //it need styles in custom component
             }
     };
 
     return (
         <div className="container-page">
+
             <Link to="/">{t("back.to.home")}</Link>
+
             <Cart
-            money={getMoney()}
+                money={getMoney()}
                 empty={cartItems.length === 0}
                 count={getCartCount()}
                 subtotal={getCartSubTotal()}
