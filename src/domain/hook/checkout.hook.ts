@@ -33,6 +33,10 @@ export const useCheckout = () => {
     useEffect(() => {
     }, []);
 
+    /**
+     * get Shipping Price
+     * @param address 
+     */
     const getShippingPrice = async (address: AddressType) => {
 
         setState({ isProcessing: true, hasError: false, msg: '', isSuccess: false });

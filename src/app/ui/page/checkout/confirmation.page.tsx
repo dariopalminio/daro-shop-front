@@ -37,7 +37,6 @@ const ConfirmationPage: FunctionComponent = () => {
     };
 
     useEffect(() => {
-        console.log("CheckoutPage...");
         const initialSteps = [
             {
                 key: "cart",
@@ -90,10 +89,6 @@ const ConfirmationPage: FunctionComponent = () => {
 
     const handleNext = (): void => {
         if (canContinueToPayment()) navigate(steps[3].path);
-    };
-
-    const isNotLogged = () => {
-        return session && !session.isLogged;
     };
 
     return (

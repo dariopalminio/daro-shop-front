@@ -2,7 +2,7 @@
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import {
-  Link, useParams,
+  Link, useLocation, useParams,
 } from "react-router-dom";
 import useProducts from "domain/hook/products.hook";
 import CircularProgress from "app/ui/common/progress/circular-progress";
@@ -20,6 +20,7 @@ function ProductDetailPage() {
   const { isProcessing, hasError, msg, isSuccess, product, getDetail } = useProducts();
   const { t } = useTranslation();
   const { productId } = useParams();
+  const location = useLocation();
   
   useEffect(() => {
     const fetchData = async () => {
@@ -33,10 +34,18 @@ function ProductDetailPage() {
     console.log(result);
   }, [])
 
+  /** 
+   * Retrieves the pathname entered in the state for the last link using location.
+   * The pathname will be used to redirect after login success
+   */
+   const getPathname = () => {
+    const pathname = location?.state?.pathname ? location.state.pathname : "/";
+    return pathname;
+  }
 
   return (
     <div className="container-page">
-      <Link to="/">{t("back.to.home")}</Link>
+      <Link to={getPathname()}>&#8249; {t("back.to.previous")}</Link>
       {isProcessing &&
         <CircularProgress>{t('progress.loading')}</CircularProgress>
       }

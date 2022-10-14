@@ -45,6 +45,11 @@ export default function useProfile() {
         return initialEmptyProfile;
     }
 
+    /**
+     * Get Profile
+     * @param userName 
+     * @returns 
+     */
     const getProfile = async (userName: string | undefined) => {
         setState({ isProcessing: true, hasError: false, msg: '', isSuccess: false });
 
@@ -73,6 +78,12 @@ export default function useProfile() {
 
     };
 
+    /**
+     * Update Profile
+     * 
+     * @param userProfile 
+     * @returns 
+     */
     const updateProfile = async (userProfile: any | undefined) => {
         setState({ isProcessing: true, hasError: false, msg: '', isSuccess: false });
 

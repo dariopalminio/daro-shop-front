@@ -25,7 +25,6 @@ const PaymentPage: FunctionComponent = () => {
     const { t } = useTranslation();
 
     useEffect(() => {
-        console.log("CheckoutPage...");
         const initialSteps = [
             {
                 "name": t("cart"),

@@ -140,6 +140,7 @@
     "information.delivery.addres.title": "Delivery address:",
     "information.delivery.addres.selected": "Delivery address:",
     "checkout.info.validation.error": "Missing to enter some data",
-    "selection.choose.option": "Choose an option"
+    "selection.choose.option": "Choose an option",
+    "back.to.previous": "Comeback"
 
 }

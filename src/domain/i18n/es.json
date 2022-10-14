@@ -141,5 +141,6 @@
     "information.delivery.addres.title": "Dirección de envío",
     "information.delivery.addres.selected": "La dirección de envío es:",
     "checkout.info.validation.error": "Tiene que ingresar todos los datos obligatorios (*)",
-    "selection.choose.option": "Elija una opción"
+    "selection.choose.option": "Elija una opción",
+    "back.to.previous": "Volver"
  }

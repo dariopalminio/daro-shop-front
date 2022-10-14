@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import CartContext, { ICartContext } from 'domain/context/cart.context';
 import { useContext, useState } from "react";
 import Button from "app/ui/common/button/button";
@@ -100,7 +100,8 @@ const ProductItem: React.FC<Props> = ({ productItem }) => {
   const [quantity, setQuantity] = useState(1);
   const { addToCart } = useContext(CartContext) as ICartContext;
   const { t } = useTranslation();
-
+  const location = useLocation();
+  
   const addToCartHandler = () => {
     if (productItem && quantity > 0) addToCart(productItem, quantity);
     else console.log("No tiene prodiuctos que agregar!");
@@ -126,7 +127,7 @@ const ProductItem: React.FC<Props> = ({ productItem }) => {
   return (
     <ProductItemWrapper>
 
-      <Link to={`/catalog/product/detail/${productItem._id}`} className="linkframe">
+      <Link to={`/catalog/product/detail/${productItem._id}`} state={location} className="linkframe">
         <ProductItemImg style={{ position: "relative", margin: "2px", width: "100%" }} src={getImage()} alt={productItem.name} loading="lazy"/>
       </Link>
 

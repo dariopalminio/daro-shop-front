@@ -35,11 +35,6 @@ const LoginPage: FunctionComponent = () => {
     return false //((session && session.isLogged) && !session.email_verified);
   };
 
-  const redirectToPage = () => {
-    const pathname = location?.state?.pathname ? location.state.pathname : "/";
-    navigate(pathname);
-  }
-
   /** 
    * Retrieves the pathname entered in the state for the last link using location.
    * The pathname will be used to redirect after login success

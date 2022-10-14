@@ -1,6 +1,6 @@
 
 import "./shopping-cart.css";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import ButtonQuantity from "app/ui/common/button-quantity/button-quantity";
 import { CartItemType } from "domain/model/cart/cart-item.type";
 import styled from "styled-components";
@@ -21,7 +21,7 @@ interface IProps {
  * Pattern: Compound Component, Presentation Component and Controled Component
  */
 const ShoppingCartItem: React.FC<IProps> = (props: IProps) => {
-
+  const location = useLocation();
 
   const handlerChanfeInputQty = (e: React.FormEvent<HTMLInputElement>) => {
     const newValue: number = parseInt(e.currentTarget.value);
@@ -37,7 +37,7 @@ const ShoppingCartItem: React.FC<IProps> = (props: IProps) => {
       <div className="shopping-cart-product-details">
         <div className="shopping-cart-product-title">
           <Link
-            to={`/catalog/product/detail/${props.item.productId}`} >
+            to={`/catalog/product/detail/${props.item.productId}`} state={location}>
             <p>{props.item.name}</p>
           </Link>
         </div>

@@ -83,7 +83,6 @@ const InformationPage: FunctionComponent = () => {
     }, []);
 
     useEffect(() => {
-        console.log("CheckoutPage...");
         const initialSteps = [
             {
                 key: "cart",

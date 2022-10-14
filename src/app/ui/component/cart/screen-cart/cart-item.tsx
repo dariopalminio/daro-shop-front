@@ -1,5 +1,5 @@
 
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import ButtonQuantity from "app/ui/common/button-quantity/button-quantity";
 import { CartItemType } from "domain/model/cart/cart-item.type";
 import styled from "styled-components";
@@ -73,7 +73,8 @@ interface Props {
  * Pattern: Compound Component, Presentation Component and Controled Component
  */
 const CartItem: React.FC<Props> = ({ item, qtyChangeHandler, removeHandler }) => {
-
+  
+  const location = useLocation();
 
   const handlerNewQuantityValue = (newQuantityValue: number) => {
     //validate item.countInStock
@@ -88,7 +89,7 @@ const CartItem: React.FC<Props> = ({ item, qtyChangeHandler, removeHandler }) =>
       </div>
 
       <Link
-        to={`/catalog/product/detail/${item.productId}`} className="cartItem_name">
+        to={`/catalog/product/detail/${item.productId}`} state={location} className="cartItem_name">
         <p>{item.name}</p>
       </Link>
 
