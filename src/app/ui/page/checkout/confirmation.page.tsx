@@ -7,8 +7,8 @@ import TextsStepper from 'app/ui/common/steppers/texts-stepers';
 import { useNavigate } from 'react-router-dom';
 import SessionContext, { ISessionContext } from 'domain/context/session.context';
 import PreviousNextButtons from 'app/ui/common/button/previous-next-buttons';
-import ResumeCartItem from 'app/ui/component/checkout/resume-cart-item';
-import ResumeCart from 'app/ui/component/checkout/resume-cart';
+import ShoppingCartItem from 'app/ui/component/cart/shopping-cart/shopping-cart-item';
+import ShoppingCart from 'app/ui/component/cart/shopping-cart/shopping-cart';
 
 
 /**
@@ -22,7 +22,7 @@ const ConfirmationPage: FunctionComponent = () => {
         cartSubTotal,
         removeFromCart,
         getCartCount,
-        changeItemQuantity } = useContext(CartContext) as ICartContext;
+        changeItemQuantity, cartShipping, cartTotal, canContinueToPayment } = useContext(CartContext) as ICartContext;
     const { steps, setSteps, profile, currentSelectedAddresIndex, getShippingPrice, shippingData } = useContext(CheckoutContext) as ICheckoutContext;
     const navigate = useNavigate();
     const { t } = useTranslation();
@@ -89,6 +89,7 @@ const ConfirmationPage: FunctionComponent = () => {
     };
 
     const handleNext = (): void => {
+        if (canContinueToPayment()) navigate(steps[3].path);
     };
 
     const isNotLogged = () => {
@@ -100,27 +101,24 @@ const ConfirmationPage: FunctionComponent = () => {
 
             <TextsStepper list={steps} onClick={(index: number) => changeStep(index)}></TextsStepper>
 
-
-
-            <ResumeCart
+            <ShoppingCart
                 empty={cartItems.length === 0}
                 count={getCartCount()}
                 subtotal={cartSubTotal}
+                shipping={cartShipping}
+                total={cartTotal}
                 onClick={()=>{}}
             >
                 {cartItems.map((item, index) => (
-                    <ResumeCartItem
-                        key={item.id+index.toString()}
+                    <ShoppingCartItem
+                        key={index}
                         item={item}
                         qtyChangeHandler={changeItemQuantity}
                         removeHandler={removeFromCart}
                     />
                 ))}
 
-            </ResumeCart>
-
-            Resumme...
-            Price Shipping / Despacho: {shippingData?.price}
+            </ShoppingCart>
 
             <PreviousNextButtons labelPrevious={t('previous')} labelNext={t('next')}
                 handlePrevious={() => handlePrevious()} handleNext={() => handleNext()} />

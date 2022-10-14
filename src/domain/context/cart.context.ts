@@ -5,22 +5,32 @@ export interface ICartContext {
     cartItems: Array<any>
     cartSubTotal: number
     setCartItems: (newCartItems: Array<any>) => void
-    setCartSubTotal: (newTotal: number) => void
+    setCartSubTotal: (newSubTotal: number) => void
     addToCart: (item: ProductType, qty: number) => void
     removeFromCart: (id: string) => void
     getCartCount: () => number
-    changeItemQuantity: (id: string, qty: number) => void
+    changeItemQuantity: (id: string, qty: number) => void,
+    cartShipping: number,
+    setCartShipping: (newTotal: number) => void,
+    cartTotal: number,
+    calculateTotals: () => void,
+    canContinueToPayment: () => boolean
 };
 
 export const CartContextDefaultValues: ICartContext = {
     cartItems: [],
     cartSubTotal: 0,
     setCartItems: (newCartItems: Array<any>) => { },
-    setCartSubTotal: (newTotal: number) => { },
+    setCartSubTotal: (newSubTotal: number) => { },
     addToCart: (item: ProductType, qty: number) => { },
     removeFromCart: (id: string) => { },
     getCartCount: () => 0,
-    changeItemQuantity: (id: string, qty: number) => { }
+    changeItemQuantity: (id: string, qty: number) => { },
+    cartShipping:  0,
+    setCartShipping: (newTotal: number) => { },
+    cartTotal: 0,
+    calculateTotals: () => { },
+    canContinueToPayment: () => { return false },
 };
 
 // Global cart context

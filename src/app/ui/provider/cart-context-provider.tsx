@@ -2,7 +2,7 @@ import { FC } from "react";
 import CartContext from "domain/context/cart.context";
 import { useCart } from "domain/hook/cart.hook";
 
-interface Props {children?: React.ReactNode}
+interface Props { children?: React.ReactNode }
 
 /**
  * Cart Context Provider
@@ -16,7 +16,12 @@ const CartContextProvider: FC<Props> = ({ children }) => {
         addToCart,
         removeFromCart,
         getCartCount,
-        changeItemQuantity
+        changeItemQuantity,
+        cartShipping,
+        setCartShipping,
+        cartTotal,
+        calculateTotals,
+        canContinueToPayment
     } = useCart();
 
     return (
@@ -29,7 +34,12 @@ const CartContextProvider: FC<Props> = ({ children }) => {
                 addToCart,
                 removeFromCart,
                 getCartCount,
-                changeItemQuantity
+                changeItemQuantity,
+                cartShipping,
+                setCartShipping,
+                cartTotal,
+                calculateTotals,
+                canContinueToPayment
             }}
         >
             {children}

@@ -9,7 +9,10 @@ const CART_ITEM_NAME = 'CART';
  */
 export const useCart = () => {
     const [cartItems, setCartItems] = useState<Array<CartItemType>>([]);
-    const [cartSubTotal, setCartSubTotal] = useState(0);
+    const [cartSubTotal, setCartSubTotal] = useState<number>(0);
+    const [cartShipping, setCartShipping] = useState<number>(0);
+    const [cartTotal, setCartTotal] = useState<number>(0);
+
 
     useEffect(() => {
         const cartStorageItem = window.sessionStorage.getItem(CART_ITEM_NAME);
@@ -31,11 +34,13 @@ export const useCart = () => {
     }, [cartItems]);
 
     const calculateTotals = () => {
-        let totalVal = 0;
+        let subTotalVal = 0;
         for (let i = 0; i < cartItems.length; i++) {
-            totalVal += cartItems[i].amount;
+            subTotalVal += cartItems[i].amount;
         }
-        setCartSubTotal(roundNumber(totalVal));
+        setCartSubTotal(roundNumber(subTotalVal));
+        const total = subTotalVal + 0.0 + cartShipping;
+        setCartTotal(roundNumber(total));
     };
 
     const addToCart = (productItem: ProductType, qty: number) => {
@@ -79,7 +84,7 @@ export const useCart = () => {
         const indexToUpdate = cartItems.findIndex((cartItem) => cartItem.itemId === id);
         const searchObject = cartItems[indexToUpdate];
 
-        const newAmount: number = roundNumber(qty * searchObject.grossPrice); 
+        const newAmount: number = roundNumber(qty * searchObject.grossPrice);
 
         const itemChanged = {
             ...searchObject,
@@ -92,11 +97,11 @@ export const useCart = () => {
         saveCart(newCartItems);
     };
 
-const roundNumber = (numberToRound: number): number =>{
+    const roundNumber = (numberToRound: number): number => {
         const num: number = Number(numberToRound) // The Number() only visualizes the type and is not needed
         const roundedString: string = num.toFixed(2); // toFixed() returns a string rounded
-        return Number(roundedString); 
-}
+        return Number(roundedString);
+    };
 
     /**
      * Save cart in storage
@@ -104,6 +109,10 @@ const roundNumber = (numberToRound: number): number =>{
     const saveCart = (items: Array<CartItemType>) => {
         const sessionStorageItem: string = JSON.stringify(items);
         window.sessionStorage.setItem(CART_ITEM_NAME, sessionStorageItem);
+    };
+
+    const canContinueToPayment = (): boolean => {
+        return cartTotal > 0;
     };
 
     return {
@@ -114,6 +123,11 @@ const roundNumber = (numberToRound: number): number =>{
         addToCart,
         removeFromCart,
         getCartCount,
-        changeItemQuantity
+        changeItemQuantity,
+        cartShipping,
+        setCartShipping,
+        cartTotal,
+        calculateTotals,
+        canContinueToPayment
     };
 };

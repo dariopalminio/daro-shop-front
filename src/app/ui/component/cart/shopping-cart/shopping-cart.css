@@ -1,0 +1,125 @@
+.shopping-cart-resume {
+  width: 100%;
+}
+
+.shopping-cart-product-image {
+  float: left;
+  width: 13%;
+}
+
+.shopping-cart-product-details {
+  float: left;
+  width: 44%;
+}
+
+.shopping-cart-product-price {
+  float: left;
+  width: 12%;
+}
+
+.shopping-cart-product-quantity {
+  float: left;
+  width: 10%;
+}
+
+.shopping-cart-product-removal {
+  float: left;
+  width: 9%;
+}
+
+.shopping-cart-product-line-price {
+  float: left;
+  width: 12%;
+  text-align: right;
+}
+
+.shopping-cart-column-labels {
+  box-sizing: border-box;
+  border-bottom: 1px solid #E8F4FC;
+  width: 100%;
+  float: left;
+}
+
+/* Column headers */
+.shopping-cart-column-labels label {
+  margin-bottom: 5px;
+}
+
+/* Product entries */
+.shopping-cart-product {
+  box-sizing: border-box;
+  border-bottom: 1px solid #E8F4FC;
+  width: 100%;
+  float: left;
+}
+
+.shopping-cart-product-image {
+  text-align: center;
+}
+
+.shopping-cart-product-title {
+  margin-right: 20px;
+}
+
+.shopping-cart-product-description {
+  margin: 5px 20px 5px 0;
+  line-height: 1.4em;
+}
+
+.shopping-cart-product-quantity input {
+  width: 40px;
+}
+
+.shopping-cart-remove-product {
+  border: 0;
+  padding: 4px 8px;
+  background-color: #c66;
+  color: #fff;
+  font-size: 12px;
+  border-radius: 3px;
+}
+
+.shopping-cart-remove-product:hover {
+  background-color: #a44;
+}
+
+.shopping-cart-product-amount {
+  float: right;
+  width: 70px;
+  text-align: right;
+  margin-right: 10px;
+}
+
+.shopping-cart-totals {
+  border-bottom: 1px solid #E8F4FC;
+  box-sizing: border-box;
+  width: 100%;
+  float: right;
+}
+
+.shopping-cart-totals .shopping-cart-totals-item {
+  float: right;
+  clear: both;
+  width: 100%;
+  margin-bottom: 10px;
+  margin-right: 10px;
+}
+
+.shopping-cart-totals label {
+  float: left;
+  clear: both;
+  width: 79%;
+  text-align: right;
+}
+
+.shopping-cart-totals .shopping-cart-totals-value {
+  float: right;
+  width: 21%;
+  text-align: right;
+}
+
+.shopping-cart-totals .shopping-cart-totals-item-total {
+  font-size: 18px;
+  font-weight: bold;
+  margin-right: 10px;
+}

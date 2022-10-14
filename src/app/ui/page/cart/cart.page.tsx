@@ -1,8 +1,8 @@
 
 import { FunctionComponent, useContext } from 'react'
 import CartContext, { ICartContext } from "domain/context/cart.context";
-import CartItem from "app/ui/component/cart/cart-item";
-import Cart from "app/ui/component/cart/cart";
+import CartItem from "app/ui/component/cart/screen-cart/cart-item";
+import Cart from "app/ui/component/cart/screen-cart/cart";
 import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
