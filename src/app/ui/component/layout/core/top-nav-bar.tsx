@@ -4,7 +4,7 @@ import styled, { useTheme } from "styled-components";
 import CartTopMenu from "./cart-top-menu";
 import { RiMenuFill } from "react-icons/ri";
 import IconButton from "app/ui/common/icon-button/icon-button";
-import { ILayoutContext, LayoutContext } from "app/ui/provider/layout-context-provider";
+import { ILayoutContext, LayoutContext } from "app/ui/common/layout/layout-context-provider";
 import MenuIconButton from "app/ui/common/menu-icon-button/menu-icon-button";
 import SessionContext, { ISessionContext } from "domain/context/session.context";
 import { MenuItemType, AccessType } from "app/ui/common/menu-list/menu-item.type";
@@ -46,7 +46,7 @@ const containerTopMenuStyle = {
   justifyContent: "flex-start",
 };
 
-interface Props {
+interface IProps {
   menuList?: MenuItemType[];
   style?: any;
 }
@@ -56,7 +56,7 @@ interface Props {
  * Header component.
  * @visibleName TopNavBar View
  */
-const TopNavBar: React.FC<Props> = ({ menuList, style }) => {
+const TopNavBar: React.FC<IProps> = (props: IProps) => {
   const { t } = useTranslation();
   const theme: any = useTheme();
   const { sidebarWidth,

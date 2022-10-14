@@ -2,11 +2,11 @@ import { FunctionComponent } from "react"
 import { BrowserRouter as Router } from "react-router-dom"
 import SessionContextProvider from "app/ui/provider/session-context-provider"
 import CartContextProvider from "app/ui/provider/cart-context-provider"
-import Layout from "app/ui/component/layout/core/layout"
-import LayoutContextProvider from "app/ui/provider/layout-context-provider"
+import Layout from "app/ui/common/layout/core/layout"
+import LayoutContextProvider from "app/ui/common/layout/layout-context-provider"
 import { ThemeProvider } from "styled-components"
 import MainContainer from "app/ui/page/main-container"
-import TopNavBar from "app/ui/component/layout/core/appbar/top-nav-bar"
+import TopNavBar from "app/ui/component/layout/core/top-nav-bar"
 import Footer from "app/ui/page/footer"
 import SideBar from "app/ui/component/layout/core/sidebar"
 import * as GlobalConfig from 'infra/global.config';
@@ -14,11 +14,11 @@ import Themes from "app/ui/common/themes/themes";
 import CheckoutContextProvider from "./ui/provider/checkout-context-provider"
 
 /**
- * Dario Palminio
- *
- * @visibleName Web Shop App
+ * App
+ * 
+ * @visibleName Daro-Shop-Front
  * @version 1.0.0
- * @author [Dario Palminio](https://github.com/dariopalminio/tsx-web-shop.git)
+ * @author [Dario Palminio]
  */
 const App: FunctionComponent = () => {
 
@@ -29,7 +29,6 @@ const App: FunctionComponent = () => {
           <CartContextProvider>
             <CheckoutContextProvider>
               <LayoutContextProvider>
-
                 <Layout
                   topbar={<TopNavBar />}
                   leftbar={<SideBar style={{ background: "#F9F9F9" }}></SideBar>}
@@ -37,7 +36,6 @@ const App: FunctionComponent = () => {
                 >
                   <MainContainer />
                 </Layout>
-
               </LayoutContextProvider>
             </CheckoutContextProvider>
           </CartContextProvider>

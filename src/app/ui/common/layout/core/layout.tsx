@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
-import IconButton from "../../../common/icon-button/icon-button";
-import { ILayoutContext, LayoutContext } from "../../../provider/layout-context-provider";
+import IconButton from "../../icon-button/icon-button";
+import { ILayoutContext, LayoutContext } from "../layout-context-provider";
 import { RiCloseFill } from "react-icons/ri"; //ChevronLeftIcon
 
 

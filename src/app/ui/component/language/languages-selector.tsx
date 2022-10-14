@@ -3,7 +3,7 @@ import logo from "app/ui/image/logo_app.png";
 import styled, { useTheme } from "styled-components";
 import { RiMenuFill } from "react-icons/ri";
 import IconButton from "app/ui/common/icon-button/icon-button";
-import { ILayoutContext, LayoutContext } from "app/ui/provider/layout-context-provider";
+import { ILayoutContext, LayoutContext } from "app/ui/common/layout/layout-context-provider";
 import MenuIconButton from "app/ui/common/menu-icon-button/menu-icon-button";
 import SessionContext, { ISessionContext } from "domain/context/session.context";
 import { MenuItemType, AccessType } from "app/ui/common/menu-list/menu-item.type";
