@@ -27,7 +27,7 @@ interface IMyProps {
  */
 const SelectAddress: React.FC<IMyProps> = (props: IMyProps) => {
 
-    const { getInitialAddress } = useAddress();
+    const { getInitialAddress } = useAddress(); //Custom hook
     const { addresses, onChange } = props;
     const { t } = useTranslation();
     const [myAddresses, setMyAddresses] = useState<Array<AddressType>>(addresses);

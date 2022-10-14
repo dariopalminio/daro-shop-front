@@ -3,8 +3,8 @@ import styled from "styled-components";
 //Styled-components
 const QtyContainer = styled.div`
     display: flex;
+    border: 1px solid rgb(235, 235, 235);
     text-align: center;
-    padding: 5px;
     margin: 2%;
     justify-content: center;
     `;
@@ -33,11 +33,10 @@ const InputQtyMinus = styled.input`
 
 const InputQty = styled.input`
     width: 40px;
-    height: 26px;
+    height: 30px;
+    border: 0px;
     text-align: center;
-    border-width: 1px;
-    border-style: solid;
-    border-color: rgb(206, 206, 206);
+
   `;
 
 interface Props {

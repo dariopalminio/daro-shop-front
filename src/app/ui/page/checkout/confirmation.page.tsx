@@ -18,11 +18,8 @@ import ShoppingCart from 'app/ui/component/cart/shopping-cart/shopping-cart';
  */
 const ConfirmationPage: FunctionComponent = () => {
     const { session } = useContext(SessionContext) as ISessionContext;
-    const { cartItems,
-        cartSubTotal,
-        removeFromCart,
-        getCartCount,
-        changeItemQuantity, cartShipping, cartTotal, canContinueToPayment } = useContext(CartContext) as ICartContext;
+    const { cartItems, cartSubTotal, removeFromCart, getCartCount,
+        changeItemQuantity, cartShipping, cartTotal, canContinueToPayment, getMoney } = useContext(CartContext) as ICartContext;
     const { steps, setSteps, profile, currentSelectedAddresIndex, getShippingPrice, shippingData } = useContext(CheckoutContext) as ICheckoutContext;
     const navigate = useNavigate();
     const { t } = useTranslation();
@@ -97,12 +94,13 @@ const ConfirmationPage: FunctionComponent = () => {
             <TextsStepper list={steps} onClick={(index: number) => changeStep(index)}></TextsStepper>
 
             <ShoppingCart
+                money={getMoney()}
                 empty={cartItems.length === 0}
                 count={getCartCount()}
                 subtotal={cartSubTotal}
                 shipping={cartShipping}
                 total={cartTotal}
-                onClick={()=>{}}
+                onClick={() => { }}
             >
                 {cartItems.map((item, index) => (
                     <ShoppingCartItem

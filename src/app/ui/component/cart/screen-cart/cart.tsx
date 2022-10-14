@@ -72,7 +72,8 @@ const ListHeader = styled.div`
     }
 `;
 
-interface Props {
+interface IProps {
+    money: string;
     empty: boolean;
     count: number;
     subtotal: number;
@@ -85,7 +86,7 @@ interface Props {
  * 
  * Pattern: Compound Component, Presentation Component and Controled Component
  */
-const Cart: React.FC<Props> = ({ empty, count, subtotal, onClick, children }) => {
+const Cart: React.FC<IProps> = (props: IProps) => {
     const { t } = useTranslation();
 
     return (
@@ -94,7 +95,7 @@ const Cart: React.FC<Props> = ({ empty, count, subtotal, onClick, children }) =>
             <CartList>
                 <h1>{t('cart.title.shoppingcart')}</h1>
 
-                {empty ? (
+                {props.empty ? (
                     <div>
                         {t('cart.empty')}
                     </div>
@@ -108,19 +109,19 @@ const Cart: React.FC<Props> = ({ empty, count, subtotal, onClick, children }) =>
                             <p style={{textAlign: "right"}}>{t('cart.amount')}</p>
                             <p></p>
                         </ListHeader>
-                        {children}
+                        {props.children}
                     </div>
                 )}
             </CartList>
 
             <CartSummary>
                 <div className="shopping_cart_info">
-                    <p>{t('cart.you.have')} ({count}) {t('cart.products')}</p>
-                    <p>{t('cart.subtotal')}: ${subtotal}</p>
+                    <p>{t('cart.you.have')} ({props.count}) {t('cart.products')}</p>
+                    <p>{t('cart.subtotal')}: ({props.money}) $ {props.subtotal}</p>
                 </div>
                 <div>
                     <Button
-                        onClick={onClick}>
+                        onClick={props.onClick}>
                         {t('cart.button.checkout')}
                     </Button>
                 </div>

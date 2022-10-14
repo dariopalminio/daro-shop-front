@@ -93,13 +93,13 @@ const CartItem: React.FC<Props> = ({ item, qtyChangeHandler, removeHandler }) =>
         <p>{item.name}</p>
       </Link>
 
-      <p className="cartitem_price">${item.grossPrice}</p>
+      <p className="cartitem_price">$ {item.grossPrice}</p>
 
       <div className="cartitem_qty">
         <ButtonQuantity
           value={item.qty} onChange={(newQuantityValue: number) => handlerNewQuantityValue(newQuantityValue)} />
       </div>
-      <p className="cartitem_amount">${item.amount}</p>
+      <p className="cartitem_amount">$ {item.amount}</p>
       <div className="cartitem_delete">
         <IconButton
           onClick={() => removeHandler(item.itemId)}>

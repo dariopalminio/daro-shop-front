@@ -16,7 +16,7 @@ const CartPage: FunctionComponent = () => {
         cartSubTotal,
         removeFromCart,
         getCartCount,
-        changeItemQuantity } = useContext(CartContext) as ICartContext;
+        changeItemQuantity, getMoney } = useContext(CartContext) as ICartContext; //With custom hook
     const { t } = useTranslation();
     const navigate = useNavigate();
     
@@ -36,6 +36,7 @@ const CartPage: FunctionComponent = () => {
         <div className="container-page">
             <Link to="/">{t("back.to.home")}</Link>
             <Cart
+            money={getMoney()}
                 empty={cartItems.length === 0}
                 count={getCartCount()}
                 subtotal={getCartSubTotal()}

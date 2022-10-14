@@ -9,10 +9,10 @@ import SingleAttrTable from "app/ui/common/table/single-att-table";
 import { CenteringContainer } from "app/ui/common/elements/centering-container";
 import { ProductType } from "domain/model/product/product.type";
 import Alert from "app/ui/common/alert/alert";
-// Actions
 
 
-interface Props {
+interface IProps {
+  money: string;
   product: ProductType | null;
 }
 
@@ -20,20 +20,14 @@ interface Props {
  * Product Item
  * 
  */
-const ProductDetail: React.FC<Props> = ({ product }) => {
+const ProductDetail: React.FC<IProps> = (props: IProps) => {
 
+  const { addToCart } = useContext(CartContext) as ICartContext; //With custom hook
   const { t } = useTranslation();
-  const { cartItems,
-    setCartItems,
-    setCartSubTotal,
-    addToCart,
-    removeFromCart,
-    getCartCount,
-    changeItemQuantity } = useContext(CartContext) as ICartContext;
   const [quantity, setQuantity] = useState(1);
 
   const addToCartHandler = () => {
-    if (product && quantity > 0) addToCart(product, quantity);
+    if (props.product && quantity > 0) addToCart(props.product, quantity);
     else console.log("No tiene producto que agregar!");
   };
 
@@ -43,15 +37,15 @@ const ProductDetail: React.FC<Props> = ({ product }) => {
   };
 
   const getAttributes = () => {
-    if (product) {
+    if (props.product) {
       const attrs: Array<{ label: string, value: string }> = [
-        { label: 'Category', value: product.category },
-        { label: 'Type', value: product.type },
-        { label: 'Brand', value: product.brand },
-        { label: 'Color', value: product.color },
-        { label: 'Size', value: product.size },
-        { label: 'Gender', value: product.gender },
-        { label: 'sku', value: product.sku }
+        { label: 'Category', value: props.product.category },
+        { label: 'Type', value: props.product.type },
+        { label: 'Brand', value: props.product.brand },
+        { label: 'Color', value: props.product.color },
+        { label: 'Size', value: props.product.size },
+        { label: 'Gender', value: props.product.gender },
+        { label: 'sku', value: props.product.sku }
       ]
       return attrs;
     }
@@ -62,18 +56,18 @@ const ProductDetail: React.FC<Props> = ({ product }) => {
   return (
     <div className="product_detail_container">
       <>
-        {product && (
+        {props.product && (
           <>
             <div className="product_image_resume">
               <div className="frame_image">
-                <p className="product_name">{product.name}</p>
-                <CarouselImg uniqueId={product._id} images={product.images} width={"100%"} height={"300px"}></CarouselImg>
-                <p>{product.description}</p>
+                <p className="product_name">{props.product.name}</p>
+                <CarouselImg uniqueId={props.product._id} images={props.product.images} width={"100%"} height={"300px"}></CarouselImg>
+                <p>{props.product.description}</p>
               </div>
             </div>
 
             <div className="prod_info">
-                <p>{t('cart.price')}: ${product.grossPrice}</p>
+                <p>{t('cart.price')}: ${props.product.grossPrice}</p>
                 <div style={{ marginBottom: "10px" }}>Características principales:</div>
                 <SingleAttrTable rowDictionary={getAttributes()} />
 
@@ -81,12 +75,12 @@ const ProductDetail: React.FC<Props> = ({ product }) => {
                   <div className="call_to_action_info">
                     <p>
                       {t('cart.price')}:
-                      <span>${product.grossPrice}</span>
+                      <span>({props.money}) $ {props.product.grossPrice}</span>
                     </p>
                     <p>
                       {t('cart.detail.state')}:
                       <span>
-                        {product.stock > 0 ? "In Stock" : "Out of Stock"}
+                        {props.product.stock > 0 ? "In Stock" : "Out of Stock"}
                       </span>
                     </p>
 
@@ -107,7 +101,7 @@ const ProductDetail: React.FC<Props> = ({ product }) => {
         )}
       </>
 
-      {!product && <Alert severity="error">{t("producto.error.loading")}</Alert>}
+      {!props.product && <Alert severity="error">{t("producto.error.loading")}</Alert>}
 
     </div>
   );

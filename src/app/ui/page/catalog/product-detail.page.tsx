@@ -17,7 +17,7 @@ type TParams = { productId: string };
  */
 function ProductDetailPage() {
 
-  const { isProcessing, hasError, msg, isSuccess, product, getDetail } = useProducts();
+  const { isProcessing, hasError, msg, isSuccess, product, getDetail, getMoney } = useProducts(); // Custom Hook
   const { t } = useTranslation();
   const { productId } = useParams();
   const location = useLocation();
@@ -54,7 +54,7 @@ function ProductDetailPage() {
         <h2>{hasError}</h2>
       }
 
-      {isSuccess && <ProductDetail product={product} />
+      {isSuccess && <ProductDetail money={getMoney()} product={product} />
       }
     </div>
   );

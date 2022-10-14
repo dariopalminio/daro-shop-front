@@ -96,7 +96,7 @@ const UserContactInfo: React.FC<Props> = ({ profile, onChange, style }) => {
       </h1>
 
       <TextField
-        id="standard-basic-1"
+        id="UserContactInfo.profile.firstName"
         label={t('profile.label.firstname') + " *"}
         placeholder=""
         onChange={(e) => handleFirstNameChange(e.target.value)}
@@ -108,7 +108,7 @@ const UserContactInfo: React.FC<Props> = ({ profile, onChange, style }) => {
       />
 
       <TextField
-        id="standard-basic-2"
+        id="UserContactInfo.profile.lastName"
         label={t('profile.label.lastname') + " *"}
         placeholder=""
         onChange={(e) => handleLastNameChange(e.target.value)}
@@ -120,7 +120,7 @@ const UserContactInfo: React.FC<Props> = ({ profile, onChange, style }) => {
       />
 
       <TextField
-        id="standard-basic-3"
+        id="UserContactInfo.profile.email"
         label={t('profile.label.email') + " *"}
         placeholder="you@email.com"
         onChange={(e) => handleEmailChange(e.target.value)}
@@ -139,14 +139,14 @@ const UserContactInfo: React.FC<Props> = ({ profile, onChange, style }) => {
         placeholder={t('selection.choose.option')} />
 
       <TextField
-        id="standard-basic-5"
+        id="UserContactInfo.profile.document"
         label={t('profile.document')}
         onChange={(e) => handleDocumentChange(e.target.value)}
         value={profile.document}
       />
 
       <TextField
-        id="standard-basic-5"
+        id="UserContactInfo.profile.telephone"
         label={t('profile.telephone')}
         onChange={(e) => handleTelephoneChange(e.target.value)}
         value={profile.telephone}

@@ -10,6 +10,7 @@ import CircularProgress from "app/ui/common/progress/circular-progress";
 import Alert from "app/ui/common/alert/alert";
 import useProfile from "domain/hook/profile.hook";
 import ProfileForm from "app/ui/component/user/profile/profile-form";
+import useAddress from "domain/hook/address.hook";
 
 /**
  * User Profile
@@ -17,12 +18,12 @@ import ProfileForm from "app/ui/component/user/profile/profile-form";
  * Pattern: Container Component (Stateful/Container/Smart component), Conditional Rendering and Custom hook
  */
 const UserProfile: FunctionComponent = () => {
+    const { session } = useContext(SessionContext) as ISessionContext; //Context with Custom hook
+    const { isProcessing, hasError, msg, isSuccess, getInitialProfile, getProfile, updateProfile } = useProfile(); //Custom hook
+    const { getCurrentCountry } = useAddress(); //Custom hook
     const { t, i18n } = useTranslation();
-    const { isProcessing, hasError, msg, isSuccess, getInitialProfile, getProfile, updateProfile } = useProfile();
-    const { session } = useContext(SessionContext) as ISessionContext;
-    const [profile, setProfile] = useState(getInitialProfile()); //puede colocarse en el hook
+    const [profile, setProfile] = useState(getInitialProfile()); //can put in the profile custom hook
     const [initialized, setInitialized] = useState(false);
-
 
     const fetchData = async () => {
         const username = session ? session.userName : '';
@@ -75,7 +76,8 @@ const UserProfile: FunctionComponent = () => {
         <div>
             {(!hasError) && <div >
 
-                <ProfileForm initialized={initialized} profile={profile}
+                <ProfileForm currentCountry={getCurrentCountry()}
+                initialized={initialized} profile={profile}
                     onChange={(profile: any) => setProfile(profile)}
                     onSubmit={() => handleUpdateSubmit()} />
 

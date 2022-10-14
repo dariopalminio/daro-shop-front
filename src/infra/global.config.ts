@@ -3,6 +3,8 @@ import GlobalFactory from './global-factory';
 
 export const environment = import.meta.env.VITE_FE_ENV;
 
+export const defaultCountry: string = import.meta.env.VITE_FE_DEFAULT_COUNTRY as string;
+export const defaultMoney: string = import.meta.env.VITE_FE_DEFAULT_MONEY as string;
 
 
 export const is_fake_mode = ((import.meta.env.VITE_FE_FAKE === 'true') ? true : false) as boolean;

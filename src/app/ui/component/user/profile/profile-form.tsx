@@ -18,7 +18,8 @@ const validationFlagInit = {
   addresses: true,
 };
 
-interface Props {
+interface IProps {
+  currentCountry: string;
   initialized: boolean;
   profile: any;
   onChange: (profile: any) => void;
@@ -31,7 +32,7 @@ interface Props {
  * 
  * Pattern: Presentation Component, Controled Component and Extensible Style
  */
-const ProfileForm: React.FC<Props> = ({ initialized, profile, onChange, onSubmit, style }) => {
+const ProfileForm: React.FC<IProps> = ( props: IProps ) => {
   const docTypeOptions = ["RUT", "DNI", "PASSPORT", "OTHER", "None"];
   const [validationFlag, setValidationFlag] = useState(validationFlagInit);
   const { t, i18n } = useTranslation();
@@ -44,12 +45,12 @@ const ProfileForm: React.FC<Props> = ({ initialized, profile, onChange, onSubmit
 
   const handleUpdateSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    onSubmit();
+    props.onSubmit();
   };
 
   const handleFirstNameChange = async (firstNameValue: string) => {
-    onChange({
-      ...profile,
+    props.onChange({
+      ...props.profile,
       firstName: firstNameValue
     });
 
@@ -67,8 +68,8 @@ const ProfileForm: React.FC<Props> = ({ initialized, profile, onChange, onSubmit
   };
 
   const handleLastNameChange = async (lastNameValue: string) => {
-    onChange({
-      ...profile,
+    props.onChange({
+      ...props.profile,
       lastName: lastNameValue
     });
     if (expresionsRegular.lastName.test(lastNameValue)) {
@@ -85,22 +86,22 @@ const ProfileForm: React.FC<Props> = ({ initialized, profile, onChange, onSubmit
   };
 
   const handleDocTypeChange = async (docTypeValue: string) => {
-    onChange({
-      ...profile,
+    props.onChange({
+      ...props.profile,
       docType: docTypeValue
     })
   };
 
   const handleDocumentChange = async (documentValue: string) => {
-    onChange({
-      ...profile,
+    props.onChange({
+      ...props.profile,
       document: documentValue
     })
   };
 
   const handleTelephoneChange = async (telephoneValue: string) => {
-    onChange({
-      ...profile,
+    props.onChange({
+      ...props.profile,
       telephone: telephoneValue
     })
   };
@@ -111,14 +112,14 @@ const ProfileForm: React.FC<Props> = ({ initialized, profile, onChange, onSubmit
   };
 
   const handleAddClose = (newAddresses: Array<any>): void => {
-    onChange({
-      ...profile,
+    props.onChange({
+      ...props.profile,
       addresses: newAddresses
     })
   };
 
   return (
-    <div style={style? style : {}}>
+    <div style={props.style? props.style : {}}>
       <form
         id="RegisterForm"
         data-testid="RegisterForm"
@@ -133,11 +134,11 @@ const ProfileForm: React.FC<Props> = ({ initialized, profile, onChange, onSubmit
             </h1>
 
               <TextField
-                id="standard-basic-1"
+                id="ProfileForm.profile.firstName"
                 label={t('profile.label.firstname')}
                 placeholder=""
                 onChange={(e) => handleFirstNameChange(e.target.value)}
-                value={profile.firstName}
+                value={props.profile.firstName}
                 {...(!validationFlag.firstName && {
                   error: true,
                   helperText: t('register.info.helper.text.required')
@@ -145,11 +146,11 @@ const ProfileForm: React.FC<Props> = ({ initialized, profile, onChange, onSubmit
               />
             
               <TextField
-                id="standard-basic-2"
+                id="ProfileForm.profile.firstName"
                 label={t('profile.label.lastname')}
                 placeholder=""
                 onChange={(e) => handleLastNameChange(e.target.value)}
-                value={profile.lastName}
+                value={props.profile.lastName}
                 {...(!validationFlag.lastName && {
                   error: true,
                   helperText: t('register.info.helper.text.required'),
@@ -157,39 +158,39 @@ const ProfileForm: React.FC<Props> = ({ initialized, profile, onChange, onSubmit
               />
       
               <TextField
-                id="standard-basic-3"
+                id="ProfileForm.profile.email"
                 label={t('profile.label.email')}
                 placeholder="you@email.com"
                 onChange={(e) => { }}
-                value={profile.email}
+                value={props.profile.email}
               />
         
               <SelectOpts 
                 label={t('profile.docType')}
                 list={docTypeOptions}
-                selectedOption={profile.docType}
+                selectedOption={props.profile.docType}
                 setSelectedOption={(selectedOption) => handleDocTypeChange(selectedOption)} />
 
               <TextField
-                id="standard-basic-5"
+                id="ProfileForm.profile.document"
                 label={t('profile.document')}
                 onChange={(e) => handleDocumentChange(e.target.value)}
-                value={profile.document}
+                value={props.profile.document}
               />
            
               <TextField
-                id="standard-basic-5"
+                id="ProfileForm.profile.telephone"
                 label={t('profile.telephone')}
                 onChange={(e) => handleTelephoneChange(e.target.value)}
-                value={profile.telephone}
+                value={props.profile.telephone}
 
               />
 
           </div>
 
           <div className="wrapper-user-address">
-            {initialized &&
-              <MyAddresses country={"Chile"} addresses={profile.addresses}
+            {props.initialized &&
+              <MyAddresses country={props.currentCountry} addresses={props.profile.addresses}
                 onChange={(newAddresses: Array<any>) => handleAddClose(newAddresses)} />
 
             }

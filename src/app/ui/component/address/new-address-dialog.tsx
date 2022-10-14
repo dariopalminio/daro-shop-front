@@ -23,7 +23,7 @@ interface Props {
  * Pattern: Presentation Component, Controled Component 
  */
 const NewAddressDialog: React.FC<Props> = ({ address, isOpen, onClose, onChange, onAccept }) => {
-    const { getStates, getNeighborhood } = useAddress();
+    const { getStates, getNeighborhood } = useAddress(); //Custom hook
     const { t } = useTranslation();
     const [streetValid, setStreetValid] = useState(false);
     const [departmentValid, setDepartmentValid] = useState(false);

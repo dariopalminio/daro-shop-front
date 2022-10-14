@@ -45,6 +45,9 @@ export default function useProducts() {
         }
     };
 
+    const getMoney = (): string => {
+        return GlobalConfig.defaultMoney;
+    };
 
     return {
         isProcessing: state.isProcessing,
@@ -52,6 +55,7 @@ export default function useProducts() {
         msg: state.msg,
         isSuccess: state.isSuccess,
         product,
-        getDetail
+        getDetail,
+        getMoney
     };
 };

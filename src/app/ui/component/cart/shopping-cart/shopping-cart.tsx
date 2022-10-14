@@ -2,7 +2,8 @@ import "./shopping-cart.css";
 import { useTranslation } from "react-i18next";
 
 
-interface Props {
+interface IProps {
+    money: string;
     empty: boolean;
     count: number;
     subtotal: number;
@@ -17,7 +18,7 @@ interface Props {
  * 
  * Pattern: Compound Component, Presentation Component and Controled Component
  */
-const ShoppingCart: React.FC<Props> = ({ empty, count, subtotal, onClick, children, shipping, total }) => {
+const ShoppingCart: React.FC<IProps> = (props: IProps) => {
     const { t } = useTranslation();
 
     return (
@@ -34,20 +35,20 @@ const ShoppingCart: React.FC<Props> = ({ empty, count, subtotal, onClick, childr
                 <label className="shopping-cart-product-line-price">{t('cart.amount')}</label>
             </div>
 
-            {children}
+            {props.children}
 
             <div className="shopping-cart-totals">
                 <div className="shopping-cart-totals-item">
                     <label>{t('cart.subtotal')}</label>
-                    <div className="shopping-cart-totals-value" id="cart-subtotal">{subtotal}</div>
+                    <div className="shopping-cart-totals-value" id="cart-subtotal">$ {props.subtotal}</div>
                 </div>
                 <div className="shopping-cart-totals-item">
                     <label>{t('cart.shipping')}</label>
-                    <div className="shopping-cart-totals-value" id="cart-shipping">{shipping}</div>
+                    <div className="shopping-cart-totals-value" id="cart-shipping">$ {props.shipping}</div>
                 </div>
                 <div className="shopping-cart-totals-item shopping-cart-totals-item-total">
                     <label>{t('cart.grandtotal')}</label>
-                    <div className="shopping-cart-totals-value" id="cart-total">{total}</div>
+                    <div className="shopping-cart-totals-value" id="cart-total">({props.money}) $ {props.total}</div>
                 </div>
             </div>
         </div>

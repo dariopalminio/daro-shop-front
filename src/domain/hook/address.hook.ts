@@ -1,9 +1,4 @@
-import { useContext, useState } from 'react';
-import { ApiError } from 'infra/client/api.error';
-import SessionContext, { ISessionContext } from 'domain/context/session.context';
 import * as GlobalConfig from 'infra/global.config';
-import { IProfileClient } from 'domain/service/profile-client.interface';
-import { IHookState, InitialState } from 'domain/hook/hook.type';
 import { AddressType } from 'domain/model/user/address.type';
 
 const RegionsAndCommunesCL: Array<{ "region": string, "communes": string[] }> = [
@@ -84,6 +79,10 @@ const RegionsAndCommunesCL: Array<{ "region": string, "communes": string[] }> = 
  */
 export default function useAddress() {
 
+    const getCurrentCountry = (): string => {
+        return GlobalConfig.defaultCountry;
+    };
+
     const getInitialAddress = (country: string): AddressType => {
         const addrs = {
             ...addresEmpty,
@@ -112,6 +111,7 @@ export default function useAddress() {
     return {
         getInitialAddress,
         getStates,
-        getNeighborhood
+        getNeighborhood,
+        getCurrentCountry
     };
 };

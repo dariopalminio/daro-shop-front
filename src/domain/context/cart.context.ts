@@ -14,7 +14,8 @@ export interface ICartContext {
     setCartShipping: (newTotal: number) => void,
     cartTotal: number,
     calculateTotals: () => void,
-    canContinueToPayment: () => boolean
+    canContinueToPayment: () => boolean,
+    getMoney: () => string
 };
 
 export const CartContextDefaultValues: ICartContext = {
@@ -31,6 +32,7 @@ export const CartContextDefaultValues: ICartContext = {
     cartTotal: 0,
     calculateTotals: () => { },
     canContinueToPayment: () => { return false },
+    getMoney: () => { return '' }
 };
 
 // Global cart context

@@ -15,6 +15,7 @@ import AnonymousProfile from "../../component/user/profile/anonymous-profile";
 import { Profile } from "domain/model/user/profile.type";
 import Alert from "app/ui/common/alert/alert";
 import PreviousNextButtons from "app/ui/common/button/previous-next-buttons";
+import useAddress from "domain/hook/address.hook";
 
 const expresionsRegularByDefault = {
     firstName: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letters and spaces can carry accents.
@@ -31,22 +32,22 @@ const expresionsRegularByDefault = {
  * Pattern: Container Component, Conditional Rendering and Context Provider
  */
 const InformationPage: FunctionComponent = () => {
-    const { session } = useContext(SessionContext) as ISessionContext;
-    const { isProcessing, hasError, msg, isSuccess, getInitialProfile, getProfile, updateProfile } = useProfile();
+    const { session } = useContext(SessionContext) as ISessionContext;  //With Custom hook
+    const { getCurrentCountry } = useAddress(); //Custom hook
+    const { isProcessing, hasError, msg, isSuccess, getInitialProfile, getProfile, updateProfile } = useProfile(); //Custom hook
     const { cartItems,
         cartSubTotal,
         removeFromCart,
         getCartCount,
-        changeItemQuantity } = useContext(CartContext) as ICartContext;
+        changeItemQuantity } = useContext(CartContext) as ICartContext;  //With Custom hook
     const { steps, setSteps, profileInitialized,
         setProfileInitialized,
         currentSelectedAddresIndex,
         setCurrentSelectedAddresIndex, profile, setProfile, addressToDelivery,
-        setAddressToDelivery } = useContext(CheckoutContext) as ICheckoutContext;
+        setAddressToDelivery } = useContext(CheckoutContext) as ICheckoutContext; //With Custom hook
     const navigate = useNavigate();
     const { t } = useTranslation();
     const [initialized, setInitialized] = useState(false);
-
     const [hasValidationError, setHasValidationError] = useState(false);
 
 
@@ -134,7 +135,6 @@ const InformationPage: FunctionComponent = () => {
 
     const handleOnClickSelect = (item: string, index: number) => {
         const addrsSelected = profile.addresses[index];
-        console.log("addrsSelected:", addrsSelected);
         setAddressToDelivery(addrsSelected);
         setCurrentSelectedAddresIndex(index);
     };
@@ -188,7 +188,7 @@ const InformationPage: FunctionComponent = () => {
                 <div className="wrapper-delivery-address">
                     {initialized && <>
                         <SelectAddress title={t("information.delivery.addres.title")}
-                            country={"Chile"}
+                            country={getCurrentCountry()}
                             currentSelected={currentSelectedAddresIndex}
                             addresses={profile.addresses}
                             onChange={(newAddresses: Array<any>) => handleAddNeAddressAndClose(newAddresses)}

@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react'
 import { CartItemType } from 'domain/model/cart/cart-item.type';
 import { ProductType } from 'domain/model/product/product.type';
+import * as GlobalConfig from 'infra/global.config';
 
-const CART_ITEM_NAME = 'CART';
+const CART_ITEM_NAME = 'CART'; //Name to storage
 
 /**
  * Cart Custom Hook
@@ -115,6 +116,10 @@ export const useCart = () => {
         return cartTotal > 0;
     };
 
+    const getMoney = (): string => {
+        return GlobalConfig.defaultMoney;
+    };
+
     return {
         cartItems,
         cartSubTotal,
@@ -128,6 +133,7 @@ export const useCart = () => {
         setCartShipping,
         cartTotal,
         calculateTotals,
-        canContinueToPayment
+        canContinueToPayment,
+        getMoney
     };
 };
