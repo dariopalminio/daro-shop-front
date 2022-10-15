@@ -12,6 +12,8 @@ import ShoppingCart from 'app/ui/component/cart/shopping-cart/shopping-cart';
 import { useShipping } from 'domain/hook/shipping.hook';
 import CircularProgress from 'app/ui/common/progress/circular-progress';
 import Alert from 'app/ui/common/alert/alert';
+import useAddress from 'domain/hook/address.hook';
+import ShippingData from 'app/ui/component/checkout/shipping-data';
 
 
 /**
@@ -22,15 +24,16 @@ import Alert from 'app/ui/common/alert/alert';
 const ConfirmationPage: FunctionComponent = () => {
     const navigate = useNavigate();
     const { t } = useTranslation();
+    const { convertAddressToString } = useAddress(); //Custom hook
     const { session } = useContext(SessionContext) as ISessionContext; // with Custom hook
     const { isProcessing, hasError, msg, isSuccess, getShippingPrice } = useShipping(); // Custom hook
     const { cartItems, cartSubTotal, removeFromCart, getCartCount,
         changeItemQuantity, cartShipping, cartTotal, canContinueToPayment, getMoney } = useContext(CartContext) as ICartContext; // with Custom hook
-        const { profileInitialized,
-            setProfileInitialized,
-            currentSelectedAddresIndex,
-            setCurrentSelectedAddresIndex, profile, setProfile, addressToDelivery,
-            setAddressToDelivery, setShippingPrice  } = useContext(CheckoutContext) as ICheckoutContext; //With Custom hook
+    const { profileInitialized,
+        setProfileInitialized,
+        currentSelectedAddresIndex,
+        setCurrentSelectedAddresIndex, profile, setProfile, addressToDelivery,
+        setAddressToDelivery, setShippingPrice } = useContext(CheckoutContext) as ICheckoutContext; //With Custom hook
 
 
     const fetchData = async () => {
@@ -48,8 +51,8 @@ const ConfirmationPage: FunctionComponent = () => {
     }, []);
 
     const changeStep = (index: number) => {
-        if ((index === 0) ) navigate("/cart", { state: location });
-        if ((index === 1) ) handlePrevious();
+        if ((index === 0)) navigate("/cart", { state: location });
+        if ((index === 1)) handlePrevious();
         if (index === 3) handleNext();
     }
 
@@ -61,6 +64,11 @@ const ConfirmationPage: FunctionComponent = () => {
         if (canContinueToPayment()) navigate("/checkout/payment"); // programmatically redirect
     };
 
+    const getAddressStr = () => {
+        if (!addressToDelivery) return "Address problem!";
+        return convertAddressToString(addressToDelivery);
+    }
+
     return (
         <div className="container-page">
 
@@ -71,6 +79,10 @@ const ConfirmationPage: FunctionComponent = () => {
                 { "name": t("steps.payment"), "current": false },
                 { "name": t("steps.success"), "current": false }
             ]} onClick={(index: number) => changeStep(index)}></TextsStepper>
+
+<h1>{t('cart.confirmation')}</h1>
+
+            <ShippingData contactTo={profile?.email} shippingTo={getAddressStr()} />
 
             <ShoppingCart
                 money={getMoney()}
@@ -91,6 +103,8 @@ const ConfirmationPage: FunctionComponent = () => {
                 ))}
 
             </ShoppingCart>
+
+
 
             <PreviousNextButtons labelPrevious={t('previous')} labelNext={t('next')}
                 handlePrevious={() => handlePrevious()} handleNext={() => handleNext()} />

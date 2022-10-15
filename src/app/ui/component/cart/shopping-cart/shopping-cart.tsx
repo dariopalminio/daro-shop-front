@@ -24,15 +24,13 @@ const ShoppingCart: React.FC<IProps> = (props: IProps) => {
     return (
         <div className="shopping-cart-resume">
 
-            <h1>{t('cart.confirmation')}</h1>
-
             <div className="shopping-cart-column-labels">
                 <label className="shopping-cart-product-image">{t('cart.product')}</label>
                 <label className="shopping-cart-product-details">{t('cart.name')}</label>
                 <label className="shopping-cart-product-price">{t('cart.price')}</label>
                 <label className="shopping-cart-product-quantity">{t('cart.quantity')}</label>
                 <label className="shopping-cart-product-removal"></label>
-                <label className="shopping-cart-product-line-price">{t('cart.amount')}</label>
+                <label className="shopping-cart-product-line-price">{t('cart.amount')}&nbsp;&nbsp;</label>
             </div>
 
             {props.children}
