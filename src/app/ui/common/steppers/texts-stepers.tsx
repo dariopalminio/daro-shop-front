@@ -11,14 +11,13 @@ const StepsContainer = styled.div`
 
 //Custom props for attaching additional props to Styled-components
 interface StepLinkProps {
-    readonly isChecked?: boolean;
     readonly isCurrent?: boolean;
 }
 
 const StepLink = styled.div<StepLinkProps>`
     display: inline-block;
     cursor: pointer;
-    color: ${(props) => (props.isChecked ? "#70D58F" : "grey")};
+    color: grey;
     border-radius: 4px;
     text-decoration: ${(props) => (props.isCurrent ? "underline" : "none")};
     font-weight: ${(props) => (props.isCurrent ? "bold" : "normal")};
@@ -27,36 +26,11 @@ const StepLink = styled.div<StepLinkProps>`
       }
 `;
 
-interface CheckedProps {
-    readonly isChecked?: boolean;
-}
 
-const StepLinkConnector = styled.label<CheckedProps>`
-    color: ${(props) => (props.isChecked ? "#70D58F" : "grey")};
+
+const StepLinkConnector = styled.label`
+    color: grey;
 `;
-
-export const exampleStepLinkList = [
-    {
-        "name": "Step 1",
-        "checked": true
-    },
-    {
-        "name": "Step 2",
-        "checked": true
-    },
-    {
-        "name": "Step 3",
-        "checked": true
-    },
-    {
-        "name": "Step 4",
-        "checked": false
-    },
-    {
-        "name": "Step 5",
-        "checked": false
-    }
-];
 
 interface Props {
     list: Array<any> | undefined;
@@ -80,11 +54,9 @@ const TextsStepper: React.FC<Props> = ({ list, onClick }) => {
                     return (
                         <div key={index}>
                             {isNotFirst(index) &&
-                                <StepLinkConnector
-                                    isChecked={(element?.checked)}>&nbsp;{">"}&nbsp;</StepLinkConnector>}
+                                <StepLinkConnector>&nbsp;{">"}&nbsp;</StepLinkConnector>}
 
                             <StepLink
-                                isChecked={(element?.checked)}
                                 isCurrent={(element?.current)}
                                 onClick={() => onClick(index)}>
                                 {element?.name}

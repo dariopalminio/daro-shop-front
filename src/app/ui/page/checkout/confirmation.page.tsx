@@ -20,84 +20,57 @@ import Alert from 'app/ui/common/alert/alert';
  * Pattern: Container Component, Conditional Rendering and Context Provider
  */
 const ConfirmationPage: FunctionComponent = () => {
-    const navigate = useNavigate(); 
+    const navigate = useNavigate();
     const { t } = useTranslation();
     const { session } = useContext(SessionContext) as ISessionContext; // with Custom hook
     const { isProcessing, hasError, msg, isSuccess, getShippingPrice } = useShipping(); // Custom hook
     const { cartItems, cartSubTotal, removeFromCart, getCartCount,
         changeItemQuantity, cartShipping, cartTotal, canContinueToPayment, getMoney } = useContext(CartContext) as ICartContext; // with Custom hook
-    const { steps, setSteps, profile, currentSelectedAddresIndex, shippingData, setShippingPrice } = useContext(CheckoutContext) as ICheckoutContext; // with Custom hook
+        const { profileInitialized,
+            setProfileInitialized,
+            currentSelectedAddresIndex,
+            setCurrentSelectedAddresIndex, profile, setProfile, addressToDelivery,
+            setAddressToDelivery, setShippingPrice  } = useContext(CheckoutContext) as ICheckoutContext; //With Custom hook
+
 
     const fetchData = async () => {
         try {
             const address = profile.addresses[currentSelectedAddresIndex];
             const data = await getShippingPrice(address);
             setShippingPrice(data);
-
         } catch (e) {
             console.log("Error in getShippingPrice fetchData:", e);
         }
     };
 
     useEffect(() => {
-        const initialSteps = [
-            {
-                key: "cart",
-                "name": t("cart"),
-                "checked": true,
-                "current": false,
-                "path": "/cart"
-            },
-            {
-                key: "information",
-                "name": t("information"),
-                "checked": true,
-                "current": false,
-                "path": "/checkout/information"
-            },
-            {
-                key: "confirmation",
-                "name": t("confirmation"),
-                "checked": false,
-                "current": true,
-                "path": "/checkout/confirmation"
-            },
-            {
-                key: "payment",
-                "name": t("payment"),
-                "checked": false,
-                "current": false,
-                "path": "/checkout/payment"
-            },
-            {
-                key: "success",
-                "name": t("success"),
-                "checked": false,
-                "current": false,
-                "path": "/checkout/success"
-            }
-        ];
-        setSteps(initialSteps);
         fetchData();
     }, []);
 
     const changeStep = (index: number) => {
-        if ((index === 0) || (index === 1)) navigate(steps[index].path);
+        if ((index === 0) ) navigate("/cart", { state: location });
+        if ((index === 1) ) handlePrevious();
         if (index === 3) handleNext();
     }
 
     const handlePrevious = () => {
-        navigate(steps[1].path);
+        navigate("/checkout/information"); // programmatically redirect
     };
 
     const handleNext = (): void => {
-        if (canContinueToPayment()) navigate(steps[3].path);
+        if (canContinueToPayment()) navigate("/checkout/payment"); // programmatically redirect
     };
 
     return (
         <div className="container-page">
 
-            <TextsStepper list={steps} onClick={(index: number) => changeStep(index)}></TextsStepper>
+            <TextsStepper list={[
+                { "name": t("steps.cart"), "current": false },
+                { "name": t("steps.information"), "current": false },
+                { "name": t("steps.confirmation"), "current": true },
+                { "name": t("steps.payment"), "current": false },
+                { "name": t("steps.success"), "current": false }
+            ]} onClick={(index: number) => changeStep(index)}></TextsStepper>
 
             <ShoppingCart
                 money={getMoney()}

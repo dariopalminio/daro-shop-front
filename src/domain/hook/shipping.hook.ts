@@ -25,13 +25,8 @@ export const useShipping = () => {
 
         setState({ isProcessing: true, hasError: false, msg: '', isSuccess: false });
         try {
-
-            let data = await shippingClient.getShippingPrice(address);
-
+            const data = await shippingClient.getShippingPrice(address);
             setState({ isProcessing: false, hasError: false, msg: "shipping.get.user.success", isSuccess: true });
-            //const shippingValue: number = parseInt(data.price);
-            //setCartShipping( shippingValue );
-            //calculateTotals();
             return data;
         } catch (error: any | ApiError) {
             let errorKey = error.message;
@@ -41,7 +36,7 @@ export const useShipping = () => {
             }
             console.error(error);
             setState({ isProcessing: false, hasError: true, msg: errorKey, isSuccess: false });
-            return;
+            return {};
         }
     };
 

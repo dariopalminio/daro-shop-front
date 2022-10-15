@@ -1,21 +1,18 @@
 import { useState, useEffect, useContext } from 'react'
-import { CartItemType } from 'domain/model/cart/cart-item.type';
 import { AddressType } from 'domain/model/user/address.type';
 import { Profile } from 'domain/model/user/profile.type';
 import { initialEmptyProfile } from './profile.hook';
 import { IShippingClient } from 'domain/service/shipping-client.interface';
 import * as GlobalConfig from 'infra/global.config';
 import { IHookState, InitialState } from './hook.type';
-import { ApiError } from 'infra/client/api.error';
 import SessionContext, { ISessionContext } from 'domain/context/session.context';
 import CartContext, { ICartContext } from 'domain/context/cart.context';
-import { RiCoinsLine } from 'react-icons/ri';
+
 
 /**
  * Checkout Custom Hook
  */
 export const useCheckout = () => {
-    const shippingClient: IShippingClient = GlobalConfig.Factory.get<IShippingClient>('shippingClient');
     const [state, setState] = useState<IHookState>(InitialState);
     const { session, removeSessionValue } = useContext(SessionContext) as ISessionContext;
     const { cartItems,
@@ -23,7 +20,6 @@ export const useCheckout = () => {
         removeFromCart,
         getCartCount,
         changeItemQuantity, setCartShipping, cartShipping, cartTotal, calculateTotals } = useContext(CartContext) as ICartContext;
-    const [steps, setSteps] = useState<Array<any>>([]);
     const [addressToDelivery, setAddressToDelivery] = useState<AddressType | undefined>(undefined);
     const [profile, setProfile] = useState<Profile>(initialEmptyProfile); //puede colocarse en el hook
     const [currentSelectedAddresIndex, setCurrentSelectedAddresIndex] = useState(-1);
@@ -31,6 +27,7 @@ export const useCheckout = () => {
     const [shippingData, setShippingData] = useState<any>(undefined);
 
     useEffect(() => {
+        console.log("useCheckout...");
     }, []);
 
     const setShippingPrice = (data: any) => {
@@ -41,8 +38,6 @@ export const useCheckout = () => {
     }
 
     return {
-        steps,
-        setSteps,
         profileInitialized,
         setProfileInitialized,
         currentSelectedAddresIndex,

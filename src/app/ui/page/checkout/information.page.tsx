@@ -33,21 +33,22 @@ const expresionsRegularByDefault = {
 const InformationPage: FunctionComponent = () => {
     const { session } = useContext(SessionContext) as ISessionContext;  //With Custom hook
     const { getCurrentCountry } = useAddress(); //Custom hook
-    const { isProcessing, hasError, msg, isSuccess, getInitialProfile, getProfile, updateProfile } = useProfile(); //Custom hook
-    const { steps, setSteps, profileInitialized,
+    const { isProcessing, hasError, msg, isSuccess, getProfile } = useProfile(); //Custom hook
+    const { cartItems, cartSubTotal, removeFromCart, getCartCount,
+        changeItemQuantity, cartShipping, cartTotal, canContinueToPayment, getMoney } = useContext(CartContext) as ICartContext; // with Custom hook
+    const { profileInitialized,
         setProfileInitialized,
         currentSelectedAddresIndex,
         setCurrentSelectedAddresIndex, profile, setProfile, addressToDelivery,
         setAddressToDelivery } = useContext(CheckoutContext) as ICheckoutContext; //With Custom hook
     const navigate = useNavigate();
-    const { t } = useTranslation();
-    const [initialized, setInitialized] = useState(false);
+    const { t, i18n } = useTranslation();
     const [hasValidationError, setHasValidationError] = useState(false);
     const location = useLocation();
 
     const fetchData = async () => {
         try {
-            if (session && session.isLogged && !profileInitialized) {
+            if (session && session.isLogged) {
                 const username = session ? session.userName : '';
                 const info = await getProfile(username);
                 if (info.userName) {
@@ -64,58 +65,16 @@ const InformationPage: FunctionComponent = () => {
                         addresses: info.addresses ? info.addresses : []
                     };
                     setProfile(p);
-                    setProfileInitialized(true);
                 }
             }
-            setInitialized(true);
+            setProfileInitialized(true);
         } catch (e) {
             console.log("Error in UserProfile fetchData:", e);
         }
     };
 
     useEffect(() => {
-        fetchData();
-    }, []);
-
-    useEffect(() => {
-        const initialSteps = [
-            {
-                key: "cart",
-                "name": t("cart"),
-                "checked": true,
-                "current": false,
-                "path": "/cart"
-            },
-            {
-                key: "information",
-                "name": t("information"),
-                "checked": false,
-                "current": true,
-                "path": "/checkout/information"
-            },
-            {
-                key: "confirmation",
-                "name": t("confirmation"),
-                "checked": false,
-                "current": false,
-                "path": "/checkout/confirmation"
-            },
-            {
-                key: "payment",
-                "name": t("payment"),
-                "checked": false,
-                "current": false,
-                "path": "/checkout/payment"
-            },
-            {
-                key: "success",
-                "name": t("success"),
-                "checked": false,
-                "current": false,
-                "path": "/checkout/success"
-            }
-        ];
-        setSteps(initialSteps);
+        if (!profileInitialized) fetchData();
     }, []);
 
     const changeStep = (index: number) => {
@@ -161,7 +120,7 @@ const InformationPage: FunctionComponent = () => {
     const handleNext = (): void => {
         setHasValidationError(!areFieldsValid());
         if (areFieldsValid())
-            navigate("/checkout/confirmation", { state: location }); // programmatically redirect
+            navigate("/checkout/confirmation"); // programmatically redirect
     };
 
     /**
@@ -174,10 +133,17 @@ const InformationPage: FunctionComponent = () => {
     return (
         <div className="container-page">
 
-            <TextsStepper list={steps} onClick={(index: number) => changeStep(index)}></TextsStepper>
+            <TextsStepper list={[
+                { "name": t("steps.cart"), "current": false },
+                { "name": t("steps.information"), "current": true },
+                { "name": t("steps.confirmation"), "current": false },
+                { "name": t("steps.payment"), "current": false },
+                { "name": t("steps.success"), "current": false }
+            ]} onClick={(index: number) => changeStep(index)}></TextsStepper>
 
             {isNotLogged() && <AnonymousProfile redirectTo="information" />}
 
+            <>{console.log()}</>
             <div className="wrapper-checkout-information">
 
                 <div className="wrapper-contact-user-data">
@@ -187,7 +153,7 @@ const InformationPage: FunctionComponent = () => {
                     />
                 </div>
                 <div className="wrapper-delivery-address">
-                    {initialized && <>
+                    {profileInitialized && <>
                         <SelectAddress title={t("information.delivery.addres.title")}
                             country={getCurrentCountry()}
                             currentSelected={currentSelectedAddresIndex}

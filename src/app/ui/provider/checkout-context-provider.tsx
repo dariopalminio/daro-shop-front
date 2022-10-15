@@ -9,8 +9,6 @@ interface Props { children?: React.ReactNode }
  */
 const CheckoutContextProvider: FC<Props> = ({ children }) => {
     const {
-        steps,
-        setSteps,
         profileInitialized,
         setProfileInitialized,
         currentSelectedAddresIndex,
@@ -26,8 +24,6 @@ const CheckoutContextProvider: FC<Props> = ({ children }) => {
     return (
         <CheckoutContext.Provider
             value={{
-                steps,
-                setSteps,
                 profileInitialized,
                 setProfileInitialized,
                 currentSelectedAddresIndex,
