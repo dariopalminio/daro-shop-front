@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 const ShippingDataContainer = styled.div`
     diplay: block;
-    border: 1px solid #d7d7d7;
+    border: 1px solid #E8F4FC;
     border-radius: 5px;
     margin: 5px 5px 20px 5px;
     padding: 10px;
