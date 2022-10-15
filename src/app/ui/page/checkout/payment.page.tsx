@@ -20,7 +20,7 @@ const PaymentPage: FunctionComponent = () => {
         removeFromCart,
         getCartCount,
         changeItemQuantity } = useContext(CartContext) as ICartContext;
-    const { steps, setSteps } = useContext(CheckoutContext) as ICheckoutContext;
+
     const navigate = useNavigate();
     const { t } = useTranslation();
 
@@ -52,7 +52,7 @@ const PaymentPage: FunctionComponent = () => {
                 "current": false
             }
         ];
-        setSteps(initialSteps);
+   
     }, []);
     
     const changeStep = (index: number) => {
@@ -67,7 +67,7 @@ const PaymentPage: FunctionComponent = () => {
     return (
         <div className="container-page">
 
-            <TextsStepper list={steps} onClick={(index: number) => changeStep(index)}></TextsStepper>
+            <TextsStepper list={[]} onClick={(index: number) => changeStep(index)}></TextsStepper>
 
            Resumme...
         </div>

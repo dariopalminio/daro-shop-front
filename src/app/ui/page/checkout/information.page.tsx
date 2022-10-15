@@ -49,6 +49,7 @@ const InformationPage: FunctionComponent = () => {
     const fetchData = async () => {
         try {
             if (session && session.isLogged) {
+                console.log("InformationPage-->Loading profile...");
                 const username = session ? session.userName : '';
                 const info = await getProfile(username);
                 if (info.userName) {
@@ -65,15 +66,16 @@ const InformationPage: FunctionComponent = () => {
                         addresses: info.addresses ? info.addresses : []
                     };
                     setProfile(p);
+                    setProfileInitialized(true);
                 }
             }
-            setProfileInitialized(true);
         } catch (e) {
             console.log("Error in UserProfile fetchData:", e);
         }
     };
 
     useEffect(() => {
+        console.log("InformationPage-->useEffect");
         if (!profileInitialized) fetchData();
     }, []);
 
@@ -114,6 +116,10 @@ const InformationPage: FunctionComponent = () => {
         return fieldsOk && isAddressSelected();
     }
 
+    const canSelectAddress = (): boolean => {
+        return (profile!=undefined && profile.addresses !== undefined)
+    };
+
     /**
      * Redirect to next page
      */
@@ -143,7 +149,6 @@ const InformationPage: FunctionComponent = () => {
 
             {isNotLogged() && <AnonymousProfile redirectTo="information" />}
 
-            <>{console.log()}</>
             <div className="wrapper-checkout-information">
 
                 <div className="wrapper-contact-user-data">
@@ -153,7 +158,7 @@ const InformationPage: FunctionComponent = () => {
                     />
                 </div>
                 <div className="wrapper-delivery-address">
-                    {profileInitialized && <>
+                    {canSelectAddress() && <>
                         <SelectAddress title={t("information.delivery.addres.title")}
                             country={getCurrentCountry()}
                             currentSelected={currentSelectedAddresIndex}
