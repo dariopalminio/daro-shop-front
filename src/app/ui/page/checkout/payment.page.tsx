@@ -6,6 +6,8 @@ import CheckoutContext, { ICheckoutContext } from 'domain/context/checkout.conte
 import TextsStepper from 'app/ui/common/steppers/texts-stepers';
 import { useNavigate } from 'react-router-dom';
 import SessionContext, { ISessionContext } from 'domain/context/session.context';
+import PreviousNextButtons from 'app/ui/common/button/previous-next-buttons';
+import PaymentMethods from 'app/ui/component/payment/payment-methods';
 
 
 /**
@@ -25,51 +27,54 @@ const PaymentPage: FunctionComponent = () => {
     const { t } = useTranslation();
 
     useEffect(() => {
-        const initialSteps = [
-            {
-                "name": t("cart"),
-                "checked": true,
-                "current": false
-            },
-            {
-                "name": t("information"),
-                "checked": false,
-                "current": false
-            },
-            {
-                "name": t("confirmation"),
-                "checked": false,
-                "current": false
-            },
-            {
-                "name": t("payment"),
-                "checked": false,
-                "current": true
-            },
-            {
-                "name": t("success"),
-                "checked": false,
-                "current": false
-            }
-        ];
-   
+
     }, []);
-    
+
     const changeStep = (index: number) => {
-        if (index===0) navigate("/cart");
-        alert("index");
+        if ((index === 0)) navigate("/cart", { state: location });
+        if ((index === 1)) navigate("/checkout/information");
+        if (index === 2) handlePrevious();
     }
 
     const isNotLogged = () => {
         return session && !session.isLogged;
-      };
-      
+    };
+
+    const handlePrevious = () => {
+        navigate("/checkout/confirmation"); // programmatically redirect
+    };
+
+    const handleNext = (): void => {
+        //TODO
+    };
+
     return (
         <div className="container-page">
 
-            <TextsStepper list={[]} onClick={(index: number) => changeStep(index)}></TextsStepper>
+            <h1>{t('checkout.payment.title')}</h1>
 
-           Resumme...
+            <TextsStepper list={[
+                { "name": t("steps.cart"), "current": false },
+                { "name": t("steps.information"), "current": false },
+                { "name": t("steps.confirmation"), "current": false },
+                { "name": t("steps.payment"), "current": true },
+                { "name": t("steps.success"), "current": false }
+            ]} onClick={(index: number) => changeStep(index)}></TextsStepper>
+
+            <PaymentMethods />
+
+            Pago Manual: (Transferencia Bancaria)
+    Nombre : COMERCIO EXAMPLE SPA 
+    Rut Empresa :77.887.987-1 
+    Cuenta N°: 00-123-1234-12
+    Banco: Banco Chile
+    Tipo Cuenta : Cuenta Corriente
+    Email : pay@myemma.cl 
+    En cuando haga tu transferencia por  favor enviar el comprobante a hola@mimama.cl, para acreditar tu pago y proceder con el envió.
+    Gracias
+
+            <PreviousNextButtons labelPrevious={t('previous')} labelNext={t('checkout.button.pay')}
+                handlePrevious={() => handlePrevious()} handleNext={() => handleNext()} />
         </div>
     );
 };

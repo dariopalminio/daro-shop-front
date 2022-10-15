@@ -80,7 +80,7 @@ const ConfirmationPage: FunctionComponent = () => {
                 { "name": t("steps.success"), "current": false }
             ]} onClick={(index: number) => changeStep(index)}></TextsStepper>
 
-<h1>{t('cart.confirmation')}</h1>
+            <h1>{t('checkout.confirmation.title')}</h1>
 
             <ShippingData contactTo={profile?.email} shippingTo={getAddressStr()} />
 
@@ -106,7 +106,7 @@ const ConfirmationPage: FunctionComponent = () => {
 
 
 
-            <PreviousNextButtons labelPrevious={t('previous')} labelNext={t('next')}
+            <PreviousNextButtons labelPrevious={t('previous')} labelNext={t('checkout.button.confirm')}
                 handlePrevious={() => handlePrevious()} handleNext={() => handleNext()} />
 
             {isProcessing && (

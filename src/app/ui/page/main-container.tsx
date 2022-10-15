@@ -20,6 +20,7 @@ import ProfilePage from "./user/profile/profile.page";
 import LogoutPage from "./user/auth/logout.page";
 import NoMatchPage from "./no-match.page";
 import ConfirmationPage from "./checkout/confirmation.page";
+import PaymentPage from "./checkout/payment.page";
 
 // lazy loading for components that must get loaded when it is required. 
 /*
@@ -61,6 +62,8 @@ const MainContainer: FunctionComponent = () => {
           <Route path="/checkout/information" element={<InformationPage />} />
 
           <Route path="/checkout/confirmation" element={<ConfirmationPage />} />
+
+          <Route path="/checkout/payment" element={<PaymentPage />} />
 
           <Route path="/catalog" element={<CatalogPage />} />
 
