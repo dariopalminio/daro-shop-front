@@ -1,16 +1,10 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import styled from "styled-components";
 import { CenteringContainer } from "../common/elements/centering-container";
 import AnonymousProfile from "../component/user/profile/anonymous-profile";
 
-
-
-
 /**
- * CartItem
- * 
- * Pattern: Presentation Component and Controled Component
+ * No Match Page (404 not found)
  */
  const NoMatchPage: React.FC = () => {
   const { t } = useTranslation();

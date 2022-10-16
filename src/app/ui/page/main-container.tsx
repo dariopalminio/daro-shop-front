@@ -48,49 +48,28 @@ const MainContainer: FunctionComponent = () => {
   try {
     return (
       <div id="MainContainer" className="main-container" data-testid="MainContainer">
-      
         <Routes>
           <Route path="/"  element={<HomePage />} />
-
           <Route path="/home"  element={<HomePage />} />
-
           <Route path="/user/login"  element={<LoginPage />} />
-
           <Route path="/user/logout"  element={<LogoutPage />} />
-
           <Route path="/cart"  element={<CartPage />} />
-
           <Route path="/checkout/information" element={<InformationPage />} />
-
           <Route path="/checkout/confirmation" element={<ConfirmationPage />} />
-
           <Route path="/checkout/payment" element={<PaymentPage />} />
-
           <Route path="/checkout/success" element={<SuccessPage />} />
-
           <Route path="/catalog" element={<CatalogPage />} />
-
           <Route path="/catalog/product/detail/:productId" element={<ProductDetailPage/>}  />
-
           <Route path="/contact" element={<ContactPage/>}  />
-
           <Route path="/user/register/form" element={<RegisterPage/>}  />
-  
           <Route path="/user/register/confirm/start" element={<RegisterConfirmStartPage/>} />
           <Route path="/user/register/confirm/:token" element={<RegisterConfirmEmailPage/>} />
-
           <Route path="/user/recovery/start" element={<PassRecoveryStartPage/>}  />
-
           <Route path="/user/recovery/msg" element={<PassRecoveryMsgPage/>} />
-
           <Route path="/user/recovery/form/:token" element={<PassRecoveryFormPage/>} ></Route>
-          
           <Route path="/profile" element={<ProfilePage/>} />
-
           <Route path="*" element={<NoMatchPage />} />
-
         </Routes>
-        
       </div>
     );
   } catch (error: any) {
