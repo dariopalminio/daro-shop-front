@@ -145,6 +145,8 @@
     "checkout.button.confirm": "Confirmar",
     "checkout.button.pay": "Ir al pago",
     "checkout.payment.title": "Método de pago",
+    "checkout.payment.choose": "Seleccione un medio de pago",
+    "checkout.payment.manual": "Pago Manual: (Transferencia Bancaria)",
     "checkout.contact": "Contacto",
     "checkout.shipping.to": "Entregar a",
     "selection.choose.option": "Elija una opción",

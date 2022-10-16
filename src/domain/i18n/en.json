@@ -144,6 +144,8 @@
     "checkout.button.pay": "Go to pay",
     "checkout.confirmation.title": "Confirmation",
     "checkout.payment.title": "Payment Method",
+    "checkout.payment.choose": "Choose payment method below",
+    "checkout.payment.manual": "Manual Payment (Bank Transfer)",
     "checkout.contact": "Contact",
     "checkout.shipping.to": "Shipping to",
     "selection.choose.option": "Choose an option",

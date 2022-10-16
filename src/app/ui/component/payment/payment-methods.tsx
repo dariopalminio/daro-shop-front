@@ -1,21 +1,33 @@
 
-import React from "react";
+import { CenteringContainer } from "app/ui/common/elements/centering-container";
+import React, { useState } from "react";
 import { useTranslation } from 'react-i18next';
-import { RiHome4Line, RiShieldUserFill, RiUserLine } from "react-icons/ri";
+import { RiCheckFill } from "react-icons/ri";
 import styled from "styled-components";
+import manualBankTransferImg from "app/ui/image/payment/manual_bank_transfer.png";
+import otherPaymentMethodImg from "app/ui/image/payment/other_payment_method.png";
+import { PaymentMethodType } from "app/ui/page/checkout/payment.page";
+
 
 const PaymentMethodsContainer = styled.div`
+    display: block;
     flex-direction: row-wrap;
     align-items: center;
-     justify-content: space-between;
+    justify-content: space-between;
 `;
 
-const MethodType = styled.div`
+interface ICheckedProps {
+    readonly checked?: boolean;
+}
+
+const MethodType = styled.button<ICheckedProps>`
     width: 200px;
+    height: 200px;
+    margin: 5px;
     position: relative;
     display: inline-block;
     background: #f2f4f7;
-    border: 2px solid #e8ebed;
+    border: 2px solid ${(props) => (props.checked ? "#40b3ff" : "#e8ebed")};
     padding: 25px;
     box-sizing: border-box;
     border-radius: 6px;
@@ -23,104 +35,70 @@ const MethodType = styled.div`
     text-align: center;
     transition: all .5s ease;
     &:hover {
-        border-color: #28333b;
+        border-color: ${(props) => (props.checked ? "#40b3ff" : "#28333b")};
     }
     .logo, p {
         color: #28333b;
     }
 `;
 
-const MethodTypeSelected = styled.div`
-width: 200px;
-position: relative;
-display: inline-block;
-background: rgba(64, 179, 255, .1);
-border: 2px solid #40b3ff;
-padding: 25px;
-box-sizing: border-box;
-border-radius: 6px;
-cursor: pointer;
-text-align: center;
-transition: all .5s ease;
-.logo {
-    color: #40b3ff;
-}
-p{
-    color: #28333b;
-}
+const SelectedCheck = styled.div<ICheckedProps>`
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    top -15px;
+    right 42%;
+    background: #40b3ff;
+    border-radius: 50%;
+    display: ${(props) => (props.checked ? "flex" : "none")};
+    align-items: center;
+    padding-left: 3px;
 `;
 
-/**
-    &.selected
-                        border-color #40b3ff
-                        background rgba(64, 179, 255, .1)
-                        .logo
-                            color #40b3ff
-                        p
-                            color #28333b
-                        	
-                        &::after
-                            content '\f00c'
-                            font-family 'Font Awesome 5 Free'
-                            font-weight 900
-                            position absolute
-                            height 40px
-                            width 40px
-                            top -21px
-                            right -21px
-                            background #fff
-                            border 2px solid #40b3ff
-                            border-radius 50%
-                            display flex 
-                            align-items center
-                            justify-content center
- */
 interface IProps {
+    select: string;
+    onChange: (value: string) => void;
 }
 
 /**
- * ShippingData
- * 
- * Pattern: Presentation Component, Controled Component and Extensible Style
+ * PaymentMethods
  */
 const PaymentMethods: React.FC<IProps> = (props: IProps) => {
+    const { t } = useTranslation()
+    //const [select, setSelect] = useState("");
 
-    const { t, i18n } = useTranslation();
-
+    const handleClick = (selectedName: string) => {
+        props.onChange(selectedName); //setSelect
+    }
 
     return (
         <>
-            <h4>Choose payment method below:</h4>
+            <h4 style={{marginLeft: "5px"}}>{t("checkout.payment.choose")}:</h4>
+            <CenteringContainer>
+                <PaymentMethodsContainer>
 
-            <PaymentMethodsContainer>
+                    <MethodType checked={props.select === PaymentMethodType.MANUAL} onClick={() => handleClick(PaymentMethodType.MANUAL)}>
+                        <SelectedCheck checked={props.select === props.select}><RiCheckFill size={24} color="white" /></SelectedCheck>
+                        <div>
+                            <img src={String(manualBankTransferImg)} height="50" width="100"/>
+                        </div>
+                        <div>
+                            <p>{t("checkout.payment.manual")}</p>
+                        </div>
+                    </MethodType>
 
-                <MethodTypeSelected>
-                    <div className="logo">
-                        <i className="far fa-credit-card"></i>
-                    </div>
-                    <div className="text">
-                        <p>Manual Payment</p>
-                    </div>
-                </MethodTypeSelected>
+                    <MethodType checked={props.select === "none"} onClick={() => handleClick(PaymentMethodType.MANUAL)}>
+                        <div className="logo">
+                        <img src={String(otherPaymentMethodImg)} height="50" width="100"/>
+                        </div>
+                        <div className="text">
+                            <p>Próximamente otros medios de pago ...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+                        </div>
+                    </MethodType>
 
-                <MethodType>
-                    <div className="logo">
-                        <i className="fab fa-paypal"></i>
-                    </div>
-                    <div className="text">
-                        <p>Pay with Other</p>
-                    </div>
-                </MethodType>
-
-                <MethodType>
-                    <div className="logo">
-                        <i className="fab fa-amazon"></i>
-                    </div>
-                    <div className="text">
-                        <p>Pay with Other</p>
-                    </div>
-                </MethodType>
-            </PaymentMethodsContainer>
+                
+                </PaymentMethodsContainer>
+            </CenteringContainer>
         </>
     );
 };

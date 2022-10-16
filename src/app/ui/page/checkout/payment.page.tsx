@@ -1,5 +1,5 @@
 
-import { FunctionComponent, useContext, useEffect } from 'react'
+import { FunctionComponent, useContext, useEffect, useState } from 'react'
 import CartContext, { ICartContext } from "domain/context/cart.context";
 import { useTranslation } from 'react-i18next';
 import CheckoutContext, { ICheckoutContext } from 'domain/context/checkout.context';
@@ -9,6 +9,10 @@ import SessionContext, { ISessionContext } from 'domain/context/session.context'
 import PreviousNextButtons from 'app/ui/common/button/previous-next-buttons';
 import PaymentMethods from 'app/ui/component/payment/payment-methods';
 
+export enum PaymentMethodType {
+    MANUAL = "MANUAL",
+    OTHER = "OTHER",
+  }
 
 /**
  * PaymentPage
@@ -25,6 +29,8 @@ const PaymentPage: FunctionComponent = () => {
 
     const navigate = useNavigate();
     const { t } = useTranslation();
+    const [payMethodName, setPayMethodName] = useState<string>(PaymentMethodType.MANUAL);
+
 
     useEffect(() => {
 
@@ -45,13 +51,11 @@ const PaymentPage: FunctionComponent = () => {
     };
 
     const handleNext = (): void => {
-        //TODO
+        navigate("/checkout/success"); // programmatically redirect
     };
 
     return (
         <div className="container-page">
-
-            <h1>{t('checkout.payment.title')}</h1>
 
             <TextsStepper list={[
                 { "name": t("steps.cart"), "current": false },
@@ -61,17 +65,9 @@ const PaymentPage: FunctionComponent = () => {
                 { "name": t("steps.success"), "current": false }
             ]} onClick={(index: number) => changeStep(index)}></TextsStepper>
 
-            <PaymentMethods />
+            <h1>{t('checkout.payment.title')}</h1>
 
-            Pago Manual: (Transferencia Bancaria)
-    Nombre : COMERCIO EXAMPLE SPA 
-    Rut Empresa :77.887.987-1 
-    Cuenta N°: 00-123-1234-12
-    Banco: Banco Chile
-    Tipo Cuenta : Cuenta Corriente
-    Email : pay@myemma.cl 
-    En cuando haga tu transferencia por  favor enviar el comprobante a hola@mimama.cl, para acreditar tu pago y proceder con el envió.
-    Gracias
+            <PaymentMethods select={payMethodName} onChange={(value: string) => setPayMethodName(value)} />
 
             <PreviousNextButtons labelPrevious={t('previous')} labelNext={t('checkout.button.pay')}
                 handlePrevious={() => handlePrevious()} handleNext={() => handleNext()} />
