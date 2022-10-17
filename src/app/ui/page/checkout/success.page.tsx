@@ -6,64 +6,25 @@ import CheckoutContext, { ICheckoutContext } from 'domain/context/checkout.conte
 import TextsStepper from 'app/ui/common/steppers/texts-stepers';
 import { useNavigate } from 'react-router-dom';
 import SessionContext, { ISessionContext } from 'domain/context/session.context';
-import PreviousNextButtons from 'app/ui/common/button/previous-next-buttons';
-import PaymentMethods from 'app/ui/component/payment/payment-methods';
 import PaymentManualInfo from 'app/ui/component/payment/payment-manual-info';
-
-const ifoManualPayment: Array<any> = [
-    {
-        label: "Monto a transferir",
-        text: "XXXXXX"
-    },
-    {
-        label: "Nombre",
-        text: "COMERCIO EXAMPLE SPA"
-    },
-    {
-        label: "Rut Empresa",
-        text: "77.887.987-1"
-    },
-    {
-        label: "Cuenta N°",
-        text: "00-123-1234-12"
-    },
-    {
-        label: "Banco",
-        text: "Banco Chile"
-    },
-    {
-        label: "Tipo Cuenta",
-        text: "Cuenta Corriente"
-    },
-    {
-        label: "Email",
-        text: "pay@myemma.cl"
-    },
-];
+import { usePaymentManual } from 'domain/hook/payment/payment-manual.hook';
 
 
-
-/**
- * PaymentPage
- * 
- * Pattern: Container Component, Conditional Rendering and Context Provider
- */
 const SuccessPage: FunctionComponent = () => {
     const { session } = useContext(SessionContext) as ISessionContext;
-    const { cartItems,
+    const { cartTotal, getMoney, cartItems,
         cartSubTotal,
         removeFromCart,
         getCartCount,
         changeItemQuantity } = useContext(CartContext) as ICartContext;
-
+    const { getBankTransferInfo, bankTransferInfo } = usePaymentManual();
     const navigate = useNavigate();
     const { t } = useTranslation();
 
+
     useEffect(() => {
-
+        getBankTransferInfo();
     }, []);
-
-
 
     return (
         <div className="container-page">
@@ -78,12 +39,14 @@ const SuccessPage: FunctionComponent = () => {
 
             <h1>{t("checkout.payment.manual")}</h1>
 
+            <div style={{margin: "10px"}}>
+                <p>{t("checkout.payment.manual.bank.amount")}: {getMoney()} $ {cartTotal}</p>
+                <p>{t("checkout.payment.manual.bank.info")}:</p>
 
-            <PaymentManualInfo list={ifoManualPayment} />
+                <PaymentManualInfo list={bankTransferInfo} />
 
-            <p>En cuando haga tu transferencia por  favor enviar el comprobante a payment@micomercio.cl, para acreditar tu pago y proceder con el envió.
-                Gracias</p>
-
+                <p>{t("checkout.payment.manual.bank.msg.email")}</p>
+            </div>
         </div>
     );
 };
