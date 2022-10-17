@@ -30,6 +30,7 @@ export const useShipping = () => {
             return data;
         } catch (error: any | ApiError) {
             let errorKey = error.message;
+            console.log("ERROR:",error.message);
             if (error instanceof ApiError && (error.status === 400 || error.status === 401)) {
                 errorKey = "auth.error.expired.token";
                 removeSessionValue();

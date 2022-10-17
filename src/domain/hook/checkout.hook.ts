@@ -31,7 +31,7 @@ export const useCheckout = () => {
 
     const setShippingPrice = (data: any) => {
         setShippingData(data);
-        const shippingValue: number = parseInt(data.price);
+        const shippingValue: number = Number(data.price);
         setCartShipping( shippingValue );
         calculateTotals();
     }

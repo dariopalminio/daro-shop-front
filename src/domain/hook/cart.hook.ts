@@ -3,8 +3,6 @@ import { CartItemType } from 'domain/model/cart/cart-item.type';
 import { ProductType } from 'domain/model/product/product.type';
 import * as GlobalConfig from 'infra/global.config';
 
-const CART_ITEM_NAME = 'CART'; //Name to storage
-
 /**
  * Cart Custom Hook
  */
@@ -14,9 +12,8 @@ export const useCart = () => {
     const [cartShipping, setCartShipping] = useState<number>(0);
     const [cartTotal, setCartTotal] = useState<number>(0);
 
-
     useEffect(() => {
-        const cartStorageItem = window.sessionStorage.getItem(CART_ITEM_NAME);
+        const cartStorageItem = window.sessionStorage.getItem(GlobalConfig.CART_ITEM_NAME);
         const cartJSONString: string = cartStorageItem ? cartStorageItem : "";
         let myCartRecovered: Array<CartItemType>;
         if (cartJSONString !== "") {
@@ -35,13 +32,13 @@ export const useCart = () => {
     }, [cartItems]);
 
     const calculateTotals = () => {
-        let subTotalVal = 0;
+        let subTotalVal: number = 0;
         for (let i = 0; i < cartItems.length; i++) {
             subTotalVal += cartItems[i].amount;
         }
         setCartSubTotal(roundNumber(subTotalVal));
-        const total = subTotalVal + 0.0 + cartShipping;
-        setCartTotal(roundNumber(total));
+        const total: number = roundNumber(subTotalVal + 0.0 + cartShipping);
+        setCartTotal(total);
     };
 
     const addToCart = (productItem: ProductType, qty: number) => {
@@ -109,7 +106,7 @@ export const useCart = () => {
      */
     const saveCart = (items: Array<CartItemType>) => {
         const sessionStorageItem: string = JSON.stringify(items);
-        window.sessionStorage.setItem(CART_ITEM_NAME, sessionStorageItem);
+        window.sessionStorage.setItem(GlobalConfig.CART_ITEM_NAME, sessionStorageItem);
     };
 
     const canContinueToPayment = (): boolean => {

@@ -1,6 +1,9 @@
 import GlobalFactory from './global-factory';
 
 
+export const CART_ITEM_NAME: string = 'CART'; //Name to storage
+export const SESSION_ITEM_NAME: string = "APP_SESSION_DATA";
+
 export const environment = import.meta.env.VITE_FE_ENV;
 
 export const defaultCountry: string = import.meta.env.VITE_FE_DEFAULT_COUNTRY as string;

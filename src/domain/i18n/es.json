@@ -153,6 +153,7 @@
     "checkout.contact": "Contacto",
     "checkout.shipping.to": "Entregar a",
     "checkout.shipping.address.error": "La dirección está vacía o no seleccionada.",
+    "checkout.shipping.address.error.not.found": "Precio no encontrado para la dirección de entrega",
     "selection.choose.option": "Elija una opción",
     "back.to.previous": "Volver"
  }

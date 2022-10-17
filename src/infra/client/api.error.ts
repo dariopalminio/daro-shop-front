@@ -81,6 +81,9 @@ export function handleAxiosError(e: Error | AxiosError): ApiError {
                 case AuthStatusEnum.FORBIDDEN:
                     return new ApiError(AuthStatusText.FORBIDDEN.text, e.stack, status, txt);
 
+                case AuthStatusEnum.NOT_FOUND:
+                    return new ApiError(AuthStatusText.NOT_FOUND.text, e.stack, status, txt);
+
                 default:
                     return new ApiError(AuthStatusText.UNKNOWN.text, e.stack, status, txt);
             }

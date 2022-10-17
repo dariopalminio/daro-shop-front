@@ -1,9 +1,6 @@
 import { DefaultSession } from 'domain/model/auth/default-session';
 import { SessionType } from 'domain/model/auth/session.type';
-
-//name in session/local storage
-const SESSION_ITEM_NAME: string = "APP_SESSION_DATA";
-
+import * as GlobalConfig from 'infra/global.config';
 /**
  * Function: Recovery session data from web browser Storage (storage)
  * @returns SessionType
@@ -13,7 +10,7 @@ export const recoverySessionFromStorage = (): SessionType => {
   if (typeof Storage !== "undefined") {
     // Code when Storage is supported
 
-    const sessionStorageItem = window.sessionStorage.getItem(SESSION_ITEM_NAME);
+    const sessionStorageItem = window.sessionStorage.getItem(GlobalConfig.SESSION_ITEM_NAME);
     const sessionJSONString: string = sessionStorageItem ? sessionStorageItem : "";
 
     if (sessionJSONString && sessionJSONString !== "") {
@@ -38,13 +35,13 @@ export const setSessionToStorage = (sessionToLoad: SessionType): void => {
     // Code when Storage is supported
     if (sessionToLoad) {
       const sessionStorageItem: string = JSON.stringify(sessionToLoad);
-      window.sessionStorage.setItem(SESSION_ITEM_NAME, sessionStorageItem);
+      window.sessionStorage.setItem(GlobalConfig.SESSION_ITEM_NAME, sessionStorageItem);
     }
   }
 };
 
 export const clearSessionToStorage = (): void => {
-  window.sessionStorage.setItem(SESSION_ITEM_NAME, '');
+  window.sessionStorage.setItem(GlobalConfig.SESSION_ITEM_NAME, '');
 };
 
 export const getAccessToken = (): string => {
