@@ -151,6 +151,7 @@
     "checkout.payment.manual.bank.msg.email": "As soon as you make your transfer, please send the receipt to the indicated email to credit your payment and proceed with the shipment.",
     "checkout.contact": "Contact",
     "checkout.shipping.to": "Shipping to",
+    "checkout.shipping.address.error": "No address selected",
     "selection.choose.option": "Choose an option",
     "back.to.previous": "Comeback"
 

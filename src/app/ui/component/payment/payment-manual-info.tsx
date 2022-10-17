@@ -19,13 +19,12 @@ const PaymentManualInfo: React.FC<IProps> = (props: IProps) => {
     return (
         <InfoContainer>
             {props.list.map((item: any, index: number) => {
-                return (<div>
-                    <ItemInfoWrapper>
+                return (
+                    <ItemInfoWrapper key={index}>
                         <LabelInfo>{item.label}:</LabelInfo>
                         <TextInfo>{item.text}</TextInfo>
-                    {(index < props.list.length - 1 ) && <LineDivider />}
+                        {(index < props.list.length - 1) && <LineDivider />}
                     </ItemInfoWrapper>
-                </div>
                 )
             }
             )}

@@ -20,7 +20,6 @@ export const useCheckout = () => {
         removeFromCart,
         getCartCount,
         changeItemQuantity, setCartShipping, cartShipping, cartTotal, calculateTotals } = useContext(CartContext) as ICartContext;
-    const [addressToDelivery, setAddressToDelivery] = useState<AddressType | undefined>(undefined);
     const [profile, setProfile] = useState<Profile>(initialEmptyProfile); //puede colocarse en el hook
     const [currentSelectedAddresIndex, setCurrentSelectedAddresIndex] = useState(-1);
     const [profileInitialized, setProfileInitialized] = useState<boolean>(false); //puede colocarse en el hook
@@ -42,8 +41,6 @@ export const useCheckout = () => {
         setProfileInitialized,
         currentSelectedAddresIndex,
         setCurrentSelectedAddresIndex,
-        addressToDelivery,
-        setAddressToDelivery,
         profile,
         setProfile,
         shippingData,

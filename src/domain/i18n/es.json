@@ -152,6 +152,7 @@
     "checkout.payment.manual.bank.msg.email": "En cuando haga tu transferencia por favor enviar el comprobante a el mail indicado para acreditar tu pago y proceder con el envió",
     "checkout.contact": "Contacto",
     "checkout.shipping.to": "Entregar a",
+    "checkout.shipping.address.error": "La dirección está vacía o no seleccionada.",
     "selection.choose.option": "Elija una opción",
     "back.to.previous": "Volver"
  }

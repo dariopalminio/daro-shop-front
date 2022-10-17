@@ -14,10 +14,10 @@ import TextField from "app/ui/common/text-field/text-field";
 interface IMyProps {
     country: string;
     title?: string;
-    currentSelected?: number;
+    currentSelected: number;
+    setCurrentSelected:(index: number) => void;
     addresses: Array<AddressType>;
-    onChange: (newAddresses: Array<any>) => void;
-    onClickSelect?: (item: string, index: number) => void;
+    setAddresses:  (newAddresses: Array<any>) => void;
 }
 
 /**
@@ -28,9 +28,8 @@ interface IMyProps {
 const SelectAddress: React.FC<IMyProps> = (props: IMyProps) => {
 
     const { getInitialAddress } = useAddress(); //Custom hook
-    const { addresses, onChange } = props;
     const { t } = useTranslation();
-    const [myAddresses, setMyAddresses] = useState<Array<AddressType>>(addresses);
+    //const [myAddresses, setMyAddresses] = useState<Array<AddressType>>(addresses);
     const { isDialogOpen, toggle } = useModalDialog();
     const [newAddress, setNewAddress] = React.useState(getInitialAddress(props.country));
  
@@ -39,7 +38,7 @@ const SelectAddress: React.FC<IMyProps> = (props: IMyProps) => {
     };
 
     const getStrinArrayAddresses = () => {
-        const stringArray: string[] = myAddresses.map((address: any, index: number) => convertAddressOneLine(address));
+        const stringArray: string[] = props.addresses.map((address: any, index: number) => convertAddressOneLine(address));
         return stringArray;
     }
 
@@ -49,15 +48,15 @@ const SelectAddress: React.FC<IMyProps> = (props: IMyProps) => {
 
 
     const handleSelectAddress = async (item: string, index: number) => {
-        props?.onClickSelect && props.onClickSelect(item, index);
+        props?.setCurrentSelected && props.setCurrentSelected(index);
     };
 
     const handleAddNewAddressAndClose = () => {
-        const arrayOfAddresses: Array<AddressType> = myAddresses;
+        const arrayOfAddresses: Array<AddressType> = props.addresses;
         arrayOfAddresses.push(newAddress);
-        setMyAddresses(arrayOfAddresses);
+        props.setAddresses(arrayOfAddresses);
         toggle();
-        onChange(myAddresses); //set addresses array in parent
+        //onChange(myAddresses); //set addresses array in parent
         setNewAddress(getInitialAddress(props.country));
     };
 

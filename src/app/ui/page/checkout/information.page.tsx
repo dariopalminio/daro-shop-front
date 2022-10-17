@@ -39,14 +39,15 @@ const InformationPage: FunctionComponent = () => {
     const { profileInitialized,
         setProfileInitialized,
         currentSelectedAddresIndex,
-        setCurrentSelectedAddresIndex, profile, setProfile, addressToDelivery,
-        setAddressToDelivery } = useContext(CheckoutContext) as ICheckoutContext; //With Custom hook
+        setCurrentSelectedAddresIndex, profile, setProfile,
+         } = useContext(CheckoutContext) as ICheckoutContext; //With Custom hook
     const navigate = useNavigate();
     const { t, i18n } = useTranslation();
     const [hasValidationError, setHasValidationError] = useState(false);
     const location = useLocation();
 
     const fetchData = async () => {
+        console.log("InformationPage-->fetchData...");
         try {
             if (session && session.isLogged) {
                 console.log("InformationPage-->Loading profile...");
@@ -65,6 +66,7 @@ const InformationPage: FunctionComponent = () => {
                         language: info.language ? info.language.toLowerCase() : '',
                         addresses: info.addresses ? info.addresses : []
                     };
+                    console.log("InformationPage-->Set profile:",p);
                     setProfile(p);
                     setProfileInitialized(true);
                 }
@@ -88,9 +90,8 @@ const InformationPage: FunctionComponent = () => {
         return session && !session.isLogged;
     };
 
-    const handleOnClickSelect = (item: string, index: number) => {
-        const addrsSelected = profile.addresses[index];
-        setAddressToDelivery(addrsSelected);
+    const handleOnClickSelect = (index: number) => {
+        //const addrsSelected = profile.addresses[index];
         setCurrentSelectedAddresIndex(index);
     };
 
@@ -120,6 +121,12 @@ const InformationPage: FunctionComponent = () => {
         return (profile!=undefined && profile.addresses !== undefined)
     };
 
+    const getAddresses = () => {
+        console.log("getAddresses:", profile.addresses);
+        console.log("currentSelectedAddresIndex:", currentSelectedAddresIndex);
+        return profile.addresses;
+    };
+
     /**
      * Redirect to next page
      */
@@ -136,6 +143,14 @@ const InformationPage: FunctionComponent = () => {
         navigate("/cart", { state: location }); // programmatically redirect
     };
 
+    /**
+country: string;
+    title?: string;
+    currentSelected: number;
+    setCurrentSelected:(index: number) => void;
+    addresses: Array<AddressType>;
+    setAddresses:  (newAddresses: Array<any>) => void;
+     */
     return (
         <div className="container-page">
 
@@ -162,11 +177,11 @@ const InformationPage: FunctionComponent = () => {
                         <SelectAddress title={t("information.delivery.addres.title")}
                             country={getCurrentCountry()}
                             currentSelected={currentSelectedAddresIndex}
-                            addresses={profile.addresses}
-                            onChange={(newAddresses: Array<any>) => handleAddNeAddressAndClose(newAddresses)}
-                            onClickSelect={(item: string, index: number) => handleOnClickSelect(item, index)}
+                            setCurrentSelected={(index: number) => handleOnClickSelect(index)}
+                            addresses={getAddresses()}
+                            setAddresses={(newAddresses: Array<any>) => handleAddNeAddressAndClose(newAddresses)}
+                            
                         />
-
                     </>
                     }
                 </div>

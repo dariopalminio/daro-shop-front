@@ -3,16 +3,21 @@ import { handleAxiosError, ApiError } from 'infra/client/api.error';
 import axiosInstance from './interceptor/axios.interceptor';
 import { IShippingClient } from 'domain/service/shipping-client.interface';
 import { AddressType } from 'domain/model/user/address.type';
+import { throws } from 'assert';
 
 
 export default function ShippingClientImpl(): IShippingClient {
 
     async function getShippingPrice(address: AddressType): Promise<any> {
 
-        const URL = `${InfraConfig.APIEndpoints.shipping}/region/price`;
+        if (!address) throw Error("checkout.shipping.address.error");
+        const URL = `${InfraConfig.APIEndpoints.shipping}/address/price`;
         console.log();
         const params = new URLSearchParams();
-        params.append('region', address.state);
+        params.append('country', address.country);
+        params.append('state', address.state);
+        params.append('neighborhood', address.neighborhood);
+        params.append('city', address.city);
 
         const config = {
             params: params

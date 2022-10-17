@@ -32,8 +32,7 @@ const ConfirmationPage: FunctionComponent = () => {
     const { profileInitialized,
         setProfileInitialized,
         currentSelectedAddresIndex,
-        setCurrentSelectedAddresIndex, profile, setProfile, addressToDelivery,
-        setAddressToDelivery, setShippingPrice } = useContext(CheckoutContext) as ICheckoutContext; //With Custom hook
+        setCurrentSelectedAddresIndex, profile, setProfile, setShippingPrice } = useContext(CheckoutContext) as ICheckoutContext; //With Custom hook
 
 
     const fetchData = async () => {
@@ -65,8 +64,8 @@ const ConfirmationPage: FunctionComponent = () => {
     };
 
     const getAddressStr = () => {
-        if (!addressToDelivery) return "Address problem!";
-        return convertAddressToString(addressToDelivery);
+        if (!profile.addresses[currentSelectedAddresIndex]) return "Address problem!";
+        return convertAddressToString(profile.addresses[currentSelectedAddresIndex]);
     }
 
     return (
@@ -103,8 +102,6 @@ const ConfirmationPage: FunctionComponent = () => {
                 ))}
 
             </ShoppingCart>
-
-
 
             <PreviousNextButtons labelPrevious={t('previous')} labelNext={t('checkout.button.confirm')}
                 handlePrevious={() => handlePrevious()} handleNext={() => handleNext()} />

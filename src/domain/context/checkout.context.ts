@@ -9,8 +9,6 @@ export interface ICheckoutContext {
     setProfileInitialized:  (initialized: boolean) => void;
     currentSelectedAddresIndex: number;
     setCurrentSelectedAddresIndex: (index: number) => void
-    addressToDelivery: AddressType | undefined;
-    setAddressToDelivery: (addrs: AddressType) => void;
     profile: Profile;
     setProfile:  (prof: Profile) => void;
     shippingData: any;
@@ -22,8 +20,6 @@ export const CheckoutContextDefaultValues: ICheckoutContext = {
     setProfileInitialized:  (initialized: boolean) => { return false },
     currentSelectedAddresIndex: -1,
     setCurrentSelectedAddresIndex: (index: number) => { },
-    addressToDelivery: undefined,
-    setAddressToDelivery: (addrs: AddressType) => { },
     profile: initialEmptyProfile, 
     setProfile:  (prof: Profile) =>  { },
     shippingData: undefined,
