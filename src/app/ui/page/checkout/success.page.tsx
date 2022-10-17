@@ -8,6 +8,39 @@ import { useNavigate } from 'react-router-dom';
 import SessionContext, { ISessionContext } from 'domain/context/session.context';
 import PreviousNextButtons from 'app/ui/common/button/previous-next-buttons';
 import PaymentMethods from 'app/ui/component/payment/payment-methods';
+import PaymentManualInfo from 'app/ui/component/payment/payment-manual-info';
+
+const ifoManualPayment: Array<any> = [
+    {
+        label: "Monto a transferir",
+        text: "XXXXXX"
+    },
+    {
+        label: "Nombre",
+        text: "COMERCIO EXAMPLE SPA"
+    },
+    {
+        label: "Rut Empresa",
+        text: "77.887.987-1"
+    },
+    {
+        label: "Cuenta N°",
+        text: "00-123-1234-12"
+    },
+    {
+        label: "Banco",
+        text: "Banco Chile"
+    },
+    {
+        label: "Tipo Cuenta",
+        text: "Cuenta Corriente"
+    },
+    {
+        label: "Email",
+        text: "pay@myemma.cl"
+    },
+];
+
 
 
 /**
@@ -35,30 +68,22 @@ const SuccessPage: FunctionComponent = () => {
     return (
         <div className="container-page">
 
-            <h1>{t('checkout.payment.title')}</h1>
-
             <TextsStepper list={[
                 { "name": t("steps.cart"), "current": false },
                 { "name": t("steps.information"), "current": false },
                 { "name": t("steps.confirmation"), "current": false },
                 { "name": t("steps.payment"), "current": false },
                 { "name": t("steps.success"), "current": true }
-            ]} onClick={(index: number) => {}}></TextsStepper>
+            ]} onClick={(index: number) => { }}></TextsStepper>
 
-            
-    <h2>Pago Manual: (Transferencia Bancaria)</h2>
+            <h1>{t("checkout.payment.manual")}</h1>
 
-    <p>Monto a transferir: XXXXXX</p>
-    <p>Nombre : COMERCIO EXAMPLE SPA</p> 
-    <p>Rut Empresa :77.887.987-1 </p>
-    <p>Cuenta N°: 00-123-1234-12</p>
-    <p>Banco: Banco Chile</p>
-    <p>Tipo Cuenta : Cuenta Corriente</p>
-    <p>Email : pay@myemma.cl </p>
-    <p>En cuando haga tu transferencia por  favor enviar el comprobante a payment@micomercio.cl, para acreditar tu pago y proceder con el envió.
-    Gracias</p>
 
-            
+            <PaymentManualInfo list={ifoManualPayment} />
+
+            <p>En cuando haga tu transferencia por  favor enviar el comprobante a payment@micomercio.cl, para acreditar tu pago y proceder con el envió.
+                Gracias</p>
+
         </div>
     );
 };

@@ -73,7 +73,7 @@ const PaymentMethods: React.FC<IProps> = (props: IProps) => {
 
     return (
         <>
-            <h4 style={{marginLeft: "5px"}}>{t("checkout.payment.choose")}:</h4>
+            <p style={{marginLeft: "5px", color: "grey"}}>{t("checkout.payment.choose")}:</p>
             <CenteringContainer>
                 <PaymentMethodsContainer>
 

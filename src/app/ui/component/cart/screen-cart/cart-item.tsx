@@ -33,6 +33,7 @@ const CartItemWrapper = styled.div`
       grid-area: c;
     }
     .cartitem_qty {
+      padding-top: 7px;
       grid-area: d;
     }
     .cartitem_amount {

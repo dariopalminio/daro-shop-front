@@ -87,7 +87,7 @@ const BottomCallToAction = styled.div`
   align-items: center;
  `;
 
-interface Props {
+interface IProps {
   productItem: ProductType;
 }
 
@@ -95,15 +95,15 @@ interface Props {
  * Product Item
  * 
  */
-const ProductItem: React.FC<Props> = ({ productItem }) => {
+const ProductItem: React.FC<IProps> = (props: IProps) => {
 
   const [quantity, setQuantity] = useState(1);
   const { addToCart } = useContext(CartContext) as ICartContext;
   const { t } = useTranslation();
   const location = useLocation();
-  
+
   const addToCartHandler = () => {
-    if (productItem && quantity > 0) addToCart(productItem, quantity);
+    if (props.productItem && quantity > 0) addToCart(props.productItem, quantity);
     else console.log("No tiene prodiuctos que agregar!");
   };
 
@@ -113,27 +113,29 @@ const ProductItem: React.FC<Props> = ({ productItem }) => {
   };
 
   const getImage = () => {
-    return productItem.images ? productItem.images[0] : NoImage;
+    return props.productItem.images ? props.productItem.images[0] : NoImage;
   }
 
   const getDescription = () => {
-    return productItem.description ? productItem.description.substring(0, 100) : "No description!";
+    return props.productItem.description ? props.productItem.description.substring(0, 100) : "No description!";
   }
 
   const getPrice = () => {
-    return productItem.grossPrice ? productItem.grossPrice : "No price!";
+    return props.productItem.grossPrice ? props.productItem.grossPrice : "No price!";
   }
 
   return (
     <ProductItemWrapper>
 
-      <Link to={`/catalog/product/detail/${productItem._id}`} state={location} className="linkframe">
-        <ProductItemImg style={{ position: "relative", margin: "2px", width: "100%" }} src={getImage()} alt={productItem.name} loading="lazy"/>
+      <Link to={`/catalog/product/detail/${props.productItem._id}`} state={location} className="linkframe">
+        <ProductItemImg style={{ position: "relative", margin: "2px", width: "100%" }}
+          src={getImage()} alt={props.productItem.name}
+          loading="lazy" />
       </Link>
 
-      <Link to={`/catalog/product/detail/${productItem._id}`} className="linkframe">
+      <Link to={`/catalog/product/detail/${props.productItem._id}`} className="linkframe">
         <div className="product_info">
-          <p className="info_name">{productItem.name}</p>
+          <p className="info_name">{props.productItem.name}</p>
 
           <p className="info_description">{getDescription()}...</p>
 
@@ -143,9 +145,11 @@ const ProductItem: React.FC<Props> = ({ productItem }) => {
       </Link>
 
       <BottomCallToAction>
-        <ButtonQuantity
-          value={quantity}
-          onChange={(newQuantityValue: number) => handlerNewQuantityValue(newQuantityValue)} />
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <ButtonQuantity
+            value={quantity}
+            onChange={(newQuantityValue: number) => handlerNewQuantityValue(newQuantityValue)} />
+        </div>
         <Button
           onClick={addToCartHandler}>
           {t('cart.button.add.to.cart')}

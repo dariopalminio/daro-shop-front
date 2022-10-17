@@ -41,9 +41,8 @@ const ShoppingCartItem: React.FC<IProps> = (props: IProps) => {
             <p>{props.item.name}</p>
           </Link>
         </div>
-
       </div>
-      <div className="shopping-cart-product-price">$ {props.item.grossPrice}</div>
+      <div className="shopping-cart-product-price">{props.item.grossPrice}</div>
       <div className="shopping-cart-product-quantity">
         <input  type="number" defaultValue={props.item.qty} min="1" onChange={(e) => handlerChanfeInputQty(e)} />
       </div>
@@ -53,7 +52,7 @@ const ShoppingCartItem: React.FC<IProps> = (props: IProps) => {
           <RiDeleteBin7Fill size={20} color="grey" onClick={() => props.removeHandler(props.item.itemId)} />
         </IconButton>
       </div>
-      <div className="shopping-cart-product-amount">$ {props.item.amount}</div>
+      <div className="shopping-cart-product-amount">{props.item.amount}</div>
     </div>
   );
 };
