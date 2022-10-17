@@ -14,7 +14,7 @@ function getShippingPrice(address: AddressType): Promise<any>{
             "_id": "6316b3844c55dc07b0aac559",
             "price": "2900",
             "money": "CLP",
-            "detail": "",
+            "region": "",
 
         };
            resolve(data);

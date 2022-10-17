@@ -1,7 +1,7 @@
 import * as GlobalConfig from 'infra/global.config';
 import axios from 'axios';
 import { handleAxiosError, ApiError } from 'infra/client/api.error';
-import qs from 'querystring';
+//import qs from 'querystring';
 import { IAuthTokensClient } from 'domain/service/auth-tokens-client.interface';
 
 type NewAdminTokenRequestType = {
@@ -58,7 +58,9 @@ export default function AuthTokensClientImpl(): IAuthTokensClient {
       // Token endpoint
       const URL = `${GlobalConfig.APIEndpoints.auth}/tokens/admin`;
 
-      const response = await axios.post(URL, qs.stringify(body))
+      const qs = new URLSearchParams(body);
+
+      const response = await axios.post(URL, qs.toString())
 
       return response.data.access_token;
     } catch (error: any) {
@@ -89,7 +91,9 @@ export default function AuthTokensClientImpl(): IAuthTokensClient {
       // Token endpoint
       const URL = `${GlobalConfig.APIEndpoints.auth}/tokens/app`;
 
-      const response = await axios.post(URL, qs.stringify(body));
+      const qs = new URLSearchParams(body);
+
+      const response = await axios.post(URL, qs.toString());
 
       return response.data.access_token;
     } catch (error: any) {
@@ -131,7 +135,9 @@ export default function AuthTokensClientImpl(): IAuthTokensClient {
       // Token endpoint
       const URL = `${GlobalConfig.APIEndpoints.auth}/tokens/refresh`;
 
-      const response = await axios.post(URL, qs.stringify(body));
+      const qs = new URLSearchParams(body);
+      
+      const response = await axios.post(URL, qs.toString());
 
       return response;
     } catch (error: any) {

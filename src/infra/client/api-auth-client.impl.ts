@@ -1,7 +1,7 @@
 import * as GlobalConfig from 'infra/global.config';
 import axios, { AxiosPromise } from 'axios';
 import { handleAxiosError, ApiError, AuthStatusEnum } from 'infra/client/api.error';
-import qs from 'querystring';
+//import qs from 'querystring';
 import { IAuthClient } from 'domain/service/auth-client.interface';
 import { Tokens } from 'domain/model/auth/tokens.type';
 import { IAuthTokensClient } from 'domain/service/auth-tokens-client.interface';
@@ -197,8 +197,10 @@ export default function ApiAuthClientImpl(): IAuthClient {
     //Login endpoint
     const URL = `${GlobalConfig.APIEndpoints.auth}/tokens/login`;
 
+    const qs = new URLSearchParams(body);
+
     //post<T = any, R = AxiosResponse<T>>(url: string, data?: any, config?: AxiosRequestConfig): Promise<R>;
-    const promise: AxiosPromise<any> = axios.post(URL, qs.stringify(body));
+    const promise: AxiosPromise<any> = axios.post(URL, qs.toString());
 
     // using .then, create a new promise which extracts the data
     const tokens: Promise<Tokens> = promise.then((response) => {

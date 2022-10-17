@@ -10,6 +10,7 @@ import AuthTokensClientImpl from "./client/auth-tokens-client.impl";
 import ProductApiClientImpl from "./client/product-api-client.impl";
 import ProfileApiClientImpl from "./client/profile-api-client.impl";
 import NotificationApiServiceImpl from "./client/notification-api-client.impl";
+import ShippingClientImpl from "./client/shipping-api-client.impl";
 
 //Imports fakes (Mocks and stubs) for app simulation 
 import ApiAuthClientStub from "../__tests__/infra/client/fake/api-auth-client.stub";
@@ -48,7 +49,7 @@ export default function GlobalFactory() {
         container.set('authTokensClient', AuthTokensClientImpl() as IAuthTokensClient);
         container.set('profileClient', ProfileApiClientImpl() as IProfileClient);
         container.set('notificationClient', NotificationApiServiceImpl() as INotificationClient);
-        //container.set('shippingClient', ShippingClientImpl() as IShippingClient);
+        container.set('shippingClient', ShippingClientImpl() as IShippingClient);
     }
 
     //Get instance for key name
