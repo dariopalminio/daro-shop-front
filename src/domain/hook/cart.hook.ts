@@ -109,10 +109,6 @@ export const useCart = () => {
         window.sessionStorage.setItem(GlobalConfig.CART_ITEM_NAME, sessionStorageItem);
     };
 
-    const canContinueToPayment = (): boolean => {
-        return cartTotal > 0;
-    };
-
     const getMoney = (): string => {
         return GlobalConfig.defaultMoney;
     };
@@ -130,7 +126,6 @@ export const useCart = () => {
         setCartShipping,
         cartTotal,
         calculateTotals,
-        canContinueToPayment,
         getMoney
     };
 };

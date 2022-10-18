@@ -28,11 +28,11 @@ const ConfirmationPage: FunctionComponent = () => {
     const { session } = useContext(SessionContext) as ISessionContext; // with Custom hook
     const { isProcessing, hasError, msg, isSuccess, getShippingPrice } = useShipping(); // Custom hook
     const { cartItems, cartSubTotal, removeFromCart, getCartCount,
-        changeItemQuantity, cartShipping, cartTotal, canContinueToPayment, getMoney } = useContext(CartContext) as ICartContext; // with Custom hook
+        changeItemQuantity, cartShipping, cartTotal, getMoney } = useContext(CartContext) as ICartContext; // with Custom hook
     const { profileInitialized,
         setProfileInitialized,
         currentSelectedAddresIndex,
-        setCurrentSelectedAddresIndex, profile, setProfile, setShippingPrice } = useContext(CheckoutContext) as ICheckoutContext; //With Custom hook
+        setCurrentSelectedAddresIndex, profile, setProfile, setShippingPrice, canContinueToPayment } = useContext(CheckoutContext) as ICheckoutContext; //With Custom hook
 
 
     const fetchData = async () => {

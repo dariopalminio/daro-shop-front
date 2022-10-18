@@ -8,23 +8,28 @@ import { AddressType } from 'domain/model/user/address.type';
 
 export default function ShippingClientImpl(): IShippingClient {
 
+    /**
+     * Get Shipping Price 
+     * Get the delivery price according to an address
+     * @returns 
+     */
     async function getShippingPrice(address: AddressType): Promise<any> {
 
         if (!address) throw Error("checkout.shipping.address.error");
 
-        const URL = `${InfraConfig.APIEndpoints.shipping}/price/address`;
-        console.log();
-        const params = new URLSearchParams();
-        params.append('country', address.country);
-        params.append('state', address.state);
-        params.append('neighborhood', address.neighborhood);
-        params.append('city', address.city);
-
-        const config = {
-            params: params
-        };
-
         try {
+            const URL = `${InfraConfig.APIEndpoints.shipping}/price/address`;
+
+            const params = new URLSearchParams();
+            params.append('country', address.country);
+            params.append('state', address.state);
+            params.append('neighborhood', address.neighborhood);
+            params.append('city', address.city);
+
+            const config = {
+                params: params
+            };
+
             const response = await axiosInstance.get(URL, config);
 
             console.log("ShippingClientImpl->response:", response);

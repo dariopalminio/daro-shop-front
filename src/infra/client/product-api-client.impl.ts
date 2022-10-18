@@ -7,23 +7,22 @@ import axiosInstance from './interceptor/axios.interceptor';
 import { CategoryType } from 'domain/model/category/category.type';
 import { ApiError, handleAxiosError } from './api.error';
 
+/**
+ * Product API HTML Client
+ */
 export default function ProductApiClientImpl(): IProductClient {
 
 
     async function getCategories(): Promise<Array<CategoryType>> {
-        //http://localhost:3001/api/webshop/v1/products/categories/all
         const myURL = `${InfraConfig.APIEndpoints.products}/categories/all`;
-
         const resp = await axiosInstance.get(myURL);
-        console.log("HOOK.getCategories:", resp.data);
-
         return resp.data;
     };
 
     /**
      * Get Catalog
      * 
-     * http://localhost:3001/api/webshop/v1/products/catalog?page=1&limit=100&orderBy=name&isAsc=true
+     * Request URL Example: http://localhost:3001/api/webshop/v1/products/catalog?category=Cat&page=1&limit=100&orderBy=name&isAsc=true
      */
     async function getCatalog(category: string, page: number, limit: number, orderBy: string): Promise<FilteredProductsDTO> {
         try {
@@ -44,6 +43,7 @@ export default function ProductApiClientImpl(): IProductClient {
             const resp = await axiosInstance.get(myURL, config);
             console.log(resp);
 
+            //concatenate image names with base path to get absolute urls
             const remoteUrl = InfraConfig.urlImages;
             const datacopy: [] = resp.data.list.map((element: any) => {
                 const newImagesUrl: [] = element.images ? element.images.map((imgName: string) => `${remoteUrl}/${imgName}`) : 'NO_IMAGE';
@@ -68,8 +68,8 @@ export default function ProductApiClientImpl(): IProductClient {
 
             const resp = await axiosInstance.get(myURL);
 
+            //concatenate image names with base path to get absolute urls
             const remoteUrl = InfraConfig.urlImages;
-
             const newImagesUrl: [] = resp.data.images ? resp.data.images.map((imgName: string) => `${remoteUrl}/${imgName}`) : 'NO_IMAGE';
 
             return { ...resp.data, images: newImagesUrl };

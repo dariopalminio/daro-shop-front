@@ -148,6 +148,7 @@
     "checkout.payment.manual": "Manual Payment (Bank Transfer)",
     "checkout.payment.manual.bank.info": "Bank Data are",
     "checkout.payment.manual.bank.amount": "Amount to transfer is",
+    "checkout.payment.manual.bank.msg.order.code": "When making the transfer, place in the reason message the order code",
     "checkout.payment.manual.bank.msg.email": "As soon as you make your transfer, please send the receipt to the indicated email to credit your payment and proceed with the shipment.",
     "checkout.contact": "Contact",
     "checkout.shipping.to": "Shipping to",

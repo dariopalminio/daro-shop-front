@@ -6,6 +6,7 @@ import { RiCheckFill } from "react-icons/ri";
 import styled from "styled-components";
 import manualBankTransferImg from "app/ui/image/payment/manual_bank_transfer.png";
 import otherPaymentMethodImg from "app/ui/image/payment/other_payment_method.png";
+import bitcoinMethodTypeImg from "app/ui/image/payment/aceptamos-bitcoin.png";
 import { PaymentMethodType } from "app/ui/page/checkout/payment.page";
 
 
@@ -80,7 +81,7 @@ const PaymentMethods: React.FC<IProps> = (props: IProps) => {
                     <MethodType checked={props.select === PaymentMethodType.MANUAL} onClick={() => handleClick(PaymentMethodType.MANUAL)}>
                         <SelectedCheck checked={props.select === props.select}><RiCheckFill size={24} color="white" /></SelectedCheck>
                         <div>
-                            <img src={String(manualBankTransferImg)} height="50" width="100"/>
+                            <img src={String(manualBankTransferImg)} height="60" width="100"/>
                         </div>
                         <div>
                             <p>{t("checkout.payment.manual")}</p>
@@ -89,7 +90,16 @@ const PaymentMethods: React.FC<IProps> = (props: IProps) => {
 
                     <MethodType checked={props.select === "none"} onClick={() => handleClick(PaymentMethodType.MANUAL)}>
                         <div className="logo">
-                        <img src={String(otherPaymentMethodImg)} height="50" width="100"/>
+                        <img src={String(bitcoinMethodTypeImg)} height="60" width="100"/>
+                        </div>
+                        <div className="text">
+                            <p>Próximamente otros medios de pago ...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+                        </div>
+                    </MethodType>
+
+                    <MethodType checked={props.select === "none"} onClick={() => handleClick(PaymentMethodType.MANUAL)}>
+                        <div className="logo">
+                        <img src={String(otherPaymentMethodImg)} height="60" width="100"/>
                         </div>
                         <div className="text">
                             <p>Próximamente otros medios de pago ...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>

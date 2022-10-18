@@ -36,6 +36,10 @@ export const useCheckout = () => {
         calculateTotals();
     }
 
+    const canContinueToPayment = (): boolean => {
+        return cartTotal > 0;
+    };
+
     return {
         profileInitialized,
         setProfileInitialized,
@@ -44,6 +48,7 @@ export const useCheckout = () => {
         profile,
         setProfile,
         shippingData,
-        setShippingPrice
+        setShippingPrice,
+        canContinueToPayment
     };
 };

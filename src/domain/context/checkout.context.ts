@@ -13,6 +13,7 @@ export interface ICheckoutContext {
     setProfile:  (prof: Profile) => void;
     shippingData: any;
     setShippingPrice:  (data: any) => void;
+    canContinueToPayment: () => boolean;
 };
 
 export const CheckoutContextDefaultValues: ICheckoutContext = {
@@ -23,7 +24,8 @@ export const CheckoutContextDefaultValues: ICheckoutContext = {
     profile: initialEmptyProfile, 
     setProfile:  (prof: Profile) =>  { },
     shippingData: undefined,
-    setShippingPrice:  (data: any) => { }
+    setShippingPrice:  (data: any) => { },
+    canContinueToPayment: () => { return false },
 };
 
 // Global Checkout context
