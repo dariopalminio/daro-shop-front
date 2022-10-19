@@ -3,7 +3,7 @@ import { AddressType } from 'domain/model/user/address.type';
 import { IShippingClient } from 'domain/service/shipping-client.interface';
 
 /**
- * A stub for Profile http client thet may simulate the behavior of real impementation code and be a temporary substitute for this. 
+ * A stub for Shipping http client thet may simulate the behavior of real impementation code and be a temporary substitute for this. 
  */
 export default function ShippingClientStub(): IShippingClient {
 

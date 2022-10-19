@@ -35,7 +35,7 @@ const InformationPage: FunctionComponent = () => {
     const { getCurrentCountry } = useAddress(); //Custom hook
     const { isProcessing, hasError, msg, isSuccess, getProfile } = useProfile(); //Custom hook
     const { cartItems, cartSubTotal, removeFromCart, getCartCount,
-        changeItemQuantity, cartShipping, cartTotal, canContinueToPayment, getMoney } = useContext(CartContext) as ICartContext; // with Custom hook
+        changeItemQuantity, cartShipping, cartTotal, getMoney } = useContext(CartContext) as ICartContext; // with Custom hook
     const { profileInitialized,
         setProfileInitialized,
         currentSelectedAddresIndex,
@@ -67,6 +67,7 @@ const InformationPage: FunctionComponent = () => {
                         addresses: info.addresses ? info.addresses : []
                     };
                     console.log("InformationPage-->Set profile:",p);
+                    console.log("InformationPage-->info.addresses:",info.addresses);
                     setProfile(p);
                     setProfileInitialized(true);
                 }
@@ -92,6 +93,7 @@ const InformationPage: FunctionComponent = () => {
 
     const handleOnClickSelect = (index: number) => {
         //const addrsSelected = profile.addresses[index];
+        console.log("InformationPage-->profile.addresses[index]:",profile.addresses[index])
         setCurrentSelectedAddresIndex(index);
     };
 

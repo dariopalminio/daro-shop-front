@@ -29,6 +29,9 @@ export const useCart = () => {
 
     useEffect(() => {
         calculateTotals(); //update calculated values
+        console.log("cartItems:", cartItems);
+        console.log("cartSubTotal:", cartSubTotal);
+        console.log("cartTotal:", cartTotal);
     }, [cartItems]);
 
     const calculateTotals = () => {
