@@ -1,23 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import { AddressType } from "domain/model/user/address.type";
 import Button from "app/ui/common/button/button";
 import useModalDialog from "app/ui/common/dialog/use-modal-dialog";
-import SelectList from "app/ui/common/select-list/select-list";
 import NewAddressDialog from "app/ui/component/address/new-address-dialog";
 import useAddress from "domain/hook/address.hook";
 import RadioButtonList from "app/ui/common/select-list-radio-button/radio-button-list";
-import { CenteringContainer } from "app/ui/common/elements/centering-container";
-import TextField from "app/ui/common/text-field/text-field";
-
 
 interface IMyProps {
     country: string;
     title?: string;
     currentSelected: number;
-    setCurrentSelected:(index: number) => void;
+    setCurrentSelected: (index: number) => void;
     addresses: Array<AddressType>;
-    setAddresses:  (newAddresses: Array<any>) => void;
+    setAddresses: (newAddresses: Array<any>) => void;
 }
 
 /**
@@ -29,10 +25,9 @@ const SelectAddress: React.FC<IMyProps> = (props: IMyProps) => {
 
     const { getInitialAddress } = useAddress(); //Custom hook
     const { t } = useTranslation();
-    //const [myAddresses, setMyAddresses] = useState<Array<AddressType>>(addresses);
     const { isDialogOpen, toggle } = useModalDialog();
     const [newAddress, setNewAddress] = React.useState(getInitialAddress(props.country));
- 
+
     const convertAddressOneLine = (address: any) => {
         return address?.street + " " + address?.department + " " + address?.city;
     };
@@ -41,10 +36,6 @@ const SelectAddress: React.FC<IMyProps> = (props: IMyProps) => {
         const stringArray: string[] = props.addresses.map((address: any, index: number) => convertAddressOneLine(address));
         return stringArray;
     }
-
-    const handleClickOpen = () => {
-        toggle();
-    };
 
     const handleSelectAddress = async (item: string, index: number) => {
         props?.setCurrentSelected && props.setCurrentSelected(index);
@@ -55,7 +46,6 @@ const SelectAddress: React.FC<IMyProps> = (props: IMyProps) => {
         arrayOfAddresses.push(newAddress);
         props.setAddresses(arrayOfAddresses);
         toggle();
-        //onChange(myAddresses); //set addresses array in parent
         setNewAddress(getInitialAddress(props.country));
     };
 
@@ -72,37 +62,40 @@ const SelectAddress: React.FC<IMyProps> = (props: IMyProps) => {
         return props.title ? props.title : t('my.addresses.title');
     }
 
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        toggle();
+    }
+
     return (
         <div style={{ ...{ display: "block" } }}>
             {props.title && <h1>{getTitle()}</h1>}
+            <form onSubmit={(e) => handleSubmit(e)}>
+                <div style={{ textAlign: "left" }}>
+                    <RadioButtonList
+                        id="mySelectListAddress"
+                        label={t("address.label.selection") + " *"}
+                        currentSelected={props.currentSelected}
+                        list={getStrinArrayAddresses()}
+                        onClickSelect={(item: string, index: number) => handleSelectAddress(item, index)}
+                    />
+                </div>
 
-            <div style={{ textAlign: "left" }}>
-                <RadioButtonList
-                    id="mySelectListAddress"
-                    label={t("address.label.selection")+" *"}
-                    currentSelected={props.currentSelected}
-                    list={getStrinArrayAddresses()}
-                    onClickSelect={(item: string, index: number) => handleSelectAddress(item, index)}
-                />
-            </div>
+                <div>
+                    <Button type="submit" style={{ marginTop: "15px" }}>
+                        {t('my.addresses.add')}
+                    </Button>
+                </div>
 
-            <div>
-                <Button type="button" onClick={handleClickOpen}
-                    style={{ marginTop: "15px" }}
+                <NewAddressDialog
+                    address={newAddress}
+                    isOpen={isDialogOpen}
+                    onClose={handleCloseNewAddressDialog}
+                    onChange={(newAddress: any) => handleNewAddressChange(newAddress)}
+                    onAccept={() => handleAddNewAddressAndClose()}
                 >
-                    {t('my.addresses.add')}
-                </Button>
-            </div>
-
-            <NewAddressDialog
-                address={newAddress}
-                isOpen={isDialogOpen}
-                onClose={handleCloseNewAddressDialog}
-                onChange={(newAddress: any) => handleNewAddressChange(newAddress)}
-                onAccept={() => handleAddNewAddressAndClose()}
-            >
-            </NewAddressDialog>
-
+                </NewAddressDialog>
+            </form>
         </div>
     );
 };

@@ -28,6 +28,13 @@ const CartSummaryContainer = styled.div`
       }
 `;
 
+const CartSummaryInfo = styled.div`
+    padding: 4px;
+    p:first-child {
+        font-weight: bold;
+      }
+`;
+
 
 interface IProps {
     readOnly?: boolean;
@@ -54,12 +61,12 @@ const CartSummary: React.FC<IProps> = (props: IProps) => {
 
     return (
         <CartSummaryContainer>
-            <div className="shopping_cart_info">
+            <CartSummaryInfo>
                 <p>{t('cart.you.have')} ({props.count}) {t('cart.products')}</p>
                 <p>{t('cart.subtotal')}: ({props.money}) $ {props.subtotal}</p>
                 {(props.shipping !==0) && <p>{t('cart.shipping')}: ({props.money}) $ {props.shipping}</p>}
                 {props.total && <p>{t('cart.grandtotal')}: ({props.money}) $ {props.total}</p>}
-            </div>
+            </CartSummaryInfo>
             {!props.readOnly &&
             <div>
                 <Button

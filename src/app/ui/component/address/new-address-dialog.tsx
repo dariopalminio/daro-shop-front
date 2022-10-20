@@ -8,7 +8,7 @@ import { AddressType } from "domain/model/user/address.type";
 import { SelectOpts } from "app/ui/common/select-opts";
 import useAddress from "domain/hook/address.hook";
 
-interface Props {
+interface IMyProps {
     address: AddressType;
     isOpen: boolean;
     onClose: () => void;
@@ -22,7 +22,7 @@ interface Props {
  * 
  * Pattern: Presentation Component, Controled Component 
  */
-const NewAddressDialog: React.FC<Props> = ({ address, isOpen, onClose, onChange, onAccept }) => {
+const NewAddressDialog: React.FC<IMyProps> = (props: IMyProps) => {
     const { getStates, getNeighborhood } = useAddress(); //Custom hook
     const { t } = useTranslation();
     const [streetValid, setStreetValid] = useState(false);
@@ -33,15 +33,15 @@ const NewAddressDialog: React.FC<Props> = ({ address, isOpen, onClose, onChange,
     };
 
     const handleStateChange = async (selectedState: string) => {
-        onChange({
-            ...address,
+        props.onChange({
+            ...props.address,
             state: selectedState
         })
     };
 
     const handleStreetChange = async (value: string) => {
-        onChange({
-            ...address,
+        props.onChange({
+            ...props.address,
             street: value
         });
 
@@ -54,8 +54,8 @@ const NewAddressDialog: React.FC<Props> = ({ address, isOpen, onClose, onChange,
     };
 
     const handleDepartmentChange = async (value: string) => {
-        onChange({
-            ...address,
+        props.onChange({
+            ...props.address,
             department: value
         });
         if (value &&
@@ -67,22 +67,22 @@ const NewAddressDialog: React.FC<Props> = ({ address, isOpen, onClose, onChange,
     };
 
     const handleNeighborhoodChange = async (value: string) => {
-        onChange({
-            ...address,
+        props.onChange({
+            ...props.address,
             neighborhood: value
         })
     };
 
     const handleCityChange = async (value: string) => {
-        onChange({
-            ...address,
+        props.onChange({
+            ...props.address,
             city: value
         })
     };
 
     const handleCountryChange = async (value: string) => {
-        onChange({
-            ...address,
+        props.onChange({
+            ...props.address,
             country: value
         })
     };
@@ -92,19 +92,19 @@ const NewAddressDialog: React.FC<Props> = ({ address, isOpen, onClose, onChange,
     };
 
     const handleAddClose = () => {
-        onAccept();
+        props.onAccept();
     };
 
     return (
 
         <ModalDialog
-            isOpen={isOpen}
-            onClose={onClose}
+            isOpen={props.isOpen}
+            onClose={props.onClose}
         >
             <TextField
-                id="country"
+                id="my.addresses.country"
                 label={t('my.addresses.country')}
-                value={address.country}
+                value={props.address.country}
                 onChange={(e) => handleCountryChange(e.target.value)}
                 readonly={true}
 
@@ -112,31 +112,31 @@ const NewAddressDialog: React.FC<Props> = ({ address, isOpen, onClose, onChange,
 
             <SelectOpts
                 label={t('my.addresses.state')}
-                list={getStates(address.country)}
-                selectedOption={address.state}
+                list={getStates(props.address.country)}
+                selectedOption={props.address.state}
                 setSelectedOption={(selectedOption) => handleStateChange(selectedOption)} 
                 placeholder={t('field.placeholder.select.option')}/>
 
 
             <SelectOpts
                 label={t('my.addresses.neighborhood')}
-                list={getNeighborhood(address.country, address.state)}
-                selectedOption={address.neighborhood}
+                list={getNeighborhood(props.address.country, props.address.state)}
+                selectedOption={props.address.neighborhood}
                 setSelectedOption={(selectedOption) => handleNeighborhoodChange(selectedOption)} 
                 placeholder={t('field.placeholder.select.option')}/>
 
 
             <TextField
-                id="city"
+                id="my.addresses.city"
                 label={t('my.addresses.city')}
-                value={address.city}
+                value={props.address.city}
                 onChange={(e) => handleCityChange(e.target.value)}
 
             />
             <TextField
-                id="street"
+                id="my.addresses.street"
                 label={t('my.addresses.street')}
-                value={address.street}
+                value={props.address.street}
                 onChange={(e) => handleStreetChange(e.target.value)}
                 {...(!streetValid && {
                     error: true,
@@ -144,9 +144,9 @@ const NewAddressDialog: React.FC<Props> = ({ address, isOpen, onClose, onChange,
                 })}
             />
             <TextField
-                id="department"
+                id="my.addresses.department"
                 label={t('my.addresses.department')}
-                value={address.department}
+                value={props.address.department}
                 onChange={(e) => handleDepartmentChange(e.target.value)}
                 {...(!departmentValid && {
                     error: true,

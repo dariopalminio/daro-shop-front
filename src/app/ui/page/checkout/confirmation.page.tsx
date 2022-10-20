@@ -61,6 +61,7 @@ const ConfirmationPage: FunctionComponent = () => {
         navigate("/checkout/information"); // programmatically redirect
     };
 
+    //Confirm
     const handleNext = (): void => {
         if (canContinueToPayment()) navigate("/checkout/payment"); // programmatically redirect
     };
