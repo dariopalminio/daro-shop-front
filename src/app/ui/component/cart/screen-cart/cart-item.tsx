@@ -79,7 +79,7 @@ const CartItem: React.FC<Props> = ({ item, qtyChangeHandler, removeHandler }) =>
 
   const handlerNewQuantityValue = (newQuantityValue: number) => {
     //validate item.countInStock
-    qtyChangeHandler(item.itemId, newQuantityValue);
+    qtyChangeHandler(item.productId, newQuantityValue);
   };
 
   return (
@@ -103,8 +103,8 @@ const CartItem: React.FC<Props> = ({ item, qtyChangeHandler, removeHandler }) =>
       <p className="cartitem_amount">$ {item.amount}</p>
       <div className="cartitem_delete">
         <IconButton
-          onClick={() => removeHandler(item.itemId)}>
-          <RiDeleteBin7Fill size={20} color="grey" onClick={() => removeHandler(item.itemId)} />
+          onClick={() => removeHandler(item.productId)}>
+          <RiDeleteBin7Fill size={20} color="grey"  />
         </IconButton>
       </div>
     </CartItemWrapper>

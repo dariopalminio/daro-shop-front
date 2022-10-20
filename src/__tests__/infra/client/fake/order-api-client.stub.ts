@@ -17,7 +17,6 @@ const responseInitialized: any = {
         },
         "orderItems": [
             {
-                "itemId": "0",
                 "productId": "634ccc200dcc68cbdecd0363",
                 "imageUrl": "https://i.pinimg.com/originals/95/5d/e2/955de20dd2d6f457a1cfdadb8edc23d4.png",
                 "name": "Magic unicorn toy",
@@ -26,7 +25,6 @@ const responseInitialized: any = {
                 "amount": 1190
             },
             {
-                "itemId": "1",
                 "productId": "634ccc400dcc68cbdecd0366",
                 "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2SmahEEhWXut-9211CpUtZLrOljU8BfdnBUlt60UwBVemJ0rXC3T9-SEuMAfH6ttUmMg&usqp=CAU",
                 "name": "HIDON-Chalecon",

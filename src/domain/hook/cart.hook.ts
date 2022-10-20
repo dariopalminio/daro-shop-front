@@ -46,15 +46,30 @@ export const useCart = () => {
     };
 
     const addToCart = (productItem: ProductType, qty: number) => {
-        const newItem: CartItemType = { itemId: cartItems.length.toString(), productId: productItem._id, imageUrl: productItem.images[0], name: productItem.name, grossPrice: productItem.grossPrice, qty: qty, stock: productItem.stock, amount: (productItem.grossPrice * qty) };
-        const newCartItems = [...cartItems, newItem];
-        setCartItems(newCartItems);
-        saveCart(newCartItems);
+
+        const index = cartItems.findIndex((cartItem) => cartItem.productId === productItem._id);
+
+        if (index === -1) {
+            const newItem: CartItemType = {
+                productId: productItem._id,
+                imageUrl: productItem.images[0],
+                name: productItem.name,
+                grossPrice: productItem.grossPrice,
+                qty: qty,
+                stock: productItem.stock,
+                amount: (productItem.grossPrice * qty)
+            };
+            const newCartItems = [...cartItems, newItem];
+            setCartItems(newCartItems);
+            saveCart(newCartItems);
+        }else{
+            changeItemQuantity(cartItems[index].productId, cartItems[index].qty + qty);
+        }
     }
 
     const removeFromCart = (id: string) => {
         setCartItems((currentCart) => {
-            const indexOfItemToRemove = currentCart.findIndex((cartItem) => cartItem.itemId === id);
+            const indexOfItemToRemove = currentCart.findIndex((cartItem) => cartItem.productId === id);
 
             if (indexOfItemToRemove === -1) {
                 return currentCart;
@@ -83,7 +98,7 @@ export const useCart = () => {
      * @param qty Quantity selected
      */
     const changeItemQuantity = (id: string, qty: number) => {
-        const indexToUpdate = cartItems.findIndex((cartItem) => cartItem.itemId === id);
+        const indexToUpdate = cartItems.findIndex((cartItem) => cartItem.productId === id);
         const searchObject = cartItems[indexToUpdate];
 
         const newAmount: number = roundNumber(qty * searchObject.grossPrice);

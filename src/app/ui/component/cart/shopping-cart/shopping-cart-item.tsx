@@ -27,7 +27,7 @@ const ShoppingCartItem: React.FC<IProps> = (props: IProps) => {
   const handlerChanfeInputQty = (e: React.FormEvent<HTMLInputElement>) => {
     if (!props.readOnly) {
       const newValue: number = parseInt(e.currentTarget.value);
-      props.qtyChangeHandler(props.item.itemId, newValue);
+      props.qtyChangeHandler(props.item.productId, newValue);
     }
   };
 
@@ -56,8 +56,8 @@ const ShoppingCartItem: React.FC<IProps> = (props: IProps) => {
       {!props.readOnly &&
         <div className="shopping-cart-product-removal">
           <IconButton
-            onClick={() => props.removeHandler(props.item.itemId)}>
-            <RiDeleteBin7Fill size={20} color="grey" onClick={() => props.removeHandler(props.item.itemId)} />
+            onClick={() => props.removeHandler(props.item.productId)}>
+            <RiDeleteBin7Fill size={20} color="grey" />
           </IconButton>
         </div>
       }

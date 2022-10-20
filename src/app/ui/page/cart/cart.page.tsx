@@ -53,7 +53,7 @@ const CartPage: FunctionComponent = () => {
             >
                 {cartItems.map((item, index) => (
                     <CartItem
-                        key={item.id + index.toString()}
+                        key={index}
                         item={item}
                         qtyChangeHandler={changeItemQuantity}
                         removeHandler={removeFromCart}

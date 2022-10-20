@@ -1,5 +1,4 @@
 export type OrderItemType = {
-    itemId: string;
     productId: string; //_id: holds an ObjectId.
     imageUrl: string;
     name: string;
