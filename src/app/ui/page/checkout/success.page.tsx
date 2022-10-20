@@ -16,7 +16,9 @@ const SuccessPage: FunctionComponent = () => {
         cartSubTotal,
         removeFromCart,
         getCartCount,
-        changeItemQuantity } = useContext(CartContext) as ICartContext;
+        changeItemQuantity, emptyTheCart } = useContext(CartContext) as ICartContext;
+        const { order
+        } = useContext(CheckoutContext) as ICheckoutContext; //With Custom hook
     const { getBankTransferInfo, bankTransferInfo } = usePaymentManual();
     const navigate = useNavigate();
     const { t } = useTranslation();
@@ -24,6 +26,7 @@ const SuccessPage: FunctionComponent = () => {
 
     useEffect(() => {
         getBankTransferInfo();
+        emptyTheCart();
     }, []);
 
     return (
@@ -45,7 +48,7 @@ const SuccessPage: FunctionComponent = () => {
 
                 <PaymentManualInfo list={bankTransferInfo} />
 
-                <p>{t("checkout.payment.manual.bank.msg.order.code")}: ORDER_CODE</p>
+                <p>{t("checkout.payment.manual.bank.msg.order.code")}: {order?._id}</p>
                 <p>{t("checkout.payment.manual.bank.msg.email")}</p>
 
             </div>

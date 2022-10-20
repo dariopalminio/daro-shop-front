@@ -3,12 +3,13 @@ import { ClientType } from "./client.type";
 import { OrderItemType } from "./order-item.type";
 
 export type OrderType = {
-    _id: string; //_id: holds an ObjectId.
+    _id?: string; //_id: holds an ObjectId.
 
     client: ClientType;
     
     orderItems: OrderItemType[];
 
+    count: number;
     includesShipping: boolean; //if is false then includes pick up in store
     shippingAddress: AddressType;
 
@@ -16,7 +17,7 @@ export type OrderType = {
     shippingPrice: number;
     total: number; //total with VAT included
 
-    status: string;
+    status?: string;
 
     createdAt?: Date;
     updatedAt?: Date;

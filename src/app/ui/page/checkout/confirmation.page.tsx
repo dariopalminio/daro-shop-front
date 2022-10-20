@@ -26,22 +26,24 @@ const ConfirmationPage: FunctionComponent = () => {
     const { t } = useTranslation();
     const { convertAddressToString } = useAddress(); //Custom hook
     const { session } = useContext(SessionContext) as ISessionContext; // with Custom hook
-    const { isProcessing, hasError, msg, isSuccess, getShippingPrice } = useShipping(); // Custom hook
-    const { cartItems, cartSubTotal, removeFromCart, getCartCount,
+    const { cartItems, cartSubTotal, removeFromCart,
         changeItemQuantity, cartShipping, cartTotal, getMoney } = useContext(CartContext) as ICartContext; // with Custom hook
-    const { profileInitialized,
+    const { isProcessing,
+        hasError,
+        msg,
+        isSuccess, profileInitialized,
         setProfileInitialized,
         currentSelectedAddresIndex,
-        setCurrentSelectedAddresIndex, profile, setProfile, setShippingPrice, canContinueToPayment } = useContext(CheckoutContext) as ICheckoutContext; //With Custom hook
+        setCurrentSelectedAddresIndex, profile, setProfile, setShippingPrice, canContinueToPayment, initializeOrder, order, includesShipping } = useContext(CheckoutContext) as ICheckoutContext; //With Custom hook
 
 
     const fetchData = async () => {
         try {
-            const address = profile.addresses[currentSelectedAddresIndex];
-            const data = await getShippingPrice(address);
-            setShippingPrice(data);
+            console.log("useEffect-->fetchData");
+            if (!order) initializeOrder(); //create new order in server
+            else alert("an order already exists! It must be updated (TODO...)");
         } catch (e) {
-            console.log("Error in getShippingPrice fetchData:", e);
+            console.log("Error in initializeOrder fetchData:", e);
         }
     };
 
@@ -63,9 +65,12 @@ const ConfirmationPage: FunctionComponent = () => {
         if (canContinueToPayment()) navigate("/checkout/payment"); // programmatically redirect
     };
 
-    const getAddressStr = () => {
-        if (!profile.addresses[currentSelectedAddresIndex]) return "Address problem!";
-        return convertAddressToString(profile.addresses[currentSelectedAddresIndex]);
+    const getShippingInfo = () => {
+        if (includesShipping){
+            if (!order?.shippingAddress) return t('checkout.shipping.address.error');
+            return convertAddressToString(order?.shippingAddress);
+        }
+        return t('checkout.shipping.type.pickup'); //pick up in store, no delivery
     }
 
     return (
@@ -81,27 +86,29 @@ const ConfirmationPage: FunctionComponent = () => {
 
             <h1>{t('checkout.confirmation.title')}</h1>
 
-            <ShippingData contactTo={profile?.email} shippingTo={getAddressStr()} />
+            {order && <ShippingData
+                contactTo={order?.client?.email ? order?.client.email : 'Error'}
+                shippingTo={getShippingInfo()} />
+            }
 
-            <ShoppingCart
-                money={getMoney()}
-                empty={cartItems.length === 0}
-                count={getCartCount()}
-                subtotal={cartSubTotal}
-                shipping={cartShipping}
-                total={cartTotal}
-                onClick={() => { }}
-            >
-                {cartItems.map((item, index) => (
-                    <ShoppingCartItem
-                        key={index}
-                        item={item}
-                        qtyChangeHandler={changeItemQuantity}
-                        removeHandler={removeFromCart}
-                    />
-                ))}
+            {order &&
+                <ShoppingCart
+                    money={getMoney()}
+                    order={order}
+                    onClick={() => { }}
+                >
+                    {order.orderItems.map((item, index) => (
+                        <ShoppingCartItem
+                            readOnly={true}
+                            key={index}
+                            item={item}
+                            qtyChangeHandler={changeItemQuantity}
+                            removeHandler={removeFromCart}
+                        />
+                    ))}
 
-            </ShoppingCart>
+                </ShoppingCart>
+            }
 
             <PreviousNextButtons labelPrevious={t('previous')} labelNext={t('checkout.button.confirm')}
                 handlePrevious={() => handlePrevious()} handleNext={() => handleNext()} />

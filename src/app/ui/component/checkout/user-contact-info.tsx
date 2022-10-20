@@ -151,6 +151,7 @@ const UserContactInfo: React.FC<Props> = ({ profile, onChange, style }) => {
         onChange={(e) => handleTelephoneChange(e.target.value)}
         value={profile.telephone}
       />
+
     </div>
   );
 };

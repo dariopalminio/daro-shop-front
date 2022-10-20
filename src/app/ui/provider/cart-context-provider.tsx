@@ -21,7 +21,8 @@ const CartContextProvider: FC<Props> = ({ children }) => {
         setCartShipping,
         cartTotal,
         calculateTotals,
-        getMoney
+        getMoney,
+        emptyTheCart
     } = useCart();
 
     return (
@@ -39,7 +40,8 @@ const CartContextProvider: FC<Props> = ({ children }) => {
                 setCartShipping,
                 cartTotal,
                 calculateTotals,
-                getMoney
+                getMoney,
+                emptyTheCart
             }}
         >
             {children}

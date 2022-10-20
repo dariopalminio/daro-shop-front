@@ -1,8 +1,9 @@
 import Button from "app/ui/common/button/button";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
+import CartSummary from "./cart-summary";
 
-const CartSummary = styled.div`
+const CartSummaryLocal = styled.div`
     flex: 0.3;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
     height: fit-content;
@@ -91,7 +92,7 @@ const Cart: React.FC<IProps> = (props: IProps) => {
 
     return (
         <CartContainer>
-            
+
             <CartList>
                 <h1>{t('cart.title.shoppingcart')}</h1>
 
@@ -102,11 +103,11 @@ const Cart: React.FC<IProps> = (props: IProps) => {
                 ) : (
                     <div>
                         <ListHeader>
-                            <p/>
+                            <p />
                             <p>{t('cart.product')}</p>
                             <p>{t('cart.price')}</p>
                             <p>{t('cart.quantity')}</p>
-                            <p style={{textAlign: "right"}}>{t('cart.amount')}</p>
+                            <p style={{ textAlign: "right" }}>{t('cart.amount')}</p>
                             <p></p>
                         </ListHeader>
                         {props.children}
@@ -114,18 +115,13 @@ const Cart: React.FC<IProps> = (props: IProps) => {
                 )}
             </CartList>
 
-            <CartSummary>
-                <div className="shopping_cart_info">
-                    <p>{t('cart.you.have')} ({props.count}) {t('cart.products')}</p>
-                    <p>{t('cart.subtotal')}: ({props.money}) $ {props.subtotal}</p>
-                </div>
-                <div>
-                    <Button
-                        onClick={props.onClick}>
-                        {t('cart.button.checkout')}
-                    </Button>
-                </div>
-            </CartSummary>
+            <CartSummary
+                readOnly={false}
+                money={props.money}
+                count={props.count}
+                subtotal={props.subtotal}
+                onClick={props.onClick} />
+
         </CartContainer >
     );
 };

@@ -15,6 +15,9 @@ import Alert from "app/ui/common/alert/alert";
 import PreviousNextButtons from "app/ui/common/button/previous-next-buttons";
 import useAddress from "domain/hook/address.hook";
 import CircularProgress from "app/ui/common/progress/circular-progress";
+import { useShipping } from "domain/hook/shipping.hook";
+import CartSummary from "app/ui/component/cart/screen-cart/cart-summary";
+import RadioButtonList from "app/ui/common/select-list-radio-button/radio-button-list";
 
 const expresionsRegularByDefault = {
     firstName: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letters and spaces can carry accents.
@@ -35,12 +38,17 @@ const InformationPage: FunctionComponent = () => {
     const { getCurrentCountry } = useAddress(); //Custom hook
     const { isProcessing, hasError, msg, isSuccess, getProfile } = useProfile(); //Custom hook
     const { cartItems, cartSubTotal, removeFromCart, getCartCount,
-        changeItemQuantity, cartShipping, cartTotal, getMoney } = useContext(CartContext) as ICartContext; // with Custom hook
+        changeItemQuantity, cartShipping, cartTotal, getMoney, setCartShipping, calculateTotals } = useContext(CartContext) as ICartContext; // with Custom hook
     const { profileInitialized,
         setProfileInitialized,
         currentSelectedAddresIndex,
-        setCurrentSelectedAddresIndex, profile, setProfile,
-         } = useContext(CheckoutContext) as ICheckoutContext; //With Custom hook
+        setCurrentSelectedAddresIndex, profile, setProfile, setShippingPrice, shippingData, includesShipping,
+        SetIncludesShipping
+    } = useContext(CheckoutContext) as ICheckoutContext; //With Custom hook
+    const { isProcessingShipping,
+        hasErrorShipping,
+        msgShipping,
+        isSuccessShipping, getShippingPrice } = useShipping(); // Custom hook
     const navigate = useNavigate();
     const { t, i18n } = useTranslation();
     const [hasValidationError, setHasValidationError] = useState(false);
@@ -66,8 +74,8 @@ const InformationPage: FunctionComponent = () => {
                         language: info.language ? info.language.toLowerCase() : '',
                         addresses: info.addresses ? info.addresses : []
                     };
-                    console.log("InformationPage-->Set profile:",p);
-                    console.log("InformationPage-->info.addresses:",info.addresses);
+                    console.log("InformationPage-->Set profile:", p);
+                    console.log("InformationPage-->info.addresses:", info.addresses);
                     setProfile(p);
                     setProfileInitialized(true);
                 }
@@ -91,10 +99,17 @@ const InformationPage: FunctionComponent = () => {
         return session && !session.isLogged;
     };
 
-    const handleOnClickSelect = (index: number) => {
+    const handleOnClickSelect = async (index: number) => {
         //const addrsSelected = profile.addresses[index];
-        console.log("InformationPage-->profile.addresses[index]:",profile.addresses[index])
+        console.log("InformationPage-->profile.addresses[index]:", profile.addresses[index])
         setCurrentSelectedAddresIndex(index);
+        try {
+            const address = profile.addresses[currentSelectedAddresIndex];
+            const data = await getShippingPrice(address);
+            setShippingPrice(data);
+        } catch (e) {
+            console.log("Error in getShippingPrice fetchData:", e);
+        }
     };
 
     const handleAddNeAddressAndClose = (newAddresses: Array<any>): void => {
@@ -120,7 +135,7 @@ const InformationPage: FunctionComponent = () => {
     }
 
     const canSelectAddress = (): boolean => {
-        return (profile!=undefined && profile.addresses !== undefined)
+        return (profile != undefined && profile.addresses !== undefined)
     };
 
     const getAddresses = () => {
@@ -128,6 +143,16 @@ const InformationPage: FunctionComponent = () => {
         console.log("currentSelectedAddresIndex:", currentSelectedAddresIndex);
         return profile.addresses;
     };
+
+    const handleOnClickShippingType = (item: string, index: number) => {
+        SetIncludesShipping(index === 1);
+        if (index === 1 && shippingData) {
+            const shippingValue: number = Number(shippingData.price);
+            setCartShipping(shippingValue);
+            calculateTotals();
+        }
+        else setCartShipping(0);
+    }
 
     /**
      * Redirect to next page
@@ -145,14 +170,7 @@ const InformationPage: FunctionComponent = () => {
         navigate("/cart", { state: location }); // programmatically redirect
     };
 
-    /**
-country: string;
-    title?: string;
-    currentSelected: number;
-    setCurrentSelected:(index: number) => void;
-    addresses: Array<AddressType>;
-    setAddresses:  (newAddresses: Array<any>) => void;
-     */
+
     return (
         <div className="container-page">
 
@@ -174,18 +192,47 @@ country: string;
                         onChange={(profile: any, isVaslid: boolean) => handleChangeSomeField(profile, isVaslid)}
                     />
                 </div>
+
+
                 <div className="wrapper-delivery-address">
-                    {canSelectAddress() && <>
-                        <SelectAddress title={t("information.delivery.addres.title")}
-                            country={getCurrentCountry()}
-                            currentSelected={currentSelectedAddresIndex}
-                            setCurrentSelected={(index: number) => handleOnClickSelect(index)}
-                            addresses={getAddresses()}
-                            setAddresses={(newAddresses: Array<any>) => handleAddNeAddressAndClose(newAddresses)}
-                            
-                        />
-                    </>
+
+                    <div style={{ textAlign: "left" }}>
+                        <h1>{t('checkout.shipping.title')}</h1>
+                        <form>
+                            <RadioButtonList
+                                id="mySelectListShipping"
+                                label={t('checkout.shipping.type') + " *"}
+                                currentSelected={includesShipping ? 1 : 0}
+                                list={[t('checkout.shipping.type.pickup'), t('checkout.shipping.type.delivery')]}
+                                onClickSelect={(item: string, index: number) => handleOnClickShippingType(item, index)}
+                            />
+                        </form>
+                    </div>
+
+                    {includesShipping &&
+                        <>
+                            {canSelectAddress() && <>
+                                <SelectAddress
+                                    country={getCurrentCountry()}
+                                    currentSelected={currentSelectedAddresIndex}
+                                    setCurrentSelected={(index: number) => handleOnClickSelect(index)}
+                                    addresses={getAddresses()}
+                                    setAddresses={(newAddresses: Array<any>) => handleAddNeAddressAndClose(newAddresses)}
+
+                                />
+                            </>
+                            }
+                        </>
                     }
+                    <div style={{ ...{ display: "block" } }}>
+                        <CartSummary
+                            money={getMoney()}
+                            shipping={cartShipping}
+                            count={getCartCount()}
+                            subtotal={cartSubTotal}
+                            total={cartTotal}
+                            readOnly={true} />
+                    </div>
                 </div>
             </div>
 
@@ -194,11 +241,13 @@ country: string;
             <PreviousNextButtons labelPrevious={t('previous')} labelNext={t('next')}
                 handlePrevious={() => handlePrevious()} handleNext={() => handleNext()} />
 
-            {isProcessing && (
+            {(isProcessing || isProcessingShipping) && (
                 <CircularProgress>{t('login.info.loading')}</CircularProgress>
             )}
 
             {hasError && <Alert severity="error">{t(msg)}</Alert>}
+
+            {hasErrorShipping && <Alert severity="error">{t(msgShipping)}</Alert>}
         </div>
     );
 };

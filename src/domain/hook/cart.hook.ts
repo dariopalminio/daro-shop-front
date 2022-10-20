@@ -29,10 +29,11 @@ export const useCart = () => {
 
     useEffect(() => {
         calculateTotals(); //update calculated values
-        console.log("cartItems:", cartItems);
-        console.log("cartSubTotal:", cartSubTotal);
-        console.log("cartTotal:", cartTotal);
-    }, [cartItems]);
+    }, [cartItems, cartShipping]);
+
+    const emptyTheCart = () => {
+        setCartItems([]);
+    };
 
     const calculateTotals = () => {
         let subTotalVal: number = 0;
@@ -129,6 +130,7 @@ export const useCart = () => {
         setCartShipping,
         cartTotal,
         calculateTotals,
-        getMoney
+        getMoney,
+        emptyTheCart
     };
 };

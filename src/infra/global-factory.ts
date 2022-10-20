@@ -20,7 +20,7 @@ import ProductClientFake from "../__tests__/infra/client/fake/product-api-client
 import ProfileClientStub from "../__tests__/infra/client/fake/profile-api-client.stub";
 import ShippingClientStub from "../__tests__/infra/client/fake/shipping-api-client.fake";
 import { IShippingClient } from "domain/service/shipping-client.interface";
-import OrderClientStub from "__tests__/infra/client/fake/order-api-client.stub";
+import OrderClientStub from "../__tests__/infra/client/fake/order-api-client.stub";
 import { IOrderClient } from "domain/service/order-client.interface";
 
 

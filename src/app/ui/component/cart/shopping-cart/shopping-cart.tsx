@@ -1,14 +1,11 @@
 import "./shopping-cart.css";
 import { useTranslation } from "react-i18next";
+import { OrderType } from "domain/model/order/order.type";
 
 
 interface IProps {
+    order: OrderType;
     money: string;
-    empty: boolean;
-    count: number;
-    subtotal: number;
-    shipping: number;
-    total: number;
     onClick: () => void;
     children?: React.ReactNode; //CartItem
 }
@@ -38,15 +35,15 @@ const ShoppingCart: React.FC<IProps> = (props: IProps) => {
             <div className="shopping-cart-totals">
                 <div className="shopping-cart-totals-item">
                     <label>{t('cart.subtotal')}</label>
-                    <div className="shopping-cart-totals-value" id="cart-subtotal">$ {props.subtotal}</div>
+                    <div className="shopping-cart-totals-value" id="cart-subtotal">$ {props.order.subTotal}</div>
                 </div>
                 <div className="shopping-cart-totals-item">
                     <label>{t('cart.shipping')}</label>
-                    <div className="shopping-cart-totals-value" id="cart-shipping">$ {props.shipping}</div>
+                    <div className="shopping-cart-totals-value" id="cart-shipping">$ {props.order.shippingPrice}</div>
                 </div>
                 <div className="shopping-cart-totals-item shopping-cart-totals-item-total">
                     <label>{t('cart.grandtotal')}</label>
-                    <div className="shopping-cart-totals-value" id="cart-total">({props.money}) $ {props.total}</div>
+                    <div className="shopping-cart-totals-value" id="cart-total">({props.money}) $ {props.order.total}</div>
                 </div>
             </div>
         </div>

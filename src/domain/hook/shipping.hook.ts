@@ -42,10 +42,10 @@ export const useShipping = () => {
     };
 
     return {
-        isProcessing: state.isProcessing,
-        hasError: state.hasError,
-        msg: state.msg,
-        isSuccess: state.isSuccess,
+        isProcessingShipping: state.isProcessing,
+        hasErrorShipping: state.hasError,
+        msgShipping: state.msg,
+        isSuccessShipping: state.isSuccess,
         getShippingPrice
     };
 };

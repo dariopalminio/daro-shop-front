@@ -7,6 +7,8 @@ import * as GlobalConfig from 'infra/global.config';
 import { IHookState, InitialState } from './hook.type';
 import SessionContext, { ISessionContext } from 'domain/context/session.context';
 import CartContext, { ICartContext } from 'domain/context/cart.context';
+import { IOrderClient } from 'domain/service/order-client.interface';
+import { OrderType } from 'domain/model/order/order.type';
 
 
 /**
@@ -24,23 +26,55 @@ export const useCheckout = () => {
     const [currentSelectedAddresIndex, setCurrentSelectedAddresIndex] = useState(-1);
     const [profileInitialized, setProfileInitialized] = useState<boolean>(false); //puede colocarse en el hook
     const [shippingData, setShippingData] = useState<any>(undefined);
+    const orderClient: IOrderClient = GlobalConfig.Factory.get<IOrderClient>('orderClient');
+    const [order, setOrder] = useState<OrderType | undefined>(undefined);
+    const [includesShipping, SetIncludesShipping] = useState<boolean>(true);
 
     useEffect(() => {
         console.log("useCheckout...");
     }, []);
 
     const setShippingPrice = (data: any) => {
-        setShippingData(data);
         const shippingValue: number = Number(data.price);
-        setCartShipping( shippingValue );
-        calculateTotals();
+        setCartShipping(shippingValue);
+        setShippingData(data);
     }
 
     const canContinueToPayment = (): boolean => {
         return cartTotal > 0;
     };
 
+    const initializeOrder = async () => {
+
+        const orderToInit: OrderType = {
+            client: {
+                userId: "",
+                firstName: "",
+                lastName: "",
+                email: "",
+                docType: "",
+                document: "",
+                telephone: "",
+            },
+            count: 0,
+            orderItems: [],
+            includesShipping: includesShipping,
+            shippingAddress: profile.addresses[currentSelectedAddresIndex],
+            subTotal: 0,
+            shippingPrice: 0,
+            total: 0
+        }
+
+        const newOrder: any = await orderClient.initialize(orderToInit);
+        console.log("initialize:", newOrder);
+        setOrder(newOrder.order);
+    }
+
     return {
+        isProcessing: state.isProcessing,
+        hasError: state.hasError,
+        msg: state.msg,
+        isSuccess: state.isSuccess,
         profileInitialized,
         setProfileInitialized,
         currentSelectedAddresIndex,
@@ -49,6 +83,10 @@ export const useCheckout = () => {
         setProfile,
         shippingData,
         setShippingPrice,
-        canContinueToPayment
+        canContinueToPayment,
+        initializeOrder,
+        order,
+        includesShipping, 
+        SetIncludesShipping
     };
 };

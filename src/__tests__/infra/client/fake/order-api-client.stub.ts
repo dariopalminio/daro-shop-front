@@ -35,6 +35,7 @@ const responseInitialized: any = {
                 "amount": 650000
             }
         ],
+        "count": 2,
         "includesShipping": true,
         "shippingAddress": {
             "street": "Galvarino Gallardo 1750",

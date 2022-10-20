@@ -10,7 +10,8 @@ import { useRef } from "react";
 
 
 interface IProps {
-  item: CartItemType;
+  readOnly: boolean;
+  item: any;
   qtyChangeHandler: (id: string, qty: number) => void;
   removeHandler: (id: string) => void;
 }
@@ -24,9 +25,10 @@ const ShoppingCartItem: React.FC<IProps> = (props: IProps) => {
   const location = useLocation();
 
   const handlerChanfeInputQty = (e: React.FormEvent<HTMLInputElement>) => {
-    const newValue: number = parseInt(e.currentTarget.value);
-    props.qtyChangeHandler(props.item.itemId, newValue);
-    
+    if (!props.readOnly) {
+      const newValue: number = parseInt(e.currentTarget.value);
+      props.qtyChangeHandler(props.item.itemId, newValue);
+    }
   };
 
   return (
@@ -36,22 +38,29 @@ const ShoppingCartItem: React.FC<IProps> = (props: IProps) => {
       </div>
       <div className="shopping-cart-product-details">
         <div className="shopping-cart-product-title">
-          <Link
-            to={`/catalog/product/detail/${props.item.productId}`} state={location}>
+          {!props.readOnly &&
+            <Link
+              to={`/catalog/product/detail/${props.item.productId}`} state={location}>
+              <p>{props.item.name}</p>
+            </Link>
+          }
+          {props.readOnly &&
             <p>{props.item.name}</p>
-          </Link>
+          }
         </div>
       </div>
       <div className="shopping-cart-product-price">{props.item.grossPrice}</div>
       <div className="shopping-cart-product-quantity">
-        <input  type="number" defaultValue={props.item.qty} min="1" onChange={(e) => handlerChanfeInputQty(e)} />
+        <input type="number" defaultValue={props.item.qty} min="1" onChange={(e) => handlerChanfeInputQty(e)} disabled={props.readOnly} />
       </div>
-      <div className="shopping-cart-product-removal">
-        <IconButton
-          onClick={() => props.removeHandler(props.item.itemId)}>
-          <RiDeleteBin7Fill size={20} color="grey" onClick={() => props.removeHandler(props.item.itemId)} />
-        </IconButton>
-      </div>
+      {!props.readOnly &&
+        <div className="shopping-cart-product-removal">
+          <IconButton
+            onClick={() => props.removeHandler(props.item.itemId)}>
+            <RiDeleteBin7Fill size={20} color="grey" onClick={() => props.removeHandler(props.item.itemId)} />
+          </IconButton>
+        </div>
+      }
       <div className="shopping-cart-product-amount">{props.item.amount}</div>
     </div>
   );

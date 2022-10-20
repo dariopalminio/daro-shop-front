@@ -46,7 +46,6 @@ const SelectAddress: React.FC<IMyProps> = (props: IMyProps) => {
         toggle();
     };
 
-
     const handleSelectAddress = async (item: string, index: number) => {
         props?.setCurrentSelected && props.setCurrentSelected(index);
     };
@@ -75,9 +74,7 @@ const SelectAddress: React.FC<IMyProps> = (props: IMyProps) => {
 
     return (
         <div style={{ ...{ display: "block" } }}>
-            <h1>
-                {getTitle()}
-            </h1>
+            {props.title && <h1>{getTitle()}</h1>}
 
             <div style={{ textAlign: "left" }}>
                 <RadioButtonList
