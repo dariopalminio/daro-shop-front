@@ -6,7 +6,7 @@ import { IPaymentClient } from 'domain/service/payment-client.interface';
 /**
  * usePaymentManual Custom Hook
  */
-export const usePaymentManual = () => {
+export const usePayment = () => {
     const paymentClient: IPaymentClient = GlobalConfig.Factory.get<IPaymentClient>('paymentClient');
     const [state, setState] = useState<IHookState>(InitialState);
     const [ bankTransferInfo, setBankTransferInfo] = useState<Array<any>>([]);
@@ -15,7 +15,7 @@ export const usePaymentManual = () => {
     }, []);
 
     const getBankTransferInfo = async () => {
-        //http://localhost:3001/api/webshop/v1/payment/methods/key/BANK_TRANSFER
+        
         const data = await paymentClient.getPaymentMethodInfo('BANK_TRANSFER');
         setBankTransferInfo(data.meta);
     };

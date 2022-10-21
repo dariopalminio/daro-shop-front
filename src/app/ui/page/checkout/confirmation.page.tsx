@@ -40,8 +40,8 @@ const ConfirmationPage: FunctionComponent = () => {
     const fetchData = async () => {
         try {
             console.log("useEffect-->fetchData");
-            if (!order) initializeOrder(); //create new order in server
-            else alert("an order already exists! It must be updated (TODO...)");
+            //if (!order) initializeOrder(); //create new order in server
+            //else alert("an order already exists! It must be updated (TODO...)");
         } catch (e) {
             console.log("Error in initializeOrder fetchData:", e);
         }

@@ -7,7 +7,7 @@ import TextsStepper from 'app/ui/common/steppers/texts-stepers';
 import { useNavigate } from 'react-router-dom';
 import SessionContext, { ISessionContext } from 'domain/context/session.context';
 import PaymentManualInfo from 'app/ui/component/payment/payment-manual-info';
-import { usePaymentManual } from 'domain/hook/payment/payment-manual.hook';
+import { usePayment } from 'domain/hook/payment/payment.hook';
 
 
 const SuccessPage: FunctionComponent = () => {
@@ -19,7 +19,7 @@ const SuccessPage: FunctionComponent = () => {
         changeItemQuantity, emptyTheCart } = useContext(CartContext) as ICartContext;
         const { order
         } = useContext(CheckoutContext) as ICheckoutContext; //With Custom hook
-    const { getBankTransferInfo, bankTransferInfo } = usePaymentManual();
+    const { getBankTransferInfo, bankTransferInfo } = usePayment();
     const navigate = useNavigate();
     const { t } = useTranslation();
 

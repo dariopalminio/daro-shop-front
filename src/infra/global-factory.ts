@@ -24,6 +24,7 @@ import ProfileClientStub from "../__tests__/infra/client/fake/profile-api-client
 import ShippingClientStub from "../__tests__/infra/client/fake/shipping-api-client.fake";
 import OrderClientStub from "../__tests__/infra/client/fake/order-api-client.stub";
 import PaymentClientStub from "../__tests__/infra/client/fake/payment-api-client.stub";
+import PaimentApiClientImpl from "./client/payment-api-client.impl";
 
 
 
@@ -49,7 +50,6 @@ export default function GlobalFactory() {
         container.set('shippingClient', ShippingClientStub() as IShippingClient);
         container.set('orderClient', OrderClientStub() as IOrderClient);
         container.set('paymentClient', PaymentClientStub() as IPaymentClient);
-
     } else {
         /** Instances for injection of the real */
         container.set('productClient', ProductApiClientImpl() as IProductClient);
@@ -58,6 +58,7 @@ export default function GlobalFactory() {
         container.set('profileClient', ProfileApiClientImpl() as IProfileClient);
         container.set('notificationClient', NotificationApiServiceImpl() as INotificationClient);
         container.set('shippingClient', ShippingClientImpl() as IShippingClient);
+        container.set('paymentClient', PaimentApiClientImpl() as IPaymentClient);
     }
 
     //Get instance for key name

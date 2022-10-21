@@ -21,6 +21,7 @@ export const APIEndpoints = {
   products:  import.meta.env.VITE_FE_API_PRODUCTS as string,
   profiles: import.meta.env.VITE_FE_API_PROFILES as string,
   shipping: import.meta.env.VITE_FE_API_SHIPPING as string,
+  payment: import.meta.env.VITE_FE_API_PAYMENT as string,
 };
 
 export const Auth = {
