@@ -99,17 +99,17 @@ const InformationPage: FunctionComponent = () => {
         return session && !session.isLogged;
     };
 
-    const handleOnClickSelect = async (index: number) => {
+    const handleOnClickSelectAddress = async (index: number) => {
         //const addrsSelected = profile.addresses[index];
         console.log("InformationPage-->profile.addresses[index]:", profile.addresses[index])
-        setCurrentSelectedAddresIndex(index);
         try {
-            const address = profile.addresses[currentSelectedAddresIndex];
+            const address = profile.addresses[index];
             const data = await getShippingPrice(address);
             setShippingPrice(data);
         } catch (e) {
             console.log("Error in getShippingPrice fetchData:", e);
         }
+        setCurrentSelectedAddresIndex(index);
     };
 
     const handleAddNeAddressAndClose = (newAddresses: Array<any>): void => {
@@ -215,7 +215,7 @@ const InformationPage: FunctionComponent = () => {
                                 <SelectAddress
                                     country={getCurrentCountry()}
                                     currentSelected={currentSelectedAddresIndex}
-                                    setCurrentSelected={(index: number) => handleOnClickSelect(index)}
+                                    setCurrentSelected={(index: number) => handleOnClickSelectAddress(index)}
                                     addresses={getAddresses()}
                                     setAddresses={(newAddresses: Array<any>) => handleAddNeAddressAndClose(newAddresses)}
 
