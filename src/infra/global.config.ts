@@ -17,12 +17,13 @@ export const urlImages = (import.meta.env.VITE_FE_URL_STATIC_IMG ? import.meta.e
 export const APIEndpoints = {
   notifications: import.meta.env.VITE_FE_NOTIFICATION_API as string,
   auth: import.meta.env.VITE_FE_API_AUTH as string,
-  users: import.meta.env.VITE_FE_API_USER as string,
+  users: import.meta.env.VITE_FE_API_USERS as string,
   products:  import.meta.env.VITE_FE_API_PRODUCTS as string,
   profiles: import.meta.env.VITE_FE_API_PROFILES as string,
   shipping: import.meta.env.VITE_FE_API_SHIPPING as string,
-  payment: import.meta.env.VITE_FE_API_PAYMENT as string,
-};
+  payments: import.meta.env.VITE_FE_API_PAYMENTS as string,
+  orders: import.meta.env.VITE_FE_API_ORDERS as string,
+}
 
 export const Auth = {
   realm: import.meta.env.VITE_FE_AUTH_REALM as string,

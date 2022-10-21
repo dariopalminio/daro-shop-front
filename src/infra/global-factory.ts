@@ -25,6 +25,7 @@ import ShippingClientStub from "../__tests__/infra/client/fake/shipping-api-clie
 import OrderClientStub from "../__tests__/infra/client/fake/order-api-client.stub";
 import PaymentClientStub from "../__tests__/infra/client/fake/payment-api-client.stub";
 import PaimentApiClientImpl from "./client/payment-api-client.impl";
+import OrderApiClientImpl from "./client/order-api-client.impl";
 
 
 
@@ -58,6 +59,7 @@ export default function GlobalFactory() {
         container.set('profileClient', ProfileApiClientImpl() as IProfileClient);
         container.set('notificationClient', NotificationApiServiceImpl() as INotificationClient);
         container.set('shippingClient', ShippingClientImpl() as IShippingClient);
+        container.set('orderClient', OrderApiClientImpl() as IOrderClient);
         container.set('paymentClient', PaimentApiClientImpl() as IPaymentClient);
     }
 

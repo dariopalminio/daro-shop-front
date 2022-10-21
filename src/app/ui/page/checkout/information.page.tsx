@@ -100,8 +100,6 @@ const InformationPage: FunctionComponent = () => {
     };
 
     const handleOnClickSelectAddress = async (index: number) => {
-        //const addrsSelected = profile.addresses[index];
-        console.log("InformationPage-->profile.addresses[index]:", profile.addresses[index])
         try {
             const address = profile.addresses[index];
             const data = await getShippingPrice(address);
@@ -192,7 +190,6 @@ const InformationPage: FunctionComponent = () => {
                         onChange={(profile: any, isVaslid: boolean) => handleChangeSomeField(profile, isVaslid)}
                     />
                 </div>
-
 
                 <div className="wrapper-delivery-address">
 

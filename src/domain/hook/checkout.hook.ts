@@ -46,28 +46,34 @@ export const useCheckout = () => {
 
     const initializeOrder = async () => {
 
-        const orderToInit: OrderType = {
-            client: {
-                userId: "",
-                firstName: "",
-                lastName: "",
-                email: "",
-                docType: "",
-                document: "",
-                telephone: "",
-            },
-            count: 0,
-            orderItems: [],
-            includesShipping: includesShipping,
-            shippingAddress: profile.addresses[currentSelectedAddresIndex],
-            subTotal: 0,
-            shippingPrice: 0,
-            total: 0
-        }
+        setState({ isProcessing: true, hasError: false, msg: '', isSuccess: false });
+        try {
+            const orderToInit: OrderType = {
+                client: {
+                    userId: profile.userId ? profile.userId : 'Anonymous',
+                    firstName: profile.userId ? profile.userId : 'Anonymous',
+                    lastName: profile.lastName ? profile.lastName : 'Anonymous',
+                    email: profile.lastName,
+                    docType: profile.docType ? profile.docType : '',
+                    document: profile.document ? profile.document : '',
+                    telephone: profile.telephone ? profile.telephone : '',
+                },
+                count: getCartCount(),
+                orderItems: cartItems,
+                includesShipping: includesShipping,
+                shippingAddress: profile.addresses[currentSelectedAddresIndex],
+                subTotal: cartSubTotal,
+                shippingPrice: cartShipping,
+                total: cartTotal
+            }
 
-        const newOrder: any = await orderClient.initialize(orderToInit);
-        console.log("initialize:", newOrder);
-        setOrder(newOrder.order);
+            const newOrder: any = await orderClient.initialize(orderToInit);
+            console.log("initialize:", newOrder);
+            setOrder(newOrder.order);
+            setState({ isProcessing: false, hasError: false, msg: '', isSuccess: true });
+        } catch (error: any) {
+            setState({ isProcessing: false, hasError: true, msg: error.message, isSuccess: false });
+        }
     }
 
     return {
@@ -86,7 +92,7 @@ export const useCheckout = () => {
         canContinueToPayment,
         initializeOrder,
         order,
-        includesShipping, 
+        includesShipping,
         SetIncludesShipping
     };
 };

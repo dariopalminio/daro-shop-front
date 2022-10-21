@@ -3,7 +3,7 @@ export type CartItemType = {
     imageUrl: string;
     name: string;
     grossPrice: number;
-    qty: number;
+    quantity: number;
     amount: number;
     stock: number;
 };

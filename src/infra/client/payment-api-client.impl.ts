@@ -19,7 +19,7 @@ export default function PaimentApiClientImpl(): IPaymentClient {
         if (!key) throw Error("No payment method key selected");
 
         try {
-            const URL = `${InfraConfig.APIEndpoints.payment}/methods/key/${key}`;
+            const URL = `${InfraConfig.APIEndpoints.payments}/methods/key/${key}`;
 
             const params = new URLSearchParams();
             params.append('key', key);

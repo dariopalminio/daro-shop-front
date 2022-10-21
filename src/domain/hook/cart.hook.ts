@@ -9,7 +9,7 @@ import * as GlobalConfig from 'infra/global.config';
 export const useCart = () => {
     const [cartItems, setCartItems] = useState<Array<CartItemType>>([]);
     const [cartSubTotal, setCartSubTotal] = useState<number>(0);
-    const [cartShipping, setCartShipping] = useState<number>(0);
+    const [cartShipping, setCartShipping] = useState<number>(-1);
     const [cartTotal, setCartTotal] = useState<number>(0);
 
     useEffect(() => {
@@ -55,7 +55,7 @@ export const useCart = () => {
                 imageUrl: productItem.images[0],
                 name: productItem.name,
                 grossPrice: productItem.grossPrice,
-                qty: qty,
+                quantity: qty,
                 stock: productItem.stock,
                 amount: (productItem.grossPrice * qty)
             };
@@ -63,7 +63,7 @@ export const useCart = () => {
             setCartItems(newCartItems);
             saveCart(newCartItems);
         }else{
-            changeItemQuantity(cartItems[index].productId, cartItems[index].qty + qty);
+            changeItemQuantity(cartItems[index].productId, cartItems[index].quantity + qty);
         }
     }
 
@@ -87,7 +87,7 @@ export const useCart = () => {
     const getCartCount = (): number => {
         let totalVal = 0;
         for (let i = 0; i < cartItems.length; i++) {
-            totalVal += cartItems[i].qty;
+            totalVal += cartItems[i].quantity;
         }
         return totalVal;
     };

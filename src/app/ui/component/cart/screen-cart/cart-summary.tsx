@@ -64,7 +64,8 @@ const CartSummary: React.FC<IProps> = (props: IProps) => {
             <CartSummaryInfo>
                 <p>{t('cart.you.have')} ({props.count}) {t('cart.products')}</p>
                 <p>{t('cart.subtotal')}: ({props.money}) $ {props.subtotal}</p>
-                {(props.shipping !==0) && <p>{t('cart.shipping')}: ({props.money}) $ {props.shipping}</p>}
+                {(props.shipping && props.shipping !==-1) && 
+                    <p>{t('cart.shipping')}: ({props.money}) $ {props.shipping}</p>}
                 {props.total && <p>{t('cart.grandtotal')}: ({props.money}) $ {props.total}</p>}
             </CartSummaryInfo>
             {!props.readOnly &&
