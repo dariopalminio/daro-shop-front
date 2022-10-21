@@ -50,17 +50,17 @@ export default function useProfile() {
      * @param userName 
      * @returns 
      */
-    const getProfile = async (userName: string | undefined) => {
+    const getProfile = async (userName: string | undefined): Promise<Profile | null> => {
         setState({ isProcessing: true, hasError: false, msg: '', isSuccess: false });
 
         if (!session || !userName || userName == null) {
             setState({ isProcessing: false, hasError: true, msg: "auth.error.not.logged", isSuccess: false });
-            return;
+            return null;
         };
 
         try {
 
-            let info = await profileClient.getProfile(userName);
+            let info: Profile = await profileClient.getProfile(userName);
 
             setState({ isProcessing: false, hasError: false, msg: "profile.get.user.success", isSuccess: true });
             return info;
@@ -73,7 +73,7 @@ export default function useProfile() {
             }
             console.error(error);
             setState({ isProcessing: false, hasError: true, msg: errorKey, isSuccess: false });
-            throw error;
+            return null;
         }
 
     };

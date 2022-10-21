@@ -55,13 +55,12 @@ const InformationPage: FunctionComponent = () => {
     const location = useLocation();
 
     const fetchData = async () => {
-        console.log("InformationPage-->fetchData...");
         try {
             if (session && session.isLogged) {
                 console.log("InformationPage-->Loading profile...");
                 const username = session ? session.userName : '';
                 const info = await getProfile(username);
-                if (info.userName) {
+                if (info !== null && info.userName) {
                     const p: Profile = {
                         ...profile,
                         userName: info.userName ? info.userName : '',
