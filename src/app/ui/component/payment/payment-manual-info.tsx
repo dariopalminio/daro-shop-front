@@ -22,7 +22,7 @@ const PaymentManualInfo: React.FC<IProps> = (props: IProps) => {
                 return (
                     <ItemInfoWrapper key={index}>
                         <LabelInfo>{item.label}:</LabelInfo>
-                        <TextInfo>{item.text}</TextInfo>
+                        <TextInfo>{item.value}</TextInfo>
                         {(index < props.list.length - 1) && <LineDivider />}
                     </ItemInfoWrapper>
                 )

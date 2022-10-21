@@ -10,9 +10,9 @@ import PreviousNextButtons from 'app/ui/common/button/previous-next-buttons';
 import PaymentMethods from 'app/ui/component/payment/payment-methods';
 
 export enum PaymentMethodType {
-    MANUAL = "MANUAL",
+    BANK_TRANSFER = "BANK_TRANSFER",
     OTHER = "OTHER",
-  }
+}
 
 /**
  * PaymentPage
@@ -29,11 +29,11 @@ const PaymentPage: FunctionComponent = () => {
 
     const navigate = useNavigate();
     const { t } = useTranslation();
-    const [payMethodName, setPayMethodName] = useState<string>(PaymentMethodType.MANUAL);
+    const [payMethodName, setPayMethodName] = useState<string>(PaymentMethodType.BANK_TRANSFER);
 
 
     useEffect(() => {
-
+        //send confirm order
     }, []);
 
     const changeStep = (index: number) => {

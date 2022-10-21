@@ -3,6 +3,9 @@ import { IAuthTokensClient } from "domain/service/auth-tokens-client.interface";
 import { INotificationClient } from "domain/service/notification-client.interface";
 import { IProductClient } from "domain/service/product-client.interface";
 import { IProfileClient } from "domain/service/profile-client.interface";
+import { IPaymentClient } from "domain/service/payment-client.interface";
+import { IOrderClient } from "domain/service/order-client.interface";
+import { IShippingClient } from "domain/service/shipping-client.interface";
 
 //Imports real implementations
 import ApiAuthClientImpl from "./client/api-auth-client.impl";
@@ -19,9 +22,9 @@ import NotificationClientStub from "../__tests__/infra/client/fake/notification-
 import ProductClientFake from "../__tests__/infra/client/fake/product-api-client.fake";
 import ProfileClientStub from "../__tests__/infra/client/fake/profile-api-client.stub";
 import ShippingClientStub from "../__tests__/infra/client/fake/shipping-api-client.fake";
-import { IShippingClient } from "domain/service/shipping-client.interface";
 import OrderClientStub from "../__tests__/infra/client/fake/order-api-client.stub";
-import { IOrderClient } from "domain/service/order-client.interface";
+import PaymentClientStub from "../__tests__/infra/client/fake/payment-api-client.stub";
+
 
 
 /**
@@ -45,6 +48,8 @@ export default function GlobalFactory() {
         container.set('notificationClient', NotificationClientStub() as INotificationClient);
         container.set('shippingClient', ShippingClientStub() as IShippingClient);
         container.set('orderClient', OrderClientStub() as IOrderClient);
+        container.set('paymentClient', PaymentClientStub() as IPaymentClient);
+
     } else {
         /** Instances for injection of the real */
         container.set('productClient', ProductApiClientImpl() as IProductClient);

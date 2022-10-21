@@ -1,6 +1,6 @@
 
 import { CenteringContainer } from "app/ui/common/elements/centering-container";
-import React, { useState } from "react";
+import React from "react";
 import { useTranslation } from 'react-i18next';
 import { RiCheckFill } from "react-icons/ri";
 import styled from "styled-components";
@@ -78,7 +78,7 @@ const PaymentMethods: React.FC<IProps> = (props: IProps) => {
             <CenteringContainer>
                 <PaymentMethodsContainer>
 
-                    <MethodType checked={props.select === PaymentMethodType.MANUAL} onClick={() => handleClick(PaymentMethodType.MANUAL)}>
+                    <MethodType checked={props.select === PaymentMethodType.BANK_TRANSFER} onClick={() => handleClick(PaymentMethodType.BANK_TRANSFER)}>
                         <SelectedCheck checked={props.select === props.select}><RiCheckFill size={24} color="white" /></SelectedCheck>
                         <div>
                             <img src={String(manualBankTransferImg)} height="60" width="100"/>
@@ -88,7 +88,7 @@ const PaymentMethods: React.FC<IProps> = (props: IProps) => {
                         </div>
                     </MethodType>
 
-                    <MethodType checked={props.select === "none"} onClick={() => handleClick(PaymentMethodType.MANUAL)}>
+                    <MethodType checked={props.select === "none"} onClick={() => handleClick(PaymentMethodType.BANK_TRANSFER)}>
                         <div className="logo">
                         <img src={String(bitcoinMethodTypeImg)} height="60" width="100"/>
                         </div>
@@ -97,7 +97,7 @@ const PaymentMethods: React.FC<IProps> = (props: IProps) => {
                         </div>
                     </MethodType>
 
-                    <MethodType checked={props.select === "none"} onClick={() => handleClick(PaymentMethodType.MANUAL)}>
+                    <MethodType checked={props.select === "none"} onClick={() => handleClick(PaymentMethodType.BANK_TRANSFER)}>
                         <div className="logo">
                         <img src={String(otherPaymentMethodImg)} height="60" width="100"/>
                         </div>
