@@ -13,7 +13,8 @@ export interface SessionType {
   };
 
   export enum PermissionType {
-    ANONYMOUS = "ANONYMOUS",
-    USER = "USER",
-    ADMIN = "ADMIN",
+    ANONYMOUS = "anonymous", //User not logged
+    USER = "user",
+    ADMIN = "admin",
+    APP = "app",
   }

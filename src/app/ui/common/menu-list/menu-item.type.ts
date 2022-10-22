@@ -1,8 +1,8 @@
 
 export enum AccessType {
-    ANONYMOUS = "ANONYMOUS",
-    USER = "USER",
-    ADMIN = "ADMIN",
+    ANONYMOUS = "anonymous",
+    USER = "user",
+    ADMIN = "admin",
   }
 
 /**
