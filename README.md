@@ -17,8 +17,8 @@ Daro web app
 
 ## Referencias:
 - Code commits standard: https://www.conventionalcommits.org/en/v1.0.0/
+- Node Style Guide: https://github.com/felixge/node-style-guide
 - Naming cheatsheet NestJS: https://narhakobyan.github.io/awesome-nest-boilerplate/docs/naming-cheatsheet.html#should
-- API Guide: https://github.com/byrondover/api-guidelines/blob/master/Guidelines.md#errors
 - HTTP Client, Axios :https://axios-http.com/docs/intro
 - Internationalization, react-i18next: https://github.com/andretorres00123/react-i18n-tutorial
 - Internationalization, i18next: https://www.i18next.com/overview/getting-started
