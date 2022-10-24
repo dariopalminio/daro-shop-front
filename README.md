@@ -17,6 +17,8 @@ Daro web app
 
 ## Referencias:
 - Code commits standard: https://www.conventionalcommits.org/en/v1.0.0/
+- Naming cheatsheet NestJS: https://narhakobyan.github.io/awesome-nest-boilerplate/docs/naming-cheatsheet.html#should
+- API Guide: https://github.com/byrondover/api-guidelines/blob/master/Guidelines.md#errors
 - HTTP Client, Axios :https://axios-http.com/docs/intro
 - Internationalization, react-i18next: https://github.com/andretorres00123/react-i18n-tutorial
 - Internationalization, i18next: https://www.i18next.com/overview/getting-started
@@ -26,7 +28,6 @@ Daro web app
 - Node shop api with stripe payment:  https://github.com/safak/youtube/tree/node-shop-api
 - Responsive testing tool: https://responsivedesignchecker.com/
 - Ajv and JWT: https://github.com/Desarrollo-Util/express-example
-- API Guide: https://github.com/byrondover/api-guidelines/blob/master/Guidelines.md#errors
 - Axios and refresh token: https://javascript.plainenglish.io/handle-refresh-token-with-axios-1e0f45e9afa
 
 Other References:

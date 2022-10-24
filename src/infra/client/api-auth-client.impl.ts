@@ -39,7 +39,7 @@ export default function ApiAuthClientImpl(): IAuthClient {
     }
 
     const body = {
-      username: username,
+      userName: username,
       firstName: firstName,
       lastName: lastName,
       email: email,
@@ -190,7 +190,7 @@ export default function ApiAuthClientImpl(): IAuthClient {
   function loginService(username: string, pass: string): Promise<Tokens> {
 
     const body = {
-      username: username,
+      userName: username,
       password: pass
     };
 

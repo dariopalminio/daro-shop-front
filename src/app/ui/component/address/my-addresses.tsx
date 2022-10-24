@@ -29,7 +29,7 @@ const MyAddresses: React.FC<IMyProps> = (props: IMyProps) => {
     const [newAddress, setNewAddress] = React.useState(getInitialAddress(props.country));
 
     useEffect(() => {
-        console.log("MyAddresses->useEffect->props?.addresses:", props?.addresses);
+        //console.log("MyAddresses->useEffect->props?.addresses:", props?.addresses);
     }, []);
     
     const convertAddressOneLine = (address: any) => {
