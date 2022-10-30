@@ -7,7 +7,7 @@ import { IAuthTokensClient } from 'domain/service/auth-tokens-client.interface';
 type NewAdminTokenRequestType = {
   client_id: string,
   grant_type: string,
-  username: string,
+  userName: string,
   password: string,
   scope: string,
   client_secret: string,
@@ -49,7 +49,7 @@ export default function AuthTokensClientImpl(): IAuthTokensClient {
       const body: NewAdminTokenRequestType = {
         client_id: GlobalConfig.Auth.client_id,
         grant_type: 'password',
-        username: GlobalConfig.Auth.username_admin,
+        userName: GlobalConfig.Auth.username_admin,
         password: GlobalConfig.Auth.password_admin,
         scope: 'openid roles',
         client_secret: GlobalConfig.Auth.client_secret,
