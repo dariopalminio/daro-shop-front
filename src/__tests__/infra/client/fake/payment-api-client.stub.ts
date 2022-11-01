@@ -9,7 +9,7 @@ export default function PaymentClientStub(): IPaymentClient {
 function getPaymentMethodInfo(key: string): Promise<any>{
     return new Promise<any>( (resolve, reject) => {
            const data: any = {
-            "_id": "6351fc7a004c27fe61a552d1",
+            "id": "6351fc7a004c27fe61a552d1",
             "key": "BANK_TRANSFER",
             "name": "Transferencia",
             "description": "Transferencia Bancaria Manual",

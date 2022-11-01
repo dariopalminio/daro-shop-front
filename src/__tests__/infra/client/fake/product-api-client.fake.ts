@@ -14,7 +14,7 @@ export default function ProductClientFake(): IProductClient {
         count: 5,
         list: [
             {
-                _id: "1",
+                id: "1",
                 sku: "1324",
                 name: "Paisaje con palmeras",
                 images: ["https://i.pinimg.com/originals/95/5d/e2/955de20dd2d6f457a1cfdadb8edc23d4.png"],
@@ -24,7 +24,7 @@ export default function ProductClientFake(): IProductClient {
                 category: "Category 1"
             },
             {
-                _id: "2",
+                id: "2",
                 sku: "1234",
                 name: "Amanecer digital",
                 images: ["https://wallpaperaccess.com/full/2918041.jpg"],
@@ -34,7 +34,7 @@ export default function ProductClientFake(): IProductClient {
                 category: "Category 1"
             },
             {
-                _id: "3",
+                id: "3",
                 sku: "134",
                 name: "Entre montañas 3D",
                 images: ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2SmahEEhWXut-9211CpUtZLrOljU8BfdnBUlt60UwBVemJ0rXC3T9-SEuMAfH6ttUmMg&usqp=CAU"],
@@ -44,7 +44,7 @@ export default function ProductClientFake(): IProductClient {
                 category: "Category 1"
             },
             {
-                _id: "4",
+                id: "4",
                 sku: "1222",
                 name: "Las pirámides",
                 images: ["https://wallpaperaccess.com/full/5287561.jpg",
@@ -56,7 +56,7 @@ export default function ProductClientFake(): IProductClient {
                 category: "Category 1"
             },
             {
-                _id: "6",
+                id: "6",
                 sku: "1444",
                 name: "Palmeras al sol",
                 images: ["https://wallpaperbat.com/img/11896-outrun-sunset-wallpaper.jpg"],
@@ -73,7 +73,7 @@ export default function ProductClientFake(): IProductClient {
         count: 2,
         list: [
             {
-                _id: "5",
+                id: "5",
                 sku: "1333",
                 name: "Einstein I",
                 images: ["https://www.biografiasyvidas.com/monografia/einstein/fotos/einstein_1947.jpg",
@@ -85,7 +85,7 @@ export default function ProductClientFake(): IProductClient {
                 category: "Category 2"
             },
             {
-                _id: "8",
+                id: "8",
                 sku: "1333",
                 name: "Einstein II",
                 images: [
@@ -104,7 +104,7 @@ export default function ProductClientFake(): IProductClient {
         count: 1,
         list: [
             {
-                _id: "9",
+                id: "9",
                 sku: "13333",
                 name: "Stallman",
                 images: ["https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Richard_Matthew_Stallman.jpeg/1200px-Richard_Matthew_Stallman.jpeg",
@@ -131,7 +131,7 @@ export default function ProductClientFake(): IProductClient {
 
     //Product Detail hardcoded to simulation
     const productDetailed: any = {
-        "_id": "632df7695a88c40e4fa634f6",
+        "id": "632df7695a88c40e4fa634f6",
         "sku": "PIJAMAS-RABAH",
         "barcode": "5111407592",
         "name": "Pijama Unisex Bebé Vaca",
@@ -161,19 +161,19 @@ export default function ProductClientFake(): IProductClient {
 
     const categories_fake = [
         {
-            "_id": "6338707686b0c1591fc3b14b",
+            "id": "6338707686b0c1591fc3b14b",
             "name": "Category 1",
             "description": "Category 1 description",
             "__v": 0
         },
         {
-            "_id": "6338708186b0c1591fc3b14d",
+            "id": "6338708186b0c1591fc3b14d",
             "name": "Category 2",
             "description": "Category 2 description",
             "__v": 0
         },
         {
-            "_id": "6338708186b0c1591fc3b123",
+            "id": "6338708186b0c1591fc3b123",
             "name": "Category 3",
             "description": "Category 3 description",
             "__v": 0

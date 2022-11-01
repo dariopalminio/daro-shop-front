@@ -215,7 +215,6 @@ export default function ApiAuthClientImpl(): IAuthClient {
     }
     ).catch((error) => {
       // response.status !== 200
-      console.log('loginService.error', error);
       const authError: ApiError = handleAxiosError(error);
       throw authError;
     });

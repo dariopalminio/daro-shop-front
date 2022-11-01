@@ -160,6 +160,7 @@
     "checkout.shipping.address.error": "No address selected",
     "checkout.shipping.address.error.not.found": "Address to shipping not found!",
     "selection.choose.option": "Choose an option",
-    "back.to.previous": "Comeback"
+    "back.to.previous": "Comeback",
+    "InvalidCredentialsError": "Invalid Credentials Error"
 
 }

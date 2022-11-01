@@ -15,7 +15,8 @@ export interface ICartContext {
     cartTotal: number,
     calculateTotals: () => void,
     getMoney: () => string,
-    emptyTheCart: () => void
+    emptyTheCart: () => void,
+    cartCount: number
 };
 
 export const CartContextDefaultValues: ICartContext = {
@@ -32,7 +33,8 @@ export const CartContextDefaultValues: ICartContext = {
     cartTotal: 0,
     calculateTotals: () => { },
     getMoney: () => { return '' },
-    emptyTheCart: () => { }
+    emptyTheCart: () => { },
+    cartCount: 0
 };
 
 // Global cart context

@@ -98,7 +98,7 @@ const CartItem: React.FC<Props> = ({ item, qtyChangeHandler, removeHandler }) =>
 
       <div className="cartitem_qty">
         <ButtonQuantity
-          value={item.qty} onChange={(newQuantityValue: number) => handlerNewQuantityValue(newQuantityValue)} />
+          value={item.quantity} onChange={(newQuantityValue: number) => handlerNewQuantityValue(newQuantityValue)} />
       </div>
       <p className="cartitem_amount">$ {item.amount}</p>
       <div className="cartitem_delete">

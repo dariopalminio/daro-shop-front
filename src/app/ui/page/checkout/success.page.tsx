@@ -48,7 +48,7 @@ const SuccessPage: FunctionComponent = () => {
 
                 <PaymentManualInfo list={bankTransferInfo} />
 
-                <p>{t("checkout.payment.manual.bank.msg.order.code")}: {order?._id}</p>
+                <p>{t("checkout.payment.manual.bank.msg.order.code")}: {order?.id}</p>
                 <p>{t("checkout.payment.manual.bank.msg.email")}</p>
 
             </div>

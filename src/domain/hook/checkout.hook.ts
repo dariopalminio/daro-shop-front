@@ -68,7 +68,6 @@ export const useCheckout = () => {
             }
 
             const newOrder: any = await orderClient.initialize(orderToInit);
-            console.log("initialize:", newOrder);
             setOrder(newOrder.order);
             setState({ isProcessing: false, hasError: false, msg: '', isSuccess: true });
         } catch (error: any) {

@@ -3,7 +3,7 @@ import { ClientType } from "./client.type";
 import { OrderItemType } from "./order-item.type";
 
 export type OrderType = {
-    _id?: string; //_id: holds an ObjectId.
+    id?: string; //_id: holds an ObjectId.
 
     client: ClientType;
     

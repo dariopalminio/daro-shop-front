@@ -161,5 +161,6 @@
     "checkout.shipping.address.error": "La dirección está vacía o no seleccionada.",
     "checkout.shipping.address.error.not.found": "Precio no encontrado para la dirección de entrega",
     "selection.choose.option": "Elija una opción",
-    "back.to.previous": "Volver"
+    "back.to.previous": "Volver",
+    "InvalidCredentialsError": "Credenciales inválidas: no autorizado porque el nombre de usuario o la contraseña son incorrectos."
  }

@@ -37,7 +37,7 @@ interface Props {
  const CartTopMenu: React.FC<Props> = (style) => {
 
   const { t } = useTranslation();
-  const { getCartCount } = useContext(CartContext) as ICartContext; //Custom Hook
+  const { cartCount } = useContext(CartContext) as ICartContext; //Custom Hook
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -57,7 +57,7 @@ interface Props {
     })}
   >
     <CartCircle>
-      <CartCount>{getCartCount()}</CartCount>
+      <CartCount>{cartCount}</CartCount>
     </CartCircle>
     
     <RiShoppingCart2Fill size={20}/>

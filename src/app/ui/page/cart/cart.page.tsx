@@ -12,7 +12,7 @@ import { useTranslation } from 'react-i18next';
  * Pattern: Container Component, Conditional Rendering and Context Provider
  */
 const CartPage: FunctionComponent = () => {
-    const { cartItems, cartSubTotal, removeFromCart, getCartCount,
+    const { cartItems, cartSubTotal, removeFromCart, cartCount,
         changeItemQuantity, getMoney } = useContext(CartContext) as ICartContext; //With custom hook
     const { t } = useTranslation();
     const navigate = useNavigate();
@@ -23,7 +23,7 @@ const CartPage: FunctionComponent = () => {
     };
 
     const handleContinue = () => {
-        if (getCartCount() > 0)
+        if (cartCount > 0)
             navigate("/checkout/information");
         else {
             alert(t('cart.empty')); //it need styles in custom component
@@ -47,7 +47,7 @@ const CartPage: FunctionComponent = () => {
             <Cart
                 money={getMoney()}
                 empty={cartItems.length === 0}
-                count={getCartCount()}
+                count={cartCount}
                 subtotal={getCartSubTotal()}
                 onClick={handleContinue}
             >

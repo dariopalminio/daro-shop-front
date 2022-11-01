@@ -127,13 +127,13 @@ const ProductItem: React.FC<IProps> = (props: IProps) => {
   return (
     <ProductItemWrapper>
 
-      <Link to={`/catalog/product/detail/${props.productItem._id}`} state={location} className="linkframe">
+      <Link to={`/catalog/product/detail/${props.productItem.id}`} state={location} className="linkframe">
         <ProductItemImg style={{ position: "relative", margin: "2px", width: "100%" }}
           src={getImage()} alt={props.productItem.name}
           loading="lazy" />
       </Link>
 
-      <Link to={`/catalog/product/detail/${props.productItem._id}`} className="linkframe">
+      <Link to={`/catalog/product/detail/${props.productItem.id}`} className="linkframe">
         <div className="product_info">
           <p className="info_name">{props.productItem.name}</p>
 

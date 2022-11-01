@@ -11,7 +11,7 @@ export default function ShippingClientStub(): IShippingClient {
 function getShippingPrice(address: AddressType): Promise<any>{
     return new Promise<any>( (resolve, reject) => {
            const data: any = {
-            "_id": "6316b3844c55dc07b0aac559",
+            "id": "6316b3844c55dc07b0aac559",
             "price": "2900",
             "money": "CMetropolitana",
 

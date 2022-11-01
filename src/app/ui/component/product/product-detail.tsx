@@ -61,7 +61,7 @@ const ProductDetail: React.FC<IProps> = (props: IProps) => {
             <div className="product_image_resume">
               <div className="frame_image">
                 <p className="product_name">{props.product.name}</p>
-                <CarouselImg uniqueId={props.product._id} images={props.product.images} width={"100%"} height={"300px"}></CarouselImg>
+                <CarouselImg uniqueId={props.product.id} images={props.product.images} width={"100%"} height={"300px"}></CarouselImg>
                 <p>{props.product.description}</p>
               </div>
             </div>

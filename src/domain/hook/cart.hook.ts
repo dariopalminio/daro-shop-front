@@ -11,6 +11,7 @@ export const useCart = () => {
     const [cartSubTotal, setCartSubTotal] = useState<number>(0);
     const [cartShipping, setCartShipping] = useState<number>(-1);
     const [cartTotal, setCartTotal] = useState<number>(0);
+    const [cartCount, setCartCount] = useState<number>(0);
 
     useEffect(() => {
         const cartStorageItem = window.sessionStorage.getItem(GlobalConfig.CART_ITEM_NAME);
@@ -36,6 +37,7 @@ export const useCart = () => {
     };
 
     const calculateTotals = () => {
+        calculateCartCount();
         let subTotalVal: number = 0;
         for (let i = 0; i < cartItems.length; i++) {
             subTotalVal += cartItems[i].amount;
@@ -47,11 +49,11 @@ export const useCart = () => {
 
     const addToCart = (productItem: ProductType, qty: number) => {
 
-        const index = cartItems.findIndex((cartItem) => cartItem.productId === productItem._id);
+        const index = cartItems.findIndex((cartItem) => cartItem.productId === productItem.id);
 
         if (index === -1) {
             const newItem: CartItemType = {
-                productId: productItem._id,
+                productId: productItem.id,
                 imageUrl: productItem.images[0],
                 name: productItem.name,
                 grossPrice: productItem.grossPrice,
@@ -65,6 +67,7 @@ export const useCart = () => {
         }else{
             changeItemQuantity(cartItems[index].productId, cartItems[index].quantity + qty);
         }
+        calculateCartCount();
     }
 
     const removeFromCart = (id: string) => {
@@ -81,15 +84,20 @@ export const useCart = () => {
             saveCart(newCartItems);
             return newCartItems;
         });
-
+        calculateCartCount();
     };
 
-    const getCartCount = (): number => {
+    const calculateCartCount = ():number => {
         let totalVal = 0;
         for (let i = 0; i < cartItems.length; i++) {
             totalVal += cartItems[i].quantity;
         }
+        setCartCount(totalVal);
         return totalVal;
+    }
+
+    const getCartCount = (): number => {
+        return calculateCartCount();
     };
 
     /**
@@ -105,12 +113,13 @@ export const useCart = () => {
 
         const itemChanged = {
             ...searchObject,
-            qty: qty,
+            quantity: qty,
             amount: newAmount
         }
         let newCartItems = [...cartItems];
         newCartItems[indexToUpdate] = itemChanged;
         setCartItems(newCartItems);
+        calculateCartCount();
         saveCart(newCartItems);
     };
 
@@ -146,6 +155,7 @@ export const useCart = () => {
         cartTotal,
         calculateTotals,
         getMoney,
-        emptyTheCart
+        emptyTheCart,
+        cartCount
     };
 };

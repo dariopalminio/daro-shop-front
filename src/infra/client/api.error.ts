@@ -1,4 +1,4 @@
-import axios, {AxiosError} from 'axios';
+import axios, { AxiosError } from 'axios';
 
 // See https://es.wikipedia.org/wiki/Anexo:C%C3%B3digos_de_estado_HTTP
 export enum AuthStatusEnum {
@@ -60,36 +60,48 @@ export class ApiError extends Error {
  * @returns AuthError
  */
 export function handleAxiosError(e: Error | AxiosError): ApiError {
-  
+
     if (axios.isAxiosError(e)) {
-        
+
         const axiosError: AxiosError = e;
         if (e.response) {
             const status: number = axiosError.response?.status ? axiosError.response?.status : 0
-            const txt: string = axiosError.response?.statusText ? axiosError.response?.statusText : "Unknown"
-           
+            const txt: string = axiosError.response?.statusText ? axiosError.response?.statusText : "Unknown";
+            let exceptionName: string | undefined;
+            try {
+                console.log('loginService.error error.response.data.payload.name', e.response.data.payload.name);
+                exceptionName = e.response.data.payload.name;
+            } catch (err) {
+                exceptionName = undefined;
+                console.log('Cannot get the name of exception returned by the server');
+            }
             switch (status) {
-                case AuthStatusEnum.UNAUTHORIZED:
-                    return new ApiError(AuthStatusText.UNAUTHORIZED.text, e.stack, status, txt);
-
-                case AuthStatusEnum.CONFLICT:
-                    return new ApiError(AuthStatusText.CONFLICT.text, e.stack, status, txt);
-
-                case AuthStatusEnum.BAD_REQUEST:
-                    return new ApiError(AuthStatusText.BAD_REQUEST.text, e.stack, status, txt);
-
-                case AuthStatusEnum.FORBIDDEN:
-                    return new ApiError(AuthStatusText.FORBIDDEN.text, e.stack, status, txt);
-
-                case AuthStatusEnum.NOT_FOUND:
-                    return new ApiError(AuthStatusText.NOT_FOUND.text, e.stack, status, txt);
-
+                case AuthStatusEnum.UNAUTHORIZED: {
+                    const message = exceptionName ? exceptionName : AuthStatusText.UNAUTHORIZED.text;
+                    return new ApiError(message, e.stack, status, txt);
+                }
+                case AuthStatusEnum.CONFLICT: {
+                    const message = exceptionName ? exceptionName : AuthStatusText.CONFLICT.text;
+                    return new ApiError(message, e.stack, status, txt);
+                }
+                case AuthStatusEnum.BAD_REQUEST: {
+                    const message = exceptionName ? exceptionName : AuthStatusText.BAD_REQUEST.text;
+                    return new ApiError(message, e.stack, status, txt);
+                }
+                case AuthStatusEnum.FORBIDDEN: {
+                    const message = exceptionName ? exceptionName : AuthStatusText.FORBIDDEN.text;
+                    return new ApiError(message, e.stack, status, txt);
+                }
+                case AuthStatusEnum.NOT_FOUND: {
+                    const message = exceptionName ? exceptionName : AuthStatusText.NOT_FOUND.text;
+                    return new ApiError(message, e.stack, status, txt);
+                }
                 default:
                     return new ApiError(AuthStatusText.UNKNOWN.text, e.stack, status, txt);
             }
         }
     }
-    
+
     if (e instanceof ApiError) return e;
 
     if (e.message === "Network Error") {
