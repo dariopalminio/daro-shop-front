@@ -51,8 +51,9 @@ export default function useCatalog() {
 
         try {
             let categoryName: string = '';
-            if (categories && categories.length > 0)
+            if (categories && categories.length > 0 && categorySelectedIndex >-1){
                 categoryName = categories[categorySelectedIndex].name ? categories[categorySelectedIndex].name : '';
+            }
 
             const data: FilteredProductsDTO = await productClient.getCatalog(categoryName, page, LIMIT_ITEMS_BY_PAGE, "name");
 
