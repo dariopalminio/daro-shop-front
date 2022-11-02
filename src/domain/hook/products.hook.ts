@@ -16,23 +16,25 @@ export default function useProducts() {
 
     const productClient: IProductClient = GlobalConfig.Factory.get<IProductClient>('productClient');
     const [state, setState] = useState<IHookState>(InitialState);
-    const [product, setProduct] = useState<ProductType|null>(null);
+    const [product, setProduct] = useState<ProductType | null>(null);
     const { removeSessionValue } = useContext(SessionContext) as ISessionContext;
 
     const getDetail = async (id: string | undefined) => {
         setState({ isProcessing: true, hasError: false, msg: '', isSuccess: false });
-
-        if (!id || id.trim()==='') {
-            setState({ isProcessing: false, hasError: true, msg: 'Product Id is undefined!', isSuccess: false });
-            return;
-        }
         try {
-            const data = await productClient.getProductDetail(id);
-
-            setProduct(data);
-
-            setState({ isProcessing: false, hasError: false, msg: "Success", isSuccess: true });
-            return data;
+            if (id === 'undefined') {
+                throw new Error('Product Id is undefined!');
+            }
+            if (id && id.trim() === '') {
+                throw new Error('Product Id is empty!');
+            }
+            console.log("-->Product Id pass!", id);
+            if (id) {
+                const data = await productClient.getProductDetail(id);
+                setProduct(data);
+                setState({ isProcessing: false, hasError: false, msg: "Success", isSuccess: true });
+                return data;
+            }
         } catch (error: any | ApiError) {
             let errorKey = error.message;
             if (error instanceof ApiError && (error.status === 400 || error.status === 401)) {

@@ -130,6 +130,10 @@ const ProductItem: React.FC<IProps> = (props: IProps) => {
       <Link to={`/catalog/product/detail/${props.productItem.id}`} state={location} className="linkframe">
         <ProductItemImg style={{ position: "relative", margin: "2px", width: "100%" }}
           src={getImage()} alt={props.productItem.name}
+          onError={({ currentTarget }) => {
+            currentTarget.onerror = null; // prevents looping
+            currentTarget.src=NoImage;
+          }}
           loading="lazy" />
       </Link>
 

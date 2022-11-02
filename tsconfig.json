@@ -16,7 +16,8 @@
     "isolatedModules": true,
     "noEmit": true,
     "baseUrl": "src",
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "strictNullChecks": true
   },
   "include": [
     "src", "index.d.ts"

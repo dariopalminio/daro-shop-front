@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { RiArrowLeftSLine, RiArrowRightSLine } from "react-icons/ri";
 import styled from "styled-components";
+import NoImage from "./no_image.png";
 
 const ImgCarouselContainer = styled.div`
     width: 300px;
@@ -137,7 +138,12 @@ const ImgCarousel: React.FC<Props> = ({ uniqueId, images, width, height }) => {
                     />
 
                     <ContainerImg key={'ContainerImg'+referenceName}>
-                        <ImgObject src={image} style={{ zIndex: imgZIndex, left: 0, transition: "left .65s ease-out", visibility: visible }} />
+                        <ImgObject src={image} 
+                                  onError={({ currentTarget }) => {
+                                    currentTarget.onerror = null; // prevents looping
+                                    currentTarget.src=NoImage;
+                                  }}
+                                  style={{ zIndex: imgZIndex, left: 0, transition: "left .65s ease-out", visibility: visible }} />
                     </ContainerImg>
                 </div>
                 );

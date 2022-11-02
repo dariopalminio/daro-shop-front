@@ -57,6 +57,7 @@ export default function useCatalog() {
 
             const data: FilteredProductsDTO = await productClient.getCatalog(categoryName, page, LIMIT_ITEMS_BY_PAGE, "name");
 
+            console.log(data);
             if (!data || !data.list || !data.page) {
                 throw Error("fetching.error.malformed");
             }
