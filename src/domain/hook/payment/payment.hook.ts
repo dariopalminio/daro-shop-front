@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import * as GlobalConfig from 'infra/global.config';
 import { IHookState, InitialState } from '../hook.type';
-import { IPaymentClient } from 'domain/service/payment-client.interface';
+import { IPaymentClient } from 'domain/outgoing/payment-client.interface';
 
 /**
  * usePaymentManual Custom Hook

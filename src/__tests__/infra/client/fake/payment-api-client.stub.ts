@@ -1,4 +1,4 @@
-import { IPaymentClient } from 'domain/service/payment-client.interface';
+import { IPaymentClient } from 'domain/outgoing/payment-client.interface';
 
 /**
  * A stub for Profile http client thet may simulate the behavior of real impementation code and be a temporary substitute for this. 

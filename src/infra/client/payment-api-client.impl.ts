@@ -2,7 +2,7 @@ import * as InfraConfig from 'infra/global.config';
 import { handleAxiosError, ApiError } from 'infra/client/api.error';
 import axiosInstance from './interceptor/axios.interceptor';
 import { AddressType } from 'domain/model/user/address.type';
-import { IPaymentClient } from 'domain/service/payment-client.interface';
+import { IPaymentClient } from 'domain/outgoing/payment-client.interface';
 
 
 

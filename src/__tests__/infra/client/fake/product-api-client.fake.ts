@@ -1,6 +1,6 @@
 
 import { CategoryType } from 'domain/model/category/category.type';
-import { IProductClient } from '../../../../domain/service/product-client.interface';
+import { IProductClient } from '../../../../domain/outgoing/product-client.interface';
 
 /**
  * A Fake for Product http client thet may simulate the behavior of real impementation code and be a temporary substitute for this. 

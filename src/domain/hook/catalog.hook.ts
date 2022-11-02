@@ -4,7 +4,7 @@ import SessionContext, { ISessionContext } from 'domain/context/session.context'
 import * as GlobalConfig from 'infra/global.config';
 import { FilteredProductsDTO } from 'domain/model/product/filtered-products';
 import { ProductType } from 'domain/model/product/product.type';
-import { IProductClient } from 'domain/service/product-client.interface';
+import { IProductClient } from 'domain/outgoing/product-client.interface';
 import { IHookState, InitialState } from 'domain/hook/hook.type';
 import { CategoryType } from 'domain/model/category/category.type';
 

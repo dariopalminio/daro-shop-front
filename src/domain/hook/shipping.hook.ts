@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from 'react'
 import { AddressType } from 'domain/model/user/address.type';
-import { IShippingClient } from 'domain/service/shipping-client.interface';
+import { IShippingClient } from 'domain/outgoing/shipping-client.interface';
 import * as GlobalConfig from 'infra/global.config';
 import { IHookState, InitialState } from './hook.type';
 import { ApiError } from 'infra/client/api.error';

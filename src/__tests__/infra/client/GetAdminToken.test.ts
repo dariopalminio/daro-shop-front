@@ -3,7 +3,7 @@ import axios, { AxiosResponse } from 'axios';
 //import getAdminTokenService from '../../../../origin/client/user/GetAdminTokenService';
 
 import { AuthApiClientFactory } from 'infra/client/factory/auth-api-client.factory';
-import { IAuthTokensClient } from '../../../domain/service/auth-tokens-client.interface';
+import { IAuthTokensClient } from '../../../domain/outgoing/auth-tokens-client.interface';
 //const authService: IAuthService = AuthServiceFactory.create();
 
 describe('Test UserService service', () => {

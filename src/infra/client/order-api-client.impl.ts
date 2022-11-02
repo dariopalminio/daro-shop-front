@@ -1,9 +1,9 @@
 import * as InfraConfig from 'infra/global.config';
 import { handleAxiosError, ApiError } from 'infra/client/api.error';
 import axiosInstance from './interceptor/axios.interceptor';
-import { IShippingClient } from 'domain/service/shipping-client.interface';
+import { IShippingClient } from 'domain/outgoing/shipping-client.interface';
 import { AddressType } from 'domain/model/user/address.type';
-import { IOrderClient } from 'domain/service/order-client.interface';
+import { IOrderClient } from 'domain/outgoing/order-client.interface';
 import { OrderType } from 'domain/model/order/order.type';
 
 

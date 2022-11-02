@@ -3,7 +3,7 @@ import * as InfraConfig from 'infra/global.config';
 import { AxiosPromise } from 'axios';
 import { handleAxiosError, ApiError, AuthStatusEnum } from 'infra/client/api.error';
 import { ContactType } from 'domain/model/notification/contact.type';
-import { INotificationClient } from 'domain/service/notification-client.interface';
+import { INotificationClient } from 'domain/outgoing/notification-client.interface';
 import axiosInstance from 'infra/client/interceptor/axios.interceptor';
 
 /**

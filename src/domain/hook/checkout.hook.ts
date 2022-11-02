@@ -2,12 +2,12 @@ import { useState, useEffect, useContext } from 'react'
 import { AddressType } from 'domain/model/user/address.type';
 import { Profile } from 'domain/model/user/profile.type';
 import { initialEmptyProfile } from './profile.hook';
-import { IShippingClient } from 'domain/service/shipping-client.interface';
+import { IShippingClient } from 'domain/outgoing/shipping-client.interface';
 import * as GlobalConfig from 'infra/global.config';
 import { IHookState, InitialState } from './hook.type';
 import SessionContext, { ISessionContext } from 'domain/context/session.context';
 import CartContext, { ICartContext } from 'domain/context/cart.context';
-import { IOrderClient } from 'domain/service/order-client.interface';
+import { IOrderClient } from 'domain/outgoing/order-client.interface';
 import { OrderType } from 'domain/model/order/order.type';
 
 

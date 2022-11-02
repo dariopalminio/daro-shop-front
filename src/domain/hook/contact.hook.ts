@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { ContactType } from 'domain/model/notification/contact.type';
-import { INotificationClient } from 'domain/service/notification-client.interface';
+import { INotificationClient } from 'domain/outgoing/notification-client.interface';
 import * as GlobalConfig from 'infra/global.config';
 import { IHookState, InitialState } from './hook.type';
 

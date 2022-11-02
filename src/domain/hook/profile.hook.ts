@@ -2,7 +2,7 @@ import { useContext, useState } from 'react';
 import { ApiError } from 'infra/client/api.error';
 import SessionContext, { ISessionContext } from 'domain/context/session.context';
 import * as GlobalConfig from 'infra/global.config';
-import { IProfileClient } from 'domain/service/profile-client.interface';
+import { IProfileClient } from 'domain/outgoing/profile-client.interface';
 import { IHookState, InitialState } from 'domain/hook/hook.type';
 import { Profile } from 'domain/model/user/profile.type';
 import { AddressType } from 'domain/model/user/address.type';

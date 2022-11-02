@@ -3,7 +3,7 @@ import { ApiError } from 'infra/client/api.error';
 import SessionContext, { ISessionContext } from 'domain/context/session.context';
 import * as GlobalConfig from 'infra/global.config';
 import { ProductType } from 'domain/model/product/product.type';
-import { IProductClient } from 'domain/service/product-client.interface';
+import { IProductClient } from 'domain/outgoing/product-client.interface';
 import { IHookState, InitialState } from './hook.type';
 
 /**

@@ -1,7 +1,7 @@
 import * as GlobalConfig from '../../global.config';
 import axios from 'axios';
 import * as SessionStorage from '../../storage/session.storage';
-import { IAuthTokensClient } from 'domain/service/auth-tokens-client.interface';
+import { IAuthTokensClient } from 'domain/outgoing/auth-tokens-client.interface';
 
 
 /**

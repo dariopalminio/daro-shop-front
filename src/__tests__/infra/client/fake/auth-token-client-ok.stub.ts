@@ -1,4 +1,4 @@
-import { IAuthTokensClient } from '../../../../domain/service/auth-tokens-client.interface';
+import { IAuthTokensClient } from '../../../../domain/outgoing/auth-tokens-client.interface';
 import { Tokens } from '../../../../domain/model/auth/tokens.type';
 
 

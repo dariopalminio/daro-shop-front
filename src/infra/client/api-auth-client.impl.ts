@@ -2,9 +2,9 @@ import * as GlobalConfig from 'infra/global.config';
 import axios, { AxiosPromise } from 'axios';
 import { handleAxiosError, ApiError, AuthStatusEnum } from 'infra/client/api.error';
 //import qs from 'querystring';
-import { IAuthClient } from 'domain/service/auth-client.interface';
+import { IAuthClient } from 'domain/outgoing/auth-client.interface';
 import { Tokens } from 'domain/model/auth/tokens.type';
-import { IAuthTokensClient } from 'domain/service/auth-tokens-client.interface';
+import { IAuthTokensClient } from 'domain/outgoing/auth-tokens-client.interface';
 
 /**
  * Auth Api Client Implementation

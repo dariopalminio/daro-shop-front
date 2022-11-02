@@ -1,5 +1,5 @@
 import { ContactType } from '../../../../domain/model/notification/contact.type';
-import { INotificationClient } from '../../../../domain/service/notification-client.interface';
+import { INotificationClient } from '../../../../domain/outgoing/notification-client.interface';
 
 export default function NotificationClientStub(): INotificationClient {
 

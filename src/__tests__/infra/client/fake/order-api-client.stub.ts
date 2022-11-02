@@ -1,7 +1,7 @@
 
 import { OrderType } from 'domain/model/order/order.type';
 import { AddressType } from 'domain/model/user/address.type';
-import { IOrderClient } from 'domain/service/order-client.interface';
+import { IOrderClient } from 'domain/outgoing/order-client.interface';
 
 const responseInitialized: any = {
     "message": "Order Initialized Successfully",

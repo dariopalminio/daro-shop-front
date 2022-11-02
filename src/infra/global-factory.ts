@@ -1,11 +1,11 @@
-import { IAuthClient } from "domain/service/auth-client.interface";
-import { IAuthTokensClient } from "domain/service/auth-tokens-client.interface";
-import { INotificationClient } from "domain/service/notification-client.interface";
-import { IProductClient } from "domain/service/product-client.interface";
-import { IProfileClient } from "domain/service/profile-client.interface";
-import { IPaymentClient } from "domain/service/payment-client.interface";
-import { IOrderClient } from "domain/service/order-client.interface";
-import { IShippingClient } from "domain/service/shipping-client.interface";
+import { IAuthClient } from "domain/outgoing/auth-client.interface";
+import { IAuthTokensClient } from "domain/outgoing/auth-tokens-client.interface";
+import { INotificationClient } from "domain/outgoing/notification-client.interface";
+import { IProductClient } from "domain/outgoing/product-client.interface";
+import { IProfileClient } from "domain/outgoing/profile-client.interface";
+import { IPaymentClient } from "domain/outgoing/payment-client.interface";
+import { IOrderClient } from "domain/outgoing/order-client.interface";
+import { IShippingClient } from "domain/outgoing/shipping-client.interface";
 
 //Imports real implementations
 import ApiAuthClientImpl from "./client/api-auth-client.impl";

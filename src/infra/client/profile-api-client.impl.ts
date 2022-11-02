@@ -1,12 +1,12 @@
 import * as InfraConfig from 'infra/global.config';
 import { AxiosPromise } from 'axios';
 import { handleAxiosError, ApiError, AuthStatusEnum } from 'infra/client/api.error';
-import { IProfileClient } from 'domain/service/profile-client.interface';
+import { IProfileClient } from 'domain/outgoing/profile-client.interface';
 import axiosInstance from './interceptor/axios.interceptor';
 import { Profile } from 'domain/model/user/profile.type';
 import axios from 'axios';
 import * as GlobalConfig from 'infra/global.config';
-import { IAuthTokensClient } from 'domain/service/auth-tokens-client.interface';
+import { IAuthTokensClient } from 'domain/outgoing/auth-tokens-client.interface';
 
 export default function ProfileApiClientImpl(): IProfileClient {
 

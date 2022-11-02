@@ -2,7 +2,7 @@ import * as GlobalConfig from 'infra/global.config';
 import axios from 'axios';
 import { handleAxiosError, ApiError } from 'infra/client/api.error';
 //import qs from 'querystring';
-import { IAuthTokensClient } from 'domain/service/auth-tokens-client.interface';
+import { IAuthTokensClient } from 'domain/outgoing/auth-tokens-client.interface';
 
 type NewAdminTokenRequestType = {
   client_id: string,

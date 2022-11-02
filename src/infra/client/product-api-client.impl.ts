@@ -1,6 +1,6 @@
 
 import * as InfraConfig from 'infra/global.config';
-import { IProductClient } from 'domain/service/product-client.interface';
+import { IProductClient } from 'domain/outgoing/product-client.interface';
 import { ProductType } from 'domain/model/product/product.type';
 import { FilteredProductsDTO } from 'domain/model/product/filtered-products';
 import axiosInstance from './interceptor/axios.interceptor';
