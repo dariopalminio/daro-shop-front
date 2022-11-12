@@ -8,10 +8,9 @@ import SessionContext, {
 } from "domain/context/session.context";
 import useRegister from "domain/hook/auth/register.hook";
 import { useTranslation } from 'react-i18next';
-import CircularProgress from "app/ui/common/progress/circular-progress";
-import Alert from "app/ui/common/alert/alert";
 import RegisterConfirmStart from "app/ui/component/user/register/register-confirm-start";
 import { useNavigate } from "react-router-dom";
+import { Alert, CircularProgress } from "daro-ui-kit";
 
 /**
  * Register Confirm Start Page (Register STEP 2)

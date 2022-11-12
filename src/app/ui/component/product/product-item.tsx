@@ -1,12 +1,11 @@
 import { Link, useLocation } from "react-router-dom";
 import CartContext, { ICartContext } from 'domain/context/cart.context';
 import { useContext, useState } from "react";
-import Button from "app/ui/common/button/button";
-import ButtonQuantity from "app/ui/common/button-quantity/button-quantity";
 import { useTranslation } from "react-i18next";
 import { ProductType } from "domain/model/product/product.type";
 import NoImage from "app/ui/image/no_image.png";
 import styled from "styled-components";
+import { Button, ButtonQuantity } from "daro-ui-kit";
 
 //box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 
@@ -154,7 +153,7 @@ const ProductItem: React.FC<IProps> = (props: IProps) => {
             value={quantity}
             onChange={(newQuantityValue: number) => handlerNewQuantityValue(newQuantityValue)} />
         </div>
-        <Button
+        <Button 
           onClick={addToCartHandler}>
           {t('cart.button.add.to.cart')}
         </Button>

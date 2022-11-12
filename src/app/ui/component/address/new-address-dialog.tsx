@@ -1,12 +1,8 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import Button from "app/ui/common/button/button";
-import ModalDialog from "app/ui/common/dialog/modal-dialog";
-import { CenteringContainer } from "app/ui/common/elements/centering-container";
-import TextField from "app/ui/common/text-field/text-field";
 import { AddressType } from "domain/model/user/address.type";
-import { SelectOpts } from "app/ui/common/select-opts";
 import useAddress from "domain/hook/address.hook";
+import { Button, ModalDialog, CenteringContainer, TextField, SelectOptions } from "daro-ui-kit";
 
 interface IMyProps {
     address: AddressType;
@@ -110,7 +106,7 @@ const NewAddressDialog: React.FC<IMyProps> = (props: IMyProps) => {
 
             />
 
-            <SelectOpts
+            <SelectOptions
                 label={t('my.addresses.state')}
                 list={getStates(props.address.country)}
                 selectedOption={props.address.state}
@@ -118,7 +114,7 @@ const NewAddressDialog: React.FC<IMyProps> = (props: IMyProps) => {
                 placeholder={t('field.placeholder.select.option')}/>
 
 
-            <SelectOpts
+            <SelectOptions
                 label={t('my.addresses.neighborhood')}
                 list={getNeighborhood(props.address.country, props.address.state)}
                 selectedOption={props.address.neighborhood}

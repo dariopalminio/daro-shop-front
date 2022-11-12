@@ -1,10 +1,8 @@
 import "./profile-form.css";
 import React, { useState } from "react";
 import { useTranslation } from 'react-i18next';
-import Button from "app/ui/common/button/button";
-import TextField from "app/ui/common/text-field/text-field";
 import MyAddresses from "../../address/my-addresses";
-import { SelectOpts } from "app/ui/common/select-opts";
+import { Button, TextField, SelectOptions } from "daro-ui-kit";
 
 const validationFlagInit = {
   userName: true,
@@ -165,7 +163,7 @@ const ProfileForm: React.FC<IProps> = ( props: IProps ) => {
                 value={props.profile.email}
               />
         
-              <SelectOpts 
+              <SelectOptions 
                 label={t('profile.docType')}
                 list={docTypeOptions}
                 selectedOption={props.profile.docType}

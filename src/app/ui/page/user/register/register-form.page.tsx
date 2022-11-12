@@ -3,9 +3,8 @@ import { useEffect, useState } from "react";
 import { FunctionComponent } from "react";
 import useRegister from "domain/hook/auth/register.hook";
 import { useTranslation } from 'react-i18next';
-import Alert from "app/ui/common/alert/alert";
-import CircularProgress from "app/ui/common/progress/circular-progress";
 import { useNavigate } from "react-router-dom";
+import { Alert, CircularProgress } from "daro-ui-kit";
 
 const userToRegisterInitialized = {
   userName: '',

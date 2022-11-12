@@ -1,8 +1,7 @@
 
 import React, { useState } from "react";
 import { useTranslation } from 'react-i18next';
-import TextField from "app/ui/common/text-field/text-field";
-import { SelectOpts } from "app/ui/common/select-opts";
+import { SelectOptions, TextField } from "daro-ui-kit";
 
 interface Props {
   profile: any;
@@ -28,7 +27,7 @@ const expresionsRegularByDefault = {
 const UserContactInfo: React.FC<Props> = ({ profile, onChange, style }) => {
   const docTypeOptions = ["RUT", "DNI", "PASSPORT", "OTHER", "None"];
   const { t, i18n } = useTranslation();
-  const [expresionsRegular, setExpresionsRegular] = useState(expresionsRegularByDefault);
+  const [expresionsRegular] = useState(expresionsRegularByDefault);
 
   const areFieldsValid = (): boolean => {
     return (isValidFirstName() && isValidLastName() && isValidEmail());
@@ -131,7 +130,7 @@ const UserContactInfo: React.FC<Props> = ({ profile, onChange, style }) => {
         })}
       />
 
-      <SelectOpts
+      <SelectOptions
         label={t('profile.docType')}
         list={docTypeOptions}
         selectedOption={profile.docType}

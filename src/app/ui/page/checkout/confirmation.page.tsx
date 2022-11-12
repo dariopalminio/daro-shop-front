@@ -3,18 +3,13 @@ import { FunctionComponent, useContext, useEffect } from 'react'
 import CartContext, { ICartContext } from "domain/context/cart.context";
 import { useTranslation } from 'react-i18next';
 import CheckoutContext, { ICheckoutContext } from 'domain/context/checkout.context';
-import TextsStepper from 'app/ui/common/steppers/texts-stepers';
 import { useNavigate } from 'react-router-dom';
 import SessionContext, { ISessionContext } from 'domain/context/session.context';
-import PreviousNextButtons from 'app/ui/common/button/previous-next-buttons';
 import ShoppingCartItem from 'app/ui/component/cart/shopping-cart/shopping-cart-item';
 import ShoppingCart from 'app/ui/component/cart/shopping-cart/shopping-cart';
-import { useShipping } from 'domain/hook/shipping.hook';
-import CircularProgress from 'app/ui/common/progress/circular-progress';
-import Alert from 'app/ui/common/alert/alert';
 import useAddress from 'domain/hook/address.hook';
 import ShippingData from 'app/ui/component/checkout/shipping-data';
-
+import { PreviousNextButtons, TextsStepper, CircularProgress, Alert } from "daro-ui-kit";
 
 /**
  * ConfirmationPage

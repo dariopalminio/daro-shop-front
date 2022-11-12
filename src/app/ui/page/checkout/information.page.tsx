@@ -3,7 +3,6 @@ import { FunctionComponent, useContext, useEffect, useState } from 'react'
 import CartContext, { ICartContext } from "domain/context/cart.context";
 import { useTranslation } from 'react-i18next';
 import CheckoutContext, { ICheckoutContext } from 'domain/context/checkout.context';
-import TextsStepper from 'app/ui/common/steppers/texts-stepers';
 import { useLocation, useNavigate } from 'react-router-dom';
 import SessionContext, { ISessionContext } from 'domain/context/session.context';
 import useProfile from 'domain/hook/profile.hook';
@@ -11,13 +10,10 @@ import UserContactInfo from 'app/ui/component/checkout/user-contact-info';
 import SelectAddress from 'app/ui/component/address/select-address';
 import AnonymousProfile from "../../component/user/profile/anonymous-profile";
 import { Profile } from "domain/model/user/profile.type";
-import Alert from "app/ui/common/alert/alert";
-import PreviousNextButtons from "app/ui/common/button/previous-next-buttons";
 import useAddress from "domain/hook/address.hook";
-import CircularProgress from "app/ui/common/progress/circular-progress";
 import { useShipping } from "domain/hook/shipping.hook";
 import CartSummary from "app/ui/component/cart/screen-cart/cart-summary";
-import RadioButtonList from "app/ui/common/select-list-radio-button/radio-button-list";
+import { PreviousNextButtons, TextsStepper, CircularProgress, Alert, RadioButtonList } from "daro-ui-kit";
 
 const expresionsRegularByDefault = {
     firstName: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letters and spaces can carry accents.

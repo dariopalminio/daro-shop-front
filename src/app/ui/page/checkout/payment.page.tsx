@@ -1,13 +1,9 @@
 
-import { FunctionComponent, useContext, useEffect, useState } from 'react'
-import CartContext, { ICartContext } from "domain/context/cart.context";
+import { FunctionComponent, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next';
-import CheckoutContext, { ICheckoutContext } from 'domain/context/checkout.context';
-import TextsStepper from 'app/ui/common/steppers/texts-stepers';
 import { useNavigate } from 'react-router-dom';
-import SessionContext, { ISessionContext } from 'domain/context/session.context';
-import PreviousNextButtons from 'app/ui/common/button/previous-next-buttons';
 import PaymentMethods from 'app/ui/component/payment/payment-methods';
+import { PreviousNextButtons, TextsStepper } from "daro-ui-kit";
 
 export enum PaymentMethodType {
     BANK_TRANSFER = "BANK_TRANSFER",
@@ -20,12 +16,7 @@ export enum PaymentMethodType {
  * Pattern: Container Component, Conditional Rendering and Context Provider
  */
 const PaymentPage: FunctionComponent = () => {
-    const { session } = useContext(SessionContext) as ISessionContext;
-    const { cartItems,
-        cartSubTotal,
-        removeFromCart,
-        getCartCount,
-        changeItemQuantity } = useContext(CartContext) as ICartContext;
+
 
     const navigate = useNavigate();
     const { t } = useTranslation();
@@ -41,10 +32,6 @@ const PaymentPage: FunctionComponent = () => {
         if ((index === 1)) navigate("/checkout/information");
         if (index === 2) handlePrevious();
     }
-
-    const isNotLogged = () => {
-        return session && !session.isLogged;
-    };
 
     const handlePrevious = () => {
         navigate("/checkout/confirmation"); // programmatically redirect

@@ -1,13 +1,10 @@
 
-import { FunctionComponent, useEffect } from "react";
+import { FunctionComponent } from "react";
 import { useTranslation } from 'react-i18next';
 import useCatalog from "domain/hook/catalog.hook";
-import Alert from "app/ui/common/alert/alert";
-import { CenteringContainer } from "app/ui/common/elements/centering-container";
-import CircularProgress from "app/ui/common/progress/circular-progress";
 import Pagination from "app/ui/component/product/pagination";
 import Products from "app/ui/component/product/products";
-import LinksStepper from "app/ui/common/steppers/links-stepper";
+import { LinksStepper, CenteringContainer, CircularProgress, Alert } from "daro-ui-kit";
 
 /**
  * CatalogPage for to list products as catalog

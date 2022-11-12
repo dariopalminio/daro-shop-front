@@ -1,9 +1,8 @@
 
-import { InfoContainer, ItemInfoWrapper, LabelInfo, LineDivider, TextInfo } from "app/ui/common/elements/info-elements";
 import React from "react";
 import { useTranslation } from 'react-i18next';
 import { RiHome4Line, RiUserLine } from "react-icons/ri";
-import styled from "styled-components";
+import { InfoContainer, ItemInfoWrapper, LabelInfo, LineDivider, TextInfo } from "daro-ui-kit";
 
 interface IProps {
     contactTo: string;

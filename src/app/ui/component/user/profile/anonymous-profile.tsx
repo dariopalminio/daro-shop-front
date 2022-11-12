@@ -1,7 +1,7 @@
-import { FunctionComponent, MouseEvent, useEffect } from "react";
+import { FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
-import Paper from "app/ui/common/paper/paper";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { Paper } from "daro-ui-kit";
 
 interface MyProps {
     redirectTo: string;
@@ -11,8 +11,7 @@ interface MyProps {
  * Anonymous Profile
  */
 const AnonymousProfile: FunctionComponent<MyProps> = ({redirectTo}) => {
-    const { t, i18n } = useTranslation();
-    const navigate = useNavigate();
+    const { t } = useTranslation();
     const location = useLocation();
     
 

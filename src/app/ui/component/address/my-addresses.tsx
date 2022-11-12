@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { AddressType } from "domain/model/user/address.type";
-import Button from "app/ui/common/button/button";
-import useModalDialog from "app/ui/common/dialog/use-modal-dialog";
-import SelectList from "app/ui/common/select-list/select-list";
 import NewAddressDialog from "app/ui/component/address/new-address-dialog";
 import useAddress from "domain/hook/address.hook";
+import { Button, useModalDialog, SelectList } from "daro-ui-kit";
 
 
 interface IMyProps {

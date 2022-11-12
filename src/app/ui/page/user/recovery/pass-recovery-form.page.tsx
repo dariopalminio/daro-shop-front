@@ -2,11 +2,11 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import useRecovery from "domain/hook/auth/recovery.hook";
-import Alert from "app/ui/common/alert/alert";
 import PassRecoveryForm from "app/ui/component/user/recovery/pass-recovery-form";
 import { useParams } from "react-router-dom";
+import { Alert } from "daro-ui-kit";
 
-type TParams = { token: string }; //match.params.token
+//type TParams = { token: string }; //match.params.token
 
 const passwordsInitialized = {
   password: ''

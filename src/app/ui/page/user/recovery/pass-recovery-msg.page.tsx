@@ -1,8 +1,7 @@
 import { FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 import emailSentImage from "app/ui/image/email_sent.png";
-import Paper from "app/ui/common/paper/paper";
-
+import { Paper } from "daro-ui-kit";
 /**
  * PassRecoveryCallToActionMsg (Password recovery STEP 2)
  * Pattern: Container Component (Stateful/Container/Smart component), Conditional Rendering and Context Provider

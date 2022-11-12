@@ -1,5 +1,4 @@
 
-import { CenteringContainer } from "app/ui/common/elements/centering-container";
 import React from "react";
 import { useTranslation } from 'react-i18next';
 import { RiCheckFill } from "react-icons/ri";
@@ -8,7 +7,7 @@ import manualBankTransferImg from "app/ui/image/payment/manual_bank_transfer.png
 import otherPaymentMethodImg from "app/ui/image/payment/other_payment_method.png";
 import bitcoinMethodTypeImg from "app/ui/image/payment/aceptamos-bitcoin.png";
 import { PaymentMethodType } from "app/ui/page/checkout/payment.page";
-
+import { CenteringContainer } from "daro-ui-kit";
 
 const PaymentMethodsContainer = styled.div`
     display: block;

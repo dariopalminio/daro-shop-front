@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import { ContactType } from "domain/model/notification/contact.type";
 import { useTranslation } from 'react-i18next';
-import Button from "app/ui/common/button/button";
-import Paper from "app/ui/common/paper/paper";
-import TextField from "app/ui/common/text-field/text-field";
+import { Button, Paper, TextField } from "daro-ui-kit";
 
 const defaultContact: ContactType = {
     name: "",

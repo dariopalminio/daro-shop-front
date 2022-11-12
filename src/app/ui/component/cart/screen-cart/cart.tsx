@@ -1,7 +1,7 @@
-import Button from "app/ui/common/button/button";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import CartSummary from "./cart-summary";
+
 
 const CartSummaryLocal = styled.div`
     flex: 0.3;

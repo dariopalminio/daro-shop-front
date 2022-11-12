@@ -1,11 +1,9 @@
 import { FunctionComponent, useState } from "react";
 import useRecovery from "domain/hook/auth/recovery.hook";
 import { useTranslation } from 'react-i18next';
-import Alert from "app/ui/common/alert/alert";
-import CircularProgress from "app/ui/common/progress/circular-progress";
 import PassRecoveryStartForm from "app/ui/component/user/recovery/pass-recovery-start-form";
 import { useNavigate } from "react-router-dom";
-
+import { Alert, CircularProgress } from "daro-ui-kit";
 
 /**
  * Pass Recovery Start Page (Password recovery STEP 1)

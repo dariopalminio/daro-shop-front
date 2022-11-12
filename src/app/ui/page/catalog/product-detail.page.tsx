@@ -5,8 +5,8 @@ import {
   Link, useLocation, useParams,
 } from "react-router-dom";
 import useProducts from "domain/hook/products.hook";
-import CircularProgress from "app/ui/common/progress/circular-progress";
 import ProductDetail from "app/ui/component/product/product-detail";
+import { CircularProgress } from "daro-ui-kit";
 
 type TParams = { productId: string };
 

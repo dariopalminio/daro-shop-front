@@ -1,7 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { CenteringContainer } from "../common/elements/centering-container";
 import AnonymousProfile from "../component/user/profile/anonymous-profile";
+import { CenteringContainer } from "daro-ui-kit";
 
 /**
  * No Match Page (404 not found)

@@ -1,10 +1,7 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import Button from "app/ui/common/button/button";
-import ModalDialog from "app/ui/common/dialog/modal-dialog";
-import { CenteringContainer } from "app/ui/common/elements/centering-container";
-import TextField from "app/ui/common/text-field/text-field";
 import { AddressType } from "domain/model/user/address.type";
+import { Button, ModalDialog, CenteringContainer, TextField } from "daro-ui-kit";
 
 interface IMyProps {
     address: AddressType;

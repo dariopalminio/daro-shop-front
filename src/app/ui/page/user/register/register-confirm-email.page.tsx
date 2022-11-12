@@ -1,13 +1,11 @@
 import {useParams} from 'react-router-dom';
 import { useEffect, useState } from "react";
 import { useTranslation } from 'react-i18next';
-import CircularProgress from "app/ui/common/progress/circular-progress";
-import Alert from "app/ui/common/alert/alert";
 import emailOkImage from "app/ui/image/email_ok.png";
-
 import useRegister from "domain/hook/auth/register.hook";
+import { Alert, CircularProgress } from "daro-ui-kit";
 
-type TParams = { token: string }; //match.params.token
+//type TParams = { token: string }; //match.params.token
 
 /**
  * Register Confirm Email Page (Register STEP 3)

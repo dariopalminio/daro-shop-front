@@ -2,9 +2,9 @@ import { useContext } from "react";
 import { useTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from "react-router-dom";
 import { RiShoppingCart2Fill } from "react-icons/ri";
-import IconButton from "app/ui/common/icon-button/icon-button";
 import CartContext, { ICartContext } from "domain/context/cart.context";
 import styled from "styled-components";
+import { IconButton } from "daro-ui-kit";
 
 const CartCircle = styled.div`
   position: relative;
@@ -36,7 +36,6 @@ interface Props {
  */
  const CartTopMenu: React.FC<Props> = (style) => {
 
-  const { t } = useTranslation();
   const { cartCount } = useContext(CartContext) as ICartContext; //Custom Hook
   const location = useLocation();
   const navigate = useNavigate();

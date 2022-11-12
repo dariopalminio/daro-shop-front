@@ -1,10 +1,9 @@
 
 import { Link, useLocation } from "react-router-dom";
-import ButtonQuantity from "app/ui/common/button-quantity/button-quantity";
 import { CartItemType } from "domain/model/cart/cart-item.type";
 import styled from "styled-components";
 import { RiDeleteBin7Fill } from "react-icons/ri";
-import IconButton from "app/ui/common/icon-button/icon-button";
+import { IconButton, ButtonQuantity } from "daro-ui-kit";
 
 const CartItemWrapper = styled.div`
     width: 100%;

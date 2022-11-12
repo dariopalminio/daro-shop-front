@@ -1,11 +1,10 @@
 import { FunctionComponent } from "react";
-import { lazy, Suspense } from 'react';
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+//import { lazy, Suspense } from 'react';
+import { Route, Routes } from "react-router-dom";
 import RegisterConfirmEmailPage from "./user/register/register-confirm-email.page";
 import PassRecoveryFormPage from "./user/recovery/pass-recovery-form.page";
 import ProductDetailPage from "./catalog/product-detail.page";
-import Alert from "app/ui/common/alert/alert";
-import CircularProgress from "app/ui/common/progress/circular-progress";
+import { Alert } from "daro-ui-kit";
 import RegisterConfirmStartPage from "./user/register/register-confirm-start.page";
 import HomePage from "./home/home.page";
 import LoginPage from "./user/auth/login.page";

@@ -1,10 +1,7 @@
 import React, { useState } from "react";
 import { useTranslation } from 'react-i18next';
-import Button from "app/ui/common/button/button";
-import TextField from "app/ui/common/text-field/text-field";
-import Paper from "app/ui/common/paper/paper";
-import { CenteringContainer } from "app/ui/common/elements/centering-container";
 import { Link } from "react-router-dom";
+import { Button, Paper, TextField, CenteringContainer } from "daro-ui-kit";
 
 interface Props {
     onSubmit: (email: string, password: string) => void;
@@ -26,12 +23,6 @@ const LoginForm: React.FC<Props> = ({ onSubmit, style }) => {
     const expresionsRegular = {
         email: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
     };
-
-    const LinkStyle = {
-        paddingTop: "1.5em",
-        position: "relative",
-        rigt: "1em",
-    }
 
     const handleEmailChange = async (value: string) => {
         setEmail(value);

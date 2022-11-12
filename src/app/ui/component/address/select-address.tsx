@@ -1,11 +1,10 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { AddressType } from "domain/model/user/address.type";
-import Button from "app/ui/common/button/button";
-import useModalDialog from "app/ui/common/dialog/use-modal-dialog";
 import NewAddressDialog from "app/ui/component/address/new-address-dialog";
 import useAddress from "domain/hook/address.hook";
-import RadioButtonList from "app/ui/common/select-list-radio-button/radio-button-list";
+import { Button, useModalDialog, RadioButtonList } from "daro-ui-kit";
+
 
 interface IMyProps {
     country: string;

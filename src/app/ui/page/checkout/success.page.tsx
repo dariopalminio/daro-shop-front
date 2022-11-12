@@ -3,12 +3,11 @@ import { FunctionComponent, useContext, useEffect } from 'react'
 import CartContext, { ICartContext } from "domain/context/cart.context";
 import { useTranslation } from 'react-i18next';
 import CheckoutContext, { ICheckoutContext } from 'domain/context/checkout.context';
-import TextsStepper from 'app/ui/common/steppers/texts-stepers';
 import { useNavigate } from 'react-router-dom';
 import SessionContext, { ISessionContext } from 'domain/context/session.context';
 import PaymentManualInfo from 'app/ui/component/payment/payment-manual-info';
 import { usePayment } from 'domain/hook/payment/payment.hook';
-
+import { TextsStepper } from "daro-ui-kit";
 
 const SuccessPage: FunctionComponent = () => {
     const { session } = useContext(SessionContext) as ISessionContext;

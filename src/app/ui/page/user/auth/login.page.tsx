@@ -3,11 +3,10 @@ import SessionContext, {
   ISessionContext,
 } from "domain/context/session.context";
 import { useTranslation } from 'react-i18next';
-import Alert from "app/ui/common/alert/alert";
 import useLogin from "domain/hook/auth/login.hook";
-import { Navigate, useLocation, useNavigate, useParams } from "react-router-dom";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import LoginForm from "app/ui/component/user/auth/login-form";
-import CircularProgress from "app/ui/common/progress/circular-progress";
+import { CircularProgress, Alert } from "daro-ui-kit";
 
 /**
  * Login Page for Login or Logout options
@@ -23,7 +22,6 @@ const LoginPage: FunctionComponent = () => {
     isSuccess,
     login,
   } = useLogin();
-  const navigate = useNavigate();
   const { t } = useTranslation();
   const location = useLocation();
 

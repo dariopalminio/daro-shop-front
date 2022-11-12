@@ -1,4 +1,4 @@
-import { FunctionComponent, useContext, useEffect } from "react";
+import { FunctionComponent, useContext } from "react";
 import SessionContext, {
   ISessionContext,
 } from "domain/context/session.context";

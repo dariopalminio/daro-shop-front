@@ -20,8 +20,7 @@ text-align: center;
 }
 
 /**
- * CartItem
- * 
+
  * Pattern: Presentation Component and Controled Component
  */
  const Footer: React.FC<Props> = ({ companyName, contactPhone, contactAddress}) => {

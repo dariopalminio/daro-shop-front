@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import Button from "app/ui/common/button/button";
-import Paper from "app/ui/common/paper/paper";
-import TextField from "app/ui/common/text-field/text-field";
+import { Button, TextField, Paper } from "daro-ui-kit";
 
 const validationFlagInit = {
   password: true

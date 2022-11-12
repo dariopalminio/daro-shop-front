@@ -4,13 +4,10 @@ import { useTranslation } from "react-i18next";
 import SessionContext, {
     ISessionContext,
 } from "domain/context/session.context";
-import { Profile } from "domain/model/user/profile.type";
-import { AddressType } from "domain/model/user/address.type";
-import CircularProgress from "app/ui/common/progress/circular-progress";
-import Alert from "app/ui/common/alert/alert";
 import useProfile from "domain/hook/profile.hook";
 import ProfileForm from "app/ui/component/user/profile/profile-form";
 import useAddress from "domain/hook/address.hook";
+import { Alert, CircularProgress } from "daro-ui-kit";
 
 /**
  * User Profile
@@ -36,7 +33,7 @@ const UserProfile: FunctionComponent = () => {
 
             console.log('****************UserProfile PAGE fetchData.info', info);
 
-            if (info.userName) {
+            if (info !== null && info.userName) {
                 setProfile({
                     ...profile,
                     userName: info.userName,
