@@ -5,55 +5,15 @@ import { useTranslation } from "react-i18next";
 import { ProductType } from "domain/model/product/product.type";
 import NoImage from "app/ui/image/no_image.png";
 import styled from "styled-components";
-import { Button, ButtonQuantity } from "daro-ui-kit";
+import { Button, ButtonQuantity, PaperHoverable } from "daro-ui-kit";
 
 //box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 
 const ProductItemWrapper = styled.div`
-  width: 400px;
-  padding: 1rem;
-  background: #fff;
-  cursor: pointer;
-  margin: 4px 4px 4px 4px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  border-radius:3px;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
   .linkframe:link { text-decoration: none; }
   .linkframe:visited { text-decoration: none; }
   .linkframe:hover { text-decoration: none; }
   .linkframe:active { text-decoration: none; }
-  &:hover {
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-  }
-  @media (max-width: 1232px) {
-      width: 360px;
-  }
-  @media (max-width: 1115px) {
-      width: 330px;
-  }
-  @media (max-width: 1028px) {
-      width: 300px;
-  }
-  @media (max-width: 950px) {
-      width: 400px;
-  }
-  @media (max-width: 830px) {
-      width: 330px;
-  }
-  @media (max-width: 700px) {
-      width: 290px;
-  }
-  @media (max-width: 630px) {
-      width: 90%;
-  }
-  @media (max-width: 500px) {
-      width: 90%;
-  }
-  @media (max-width: 400px) {
-      width: 100%;
-  }
   .product_info > p {
     margin-bottom: 16px;
   }
@@ -103,7 +63,7 @@ const ProductItem: React.FC<IProps> = (props: IProps) => {
 
   const addToCartHandler = () => {
     if (props.productItem && quantity > 0) addToCart(props.productItem, quantity);
-    else console.log("No tiene prodiuctos que agregar!");
+    else console.log("No tiene productos que agregar!");
   };
 
   const handlerNewQuantityValue = (newQuantityValue: number) => {
@@ -116,7 +76,15 @@ const ProductItem: React.FC<IProps> = (props: IProps) => {
   }
 
   const getDescription = () => {
-    return props.productItem.description ? props.productItem.description.substring(0, 100) : "No description!";
+    let descrip = '';
+    if (props.productItem?.description){
+      if (props.productItem.description.length>60){
+        descrip = props.productItem.description.substring(0, 57) + '...';
+      } else {
+        descrip = props.productItem.description;
+      }
+    }
+    return descrip;
   }
 
   const getPrice = () => {
@@ -125,40 +93,40 @@ const ProductItem: React.FC<IProps> = (props: IProps) => {
 
   return (
     <ProductItemWrapper>
+      <PaperHoverable width={'400px'}>
+        <Link to={`/catalog/product/detail/${props.productItem.id}`} state={location} className="linkframe">
+          <ProductItemImg style={{ position: "relative", margin: "2px", width: "100%" }}
+            src={getImage()} alt={props.productItem.name}
+            onError={({ currentTarget }) => {
+              currentTarget.onerror = null; // prevents looping
+              currentTarget.src = NoImage;
+            }}
+            loading="lazy" />
+        </Link>
 
-      <Link to={`/catalog/product/detail/${props.productItem.id}`} state={location} className="linkframe">
-        <ProductItemImg style={{ position: "relative", margin: "2px", width: "100%" }}
-          src={getImage()} alt={props.productItem.name}
-          onError={({ currentTarget }) => {
-            currentTarget.onerror = null; // prevents looping
-            currentTarget.src=NoImage;
-          }}
-          loading="lazy" />
-      </Link>
+        <Link to={`/catalog/product/detail/${props.productItem.id}`} className="linkframe">
+          <div className="product_info">
+            <p className="info_name">{props.productItem.name}</p>
 
-      <Link to={`/catalog/product/detail/${props.productItem.id}`} className="linkframe">
-        <div className="product_info">
-          <p className="info_name">{props.productItem.name}</p>
+            <p className="info_description">{getDescription()}</p>
 
-          <p className="info_description">{getDescription()}...</p>
+            <p className="info_price">${getPrice()}</p>
 
-          <p className="info_price">${getPrice()}</p>
+          </div>
+        </Link>
 
-        </div>
-      </Link>
-
-      <BottomCallToAction>
-        <div style={{ display: "flex", justifyContent: "center" }}>
-          <ButtonQuantity
-            value={quantity}
-            onChange={(newQuantityValue: number) => handlerNewQuantityValue(newQuantityValue)} />
-        </div>
-        <Button 
-          onClick={addToCartHandler}>
-          {t('cart.button.add.to.cart')}
-        </Button>
-      </BottomCallToAction>
-
+        <BottomCallToAction>
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <ButtonQuantity
+              value={quantity}
+              onChange={(newQuantityValue: number) => handlerNewQuantityValue(newQuantityValue)} />
+          </div>
+          <Button
+            onClick={addToCartHandler}>
+            {t('cart.button.add.to.cart')}
+          </Button>
+        </BottomCallToAction>
+      </PaperHoverable>
     </ProductItemWrapper>
 
   );

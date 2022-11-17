@@ -19,7 +19,7 @@ export default function ProductClientFake(): IProductClient {
                 name: "Paisaje con palmeras",
                 images: ["https://i.pinimg.com/originals/95/5d/e2/955de20dd2d6f457a1cfdadb8edc23d4.png"],
                 grossPrice: 23.4,
-                description: "Cuadro en oleo de u paisaje con palmeras realizado por el pintos Daro 2022.",
+                description: "Cuadro en oleo de un paisaje con palmeras realizado por el pintos Daro 2022.",
                 stock: 1,
                 category: "Category 1"
             },

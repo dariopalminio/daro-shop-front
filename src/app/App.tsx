@@ -10,7 +10,7 @@ import * as GlobalConfig from 'infra/global.config';
 import CheckoutContextProvider from "./ui/provider/checkout-context-provider"
 import logo from "app/ui/image/logo_app.png";
 import Bar from "./ui/component/layout/core/bar"
-import {Themes, LayoutPrimary, LayoutContextProvider, TopNavBar} from "daro-ui-kit";
+import {ThemeCore, LayoutCore, LayoutContextProvider, TopNavBar} from "daro-ui-kit";
 
 /**
  * App
@@ -24,17 +24,17 @@ const App: FunctionComponent = () => {
   return (
     <Router>
       <SessionContextProvider>
-        <ThemeProvider theme={Themes}>
+        <ThemeProvider theme={ThemeCore}>
           <CartContextProvider>
             <CheckoutContextProvider>
               <LayoutContextProvider>
-                <LayoutPrimary
+                <LayoutCore
                   topbar={<TopNavBar logo={logo} bar={<Bar />} />}
                   leftbar={<SideBar style={{ background: "#F9F9F9" }}></SideBar>}
                   footer={<Footer companyName={GlobalConfig.app_company_name} />}
                 >
                   <MainContainer />
-                </LayoutPrimary>
+                </LayoutCore>
               </LayoutContextProvider>
             </CheckoutContextProvider>
           </CartContextProvider>
