@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import { ProductType } from "domain/model/product/product.type";
 import NoImage from "app/ui/image/no_image.png";
 import styled from "styled-components";
-import { Button, ButtonQuantity, PaperHoverable } from "daro-ui-kit";
+import { Button, ButtonQuantity, PaperHoverable } from "oaky-ui-kit";
 
 //box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 

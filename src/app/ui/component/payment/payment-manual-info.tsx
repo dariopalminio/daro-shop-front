@@ -1,6 +1,6 @@
 
 import React from "react";
-import { InfoContainer, ItemInfoWrapper, LabelInfo, LineDivider, TextInfo } from "daro-ui-kit";
+import { InfoContainer, ItemInfoWrapper, LabelInfo, LineDivider, TextInfo } from "oaky-ui-kit";
 
 interface IProps {
     list: Array<any>;

@@ -3,7 +3,7 @@ import { useState, useContext } from "react";
 import CartContext, { ICartContext } from "domain/context/cart.context";
 import { useTranslation } from "react-i18next";
 import { ProductType } from "domain/model/product/product.type";
-import { Button, Alert, CenteringContainer, SingleAttrTable, ButtonQuantity, ImgCarousel } from "daro-ui-kit";
+import { Button, Alert, CenteringContainer, SingleAttrTable, ButtonQuantity, ImgCarousel } from "oaky-ui-kit";
 
 interface IProps {
   money: string;

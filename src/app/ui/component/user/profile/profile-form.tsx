@@ -2,7 +2,7 @@ import "./profile-form.css";
 import React, { useState } from "react";
 import { useTranslation } from 'react-i18next';
 import MyAddresses from "../../address/my-addresses";
-import { Button, TextField, SelectOptions } from "daro-ui-kit";
+import { Button, TextField, SelectOptions } from "oaky-ui-kit";
 
 const validationFlagInit = {
   userName: true,

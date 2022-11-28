@@ -2,7 +2,7 @@
 import "./shopping-cart.css";
 import { Link, useLocation } from "react-router-dom";
 import { RiDeleteBin7Fill } from "react-icons/ri";;
-import { IconButton } from "daro-ui-kit";
+import { IconButton } from "oaky-ui-kit";
 
 interface IProps {
   readOnly: boolean;

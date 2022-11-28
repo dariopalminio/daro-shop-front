@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { AddressType } from "domain/model/user/address.type";
 import NewAddressDialog from "app/ui/component/address/new-address-dialog";
 import useAddress from "domain/hook/address.hook";
-import { Button, useModalDialog, SelectList } from "daro-ui-kit";
+import { Button, useModalDialog, SelectList } from "oaky-ui-kit";
 
 
 interface IMyProps {

@@ -8,7 +8,7 @@ import { RiShieldUserFill } from "react-icons/ri";
 import { RiUserAddFill } from "react-icons/ri";
 import { RiUserSearchFill } from "react-icons/ri";
 import { useTranslation } from "react-i18next";
-import { MenuIconButton, MenuItemType, AccessType } from "daro-ui-kit";
+import { MenuIconButton, MenuItemType, AccessType } from "oaky-ui-kit";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const TopMenuContainer = styled.div`

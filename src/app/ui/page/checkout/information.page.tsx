@@ -13,7 +13,7 @@ import { Profile } from "domain/model/user/profile.type";
 import useAddress from "domain/hook/address.hook";
 import { useShipping } from "domain/hook/shipping.hook";
 import CartSummary from "app/ui/component/cart/screen-cart/cart-summary";
-import { PreviousNextButtons, TextsStepper, CircularProgress, Alert, RadioButtonList } from "daro-ui-kit";
+import { PreviousNextButtons, TextsStepper, CircularProgress, Alert, RadioButtonList } from "oaky-ui-kit";
 
 const expresionsRegularByDefault = {
     firstName: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letters and spaces can carry accents.

@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { CartItemType } from "domain/model/cart/cart-item.type";
 import styled from "styled-components";
 import { RiDeleteBin7Fill } from "react-icons/ri";
-import { IconButton, ButtonQuantity } from "daro-ui-kit";
+import { IconButton, ButtonQuantity } from "oaky-ui-kit";
 
 const CartItemWrapper = styled.div`
     width: 100%;

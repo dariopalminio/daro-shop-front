@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { AddressType } from "domain/model/user/address.type";
 import useAddress from "domain/hook/address.hook";
-import { Button, ModalDialog, CenteringContainer, TextField, SelectOptions } from "daro-ui-kit";
+import { Button, ModalDialog, CenteringContainer, TextField, SelectOptions } from "oaky-ui-kit";
 
 interface IMyProps {
     address: AddressType;

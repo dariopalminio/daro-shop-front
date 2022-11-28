@@ -1,7 +1,7 @@
 
 import React, { useState } from "react";
 import { useTranslation } from 'react-i18next';
-import { SelectOptions, TextField } from "daro-ui-kit";
+import { SelectOptions, TextField } from "oaky-ui-kit";
 
 interface Props {
   profile: any;

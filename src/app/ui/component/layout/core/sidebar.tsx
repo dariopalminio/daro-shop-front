@@ -6,7 +6,7 @@ import { RiFunctionFill } from "react-icons/ri";
 import { RiMailSendFill } from "react-icons/ri";
 import { useTranslation } from "react-i18next";
 import SessionContext, { ISessionContext } from "domain/context/session.context";
-import { AccessType, MenuItemType, MenuList } from "daro-ui-kit";
+import { AccessType, MenuItemType, MenuList } from "oaky-ui-kit";
 import { useLocation, useNavigate } from "react-router-dom";
 
 //Styled-components

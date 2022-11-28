@@ -7,7 +7,7 @@ import manualBankTransferImg from "app/ui/image/payment/manual_bank_transfer.png
 import otherPaymentMethodImg from "app/ui/image/payment/other_payment_method.png";
 import bitcoinMethodTypeImg from "app/ui/image/payment/aceptamos-bitcoin.png";
 import { PaymentMethodType } from "app/ui/page/checkout/payment.page";
-import { CenteringContainer } from "daro-ui-kit";
+import { CenteringContainer } from "oaky-ui-kit";
 
 const PaymentMethodsContainer = styled.div`
     display: block;

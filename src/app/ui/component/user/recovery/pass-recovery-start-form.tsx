@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import emailToSendImage from "app/ui/image/email_to_send.png";
 import { useTranslation } from 'react-i18next';
-import { Button, TextField, Paper, CenteringContainer } from "daro-ui-kit";
+import { Button, TextField, Paper, CenteringContainer } from "oaky-ui-kit";
 
 const validationFlagInit = {
   email: true

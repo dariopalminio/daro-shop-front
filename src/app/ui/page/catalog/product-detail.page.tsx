@@ -6,7 +6,7 @@ import {
 } from "react-router-dom";
 import useProducts from "domain/hook/products.hook";
 import ProductDetail from "app/ui/component/product/product-detail";
-import { CircularProgress } from "daro-ui-kit";
+import { CircularProgress } from "oaky-ui-kit";
 
 type TParams = { productId: string };
 

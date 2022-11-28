@@ -4,7 +4,7 @@ import { ContactType } from "domain/model/notification/contact.type";
 import useContact from "domain/hook/contact.hook";
 import { useTranslation } from 'react-i18next';
 import ContactForm from "app/ui/component/contact/contact-form";
-import { CircularProgress, Alert } from "daro-ui-kit";
+import { CircularProgress, Alert } from "oaky-ui-kit";
 
 /**
  * Contact Page

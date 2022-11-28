@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { ContactType } from "domain/model/notification/contact.type";
 import { useTranslation } from 'react-i18next';
-import { Button, Paper, TextField } from "daro-ui-kit";
+import { Button, Paper, TextField } from "oaky-ui-kit";
 
 const defaultContact: ContactType = {
     name: "",

@@ -3,7 +3,7 @@ import SessionContext, { ISessionContext } from "domain/context/session.context"
 //https://react-icons.github.io/react-icons/icons?name=ri
 import { RiEarthLine } from "react-icons/ri";
 import { useTranslation } from "react-i18next";
-import { MenuItemType, AccessType, MenuIconButton } from "daro-ui-kit";
+import { MenuItemType, AccessType, MenuIconButton } from "oaky-ui-kit";
 
 interface Props {
   menuList?: MenuItemType[];

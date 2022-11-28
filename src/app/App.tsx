@@ -10,7 +10,7 @@ import * as GlobalConfig from 'infra/global.config';
 import CheckoutContextProvider from "./ui/provider/checkout-context-provider"
 import logo from "app/ui/image/logo_app.png";
 import Bar from "./ui/component/layout/core/bar"
-import {ThemeCore, LayoutCore, LayoutContextProvider, TopNavBar} from "daro-ui-kit";
+import {ThemeCore, LayoutCore, LayoutContextProvider, TopNavBar} from "oaky-ui-kit";
 
 /**
  * App
@@ -21,6 +21,18 @@ import {ThemeCore, LayoutCore, LayoutContextProvider, TopNavBar} from "daro-ui-k
  */
 const App: FunctionComponent = () => {
 
+  const getLogoImage = () => {
+    return (
+      <img style={{ marginRight: "10px" }}
+      src={logo}
+      onError={({ currentTarget }) => {
+          currentTarget.onerror = null; // prevents looping
+          currentTarget.src = "../images/no-image.jpg";
+      }}
+      loading="lazy" />
+    )
+  }
+
   return (
     <Router>
       <SessionContextProvider>
@@ -29,7 +41,7 @@ const App: FunctionComponent = () => {
             <CheckoutContextProvider>
               <LayoutContextProvider>
                 <LayoutCore
-                  topbar={<TopNavBar logo={logo} bar={<Bar />} />}
+                  topbar={<TopNavBar logo={getLogoImage()} bar={<Bar />} />}
                   leftbar={<SideBar style={{ background: "#F9F9F9" }}></SideBar>}
                   footer={<Footer companyName={GlobalConfig.app_company_name} />}
                 >

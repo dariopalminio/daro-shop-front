@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import SessionContext, { ISessionContext } from 'domain/context/session.context';
 import PaymentManualInfo from 'app/ui/component/payment/payment-manual-info';
 import { usePayment } from 'domain/hook/payment/payment.hook';
-import { TextsStepper } from "daro-ui-kit";
+import { TextsStepper } from "oaky-ui-kit";
 
 const SuccessPage: FunctionComponent = () => {
     const { session } = useContext(SessionContext) as ISessionContext;

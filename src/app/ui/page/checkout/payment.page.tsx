@@ -3,7 +3,7 @@ import { FunctionComponent, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import PaymentMethods from 'app/ui/component/payment/payment-methods';
-import { PreviousNextButtons, TextsStepper } from "daro-ui-kit";
+import { PreviousNextButtons, TextsStepper } from "oaky-ui-kit";
 
 export enum PaymentMethodType {
     BANK_TRANSFER = "BANK_TRANSFER",

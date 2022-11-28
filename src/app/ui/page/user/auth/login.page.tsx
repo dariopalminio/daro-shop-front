@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import useLogin from "domain/hook/auth/login.hook";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import LoginForm from "app/ui/component/user/auth/login-form";
-import { CircularProgress, Alert } from "daro-ui-kit";
+import { CircularProgress, Alert } from "oaky-ui-kit";
 
 /**
  * Login Page for Login or Logout options

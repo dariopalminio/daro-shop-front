@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useTranslation } from 'react-i18next';
-import { Button, TextField, Paper, CenteringContainer } from "daro-ui-kit";
+import { Button, TextField, Paper, CenteringContainer } from "oaky-ui-kit";
 
 const validationFlagInit = {
   userName: true,

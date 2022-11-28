@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import useRecovery from "domain/hook/auth/recovery.hook";
 import PassRecoveryForm from "app/ui/component/user/recovery/pass-recovery-form";
 import { useParams } from "react-router-dom";
-import { Alert } from "daro-ui-kit";
+import { Alert } from "oaky-ui-kit";
 
 //type TParams = { token: string }; //match.params.token
 

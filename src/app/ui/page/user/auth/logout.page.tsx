@@ -4,7 +4,7 @@ import SessionContext, {
 } from "domain/context/session.context";
 import useLogout from "domain/hook/auth/logout.hook";
 import { useTranslation } from 'react-i18next';
-import { Button, Alert, CenteringContainer } from "daro-ui-kit";
+import { Button, Alert, CenteringContainer } from "oaky-ui-kit";
 /**
  * Login Function Component
  *

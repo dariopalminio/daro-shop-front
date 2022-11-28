@@ -3,7 +3,7 @@ import { FunctionComponent } from "react";
 import { useTranslation } from 'react-i18next';
 import useCatalog from "domain/hook/catalog.hook";
 import Products from "app/ui/component/product/products";
-import { LinksStepper, CenteringContainer, CircularProgress, Alert, Pagination } from "daro-ui-kit";
+import { LinksStepper, CenteringContainer, CircularProgress, Alert, Pagination } from "oaky-ui-kit";
 
 /**
  * CatalogPage for to list products as catalog

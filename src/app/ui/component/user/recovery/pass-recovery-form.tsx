@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Button, TextField, Paper } from "daro-ui-kit";
+import { Button, TextField, Paper } from "oaky-ui-kit";
 
 const validationFlagInit = {
   password: true

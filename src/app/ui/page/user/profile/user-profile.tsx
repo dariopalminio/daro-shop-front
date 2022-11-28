@@ -7,7 +7,7 @@ import SessionContext, {
 import useProfile from "domain/hook/profile.hook";
 import ProfileForm from "app/ui/component/user/profile/profile-form";
 import useAddress from "domain/hook/address.hook";
-import { Alert, CircularProgress } from "daro-ui-kit";
+import { Alert, CircularProgress } from "oaky-ui-kit";
 
 /**
  * User Profile

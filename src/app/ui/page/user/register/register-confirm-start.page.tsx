@@ -10,7 +10,7 @@ import useRegister from "domain/hook/auth/register.hook";
 import { useTranslation } from 'react-i18next';
 import RegisterConfirmStart from "app/ui/component/user/register/register-confirm-start";
 import { useNavigate } from "react-router-dom";
-import { Alert, CircularProgress } from "daro-ui-kit";
+import { Alert, CircularProgress } from "oaky-ui-kit";
 
 /**
  * Register Confirm Start Page (Register STEP 2)

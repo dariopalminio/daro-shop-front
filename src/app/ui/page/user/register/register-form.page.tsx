@@ -4,7 +4,7 @@ import { FunctionComponent } from "react";
 import useRegister from "domain/hook/auth/register.hook";
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from "react-router-dom";
-import { Alert, CircularProgress } from "daro-ui-kit";
+import { Alert, CircularProgress } from "oaky-ui-kit";
 
 const userToRegisterInitialized = {
   userName: '',

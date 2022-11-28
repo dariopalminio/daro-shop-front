@@ -1,5 +1,7 @@
 Daro web app
 
+SPA - Client Side Rendering
+
 ## Stack
 
 - Stack: MERN (Node.js v.16.17.1 & npm v8.19.2) with React (18) + Typescript

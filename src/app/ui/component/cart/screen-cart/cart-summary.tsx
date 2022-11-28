@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
-import { Button } from "daro-ui-kit";
+import { Button } from "oaky-ui-kit";
 
 const CartSummaryContainer = styled.div`
     flex: 0.3;

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useTranslation } from 'react-i18next';
 import emailOkImage from "app/ui/image/email_ok.png";
 import useRegister from "domain/hook/auth/register.hook";
-import { Alert, CircularProgress } from "daro-ui-kit";
+import { Alert, CircularProgress } from "oaky-ui-kit";
 
 //type TParams = { token: string }; //match.params.token
 

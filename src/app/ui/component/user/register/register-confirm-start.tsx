@@ -1,6 +1,6 @@
 import emailToConfirmImage from "app/ui/image/email_to_confirm.png";
 import { useTranslation } from 'react-i18next';
-import { Button, Alert, Paper } from "daro-ui-kit";
+import { Button, Alert, Paper } from "oaky-ui-kit";
 
  interface Props {
   successMsg: string;

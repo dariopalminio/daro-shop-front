@@ -9,7 +9,7 @@ import ShoppingCartItem from 'app/ui/component/cart/shopping-cart/shopping-cart-
 import ShoppingCart from 'app/ui/component/cart/shopping-cart/shopping-cart';
 import useAddress from 'domain/hook/address.hook';
 import ShippingData from 'app/ui/component/checkout/shipping-data';
-import { PreviousNextButtons, TextsStepper, CircularProgress, Alert } from "daro-ui-kit";
+import { PreviousNextButtons, TextsStepper, CircularProgress, Alert } from "oaky-ui-kit";
 
 /**
  * ConfirmationPage

@@ -3,7 +3,7 @@ import useRecovery from "domain/hook/auth/recovery.hook";
 import { useTranslation } from 'react-i18next';
 import PassRecoveryStartForm from "app/ui/component/user/recovery/pass-recovery-start-form";
 import { useNavigate } from "react-router-dom";
-import { Alert, CircularProgress } from "daro-ui-kit";
+import { Alert, CircularProgress } from "oaky-ui-kit";
 
 /**
  * Pass Recovery Start Page (Password recovery STEP 1)

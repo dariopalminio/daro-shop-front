@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useTranslation } from 'react-i18next';
 import { Link } from "react-router-dom";
-import { Button, Paper, TextField, CenteringContainer } from "daro-ui-kit";
+import { Button, Paper, TextField, CenteringContainer } from "oaky-ui-kit";
 
 interface Props {
     onSubmit: (email: string, password: string) => void;
